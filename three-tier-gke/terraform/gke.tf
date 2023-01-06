@@ -32,7 +32,7 @@ resource "google_container_cluster" "primary" {
     services_secondary_range_name = "services"
   }
 
-  // whitelist who can reach cluster's master nodes
+  // allow list who can reach cluster's master nodes
   // NOTE: internet is not recommended! It is used for testing only.
   master_authorized_networks_config {
     cidr_blocks {
