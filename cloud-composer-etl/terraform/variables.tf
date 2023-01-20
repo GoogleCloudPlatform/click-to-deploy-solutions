@@ -13,7 +13,7 @@
 # limitations under the License.
 
 locals {
-  resource_labels = merge(local.resource_labels, {
+  resource_labels = merge(var.resource_labels, {
     deployed_by = "cloudbuild"
     repo        = "click-to-deploy-solutions"
     solution    = "cloud-composer-etl"
