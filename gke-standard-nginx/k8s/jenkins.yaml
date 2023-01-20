@@ -1,0 +1,40 @@
+# Copyright 2023 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+controller:
+  # Consider using a custom jenkins image with the plugins already installed
+  # Ref https://github.com/jenkinsci/helm-charts/tree/main/charts/jenkins#consider-using-a-custom-image
+  image: jenkins/jenkins
+  tag: "2.319.1"
+  JCasC:
+    configScripts:
+      welcome-message: |
+        jenkins:
+          systemMessage: Welcome to Jenkins running on GKE!
+  ingress:
+    enabled: true
+    paths: []
+    ingressClassName: nginx
+    hostName: jenkins.example.com
+
+persistence:
+  enabled: true
+  storageClass: premium-rwo
+  size: "500Gi"
+
+agent:
+  resources:
+    requests:
+      cpu: "512m"
+      memory: "512Mi"
