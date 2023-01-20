@@ -12,32 +12,38 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+locals {
+  resource_labels = merge(var.resource_labels, {
+    deployed_by = "cloudbuild"
+    repo        = "click-to-deploy-solutions"
+    solution    = "gke-standard-nginx"
+    terraform   = "true"
+  })
+}
+
 variable "project_id" {
   description = "GCP Project ID"
-  default     = null
 }
 
 variable "region" {
   description = "GCP region"
-  default     = "southamerica-east1"
 }
 
-locals {
-  vpc_name = "gke-vpc"
+variable "network_name" {
+  description = "VPC name"
+}
 
-  cluster_name = "gke-std-sandbox"
-  cluster_ip_ranges = {
-    pods     = "10.0.0.0/22"
-    services = "10.0.4.0/24"
-    nodes    = "10.0.6.0/24"
-    master   = "10.0.7.0/28"
-  }
+variable "cluster_name" {
+  description = "GKE cluster name"
+}
 
-  resource_labels = {
-    deployed_by = "cloudbuild"
-    env         = "sandbox"
-    repo        = "click-to-deploy-solutions"
-    solution    = "gke-autopilot-nginx"
-    terraform   = "true"
-  }
+variable "cluster_ip_ranges" {
+  type        = map(string)
+  description = "Resource labels"
+}
+
+variable "resource_labels" {
+  type        = map(string)
+  description = "Resource labels"
+  default     = {}
 }
