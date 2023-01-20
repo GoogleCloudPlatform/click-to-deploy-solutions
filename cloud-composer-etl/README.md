@@ -33,6 +33,9 @@ Please find below a reference architecture.
 sh cloudbuild.sh
 ```
 
+Once it is finished, you can go to [Cloud Composer](https://console.cloud.google.com/composer/environments) to see the dags' results and explore the Cloud Composers's functionalities.
+
+
 ## Destroy
 
 1. Click on Open in Google Cloud Shell button below.
