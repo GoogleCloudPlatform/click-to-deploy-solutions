@@ -12,7 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-region            = "southamerica-east1"
 network_name      = "vpc-etl"
 composer_env_name = "composer-af2"
 
