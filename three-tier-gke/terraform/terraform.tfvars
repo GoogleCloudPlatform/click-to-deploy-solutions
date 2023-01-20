@@ -12,33 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-steps:
-- id: 'tf init'
-  name: 'hashicorp/terraform:1.0.0'
-  entrypoint: 'sh'
-  args: 
-  - '-c'
-  - | 
-    terraform init \
-    -backend-config="bucket=$PROJECT_ID-tf-state" \
-    -backend-config="prefix=data-fusion"
-  dir: terraform
+region       = "us-central1"
+network_name = "vpc-data"
 
-- id: 'tf apply'
-  name: 'hashicorp/terraform:1.0.0'
-  args: 
-  - destroy
-  - -auto-approve
-  dir: terraform
-
-
-options:
-  env:
-    - TF_VAR_project_id=$PROJECT_ID
-
-tags:
-  - terraform
-  - cloud-data-fusion
-  - destroy
-
-timeout: 3600s
+resource_labels = {
+  env = "sample"
+}
