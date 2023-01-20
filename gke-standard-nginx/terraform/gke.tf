@@ -37,7 +37,7 @@ module "gke" {
 
   // Private cluster setup
   enable_private_nodes   = true
-  master_ipv4_cidr_block = local.cluster_ip_ranges.master
+  master_ipv4_cidr_block = var.cluster_ip_ranges.master
 
   // allowlist who can reach cluster's master nodes
   // NOTE: internet is not recommended! It is used for testing only.
