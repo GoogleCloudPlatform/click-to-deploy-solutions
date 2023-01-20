@@ -12,21 +12,31 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+locals {
+  resource_labels = merge(var.resource_labels, {
+    deployed_by = "cloudbuild"
+    repo        = "click-to-deploy-solutions"
+    solution    = "gke-standard-nginx"
+    terraform   = "true"
+  })
+}
+
 variable "project_id" {
   description = "GCP Project ID"
-  default     = null
 }
 
 variable "region" {
   type        = string
   description = "GCP region"
-  default     = "us-central1"
+}
+
+variable "network_name" {
+  description = "VPC name"
 }
 
 variable "composer_env_name" {
   type        = string
   description = "Cloud Composer environment name"
-  default     = "composer-af2"
 }
 
 variable "composer_ip_ranges" {
@@ -43,11 +53,5 @@ variable "composer_ip_ranges" {
 variable "resource_labels" {
   type        = map(string)
   description = "Resource labels"
-  default = {
-    deployed_by = "cloudbuild"
-    env         = "sandbox"
-    repo        = "click-to-deploy-solutions"
-    solution    = "cloud-composer-etl"
-    terraform   = "true"
-  }
+  default     = {}
 }

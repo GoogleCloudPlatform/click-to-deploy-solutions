@@ -16,7 +16,7 @@ module "vpc" {
   source       = "terraform-google-modules/network/google"
   version      = "~> 6.0"
   project_id   = var.project_id
-  network_name = "vpc-data"
+  network_name = var.network_name
   routing_mode = "GLOBAL"
 
   subnets = [
