@@ -22,7 +22,7 @@ module "composer" {
   composer_service_account = google_service_account.service_account.email
   image_version            = "composer-2.0.30-airflow-2.3.3"
   environment_size         = "ENVIRONMENT_SIZE_SMALL"
-  labels                   = var.resource_labels
+  labels                   = local.resource_labels
 
   network                          = module.vpc.network_name
   subnetwork                       = var.composer_env_name

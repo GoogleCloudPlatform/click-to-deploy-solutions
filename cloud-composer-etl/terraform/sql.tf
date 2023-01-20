@@ -29,7 +29,7 @@ resource "google_sql_database_instance" "instance" {
 
   settings {
     tier        = "db-custom-1-3840"
-    user_labels = var.resource_labels
+    user_labels = local.resource_labels
 
     ip_configuration {
       ipv4_enabled    = true
@@ -59,7 +59,7 @@ resource "random_password" "db_password" {
 
 resource "google_secret_manager_secret" "db_connection" {
   secret_id = "airflow-connections-pgCitibike"
-  labels    = var.resource_labels
+  labels    = local.resource_labels
   replication {
     user_managed {
       replicas {
