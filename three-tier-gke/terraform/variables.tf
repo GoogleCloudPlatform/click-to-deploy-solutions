@@ -60,5 +60,11 @@ variable "region" {
 
 variable "apis" {
   description = "APIs required to deploy the project"
-  default     = ["redis.googleapis.com", "compute.googleapis.com", "sqladmin.googleapis.com", "secretmanager.googleapis.com", "servicenetworking.googleapis.com", "cloudbuild.googleapis.com"]
+  default     = ["redis.googleapis.com", "compute.googleapis.com", "sqladmin.googleapis.com", "secretmanager.googleapis.com", "servicenetworking.googleapis.com", "cloudbuild.googleapis.com", "cloudresourcemanager.googleapis.com"]
+}
+
+variable "resource_labels" {
+  type        = map(string)
+  description = "Resource labels"
+  default     = {}
 }
