@@ -60,7 +60,7 @@ Save the file and try to access the application, it should work:
     <img alt="Open in Cloud Shell" src="https://gstatic.com/cloudssh/images/open-btn.svg">
 </a>
 
-2. Run the `cloudbuild.sh` script and follow the instructions
+2. Run the `cloudbuild.sh` script with `destroy` argument.
 ```
 sh cloudbuild.sh destroy
 ```
