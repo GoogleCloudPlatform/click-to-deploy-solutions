@@ -1,6 +1,6 @@
 # Cloud Armor Demo
 
-This example deploys a web application called [OWASP Juice Shop](https://owasp.org/www-project-juice-shop/), and expose it to the internet by using a Global Load Balancer protected with Cloud Armor.
+This example deploys a web application called [OWASP Juice Shop](https://owasp.org/www-project-juice-shop/), and exposes it to the internet by using a Global Load Balancer protected with Cloud Armor.
 
 
 ## Architecture
