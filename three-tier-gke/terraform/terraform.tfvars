@@ -13,7 +13,6 @@
 # limitations under the License.
 
 region       = "us-central1"
-network_name = "vpc-data"
 
 resource_labels = {
   env = "sample"
