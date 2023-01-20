@@ -25,10 +25,10 @@ module "gke" {
   version    = "21.1.0"
   project_id = var.project_id
   region     = var.region
-  name       = local.cluster_name
+  name       = var.cluster_name
 
   network                   = module.vpc.network_name
-  subnetwork                = local.cluster_name
+  subnetwork                = var.cluster_name
   ip_range_pods             = "pods"
   ip_range_services         = "services"
   http_load_balancing       = false
@@ -72,7 +72,7 @@ module "gke" {
 
   node_pools_tags = {
     all = [
-      local.cluster_name
+      var.cluster_name
     ]
   }
 
