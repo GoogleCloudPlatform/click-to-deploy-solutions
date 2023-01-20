@@ -42,5 +42,5 @@ sh cloudbuild.sh
 
 2. Run the `cloudbuild.sh` script with `destroy` argument
 ```
-sh cloudbuild.sh
+sh cloudbuild.sh destroy
 ```
