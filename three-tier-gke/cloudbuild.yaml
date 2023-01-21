@@ -21,7 +21,7 @@ steps:
   - | 
     terraform init \
     -backend-config="bucket=$PROJECT_ID-tf-state" \
-    -backend-config="prefix=data-fusion"
+    -backend-config="prefix=three-tier"
   dir: terraform
       
 - id: 'tf plan'
@@ -45,7 +45,7 @@ options:
 
 tags:
   - terraform
-  - cloud-data-fusion
+  - cloud-three-tier
   - plan-apply
 
 timeout: 3600s

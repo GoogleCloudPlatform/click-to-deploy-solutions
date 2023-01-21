@@ -14,12 +14,22 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
  
-provider "google" {
-  project = var.project_id
-  region  = var.region
+terraform {
+  backend "gcs" {
+  }
+  required_providers {
+    google = {
+      source  = "hashicorp/google"
+      version = "4.46.0"
+    }
+    google-beta = {
+      source  = "hashicorp/google-beta"
+      version = "4.46.0"
+    }
+  }
 }
 
-provider "google-beta" {
+provider "google" {
   project = var.project_id
   region  = var.region
 }

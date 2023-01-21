@@ -47,7 +47,8 @@ else
         servicenetworking.googleapis.com \
         sqladmin.googleapis.com \
         storage.googleapis.com \
-        cloudbuild.googleapis.com
+        cloudbuild.googleapis.com \
+        cloudresourcemanager.googleapis.com
 
 
     echo Waiting for APIs activation...
