@@ -30,3 +30,15 @@ resource "google_project_iam_member" "monitoring_writer" {
   role    = "roles/monitoring.metricWriter"
   member  = "serviceAccount:${google_service_account.service_account.email}"
 }
+
+resource "google_project_iam_member" "secretmanager_admin" {
+    project = var.project_id
+    role    = "roles/secretmanager.admin"
+    member  = "serviceAccount:${google_service_account.service_account.email}"
+}
+
+resource "google_project_iam_member" "secret_accessor" {
+    project = var.project_id
+    role    = "roles/secretmanager.secretAccessor"
+    member  = "serviceAccount:${google_service_account.service_account.email}"
+}
