@@ -31,7 +31,7 @@ steps:
   dir: terraform
 
 - id: 'tf apply'
-  name: 'hashicorp/terraform:1.0.0'
+  name: 'fellipemedeiros/terraformgcloud:latest'
   args: 
   - apply
   - -auto-approve
