@@ -1,5 +1,5 @@
 /**
-Copyright 2022 Google LLC
+Copyright 2023 Google LLC
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -29,4 +29,16 @@ resource "google_project_iam_member" "monitoring_writer" {
   project = var.project_id
   role    = "roles/monitoring.metricWriter"
   member  = "serviceAccount:${google_service_account.service_account.email}"
+}
+
+resource "google_project_iam_member" "secretmanager_admin" {
+    project = var.project_id
+    role    = "roles/secretmanager.admin"
+    member  = "serviceAccount:${google_service_account.service_account.email}"
+}
+
+resource "google_project_iam_member" "secret_accessor" {
+    project = var.project_id
+    role    = "roles/secretmanager.secretAccessor"
+    member  = "serviceAccount:${google_service_account.service_account.email}"
 }

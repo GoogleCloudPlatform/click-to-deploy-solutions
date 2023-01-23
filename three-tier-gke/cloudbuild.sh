@@ -1,4 +1,4 @@
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -47,7 +47,8 @@ else
         servicenetworking.googleapis.com \
         sqladmin.googleapis.com \
         storage.googleapis.com \
-        cloudbuild.googleapis.com
+        cloudbuild.googleapis.com \
+        cloudresourcemanager.googleapis.com
 
 
     echo Waiting for APIs activation...
@@ -59,6 +60,7 @@ else
     gcloud projects add-iam-policy-binding $GOOGLE_CLOUD_PROJECT --member=$MEMBER --role=roles/editor
     gcloud projects add-iam-policy-binding $GOOGLE_CLOUD_PROJECT --member=$MEMBER --role=roles/iam.securityAdmin
     gcloud projects add-iam-policy-binding $GOOGLE_CLOUD_PROJECT --member=$MEMBER --role=roles/compute.networkAdmin
+    gcloud projects add-iam-policy-binding $GOOGLE_CLOUD_PROJECT --member=$MEMBER --role=roles/secretmanager.secretAccessor
 
     echo Triggering Cloud Build job...
     gcloud builds submit . --config cloudbuild.yaml

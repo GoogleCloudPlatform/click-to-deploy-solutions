@@ -1,4 +1,4 @@
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,7 +21,7 @@ steps:
   - | 
     terraform init \
     -backend-config="bucket=$PROJECT_ID-tf-state" \
-    -backend-config="prefix=data-fusion"
+    -backend-config="prefix=three-tier"
   dir: terraform
 
 - id: 'tf apply'
@@ -35,10 +35,11 @@ steps:
 options:
   env:
     - TF_VAR_project_id=$PROJECT_ID
+    - TF_VAR_project_number=$PROJECT_NUMBER
 
 tags:
   - terraform
-  - cloud-data-fusion
+  - cloud-three-tier
   - destroy
 
 timeout: 3600s

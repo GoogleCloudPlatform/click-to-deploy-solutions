@@ -15,7 +15,7 @@ Resources created
 ## Deploy
 
 1. Click on Open in Google Cloud Shell button below.
-<a href="https://ssh.cloud.google.com/cloudshell/editor?shellonly=true&cloudshell_git_repo=https://github.com/GoogleCloudPlatform/private-cloud-data-fusion" target="_new">
+<a href="https://ssh.cloud.google.com/cloudshell/editor?shellonly=true&cloudshell_git_repo=https://github.com/GoogleCloudPlatform/click-to-deploy-solutions&cloudshell_workspace=three-tier-gke" target="_new">
     <img alt="Open in Cloud Shell" src="https://gstatic.com/cloudssh/images/open-btn.svg">
 </a>
 

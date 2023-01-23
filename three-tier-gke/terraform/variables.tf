@@ -1,5 +1,5 @@
 /**
-Copyright 2022 Google LLC
+Copyright 2023 Google LLC
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -18,12 +18,13 @@ limitations under the License.
 data "google_project" "project" {}
 
 locals {
-  resource_labels = {
-    terraform = "true"
-    app       = var.application_name
-    env       = "sandbox"
-    repo      = "deploystack"
-  }
+  resource_labels = merge(var.resource_labels, {
+    deployed_by = "cloudbuild"
+    env         = "sandbox"
+    repo        = "click-to-deploy-solutions"
+    solution    = "three-tier-gke"
+    terraform   = "true"
+  })
 
   service_account = {
     email  = google_service_account.service_account.email
@@ -46,21 +47,24 @@ variable "application_name" {
 
 variable "project_id" {
   description = "GCP Project ID"
-  default     =  "linear-rig-370405"
 }
 
 variable "project_number" {
   description = "GCP Project Number"
-  default     =  "615872876716"
 }
 
 variable "region" {
   type        = string
   description = "GCP region"
-  default     = "us-central1"
 }
 
 variable "apis" {
   description = "APIs required to deploy the project"
-  default     = ["redis.googleapis.com", "compute.googleapis.com", "sqladmin.googleapis.com", "secretmanager.googleapis.com", "servicenetworking.googleapis.com", "cloudbuild.googleapis.com"]
+  default     = ["redis.googleapis.com", "compute.googleapis.com", "sqladmin.googleapis.com", "secretmanager.googleapis.com", "servicenetworking.googleapis.com", "cloudbuild.googleapis.com", "cloudresourcemanager.googleapis.com"]
+}
+
+variable "resource_labels" {
+  type        = map(string)
+  description = "Resource labels"
+  default     = {}
 }
