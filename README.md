@@ -7,6 +7,7 @@ In the catalog below you will find all solutions ready to deploy, click on it an
 
 - [Cloud Armor Demo](./cloud-armor-demo/)
 - [Cloud Composer ETL](./cloud-composer-etl/)
+- [GKE Autopilot with HPA example](./gke-autopilot-hpa/)
 - [GKE Standard with NGINX](./gke-standard-nginx/)
 - [Private Cloud Data Fusion](./private-cloud-data-fusion/)
 - [Three Tier GKE](./three-tier-gke/)

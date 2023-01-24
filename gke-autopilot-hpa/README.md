@@ -2,7 +2,7 @@
 
 ## Description
 
-This example deploys Google Kubernetes Engine (GKE) Autopilot cluster and deploy a service with Horizontal Pod Autoscaling.
+This example deploys Google Kubernetes Engine (GKE) Autopilot cluster with two sample deployments: hello-app-example and hpa-example. It demonstrate how to use Horizontal Pod Autoscaling (HPA) to scale the number of pods based on CPU utilization.
 
 Resources created:
 - VPC
@@ -11,7 +11,7 @@ Resources created:
 - GKE Autopilot
 
 ## Architecture
-- TODO
+![architecture](architecture.png)
 
 ## Deploy
 
@@ -26,7 +26,9 @@ sh cloudbuild.sh
 ```
 
 ## Executing a load test
-Once you deployed the solution, you can go to [Workloads](https://console.cloud.google.com/kubernetes/workload/overview) page and see the `hpa-example` application has one replica.
+Once you deployed the solution, you can run a load test and see the HPA in action.
+
+Go to [Workloads](https://console.cloud.google.com/kubernetes/workload/overview) page and see the `hpa-example` application has one replica.
 
 - ![replicas](./assets/hpa-example-replicas.png)
 
