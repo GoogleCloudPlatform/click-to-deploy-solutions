@@ -27,9 +27,10 @@ Our projects use Terraform to write infrastructure as code, and Cloud Build to r
  * cloudbuild.sh: execute pre-reqs and trigger Cloud Build job
 
 ## Label Strategy
-```
 Must have a variable to define resource labels, and aggregate this project's labels with locals.
-locals{
+
+```hcl
+locals {
   resource_labels = merge(var.resource_labels, {
     deployed_by = "cloudbuild"
     env         = "sandbox"
@@ -44,7 +45,6 @@ variable "resource_labels" {
   description = "Resource labels"
   default     = {}
 }
-```
 
 ## Cloud SQL
 Since Cloud SQL does not allow you to recreate an instance immediately after deletion due to name conflict, use a random string at the end of the instance name, for example:
