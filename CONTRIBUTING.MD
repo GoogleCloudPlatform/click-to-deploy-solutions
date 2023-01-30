@@ -47,7 +47,7 @@ variable "resource_labels" {
 }
 
 ## Cloud SQL
-Since Cloud SQL does not allow you to recreate an instance immediately after deletion due to name conflict, use a random string at the end of the instance name, for example:
+Since Cloud SQL does not allow you to recreate an instance immediately after deletion due to name conflict, add a random suffix to the instance name, for example:
 
 ## Open in Cloud Shell button
 Use the following url pattern for the button "Open in Cloud Shell"
