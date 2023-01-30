@@ -45,6 +45,7 @@ variable "resource_labels" {
   description = "Resource labels"
   default     = {}
 }
+```
 
 ## Cloud SQL
 Since Cloud SQL does not allow you to recreate an instance immediately after deletion due to name conflict, add a random suffix to the instance name, for example:
