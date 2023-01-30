@@ -16,6 +16,48 @@ Please note we have a code of conduct, please follow it in all your interactions
 4. You may merge the Pull Request in once you have the sign-off of two other developers, or if you 
    do not have permission to do that, you may request the second reviewer to merge it for you.
 
+## Project structure
+ * Our projects use Terraform to write infrastructure as code, and Cloud Build to run the deploy and destroy pipelines. So your project must have at least the following structure to be deployable:
+ * terraform: folder with .tf files
+ * terraform.tfvars: with variables values
+ * cloudbuild.yaml: deploy pipeline
+ * cloudbuild_destroy.yaml: destroy pipeline
+ * readme.md: solution documentation
+ * architecture.png: architecture diagram that demonstrates the solution
+ * cloudbuild.sh: execute pre-reqs and trigger Cloud Build job
+
+## Label Strategy
+```
+Must have a variable to define resource labels, and aggregate this project's labels with locals.
+locals{
+  resource_labels = merge(var.resource_labels, {
+    deployed_by = "cloudbuild"
+    env         = "sandbox"
+    repo        = "click-to-deploy-solutions"
+    solution    = "private-cloud-data-fusion"
+    terraform   = "true"
+  })
+}
+
+variable "resource_labels" {
+  type        = map(string)
+  description = "Resource labels"
+  default     = {}
+}
+```
+
+## Cloud SQL
+Since Cloud SQL does not allow you to recreate an instance immediately after deletion due to name conflict, use a random string at the end of the instance name, for example:
+
+## Open in Cloud Shell button
+Use the following url pattern for the button "Open in Cloud Shell"
+
+```
+<a href="https://ssh.cloud.google.com/cloudshell/editor?cloudshell_git_repo=https://github.com/GoogleCloudPlatform/click-to-deploy-solutions&cloudshell_workspace=path-to-solution" target="_new">
+    <img alt="Open in Cloud Shell" src="https://gstatic.com/cloudssh/images/open-btn.svg">
+</a>
+```
+
 ## Code of Conduct
 
 ### Our Pledge
