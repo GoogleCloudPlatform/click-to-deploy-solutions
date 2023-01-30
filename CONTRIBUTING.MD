@@ -17,7 +17,7 @@ Please note we have a code of conduct, please follow it in all your interactions
    do not have permission to do that, you may request the second reviewer to merge it for you.
 
 ## Project structure
- * Our projects use Terraform to write infrastructure as code, and Cloud Build to run the deploy and destroy pipelines. So your project must have at least the following structure to be deployable:
+Our projects use Terraform to write infrastructure as code, and Cloud Build to run the deploy and destroy pipelines. So your project must have at least the following structure to be deployable:
  * terraform: folder with .tf files
  * terraform.tfvars: with variables values
  * cloudbuild.yaml: deploy pipeline
