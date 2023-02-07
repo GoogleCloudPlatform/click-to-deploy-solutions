@@ -15,6 +15,9 @@
 terraform {
   backend "gcs" {
   }
+  provider_meta "google" {
+    module_name = "cloud-solutions/cloud-composer-etl-v0.1"
+  }
 }
 
 provider "google" {
