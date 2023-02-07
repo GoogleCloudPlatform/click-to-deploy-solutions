@@ -25,6 +25,9 @@ terraform {
       version = "4.46.0"
     }
   }
+  provider_meta "google" {
+    module_name = "cloud-solutions/cloud-armor-demo-v0.1"
+  }
 }
 
 provider "google" {
