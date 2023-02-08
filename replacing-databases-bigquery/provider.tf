@@ -17,7 +17,7 @@ terraform {
   }
 
   provider_meta "google" {
-    module_name = "cloud-solutions/replacing-databases-bigquery-v0.1"
+    module_name = "cloud-solutions/replicating-databases-bigquery-v0.1"
   }
 }
 

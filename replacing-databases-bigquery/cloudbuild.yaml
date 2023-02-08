@@ -21,7 +21,7 @@ steps:
   - | 
     terraform init \
     -backend-config="bucket=$PROJECT_ID-tf-state" \
-    -backend-config="prefix=replacing-databases-bigquery"
+    -backend-config="prefix=replicating-databases-bigquery"
   dir: terraform
 
 - id: 'tf apply'

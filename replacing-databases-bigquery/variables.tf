@@ -16,7 +16,7 @@ locals {
   resource_labels = merge(var.resource_labels, {
     deployed_by = "cloudbuild"
     repo        = "click-to-deploy-solutions"
-    solution    = "replacing-databases-bigquery"
+    solution    = "replicating-databases-bigquery"
     terraform   = "true"
   })
 }

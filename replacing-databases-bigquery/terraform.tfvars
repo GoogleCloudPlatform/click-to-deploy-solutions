@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-network_name      = "vpc-etl"
+network_name      = "vpc-replacing-databases"
 
 resource_labels = {
   env = "sandbox"
