@@ -13,7 +13,7 @@
 # limitations under the License.
 
 resource "google_service_account" "service_account" {
-  account_id   = "replacing-databases-bigquery"
+  account_id   = "replicating-databases-bigquery"
   display_name = "Service Account"
 }
 
