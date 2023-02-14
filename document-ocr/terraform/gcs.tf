@@ -14,14 +14,14 @@
 
 resource "google_storage_bucket" "doc_input" {
   name                        = "${var.project_id}-doc-ocr-input"
-  location                    = var.location
+  location                    = var.region
   uniform_bucket_level_access = true
   force_destroy               = true
 }
 
 resource "google_storage_bucket" "doc_output" {
   name                        = "${var.project_id}-doc-ocr-output"
-  location                    = var.location
+  location                    = var.region
   uniform_bucket_level_access = true
   force_destroy               = true
 }

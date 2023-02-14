@@ -46,12 +46,15 @@ else
 
     echo Enabling required APIs...
     gcloud services enable cloudbuild.googleapis.com \
+        aiplatform.googleapis.com \
+        cloudfunctions.googleapis.com \
         cloudresourcemanager.googleapis.com \
         compute.googleapis.com \
-        iam.googleapis.com \
         documentai.googleapis.com \
-        aiplatform.googleapis.com
-
+        eventarc.googleapis.com \
+        iam.googleapis.com \
+        run.googleapis.com \
+        pubsub.googleapis.com
 
     echo Waiting for APIs activation...
     sleep 30

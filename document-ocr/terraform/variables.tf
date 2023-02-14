@@ -19,6 +19,8 @@ locals {
     solution    = "document-ocr"
     terraform   = "true"
   })
+  function_name = "process-ocr"
+  processor_name =  "ocr-processor-${var.location}"
 }
 
 variable "project_id" {
