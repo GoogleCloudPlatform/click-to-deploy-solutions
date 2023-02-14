@@ -16,6 +16,7 @@ resource "google_storage_bucket" "gcf_source_bucket" {
   name                        = "${var.project_id}-gcf-source-bucket"
   location                    = var.region
   uniform_bucket_level_access = true
+  labels                      = local.resource_labels
 }
 
 resource "google_storage_bucket_object" "gcf_source_code" {
@@ -28,6 +29,7 @@ resource "google_cloudfunctions2_function" "function" {
   name        = local.function_name
   location    = var.region
   description = "Trigger Document AI OCR when an object is uploaded to the input bucket"
+  labels      = local.resource_labels
 
   build_config {
     runtime     = "python310"

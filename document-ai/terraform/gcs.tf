@@ -13,15 +13,17 @@
 # limitations under the License.
 
 resource "google_storage_bucket" "doc_input" {
-  name                        = "${var.project_id}-doc-ocr-input"
+  name                        = "${var.project_id}-doc-ai-form-input"
   location                    = var.region
   uniform_bucket_level_access = true
   force_destroy               = true
+  labels                      = local.resource_labels
 }
 
 resource "google_storage_bucket" "doc_output" {
-  name                        = "${var.project_id}-doc-ocr-output"
+  name                        = "${var.project_id}-doc-ai-form-output"
   location                    = var.region
   uniform_bucket_level_access = true
   force_destroy               = true
+  labels                      = local.resource_labels
 }

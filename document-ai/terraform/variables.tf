@@ -16,11 +16,11 @@ locals {
   resource_labels = merge(var.resource_labels, {
     deployed_by = "cloudbuild"
     repo        = "click-to-deploy-solutions"
-    solution    = "document-ocr"
+    solution    = "document-ai"
     terraform   = "true"
   })
-  function_name = "process-ocr"
-  processor_name =  "ocr-processor-${var.location}"
+  function_name  = "process-form"
+  processor_name = "form-processor-${var.location}"
 }
 
 variable "project_id" {

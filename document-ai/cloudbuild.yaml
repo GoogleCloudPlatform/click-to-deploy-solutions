@@ -13,6 +13,15 @@
 # limitations under the License.
 
 steps:
+- id: 'zip code'
+  name: 'ubuntu'
+  entrypoint: 'sh'
+  args: 
+  - '-c'
+  - | 
+    apt-get update; apt-get install zip -y
+    zip /workspace/function-source.zip main.py requirements.txt
+  dir: code
 - id: 'tf init'
   name: 'hashicorp/terraform:1.0.0'
   entrypoint: 'sh'
@@ -21,12 +30,12 @@ steps:
   - | 
     terraform init \
     -backend-config="bucket=$PROJECT_ID-tf-state" \
-    -backend-config="prefix=document-ocr"
-  dir: terraform
-- id: 'tf destroy'
+    -backend-config="prefix=document-ai"
+  dir: terraform   
+- id: 'tf apply'
   name: 'hashicorp/terraform:1.0.0'
   args: 
-  - destroy
+  - apply
   - -auto-approve
   dir: terraform
 options:
@@ -34,6 +43,6 @@ options:
     - TF_VAR_project_id=$PROJECT_ID
 tags:
   - terraform
-  - document-ocr
-  - destroy
+  - document-ai
+  - apply
 timeout: 3600s

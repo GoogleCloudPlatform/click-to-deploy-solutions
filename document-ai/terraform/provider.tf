@@ -12,8 +12,30 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-resource "google_document_ai_processor" "processor" {
-  location     = var.location
-  display_name = local.processor_name
-  type         = "OCR_PROCESSOR"
+terraform {
+  backend "gcs" {
+  }
+  required_providers {
+    google = {
+      source  = "hashicorp/google"
+      version = "4.52"
+    }
+    google-beta = {
+      source  = "hashicorp/google-beta"
+      version = "4.52"
+    }
+  }
+  provider_meta "google" {
+    module_name = "cloud-solutions/document-ai-v0.1"
+  }
+}
+
+provider "google" {
+  project = var.project_id
+  region  = var.region
+}
+
+provider "google-beta" {
+  project = var.project_id
+  region  = var.region
 }
