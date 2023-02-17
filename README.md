@@ -16,3 +16,6 @@ In the catalog below you will find all solutions ready to deploy, click on it an
 ## Contribute
 
 Would you like to contribute to the project? Please check out [contribution](docs/contributing.md) guidelines.
+
+
+This is not an official Google product.
