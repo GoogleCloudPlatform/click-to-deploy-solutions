@@ -10,4 +10,12 @@ In the catalog below you will find all solutions ready to deploy, click on it an
 - [GKE Autopilot with HPA example](./gke-autopilot-hpa/)
 - [GKE Standard with NGINX](./gke-standard-nginx/)
 - [Private Cloud Data Fusion](./private-cloud-data-fusion/)
+- [Replicating Databases to BigQuery](./replicating-databases-bigquery/)
 - [Three Tier GKE](./three-tier-gke/)
+
+## Contribute
+
+Would you like to contribute to the project? Please check out [contribution](docs/contributing.md) guidelines.
+
+
+This is not an official Google product.
