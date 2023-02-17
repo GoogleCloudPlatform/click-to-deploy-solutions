@@ -16,4 +16,8 @@ resource "google_document_ai_processor" "processor" {
   location     = var.location
   display_name = local.processor_name
   type         = "FORM_PARSER_PROCESSOR"
+
+  depends_on = [
+    google_project_iam_member.gcs_to_pubsub
+  ]
 }
