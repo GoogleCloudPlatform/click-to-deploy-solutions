@@ -25,7 +25,7 @@ resource "google_storage_bucket_object" "gcf_source_code" {
 }
 
 resource "google_cloudfunctions2_function" "function" {
-  name        = "gcs-to-bq-trigger"
+  name        = local.function_name
   location    = var.region
   description = "Load data from GCS to BQ"
 
@@ -50,6 +50,7 @@ resource "google_cloudfunctions2_function" "function" {
       DW_PROJECT_ID      = var.project_id
       GCS_ARCHIVE_BUCKET = google_storage_bucket.archive_bucket.name
     }
+    service_account_email = google_service_account.function_sa.email
   }
 
   event_trigger {
@@ -61,4 +62,7 @@ resource "google_cloudfunctions2_function" "function" {
       value     = google_storage_bucket.upload_bucket.name
     }
   }
+  depends_on = [
+    google_project_iam_member.publisher
+  ]
 }

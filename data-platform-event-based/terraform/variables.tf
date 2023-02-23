@@ -13,6 +13,7 @@
 # limitations under the License.
 
 locals {
+  function_name = "gcs-to-bq-trigger"
   resource_labels = merge(var.resource_labels, {
     deployed_by = "cloudbuild"
     repo        = "click-to-deploy-solutions"
