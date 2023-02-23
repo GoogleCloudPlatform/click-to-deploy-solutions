@@ -74,7 +74,7 @@ resource "google_bigquery_data_transfer_config" "gcs_load" {
   display_name           = "load-order-events-from-gcs-to-bq"
   location               = var.region
   data_source_id         = "google_cloud_storage"
-  schedule               = "every 5 minutes"
+  schedule               = "every 15 minutes"
   destination_dataset_id = google_bigquery_dataset.ecommerce.dataset_id
   params = {
     # destination
