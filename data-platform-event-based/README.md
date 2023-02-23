@@ -28,6 +28,14 @@ sh cloudbuild.sh
 Once it is finished, you can go to [Cloud Composer](https://console.cloud.google.com/composer/environments) to see the dags' results and explore the Cloud Composers's functionalities.
 
 
+## Testing
+After you deployed the solution, you can test it by loading the sample file on this repository to the upload bucket by running the `gsutil` command below, or uploading using the console.
+```
+gsutil cp sample_data/order_events_001.csv gs://your-upload-bucket/ecommerce/order_events/
+```
+
+Then, check the uploaded data on BigQuery > ecommerce dataset > order_events table.
+
 ## Destroy
 
 1. Click on Open in Google Cloud Shell button below.
