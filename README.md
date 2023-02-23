@@ -7,7 +7,8 @@ In the catalog below you will find all solutions ready to deploy, click on it an
 
 - [Cloud Armor Demo](./cloud-armor-demo/)
 - [Cloud Composer ETL](./cloud-composer-etl/)
-- [Data Platform event-based](./data-platform-event-based)
+- [Data Analytics Platform event-driven](./data-analytics-platform-event-driven)
+- [Data Analytics Platform scheduled](./data-analytics-platform-scheduled)
 - [GKE Autopilot with HPA example](./gke-autopilot-hpa/)
 - [GKE Standard with NGINX](./gke-standard-nginx/)
 - [Private Cloud Data Fusion](./private-cloud-data-fusion/)
