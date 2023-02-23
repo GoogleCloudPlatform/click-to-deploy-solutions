@@ -79,10 +79,10 @@ resource "google_bigquery_data_transfer_config" "gcs_load" {
   params = {
     # destination
     destination_table_name_template = "order_events"
-    write_disposition               = "WRITE_APPEND"
+    write_disposition               = "APPEND"
 
     # source
-    data_path_template    = "gs://${google_storage_bucket.upload_bucket.name}/*.csv"
+    data_path_template    = "gs://${google_storage_bucket.upload_bucket.name}/order-events/*.csv"
     file_format           = "CSV"
     max_bad_records       = "1"
     ignore_unknown_values = "true"
@@ -91,7 +91,7 @@ resource "google_bigquery_data_transfer_config" "gcs_load" {
     skip_leading_rows     = "1"
     allow_quoted_newlines = "true"
     allow_jagged_rows     = "false"
-    delete_source_files   = "true"
+    delete_source_files   = "false"
   }
 
 }

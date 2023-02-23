@@ -13,7 +13,7 @@
 # limitations under the License.
 
 resource "google_storage_bucket" "upload_bucket" {
-  name                        = "${var.project_id}-order-upload"
+  name                        = "${var.project_id}-data-lake"
   location                    = var.region
   uniform_bucket_level_access = true
   force_destroy               = true
