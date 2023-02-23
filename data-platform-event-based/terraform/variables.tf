@@ -13,21 +13,26 @@
 # limitations under the License.
 
 locals {
-  resource_labels = {
-    terraform = "true"
-    app       = "bq-batch-load"
-    env       = "sandbox"
-    repo      = "gcp-bq-batch-load"
-  }
+  resource_labels = merge(var.resource_labels, {
+    deployed_by = "cloudbuild"
+    repo        = "click-to-deploy-solutions"
+    solution    = "cloud-composer-etl"
+    terraform   = "true"
+  })
 }
 
 variable "project_id" {
   description = "GCP Project ID"
-  default     = null
 }
 
 variable "region" {
   type        = string
   description = "GCP region"
-  default     = "us-east1"
+  default     = "southamerica-east1"
+}
+
+variable "resource_labels" {
+  type        = map(string)
+  description = "Resource labels"
+  default     = {}
 }
