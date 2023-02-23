@@ -1,8 +1,8 @@
-# GCP BQ batch load
+# Data Analytics Platform event-driven
 
 ## Description
 
-This example demonstrates how to load files from GCS directly to BigQuery, and archive them for long-term purposes.
+This example demonstrates how to load files from Google Cloud Storage to BigQuery using an event-driven load function.
 
 ### Use case
 Upload the data into the upload bucket following the pattern `gs://your-upload-bucket/dataset-name/table-name/file.csv`.
