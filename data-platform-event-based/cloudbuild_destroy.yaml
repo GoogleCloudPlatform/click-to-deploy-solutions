@@ -14,7 +14,7 @@
 
 steps:
 - id: 'tf init'
-  name: 'hashicorp/terraform:1.0.0'
+  name: 'hashicorp/terraform:1.3.9'
   entrypoint: 'sh'
   args: 
   - '-c'
@@ -24,7 +24,7 @@ steps:
     -backend-config="prefix=data-platform-event-based"
   dir: terraform
 - id: 'tf apply'
-  name: 'hashicorp/terraform:1.0.0'
+  name: 'hashicorp/terraform:1.3.9'
   args: 
   - destroy
   - -auto-approve
