@@ -2,11 +2,11 @@
 
 ## Description
 
-This example demonstrates how to load files from Google Cloud Storage (GCS) to BigQuery using Storage Transfer Service jobs.
+This example demonstrates how to load files from your Data Lake on Google Cloud Storage (GCS) to your Data Warehouse on BigQuery.
 
 ### Use case
-Upload the data into the upload bucket following the pattern `gs://your-upload-bucket/file.csv`.
-Wait for the load job to run and check the data on BigQuery.
+Upload the data into the Data Lake bucket following the pattern `gs://your-upload-bucket/your-entity/file.csv`.
+Wait for [the BigQuery Data Transfer job](https://console.cloud.google.com/bigquery/transfers) to run, then check the data on BigQuery.
 
 ## Architecture
 Please find below a reference architecture.
@@ -28,9 +28,9 @@ Once it is finished, you can go to [Cloud Composer](https://console.cloud.google
 
 
 ## Testing
-After you deployed the solution, you can test it by loading the sample file on this repository to the upload bucket by running the `gsutil` command below, or uploading using the console.
+After you deployed the solution, you can test it by loading the sample file from this repository to the Data Lake bucket by running the `gsutil` command below, or using the console.
 ```
-gsutil cp sample_data/order_events_001.csv gs://your-upload-bucket/ecommerce/order_events/
+gsutil cp sample_data/order_events_001.csv gs://your-upload-bucket/order-events/
 ```
 
 Then, check the uploaded data on BigQuery > ecommerce dataset > order_events table.
