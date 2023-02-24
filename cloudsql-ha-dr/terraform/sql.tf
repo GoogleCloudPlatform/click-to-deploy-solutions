@@ -27,14 +27,14 @@ resource "google_sql_database_instance" "main_instance" {
   deletion_protection = false # not recommended for PROD
 
   settings {
-    tier        = "db-custom-1-3840"
-    user_labels = local.resource_labels
+    tier              = "db-custom-1-3840"
+    user_labels       = local.resource_labels
+    availability_type = "REGIONAL"
 
     ip_configuration {
       ipv4_enabled    = true
       private_network = module.vpc.network_self_link
     }
-
   }
 
   depends_on = [google_service_networking_connection.private_service_connection]

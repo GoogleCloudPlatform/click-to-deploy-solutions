@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-network_name = "vpc-sanbdox"
+network_name = "vpc-cloudsql-sanbdox"
 region       = "southamerica-east1"
 region_dr    = "southamerica-west1"
 
