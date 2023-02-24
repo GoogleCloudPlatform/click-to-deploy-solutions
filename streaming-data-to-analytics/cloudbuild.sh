@@ -30,9 +30,12 @@ else
    export PROJECT_ID=$GOOGLE_CLOUD_PROJECT
 fi
 
+REPO_LOCATION="us-central1"
+
 if [ "$1" = "destroy" ]
 then
     echo Destroying solution on project $PROJECT_ID
+    gcloud artifacts repositories delete docker-repo --location=$REPO_LOCATION --quiet
     gcloud builds submit . --config cloudbuild_destroy.yaml
 else
     echo Deploying solution onto project $PROJECT_ID
@@ -69,12 +72,12 @@ else
     add_iam_member $MEMBER roles/secretmanager.admin
 
     echo Create Docker repository
-    if gcloud artifacts repositories describe docker-repo --location=us-central1; then
+    if gcloud artifacts repositories describe docker-repo --location=$REPO_LOCATION; then
         echo Docker repository already exists!
     else
         gcloud artifacts repositories create docker-repo \
         --repository-format=docker \
-        --location=us-central1 \
+        --location=$REPO_LOCATION \
         --description="Private docker images" \
         --project $PROJECT_ID
     fi
