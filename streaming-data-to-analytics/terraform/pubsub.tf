@@ -15,7 +15,7 @@ resource "google_pubsub_subscription" "order_to_bq_sub" {
   }
   
   depends_on = [
-    google_project_iam_member.pubsub_to_bq_role
+    google_project_iam_member.pubsub_to_bq
   ]
 }
 
@@ -31,7 +31,6 @@ resource "google_pubsub_subscription" "unknown_to_bq_sub" {
   }
 
   depends_on = [
-    google_project_iam_member.pubsub_to_bq_role
+    google_project_iam_member.pubsub_to_bq
   ]
 }
-

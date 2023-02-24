@@ -1,11 +1,12 @@
 resource "google_cloud_run_service" "default" {
-  name     = "ingest-api"
+  name     = local.function_name
   location = var.region
 
   template {
     spec {
+      service_account_name = google_service_account.ingest_api.email
       containers {
-        image = var.gcp_ingest_api_image
+        image = local.ingest_api_container
         env {
           name  = "PROJECT_ID"
           value = var.project_id

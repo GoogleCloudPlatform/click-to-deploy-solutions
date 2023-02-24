@@ -46,6 +46,7 @@ else
 
     echo Enabling required APIs...
     gcloud services enable cloudbuild.googleapis.com \
+        artifactregistry.googleapis.com \
         bigquery.googleapis.com \
         cloudresourcemanager.googleapis.com \
         compute.googleapis.com \
@@ -66,6 +67,17 @@ else
     add_iam_member $MEMBER roles/iam.securityAdmin
     add_iam_member $MEMBER roles/compute.networkAdmin
     add_iam_member $MEMBER roles/secretmanager.admin
+
+    echo Create Docker repository
+    if gcloud artifacts repositories describe docker-repo --location=us-central1; then
+        echo Docker repository already exists!
+    else
+        gcloud artifacts repositories create docker-repo \
+        --repository-format=docker \
+        --location=us-central1 \
+        --description="Private docker images" \
+        --project $PROJECT_ID
+    fi
 
     echo Triggering Cloud Build job...
     gcloud builds submit . --config cloudbuild.yaml

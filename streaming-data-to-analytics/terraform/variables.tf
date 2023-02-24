@@ -7,6 +7,7 @@ locals {
   }
 
   ingest_api_container = "us-central1-docker.pkg.dev/${var.project_id}/docker-repo/gcp-ingest-api:${var.ingest_api_tag}"
+  function_name = "ingest-api"
 }
 
 variable "project_id" {
