@@ -44,6 +44,7 @@ resource "google_sql_database_instance" "dr_instance" {
   name                 = "${local.db_instance_name}-${var.region_dr}"
   region               = var.region_dr
   database_version     = "POSTGRES_14"
+  deletion_protection  = false # not recommended for PROD
   master_instance_name = google_sql_database_instance.main_instance.name
 
   settings {
