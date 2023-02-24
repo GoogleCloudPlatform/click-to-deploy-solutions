@@ -35,9 +35,6 @@ resource "google_sql_database_instance" "main_instance" {
       private_network = module.vpc.network_self_link
     }
 
-    # backup_configuration {
-    #   binary_log_enabled = true
-    # }
   }
 
   depends_on = [google_service_networking_connection.private_service_connection]
@@ -47,7 +44,7 @@ resource "google_sql_database_instance" "dr_instance" {
   name                 = "${local.db_instance_name}-${var.region_dr}"
   region               = var.region_dr
   database_version     = "POSTGRES_14"
-  master_instance_name = "${local.db_instance_name}-${var.region}"
+  master_instance_name = google_sql_database_instance.main_instance.name
 
   settings {
     tier        = "db-custom-1-3840"
@@ -61,4 +58,3 @@ resource "google_sql_database_instance" "dr_instance" {
 
   depends_on = [google_service_networking_connection.private_service_connection]
 }
-

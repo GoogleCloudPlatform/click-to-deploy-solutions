@@ -18,6 +18,7 @@ module "vpc" {
   project_id   = var.project_id
   network_name = var.network_name
   routing_mode = "GLOBAL"
+  subnets      = []
 }
 
 resource "google_compute_global_address" "service_range" {
