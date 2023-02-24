@@ -12,28 +12,31 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-locals {
-  function_name = "gcs-to-bq-trigger"
-  resource_labels = merge(var.resource_labels, {
-    deployed_by = "cloudbuild"
-    repo        = "click-to-deploy-solutions"
-    solution    = "data-analytics-platform-scheduled"
-    terraform   = "true"
-  })
-}
+steps:
+- id: 'tf init'
+  name: 'hashicorp/terraform:1.0.0'
+  entrypoint: 'sh'
+  args: 
+  - '-c'
+  - | 
+    terraform init \
+    -backend-config="bucket=$PROJECT_ID-tf-state" \
+    -backend-config="prefix=cloudsql-ha-dr"
+  dir: terraform
+- id: 'tf destroy'
+  name: 'hashicorp/terraform:1.0.0'
+  args: 
+  - destroy
+  - -auto-approve
+  dir: terraform
 
-variable "project_id" {
-  description = "GCP Project ID"
-}
+options:
+  env:
+    - TF_VAR_project_id=$PROJECT_ID
 
-variable "region" {
-  type        = string
-  description = "GCP region"
-  default     = "southamerica-east1"
-}
+tags:
+  - terraform
+  - cloudsql-ha-dr
+  - destroy
 
-variable "resource_labels" {
-  type        = map(string)
-  description = "Resource labels"
-  default     = {}
-}
+timeout: 3600s

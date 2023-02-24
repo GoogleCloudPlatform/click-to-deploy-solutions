@@ -7,6 +7,7 @@ In the catalog below you will find all solutions ready to deploy, click on it an
 
 - [Cloud Armor Demo](./cloud-armor-demo/)
 - [Cloud Composer ETL](./cloud-composer-etl/)
+- [CloudSQL with HA and DR](./cloudsql-ha-dr/)
 - [Data Analytics Platform event-driven](./data-analytics-platform-event-driven)
 - [Data Analytics Platform scheduled](./data-analytics-platform-scheduled)
 - [GKE Autopilot with HPA example](./gke-autopilot-hpa/)

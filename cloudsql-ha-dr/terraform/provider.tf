@@ -12,28 +12,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-locals {
-  function_name = "gcs-to-bq-trigger"
-  resource_labels = merge(var.resource_labels, {
-    deployed_by = "cloudbuild"
-    repo        = "click-to-deploy-solutions"
-    solution    = "data-analytics-platform-scheduled"
-    terraform   = "true"
-  })
+terraform {
+  backend "gcs" {
+  }
+  provider_meta "google" {
+    module_name = "cloud-solutions/cloudsql-ha-dr-etl-v0.1"
+  }
 }
 
-variable "project_id" {
-  description = "GCP Project ID"
-}
-
-variable "region" {
-  type        = string
-  description = "GCP region"
-  default     = "southamerica-east1"
-}
-
-variable "resource_labels" {
-  type        = map(string)
-  description = "Resource labels"
-  default     = {}
+provider "google" {
+  project = var.project_id
+  region  = var.region
 }

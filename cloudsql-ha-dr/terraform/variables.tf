@@ -13,11 +13,10 @@
 # limitations under the License.
 
 locals {
-  function_name = "gcs-to-bq-trigger"
   resource_labels = merge(var.resource_labels, {
     deployed_by = "cloudbuild"
     repo        = "click-to-deploy-solutions"
-    solution    = "data-analytics-platform-scheduled"
+    solution    = "cloudsql-ha-dr-etl"
     terraform   = "true"
   })
 }
@@ -28,8 +27,16 @@ variable "project_id" {
 
 variable "region" {
   type        = string
-  description = "GCP region"
-  default     = "southamerica-east1"
+  description = "GCP region for the primary instance"
+}
+
+variable "region_dr" {
+  type        = string
+  description = "GCP region for the DR instance"
+}
+
+variable "network_name" {
+  description = "VPC name"
 }
 
 variable "resource_labels" {
