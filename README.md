@@ -14,6 +14,7 @@ In the catalog below you will find all solutions ready to deploy, click on it an
 - [GKE Standard with NGINX](./gke-standard-nginx/)
 - [Private Cloud Data Fusion](./private-cloud-data-fusion/)
 - [Replicating Databases to BigQuery](./replicating-databases-bigquery/)
+- [Streaming Data to Analytics](./streaming-data-to-analytics/)
 - [Three Tier GKE](./three-tier-gke/)
 
 ## Contribute

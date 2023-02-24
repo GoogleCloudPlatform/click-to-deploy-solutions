@@ -1,0 +1,45 @@
+steps:
+# Container steps
+- name: 'gcr.io/cloud-builders/docker'
+  args:
+    - 'build'
+    - '-t'
+    - '${_IMAGE_NAME}'
+    - '.'
+  dir: code
+- name: 'gcr.io/cloud-builders/docker'
+  args: 
+  - 'push'
+  - '${_IMAGE_NAME}'
+  dir: code
+  # Terraform steps
+- id: 'tf init'
+  name: 'hashicorp/terraform:1.0.0'
+  entrypoint: 'sh'
+  args: 
+  - '-c'
+  - | 
+    terraform init \
+    -backend-config="bucket=$PROJECT_ID-tf-state" \
+    -backend-config="prefix=streaming-data"
+  dir: terraform
+- id: 'tf apply'
+  name: 'hashicorp/terraform:1.0.0'
+  args: 
+  - apply
+  - -auto-approve
+  dir: terraform
+substitutions:
+  _IMAGE_NAME: us-central1-docker.pkg.dev/${PROJECT_ID}/docker-repo/gcp-ingest-api:${BUILD_ID}
+options:
+  dynamic_substitutions: true
+  env:
+    - TF_VAR_project_id=$PROJECT_ID
+    - TF_VAR_ingest_api_tag=$BUILD_ID
+tags:
+  - terraform
+  - streaming-data
+  - plan-apply
+images:
+  - ${_IMAGE_NAME}    
+timeout: 3600s
