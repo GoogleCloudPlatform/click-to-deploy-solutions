@@ -13,6 +13,14 @@
 # limitations under the License.
 
 steps:
+- id: k8s delete hello-app-example
+  name: 'gcr.io/cloud-builders/kubectl'
+  args: ['delete', '-f', 'hello-app-example.yaml', '-n', 'hello-app-example']
+  dir: k8s
+- id: k8s delete hpa-example
+  name: 'gcr.io/cloud-builders/kubectl'
+  args: ['delete', '-f', 'hpa-example.yaml', '-n', 'hpa-example']
+  dir: k8s
 - id: 'tf init'
   name: 'hashicorp/terraform:1.0.0'
   entrypoint: 'sh'
@@ -32,6 +40,8 @@ steps:
 options:
   env:
     - TF_VAR_project_id=$PROJECT_ID
+    - 'CLOUDSDK_COMPUTE_REGION=southamerica-east1'
+    - 'CLOUDSDK_CONTAINER_CLUSTER=gke-autopilot-sandbox'
 tags:
   - terraform
   - gke-autopilot-hpa
