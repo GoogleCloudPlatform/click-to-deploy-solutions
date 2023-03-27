@@ -13,37 +13,37 @@
 # limitations under the License.
 
 steps:
-- id: k8s delete hello-app-example
-  name: 'gcr.io/cloud-builders/kubectl'
-  args: ['delete', '-f', 'hello-app-example.yaml', '-n', 'hello-app-example']
-  dir: k8s
-- id: k8s delete hpa-example
-  name: 'gcr.io/cloud-builders/kubectl'
-  args: ['delete', '-f', 'hpa-example.yaml', '-n', 'hpa-example']
-  dir: k8s
+- id: 'zip code'
+  name: 'ubuntu:bionic'
+  entrypoint: 'sh'
+  args: 
+  - '-c'
+  - | 
+    apt-get update; apt install zip -y
+    zip /workspace/function-source.zip main.py requirements.txt
+  dir: load_function
+
 - id: 'tf init'
-  name: 'hashicorp/terraform:1.0.0'
+  name: 'hashicorp/terraform:1.3.9'
   entrypoint: 'sh'
   args: 
   - '-c'
   - | 
     terraform init \
     -backend-config="bucket=$PROJECT_ID-tf-state" \
-    -backend-config="prefix=gke-autopilot-hpa"
+    -backend-config="prefix=data-analytics-platform-event-driven"
   dir: terraform
-- id: 'tf destroy'
-  name: 'hashicorp/terraform:1.0.0'
+- id: 'tf apply'
+  name: 'hashicorp/terraform:1.3.9'
   args: 
-  - destroy
+  - apply
   - -auto-approve
   dir: terraform
 options:
   env:
     - TF_VAR_project_id=$PROJECT_ID
-    - 'CLOUDSDK_COMPUTE_REGION=southamerica-east1'
-    - 'CLOUDSDK_CONTAINER_CLUSTER=gke-autopilot-sandbox'
+    - REGION=southamerica-east1
 tags:
   - terraform
-  - gke-autopilot-hpa
-  - destroy
-timeout: 1200s
+  - data-analytics-platform-event-driven
+  - apply

@@ -12,25 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-terraform {
-  backend "gcs" {
-  }
-  required_providers {
-    google = {
-      source  = "hashicorp/google"
-      version = "4.46.0"
-    }
-    google-beta = {
-      source  = "hashicorp/google-beta"
-      version = "4.46.0"
-    }
-  }
-  provider_meta "google" {
-    module_name = "cloud-solutions/private-cloud-data-fusion-v0.1"
-  }
-}
-
-provider "google" {
-  project = var.project_id
-  region  = var.region
+resource "google_storage_bucket" "upload_bucket" {
+  name                        = "${var.project_id}-data-lake"
+  location                    = var.region
+  uniform_bucket_level_access = true
+  force_destroy               = true
 }

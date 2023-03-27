@@ -12,25 +12,28 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-terraform {
-  backend "gcs" {
-  }
-  required_providers {
-    google = {
-      source  = "hashicorp/google"
-      version = "4.46.0"
-    }
-    google-beta = {
-      source  = "hashicorp/google-beta"
-      version = "4.46.0"
-    }
-  }
-  provider_meta "google" {
-    module_name = "cloud-solutions/private-cloud-data-fusion-v0.1"
-  }
+locals {
+  function_name = "gcs-to-bq-trigger"
+  resource_labels = merge(var.resource_labels, {
+    deployed_by = "cloudbuild"
+    repo        = "click-to-deploy-solutions"
+    solution    = "cloud-composer-etl"
+    terraform   = "true"
+  })
 }
 
-provider "google" {
-  project = var.project_id
-  region  = var.region
+variable "project_id" {
+  description = "GCP Project ID"
+}
+
+variable "region" {
+  type        = string
+  description = "GCP region"
+  default     = "southamerica-east1"
+}
+
+variable "resource_labels" {
+  type        = map(string)
+  description = "Resource labels"
+  default     = {}
 }

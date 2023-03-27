@@ -15,22 +15,23 @@
 terraform {
   backend "gcs" {
   }
+
   required_providers {
     google = {
-      source  = "hashicorp/google"
-      version = "4.46.0"
+      version = "~> 4.32"
     }
     google-beta = {
-      source  = "hashicorp/google-beta"
-      version = "4.46.0"
+      version = "~> 4.32"
     }
-  }
-  provider_meta "google" {
-    module_name = "cloud-solutions/private-cloud-data-fusion-v0.1"
   }
 }
 
 provider "google" {
+  project = var.project_id
+  region  = var.region
+}
+
+provider "google-beta" {
   project = var.project_id
   region  = var.region
 }

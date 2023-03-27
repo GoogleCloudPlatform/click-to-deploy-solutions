@@ -12,25 +12,29 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-terraform {
-  backend "gcs" {
-  }
-  required_providers {
-    google = {
-      source  = "hashicorp/google"
-      version = "4.46.0"
-    }
-    google-beta = {
-      source  = "hashicorp/google-beta"
-      version = "4.46.0"
-    }
-  }
-  provider_meta "google" {
-    module_name = "cloud-solutions/private-cloud-data-fusion-v0.1"
-  }
-}
+steps:
+- id: 'tf init'
+  name: 'hashicorp/terraform:1.0.0'
+  entrypoint: 'sh'
+  args: 
+  - '-c'
+  - | 
+    terraform init \
+    -backend-config="bucket=$PROJECT_ID-tf-state" \
+    -backend-config="prefix=cloudsql-ha-dr"
+  dir: terraform
+- id: 'tf apply'
+  name: 'hashicorp/terraform:1.0.0'
+  args: 
+  - apply
+  - -auto-approve
+  dir: terraform
+options:
+  env:
+    - TF_VAR_project_id=$PROJECT_ID
+tags:
+  - terraform
+  - cloudsql-ha-dr
+  - apply
 
-provider "google" {
-  project = var.project_id
-  region  = var.region
-}
+timeout: 3600s

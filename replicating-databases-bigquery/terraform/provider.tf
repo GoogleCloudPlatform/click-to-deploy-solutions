@@ -15,18 +15,9 @@
 terraform {
   backend "gcs" {
   }
-  required_providers {
-    google = {
-      source  = "hashicorp/google"
-      version = "4.46.0"
-    }
-    google-beta = {
-      source  = "hashicorp/google-beta"
-      version = "4.46.0"
-    }
-  }
+
   provider_meta "google" {
-    module_name = "cloud-solutions/private-cloud-data-fusion-v0.1"
+    module_name = "cloud-solutions/replicating-databases-bigquery-v0.1"
   }
 }
 

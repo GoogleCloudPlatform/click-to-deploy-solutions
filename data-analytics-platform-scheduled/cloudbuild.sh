@@ -46,9 +46,17 @@ else
 
     echo Enabling required APIs...
     gcloud services enable cloudbuild.googleapis.com \
+        bigquery.googleapis.com \
         cloudresourcemanager.googleapis.com \
         compute.googleapis.com \
-        iam.googleapis.com
+        secretmanager.googleapis.com \
+        servicenetworking.googleapis.com \
+        storage.googleapis.com \
+        eventarc.googleapis.com \
+        iam.googleapis.com \
+        run.googleapis.com \
+        pubsub.googleapis.com \
+        --project $PROJECT_ID
 
     echo Waiting for APIs activation...
     sleep 30
@@ -58,11 +66,12 @@ else
     MEMBER=serviceAccount:$PROJECT_NUMBER@cloudbuild.gserviceaccount.com
     add_iam_member $MEMBER roles/editor
     add_iam_member $MEMBER roles/iam.securityAdmin
+    add_iam_member $MEMBER roles/compute.networkAdmin
+    add_iam_member $MEMBER roles/secretmanager.admin
 
     echo Triggering Cloud Build job...
     gcloud builds submit . --config cloudbuild.yaml
 
-    echo Solution deployed successfully!
 fi
 
 echo Script completed successfully!
