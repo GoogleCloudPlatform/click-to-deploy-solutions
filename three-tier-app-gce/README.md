@@ -1,6 +1,6 @@
 # Three-tier Web Application on GCE
 
-This example deploys a Three-tier Autoscaling Web Application on GCE using Managed Instance Groups.
+This example deploys the infrastructure to run a three-tier autoscaling web application on GCE using Managed Instance Groups.
 The application can connect to Cloud SQL and Redis using private IPs, it uses load balacing for incoming traffic and Cloud NAT for egress traffic. Also, it is protected by Cloud Armor with pre-defined WAF rules.
 
 
