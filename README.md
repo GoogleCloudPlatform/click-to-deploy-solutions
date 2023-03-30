@@ -15,7 +15,8 @@ In the catalog below you will find all solutions ready to deploy, click on it an
 - [Private Cloud Data Fusion](./private-cloud-data-fusion/)
 - [Replicating Databases to BigQuery](./replicating-databases-bigquery/)
 - [Streaming Data to Analytics](./streaming-data-to-analytics/)
-- [Three Tier GKE](./three-tier-gke/)
+- [Three Tier Application on GCE](./three-tier-app-gce/)
+- [Three Tier Application on GKE](./three-tier-gke/)
 
 ## Contribute
 
