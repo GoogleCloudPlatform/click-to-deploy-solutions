@@ -1,4 +1,6 @@
-# Document OCR
+[![banner](../banner.png)](https://cloud.google.com/?utm_source=github&utm_medium=referral&utm_campaign=GCP&utm_content=packages_repository_banner)
+
+# Document AI
 
 This example deploys a solution for extracting data from documents with Document AI OCR.
 The documents uploaded input buckets are processed by Document AI, then results are pushed to output bucket.
