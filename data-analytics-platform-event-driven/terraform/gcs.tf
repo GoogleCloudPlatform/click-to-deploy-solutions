@@ -12,25 +12,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Ignore .terraform directories
-**/.terraform/*
+resource "google_storage_bucket" "upload_bucket" {
+  name                        = "${var.project_id}-upload"
+  location                    = var.region
+  uniform_bucket_level_access = true
+  force_destroy               = true
+}
 
-# .tfstate files
-*.tfstate
-*.tfstate.*
-
-# Crash log files
-crash.log
-
-# Ignore override files as they are usually used to override resources locally and so
-# are not checked in
-override.tf
-override.tf.json
-*_override.tf
-*_override.tf.json
-
-# Others
-.DS_Store
-*.pyc
-venv
-__pycache__
+resource "google_storage_bucket" "archive_bucket" {
+  name                        = "${var.project_id}-archive"
+  location                    = var.region
+  uniform_bucket_level_access = true
+  force_destroy               = true
+}

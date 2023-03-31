@@ -1,4 +1,4 @@
-# Copyright 2023 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,25 +12,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Ignore .terraform directories
-**/.terraform/*
+resource "google_redis_instance" "cache" {
+  name   = "${var.application_name}-cache"
+  region = var.region
 
-# .tfstate files
-*.tfstate
-*.tfstate.*
+  redis_version  = "REDIS_4_0"
+  tier           = "BASIC"
+  memory_size_gb = 1
+  labels         = local.resource_labels
 
-# Crash log files
-crash.log
+  authorized_network = module.vpc.network_id
+  connect_mode       = "PRIVATE_SERVICE_ACCESS"
 
-# Ignore override files as they are usually used to override resources locally and so
-# are not checked in
-override.tf
-override.tf.json
-*_override.tf
-*_override.tf.json
-
-# Others
-.DS_Store
-*.pyc
-venv
-__pycache__
+  depends_on = [
+    google_service_networking_connection.service_networking,
+  ]
+}

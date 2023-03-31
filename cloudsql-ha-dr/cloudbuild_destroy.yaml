@@ -12,25 +12,31 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Ignore .terraform directories
-**/.terraform/*
+steps:
+- id: 'tf init'
+  name: 'hashicorp/terraform:1.0.0'
+  entrypoint: 'sh'
+  args: 
+  - '-c'
+  - | 
+    terraform init \
+    -backend-config="bucket=$PROJECT_ID-tf-state" \
+    -backend-config="prefix=cloudsql-ha-dr"
+  dir: terraform
+- id: 'tf destroy'
+  name: 'hashicorp/terraform:1.0.0'
+  args: 
+  - destroy
+  - -auto-approve
+  dir: terraform
 
-# .tfstate files
-*.tfstate
-*.tfstate.*
+options:
+  env:
+    - TF_VAR_project_id=$PROJECT_ID
 
-# Crash log files
-crash.log
+tags:
+  - terraform
+  - cloudsql-ha-dr
+  - destroy
 
-# Ignore override files as they are usually used to override resources locally and so
-# are not checked in
-override.tf
-override.tf.json
-*_override.tf
-*_override.tf.json
-
-# Others
-.DS_Store
-*.pyc
-venv
-__pycache__
+timeout: 3600s

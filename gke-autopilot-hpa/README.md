@@ -36,7 +36,6 @@ To run the load test and see the HPA working, go back to the Cloud Shell console
 
 ```
 HPA_LB_IP=$(gcloud compute addresses describe hpa-lb-ip --global --format='value(address)')
-cd ./smb-solutions-stag/gke-autopilot-hpa
 sh load_test.sh $HPA_LB_IP
 ```
 

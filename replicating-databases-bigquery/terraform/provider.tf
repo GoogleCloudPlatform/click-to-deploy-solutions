@@ -12,25 +12,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Ignore .terraform directories
-**/.terraform/*
+terraform {
+  backend "gcs" {
+  }
 
-# .tfstate files
-*.tfstate
-*.tfstate.*
+  provider_meta "google" {
+    module_name = "cloud-solutions/replicating-databases-bigquery-v0.1"
+  }
+}
 
-# Crash log files
-crash.log
-
-# Ignore override files as they are usually used to override resources locally and so
-# are not checked in
-override.tf
-override.tf.json
-*_override.tf
-*_override.tf.json
-
-# Others
-.DS_Store
-*.pyc
-venv
-__pycache__
+provider "google" {
+  project = var.project_id
+  region  = var.region
+}

@@ -12,25 +12,31 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Ignore .terraform directories
-**/.terraform/*
+locals {
+  resource_labels = merge(var.resource_labels, {
+    deployed_by = "cloudbuild"
+    repo        = "click-to-deploy-solutions"
+    solution    = "replicating-databases-bigquery"
+    terraform   = "true"
+  })
+}
 
-# .tfstate files
-*.tfstate
-*.tfstate.*
+variable "project_id" {
+  description = "GCP Project ID"
+}
 
-# Crash log files
-crash.log
+variable "region" {
+  type        = string
+  description = "GCP region"
+  default     = "southamerica-east1"
+}
 
-# Ignore override files as they are usually used to override resources locally and so
-# are not checked in
-override.tf
-override.tf.json
-*_override.tf
-*_override.tf.json
+variable "network_name" {
+  description = "VPC name"
+}
 
-# Others
-.DS_Store
-*.pyc
-venv
-__pycache__
+variable "resource_labels" {
+  type        = map(string)
+  description = "Resource labels"
+  default     = {}
+}

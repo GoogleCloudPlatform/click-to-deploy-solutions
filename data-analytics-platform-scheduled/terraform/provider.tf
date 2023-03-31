@@ -12,25 +12,26 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Ignore .terraform directories
-**/.terraform/*
+terraform {
+  backend "gcs" {
+  }
 
-# .tfstate files
-*.tfstate
-*.tfstate.*
+  required_providers {
+    google = {
+      version = "~> 4.32"
+    }
+    google-beta = {
+      version = "~> 4.32"
+    }
+  }
+}
 
-# Crash log files
-crash.log
+provider "google" {
+  project = var.project_id
+  region  = var.region
+}
 
-# Ignore override files as they are usually used to override resources locally and so
-# are not checked in
-override.tf
-override.tf.json
-*_override.tf
-*_override.tf.json
-
-# Others
-.DS_Store
-*.pyc
-venv
-__pycache__
+provider "google-beta" {
+  project = var.project_id
+  region  = var.region
+}
