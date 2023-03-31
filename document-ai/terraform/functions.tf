@@ -66,7 +66,8 @@ resource "google_cloudfunctions2_function" "function" {
   }
 
   depends_on = [
-    google_project_iam_member.event_receiver
+    google_project_iam_member.event_receiver,
+    google_project_iam_member.gcs_to_pubsub
   ]
 }
 

@@ -52,20 +52,34 @@ else
         cloudresourcemanager.googleapis.com \
         compute.googleapis.com \
         documentai.googleapis.com \
-        eventarc.googleapis.com \
         iam.googleapis.com \
+        logging.googleapis.com \
+        pubsub.googleapis.com \
         run.googleapis.com \
-        pubsub.googleapis.com
+        storage.googleapis.com \
+        storage-component.googleapis.com \
+        eventarc.googleapis.com \
+        eventarcpublishing.googleapis.com
 
-    echo Waiting for APIs activation and propagation...
-    sleep 60
+    # EventArc takes time to propagate, so sleep here is longer
+    echo Waiting for APIs activation...
+    sleep 300
 
     echo "Granting Cloud Build's Service Account IAM roles to deploy the resources..."
     PROJECT_NUMBER=$(gcloud projects describe $PROJECT_ID --format='value(projectNumber)')
     MEMBER=serviceAccount:$PROJECT_NUMBER@cloudbuild.gserviceaccount.com
     add_iam_member $MEMBER roles/editor
     add_iam_member $MEMBER roles/iam.securityAdmin
+    add_iam_member $MEMBER roles/documentai.admin
 
+    echo "Granting Cloud Storage's Service Account permissions required by EventArc..."
+    GCS_SERVICE_ACCOUNT="$(gsutil kms serviceaccount -p $PROJECT_ID)"
+    MEMBER=serviceAccount:$GCS_SERVICE_ACCOUNT
+    add_iam_member $MEMBER roles/pubsub.publisher
+
+    echo Waiting for permissions to propagate...
+    sleep 120
+    
     echo Triggering Cloud Build job...
     gcloud builds submit . --config cloudbuild.yaml
 
