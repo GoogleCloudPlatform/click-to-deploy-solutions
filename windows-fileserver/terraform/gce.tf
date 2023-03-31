@@ -43,3 +43,21 @@ resource "google_compute_disk" "default" {
   size  = 2000
 }
 
+resource "google_compute_disk_resource_policy_attachment" "attachment" {
+  name = google_compute_resource_policy.policy.name
+  disk = google_compute_disk.default.name
+  zone = "us-central1-a"
+}
+
+resource "google_compute_resource_policy" "policy" {
+  name = "snapshot-policy"
+  region = "us-central1"
+  snapshot_schedule_policy {
+    schedule {
+      daily_schedule {
+        days_in_cycle = 1
+        start_time = "00:00"
+      }
+    }
+  }
+}
