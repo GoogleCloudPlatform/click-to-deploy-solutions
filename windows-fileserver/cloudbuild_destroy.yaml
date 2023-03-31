@@ -40,6 +40,6 @@ options:
 tags:
   - terraform
   - windows-file-server
-  - plan-apply
+  - destroy
 
 timeout: 3600s

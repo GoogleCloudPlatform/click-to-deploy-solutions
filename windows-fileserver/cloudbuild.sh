@@ -59,7 +59,6 @@ else
     add_iam_member $MEMBER roles/editor
     add_iam_member $MEMBER roles/iam.securityAdmin
     add_iam_member $MEMBER roles/compute.networkAdmin
-    add_iam_member $MEMBER roles/secretmanager.admin
 
     echo Triggering Cloud Build job...
     gcloud builds submit . --config cloudbuild.yaml
