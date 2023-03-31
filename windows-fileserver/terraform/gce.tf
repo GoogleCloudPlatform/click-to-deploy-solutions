@@ -13,7 +13,7 @@
 # limitations under the License.
 
 resource "google_compute_attached_disk" "default" {
-  disk     = google_compute_disk.default.id
+  disk     = google_compute_disk.windows-fileserver-data-disk.id
   instance = google_compute_instance.default.id
 }
 
@@ -33,27 +33,25 @@ resource "google_compute_instance" "default" {
     network    = module.vpc.network_name
     subnetwork = google_compute_subnetwork.subnet.self_link
   }
-
-  metadata_startup_script = "echo hi > /test.txt"
 }
 
-resource "google_compute_disk" "default" {
+resource "google_compute_disk" "windows-fileserver-data-disk" {
   name   = "disk"
   type   = "pd-ssd"
-  zone   = "us-central1-a"
+  zone   = var.zone
   size   = 2000
   labels = local.resource_labels
 }
 
 resource "google_compute_disk_resource_policy_attachment" "attachment" {
   name   = google_compute_resource_policy.policy.name
-  disk   = google_compute_disk.default.name
-  zone   = "us-central1-a"
+  disk   = google_compute_disk.windows-fileserver-data-disk.name
+  zone   = var.zone
 }
 
 resource "google_compute_resource_policy" "policy" {
   name   = "snapshot-policy"
-  region = "us-central1"
+  region = var.region
 
   snapshot_schedule_policy {
     schedule {
