@@ -18,24 +18,28 @@ The documents uploaded input buckets are processed by Document AI, then results 
 sh cloudbuild.sh
 ```
 
+## Testing 
+
+
 ## Destroy
 Execute the command below on Cloud Shell to destroy the resources.
 ```
 sh cloudbuild.sh destroy
 ```
 
-
-## Useful links
-- [Form Parsing with Document AI](https://codelabs.developers.google.com/codelabs/docai-form-parser-v1-python#0)
-- [Use a Document AI para processar seus formulários escritos à mão de maneira inteligente (Python)](https://codelabs.developers.google.com/codelabs/docai-form-parser-v3-python?hl=pt-br#0) (Portuguese)
-
-
 ## Known issues
 
-You might experience the error below while running it for the first times. That happens because the Eventarc permissions take time to propagate. Please wait some minutes and try again.
+You might face the error below while running it for the first time.
 
 ```
 Step #2 - "tf apply": │ Error: Error creating function: googleapi: Error 400: Cannot create trigger projects/doc-ai-test4/locations/us-central1/triggers/form-parser-868560: Invalid resource state for "": Permission denied while using the Eventarc Service Agent.
 
 If you recently started to use Eventarc, it may take a few minutes before all necessary permissions are propagated to the Service Agent. Otherwise, verify that it has Eventarc Service Agent role.
 ```
+
+That happens because the Eventarc permissions take time to propagate. Please wait some minutes and try again.
+
+## Useful links
+- [Form Parsing with Document AI](https://codelabs.developers.google.com/codelabs/docai-form-parser-v1-python#0)
+- [Use a Document AI para processar seus formulários escritos à mão de maneira inteligente (Python)](https://codelabs.developers.google.com/codelabs/docai-form-parser-v3-python?hl=pt-br#0) (Portuguese)
+
