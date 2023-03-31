@@ -17,6 +17,7 @@ In the catalog below you will find all solutions ready to deploy, click on it an
 - [Streaming Data to Analytics](./streaming-data-to-analytics/)
 - [Three Tier Application on GCE](./three-tier-app-gce/)
 - [Three Tier Application on GKE](./three-tier-gke/)
+- [Configuration Example - Windows File Server](./windows-fileserver/)
 
 ## Contribute
 
