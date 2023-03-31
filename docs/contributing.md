@@ -122,3 +122,12 @@ steps:
 ### Architecture Diagram
 
 Please use Google Cloud official icons to build the solution's diagram. You can find them on https://cloud.google.com/icons/.
+
+### Open in Cloud Shell button
+
+Use the following url pattern for the button "Open in Cloud Shell", please note the workspace param must be set to the solution path within this repository.
+```
+<a href="https://ssh.cloud.google.com/cloudshell/editor?cloudshell_git_repo=https://github.com/GoogleCloudPlatform/click-to-deploy-solutions&cloudshell_workspace=path-to-solution" target="_new">
+    <img alt="Open in Cloud Shell" src="https://gstatic.com/cloudssh/images/open-btn.svg">
+</a>
+```
