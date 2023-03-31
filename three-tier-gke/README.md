@@ -1,3 +1,5 @@
+[![banner](../banner.png)](https://cloud.google.com/?utm_source=github&utm_medium=referral&utm_campaign=GCP&utm_content=packages_repository_banner)
+
 # Three-tier Web Application using GKE
 
 This is a stack that deploys a Three-tier Autoscaling Web Application using GKE.

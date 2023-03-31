@@ -1,3 +1,6 @@
+[![banner](../banner.png)](https://cloud.google.com/?utm_source=github&utm_medium=referral&utm_campaign=GCP&utm_content=packages_repository_banner)
+
+
 # Cloud SQL with High Availability and Disaster Recovery  
 
 ## Description

@@ -1,3 +1,5 @@
+[![banner](../banner.png)](https://cloud.google.com/?utm_source=github&utm_medium=referral&utm_campaign=GCP&utm_content=packages_repository_banner)
+
 # Replicating databases to BigQuery
 
 This is a stack that deploys a example of a real-time analytics solution with databases replication to BigQuery.
