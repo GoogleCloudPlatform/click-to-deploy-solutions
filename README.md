@@ -1,3 +1,6 @@
+[![banner](banner.png)](https://cloud.google.com/?utm_source=github&utm_medium=referral&utm_campaign=GCP&utm_content=packages_repository_banner)
+
+
 # Click to Deploy Solutions
 
 This repository has Google Cloud solutions that you can deploy with a single click.
@@ -10,6 +13,7 @@ In the catalog below you will find all solutions ready to deploy, click on it an
 - [CloudSQL with HA and DR](./cloudsql-ha-dr/)
 - [Data Analytics Platform event-driven](./data-analytics-platform-event-driven)
 - [Data Analytics Platform scheduled](./data-analytics-platform-scheduled)
+- [Document AI](./document-ai)
 - [GKE Autopilot with HPA example](./gke-autopilot-hpa/)
 - [GKE Standard with NGINX](./gke-standard-nginx/)
 - [Private Cloud Data Fusion](./private-cloud-data-fusion/)

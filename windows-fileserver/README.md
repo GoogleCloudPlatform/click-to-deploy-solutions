@@ -1,3 +1,5 @@
+[![banner](../banner.png)](https://cloud.google.com/?utm_source=github&utm_medium=referral&utm_campaign=GCP&utm_content=packages_repository_banner)
+
 # Configuration Example - Windows File Server
 
 This is a stack that deploys a Configuration Example of Windows File Server.
