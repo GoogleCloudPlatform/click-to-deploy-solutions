@@ -49,8 +49,14 @@ resource "google_project_iam_member" "iam_user" {
   member  = "serviceAccount:${google_service_account.doc_ai_form_function.email}"
 }
 
-# resource "google_project_iam_member" "gcs_to_pubsub" {
-#   project = var.project_id
-#   role    = "roles/pubsub.publisher"
-#   member  = "serviceAccount:service-${data.google_project.project.number}@gs-project-accounts.iam.gserviceaccount.com"
-# }
+resource "google_project_iam_member" "gcs_to_pubsub" {
+  project = var.project_id
+  role    = "roles/pubsub.publisher"
+  member  = "serviceAccount:service-${data.google_project.project.number}@gs-project-accounts.iam.gserviceaccount.com"
+}
+
+resource "google_project_iam_member" "event_receiver" {
+  project = var.project_id
+  role    = "roles/eventarc.eventReceiver"
+  member  = "serviceAccount:${data.google_project.project.number}-compute@developer.gserviceaccount.com"
+}

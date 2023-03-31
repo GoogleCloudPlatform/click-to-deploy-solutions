@@ -47,6 +47,7 @@ else
     echo Enabling required APIs...
     gcloud services enable cloudbuild.googleapis.com \
         aiplatform.googleapis.com \
+        artifactregistry.googleapis.com \
         cloudfunctions.googleapis.com \
         cloudresourcemanager.googleapis.com \
         compute.googleapis.com \

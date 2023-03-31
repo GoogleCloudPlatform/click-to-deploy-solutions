@@ -24,9 +24,9 @@ def process_document(bucket_name, object_name):
     document = {"content": image_content, "mime_type": blob.content_type}
     
     # Configure the process request
-    processor_name = os.getenv("OCR_PROCESSOR")
+    processor_name = os.getenv("DOC_AI_PROCESSOR")
     if not processor_name:
-        print("Environment variable OCR_PROCESSOR not set")
+        print("Environment variable DOC_AI_PROCESSOR not set")
         exit(1)
     request = {"name": processor_name, "document": document}
 
