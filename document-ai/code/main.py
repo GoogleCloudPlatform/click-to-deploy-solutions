@@ -1,8 +1,7 @@
-from google.cloud import storage
+from google.cloud import bigquery, documentai_v1beta3, storage
 import functions_framework
-from google.cloud import documentai_v1beta3, storage
 import os
-import json 
+import json
 
 
 def process_document(bucket_name, object_name):
@@ -22,7 +21,7 @@ def process_document(bucket_name, object_name):
     with open(file_path, "rb") as image:
         image_content = image.read()
     document = {"content": image_content, "mime_type": blob.content_type}
-    
+
     # Configure the process request
     processor_name = os.getenv("DOC_AI_PROCESSOR")
     if not processor_name:
@@ -40,12 +39,12 @@ def process_document(bucket_name, object_name):
     document_dict = {}
     for page in document_pages:
         for form_field in page.form_fields:
-            fieldName=get_text(form_field.field_name,document)
-            fieldValue = get_text(form_field.field_value,document)
+            fieldName = get_text(form_field.field_name, document)
+            fieldValue = get_text(form_field.field_value, document)
             document_dict[f"{fieldName}"] = fieldValue
 
     print("Document processing complete.")
-    process_output(bucket_name, object_name, document_text, document_dict) 
+    process_output(bucket_name, object_name, document_text, document_dict)
 
 
 def get_text(doc_element: dict, document: dict):
@@ -82,21 +81,43 @@ def process_output(bucket_name, object_name, document_text, document_dict):
     results_text_blob.upload_from_string(document_text)
 
     print("Saving json results into the output bucket...")
-    document_json = json.dumps(document_dict)
+    results_json = {
+        "document_file_name": object_name,
+        "document_content": document_dict
+    }
+    results_json = json.dumps(results_json)
     results_json_name = "{}.json".format(object_name)
     results_json_blob = destination_bucket.blob(results_json_name)
-    results_json_blob.upload_from_string(document_json)
+    results_json_blob.upload_from_string(results_json)
 
     # Move object from input to output bucket
     print("Moving object {} from {} to {}".format(object_name, bucket_name, destination_bucket_name))
     source_bucket = storage_client.bucket(bucket_name)
     source_blob = source_bucket.blob(object_name)
-    destination_generation_match_precondition = 0
-    blob_copy = source_bucket.copy_blob(
-        source_blob, destination_bucket, object_name, if_generation_match=destination_generation_match_precondition,
-    )
+    blob_copy = source_bucket.copy_blob(source_blob, destination_bucket, object_name)
     source_bucket.delete_blob(object_name)
-    
+
+    # Persist results into BigQuery
+    print("Persisting data to BigQuery...")
+    bq_client = bigquery.Client()
+    table_id = os.getenv("BQ_TABLE_ID")
+    job_config = bigquery.LoadJobConfig(
+        schema=[
+            bigquery.SchemaField("document_file_name", "STRING"),
+            bigquery.SchemaField("document_content", "JSON"),
+        ],
+        source_format=bigquery.SourceFormat.NEWLINE_DELIMITED_JSON,
+    )
+    uri = "gs://{}/{}".format(destination_bucket_name, results_json_name)
+    print("Load file {} into BigQuery".format(uri))
+    load_job = bq_client.load_table_from_uri(
+        uri,
+        table_id,
+        location=os.getenv("BQ_LOCATION"),  # Must match the destination dataset location.
+        job_config=job_config,
+    )
+    load_job.result()
+
     print("Process output completed.")
 
 
@@ -122,4 +143,4 @@ def trigger_gcs(cloud_event):
     print(f"Created: {timeCreated}")
     print(f"Updated: {updated}")
 
-    process_document(bucket, name)    
+    process_document(bucket, name)

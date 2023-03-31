@@ -19,8 +19,13 @@ locals {
     solution    = "document-ai"
     terraform   = "true"
   })
-  function_name  = "form-parser"
-  processor_name = "form-parser-${var.location}"
+  
+  function_name   = "form-parser"
+  processor_name  = "form-parser-${var.location}"
+  
+  bq_table_name   = "form_parser"
+  bq_dataset_name = "document_ai"
+  bq_table_id     = "${var.project_id}.${local.bq_dataset_name}.${local.bq_table_name}"
 }
 
 variable "project_id" {

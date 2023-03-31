@@ -9,6 +9,7 @@ The documents uploaded input buckets are processed by Document AI, then results 
 ## Deploy
 
 1. Click on Open in Google Cloud Shell button below.
+
 <a href="https://ssh.cloud.google.com/cloudshell/editor?cloudshell_git_repo=https://github.com/GoogleCloudPlatform/click-to-deploy-solutions&cloudshell_workspace=document-ai" target="_new">
     <img alt="Open in Cloud Shell" src="https://gstatic.com/cloudssh/images/open-btn.svg">
 </a>
@@ -20,6 +21,18 @@ sh cloudbuild.sh
 
 ## Testing 
 
+Once you deployed the solution successfully, upload the `form.pdf` to the input bucket using either Cloud Console or `gsutil`.
+```
+gsutil cp form.pdf gs://<YOUR PROJECT NAME>-doc-ai-form-input
+```
+
+Then, check the parsed results in the output bucket in text (OCR) and json (Key=value) formats
+
+![gcs_results](gcs_results.png)
+
+Finally, check the json results on BigQuery
+
+![bq_results](bq_results.png)
 
 ## Destroy
 Execute the command below on Cloud Shell to destroy the resources.

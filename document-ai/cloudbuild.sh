@@ -48,6 +48,7 @@ else
     gcloud services enable cloudbuild.googleapis.com \
         aiplatform.googleapis.com \
         artifactregistry.googleapis.com \
+        bigquery.googleapis.com \
         cloudfunctions.googleapis.com \
         cloudresourcemanager.googleapis.com \
         compute.googleapis.com \
@@ -78,7 +79,7 @@ else
     add_iam_member $MEMBER roles/pubsub.publisher
 
     echo Waiting for permissions to propagate...
-    sleep 120
+    sleep 300
     
     echo Triggering Cloud Build job...
     gcloud builds submit . --config cloudbuild.yaml

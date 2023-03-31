@@ -25,6 +25,12 @@ resource "google_project_iam_member" "storage_admin" {
   member  = "serviceAccount:${google_service_account.doc_ai_form_function.email}"
 }
 
+resource "google_project_iam_member" "bq_admin" {
+  project = var.project_id
+  role    = "roles/bigquery.admin"
+  member  = "serviceAccount:${google_service_account.doc_ai_form_function.email}"
+}
+
 resource "google_project_iam_member" "doc_ai_user" {
   project = var.project_id
   role    = "roles/documentai.apiUser"
