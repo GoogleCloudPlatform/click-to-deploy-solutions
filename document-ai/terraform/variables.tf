@@ -19,8 +19,8 @@ locals {
     solution    = "document-ai"
     terraform   = "true"
   })
-  function_name  = "process-form"
-  processor_name = "form-processor-${var.location}"
+  function_name  = "form-parser"
+  processor_name = "form-parser-${var.location}"
 }
 
 variable "project_id" {

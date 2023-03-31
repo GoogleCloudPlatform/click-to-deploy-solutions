@@ -57,7 +57,7 @@ else
         pubsub.googleapis.com
 
     echo Waiting for APIs activation...
-    sleep 30
+    sleep 60
 
     echo "Granting Cloud Build's Service Account IAM roles to deploy the resources..."
     PROJECT_NUMBER=$(gcloud projects describe $PROJECT_ID --format='value(projectNumber)')

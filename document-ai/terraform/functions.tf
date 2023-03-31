@@ -12,73 +12,73 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-resource "google_storage_bucket" "gcf_source_bucket" {
-  name                        = "${var.project_id}-gcf-source-bucket"
-  location                    = var.region
-  uniform_bucket_level_access = true
-  labels                      = local.resource_labels
-}
+# resource "google_storage_bucket" "gcf_source_bucket" {
+#   name                        = "${var.project_id}-gcf-source-bucket"
+#   location                    = var.region
+#   uniform_bucket_level_access = true
+#   labels                      = local.resource_labels
+# }
 
-resource "google_storage_bucket_object" "gcf_source_code" {
-  name   = "function-source-${formatdate("YYYYMMDDhhmmss", timestamp())}.zip"
-  bucket = google_storage_bucket.gcf_source_bucket.name
-  source = "/workspace/function-source.zip"
-}
+# resource "google_storage_bucket_object" "gcf_source_code" {
+#   name   = "function-source-${formatdate("YYYYMMDDhhmmss", timestamp())}.zip"
+#   bucket = google_storage_bucket.gcf_source_bucket.name
+#   source = "/workspace/function-source.zip"
+# }
 
-resource "google_cloudfunctions2_function" "function" {
-  name        = local.function_name
-  location    = var.region
-  description = "Trigger Document AI OCR when an object is uploaded to the input bucket"
-  labels      = local.resource_labels
+# resource "google_cloudfunctions2_function" "function" {
+#   name        = local.function_name
+#   location    = var.region
+#   description = "Trigger Document AI OCR when an object is uploaded to the input bucket"
+#   labels      = local.resource_labels
 
-  build_config {
-    runtime     = "python310"
-    entry_point = "trigger_gcs" # Set the entry point in the code
+#   build_config {
+#     runtime     = "python310"
+#     entry_point = "trigger_gcs" # Set the entry point in the code
 
-    source {
-      storage_source {
-        bucket = google_storage_bucket.gcf_source_bucket.name
-        object = google_storage_bucket_object.gcf_source_code.name
-      }
-    }
-  }
+#     source {
+#       storage_source {
+#         bucket = google_storage_bucket.gcf_source_bucket.name
+#         object = google_storage_bucket_object.gcf_source_code.name
+#       }
+#     }
+#   }
 
-  service_config {
-    max_instance_count    = 3
-    min_instance_count    = 0
-    available_memory      = "256M"
-    timeout_seconds       = 60
-    service_account_email = google_service_account.ocr_sa.email
-    environment_variables = {
-      OCR_PROCESSOR = google_document_ai_processor.processor.id
-      GCS_OUTPUT    = google_storage_bucket.doc_output.name
-    }
-  }
+#   service_config {
+#     max_instance_count    = 3
+#     min_instance_count    = 0
+#     available_memory      = "256M"
+#     timeout_seconds       = 60
+#     service_account_email = google_service_account.doc_ai_form_function.email
+#     environment_variables = {
+#       OCR_PROCESSOR = google_document_ai_processor.processor.id
+#       GCS_OUTPUT    = google_storage_bucket.doc_output.name
+#     }
+#   }
 
-  event_trigger {
-    trigger_region        = var.region
-    event_type            = "google.cloud.storage.object.v1.finalized"
-    retry_policy          = "RETRY_POLICY_RETRY"
-    service_account_email = google_service_account.ocr_sa.email
-    event_filters {
-      attribute = "bucket"
-      value     = google_storage_bucket.doc_input.name
-    }
-  }
+#   event_trigger {
+#     trigger_region        = var.region
+#     event_type            = "google.cloud.storage.object.v1.finalized"
+#     retry_policy          = "RETRY_POLICY_RETRY"
+#     service_account_email = google_service_account.doc_ai_form_function.email
+#     event_filters {
+#       attribute = "bucket"
+#       value     = google_storage_bucket.doc_input.name
+#     }
+#   }
 
-  depends_on = [
-    google_project_iam_member.eventarc
-  ]
-}
+#   depends_on = [
+#     google_project_iam_member.eventarc
+#   ]
+# }
 
-data "google_cloud_run_service" "run_service" {
-  name     = google_cloudfunctions2_function.function.name
-  location = var.region
-}
+# data "google_cloud_run_service" "run_service" {
+#   name     = google_cloudfunctions2_function.function.name
+#   location = var.region
+# }
 
-resource "google_cloud_run_service_iam_member" "run_service_member" {
-  location = data.google_cloud_run_service.run_service.location
-  service  = data.google_cloud_run_service.run_service.name
-  role     = "roles/run.invoker"
-  member   = "allUsers"
-}
+# resource "google_cloud_run_service_iam_member" "run_service_member" {
+#   location = data.google_cloud_run_service.run_service.location
+#   service  = data.google_cloud_run_service.run_service.name
+#   role     = "roles/run.invoker"
+#   member   = "allUsers"
+# }
