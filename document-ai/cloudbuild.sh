@@ -57,7 +57,7 @@ else
         run.googleapis.com \
         pubsub.googleapis.com
 
-    echo Waiting for APIs activation...
+    echo Waiting for APIs activation and propagation...
     sleep 60
 
     echo "Granting Cloud Build's Service Account IAM roles to deploy the resources..."
