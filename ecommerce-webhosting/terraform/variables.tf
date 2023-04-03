@@ -34,11 +34,6 @@ locals {
   application_name = "ecommerce"
 }
 
-variable "application_name" {
-  description = "Application name"
-  default     = "ecommerce-web-hosting"
-}
-
 variable "project_id" {
   description = "GCP Project ID"
 }

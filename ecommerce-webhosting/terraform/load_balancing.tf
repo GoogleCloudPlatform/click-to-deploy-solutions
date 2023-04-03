@@ -12,11 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-resource "random_id" "assets-bucket" {
-  prefix      = "terraform-static-content-"
-  byte_length = 2
-}
-
 module "gce-lb-http" {
   source  = "GoogleCloudPlatform/lb-http/google"
   version = "~> 6.2"
@@ -117,7 +112,7 @@ resource "google_compute_url_map" "ml-bkd-ml-mig-bckt-s-lb" {
 }
 
 resource "google_compute_backend_bucket" "assets" {
-  name        = random_id.assets-bucket.hex
+  name        = "${var.project_id}-static-website-bucket-assets"
   description = "Contains static resources for example app"
   bucket_name = google_storage_bucket.static_website.name
   enable_cdn  = true

@@ -12,14 +12,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-resource "random_id" "bucket_prefix" {
-  byte_length = 8
-}
-
 resource "google_storage_bucket" "static_website" {
-  name          = "${random_id.bucket_prefix.hex}-static-website-bucket"
+  name          = "${var.project_id}-static-website-bucket"
   location      = "US"
-  storage_class = "COLDLINE"
+  storage_class = "STANDARD"
 
   uniform_bucket_level_access = true
 
