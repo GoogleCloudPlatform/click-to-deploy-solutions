@@ -22,6 +22,7 @@ In the catalog below you will find all solutions ready to deploy, click on it an
 - [Three Tier Application on GCE](./three-tier-app-gce/)
 - [Three Tier Application on GKE](./three-tier-gke/)
 - [Configuration Example - Windows File Server](./windows-fileserver/)
+- [Ecommerce Hosting](./ecommerce-webhosting/)
 
 ## Contribute
 
