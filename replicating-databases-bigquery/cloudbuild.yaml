@@ -25,7 +25,7 @@ steps:
   dir: terraform
 
 - id: 'tf apply'
-  name: 'fellipemedeiros/terraformgcloud:latest'
+  name: 'hashicorp/terraform:1.0.0'
   args: 
   - apply
   - -auto-approve
@@ -41,7 +41,7 @@ steps:
     export SERVICE_ACCOUNT=$(gcloud sql instances describe $$DATABASE_INSTANCE --format='value(serviceAccountEmailAddress)')
     gsutil mb gs://$PROJECT_ID-sqlbackup
     gsutil cp schema.sql gs://$PROJECT_ID-sqlbackup
-    gsutil iam ch serviceAccount:$$SERVICE_ACCOUNT:objectAdmin gs://$PROJECT_ID-sql-backup
+    gsutil iam ch serviceAccount:$$SERVICE_ACCOUNT:objectAdmin gs://$PROJECT_ID-sqlbackup
     gcloud sql import sql $$DATABASE_INSTANCE gs://$PROJECT_ID-sqlbackup/schema.sql -q
     gsutil rm gs://$PROJECT_ID-sqlbackup/schema.sql
     gsutil rb gs://$PROJECT_ID-sqlbackup
