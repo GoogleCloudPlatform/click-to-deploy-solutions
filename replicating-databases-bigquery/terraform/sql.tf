@@ -77,10 +77,3 @@ resource "google_sql_user" "user" {
     host     = "%"
     password = random_password.db_password.result
 }
-
-resource "null_resource" "create_db" {
-    provisioner "local-exec" {
-        working_dir = "${path.module}/sql/"
-        command = "/bin/bash load_schema.sh ${var.project_id} ${google_sql_database_instance.cloud_sql.name}"
-    }
-}
