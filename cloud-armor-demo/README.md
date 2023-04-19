@@ -5,6 +5,9 @@
 
 This example deploys a web application called [OWASP Juice Shop](https://owasp.org/www-project-juice-shop/), and exposes it to the internet by using a Global Load Balancer protected with Cloud Armor.
 
+Estimated deployment time: 4 min 23 sec
+
+Estimated solution cost: [USD 86.68 per 1 month](https://cloud.google.com/products/calculator/#id=4690c11f-35e2-4eb1-9565-efb1fdd5faba)
 
 ## Architecture
 ![architecture](architecture.png)
