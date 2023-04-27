@@ -21,9 +21,9 @@ Resources created:
 Check more operators available in [Airflow Google Operators doc](https://airflow.apache.org/docs/apache-airflow-providers-google/stable/operators/index.html).
 
 
-Estimated deployment time: 26 min 48 sec
+:clock1: Estimated deployment time: 26 min 48 sec
 
-Estimated solution cost: [USD 583.04 per 1 month](https://cloud.google.com/products/calculator/#id=f7caffab-fca3-490e-8654-f406df790929)
+:heavy_dollar_sign: Estimated solution cost: [USD 583.04 per 1 month](https://cloud.google.com/products/calculator/#id=f7caffab-fca3-490e-8654-f406df790929)
 
 
 ## Architecture
