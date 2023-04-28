@@ -2,8 +2,13 @@
 
 # Document AI
 
-This example deploys a solution for extracting data from documents with Document AI OCR.
-The documents uploaded input buckets are processed by Document AI, then results are pushed to output bucket.
+This example deploys a solution for extracting data from documents with Document AI.
+
+The user uploads documents to a bucket, it triggers a function and sends the document to the Document AI API, then save the results into Google Cloud Storage and BigQuery.
+
+:clock1: Estimated deployment time: 10 min
+
+:heavy_dollar_sign: Estimated solution cost: it depends on the volume of data stored, please take a look at [this example](https://cloud.google.com/products/calculator/#id=7e79b4d5-7060-4ab4-a78e-d81dadc8a9fb).
 
 ## Architecture
 ![architecture](architecture.png)
