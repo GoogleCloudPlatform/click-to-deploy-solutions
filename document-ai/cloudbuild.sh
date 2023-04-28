@@ -79,7 +79,7 @@ else
     add_iam_member $MEMBER roles/pubsub.publisher
 
     echo Waiting for permissions to propagate...
-    sleep 300
+    sleep 120
     
     echo Triggering Cloud Build job...
     gcloud builds submit . --config cloudbuild.yaml
