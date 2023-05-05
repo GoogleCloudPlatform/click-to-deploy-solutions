@@ -41,3 +41,15 @@ resource "google_compute_firewall" "allow_ssh" {
   source_ranges = ["35.235.240.0/20"]
   target_tags   = ["allow-ssh"]
 }
+
+resource "google_compute_firewall" "allow_rdp" {
+  name    = "allow-rdp-from-iap"
+  network = module.vpc.network_name
+
+  allow {
+    protocol = "tcp"
+    ports    = ["3389"]
+  }
+  source_ranges = ["35.235.240.0/20"]
+  target_tags   = ["allow-rdp"]
+}

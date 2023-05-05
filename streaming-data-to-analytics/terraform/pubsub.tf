@@ -10,12 +10,13 @@ resource "google_pubsub_subscription" "order_to_bq_sub" {
   filter = "attributes.entity=\"order-event\""
 
   bigquery_config {
-    table          = "${data.google_project.project.name}.${google_bigquery_dataset.raw.dataset_id}.${google_bigquery_table.raw_order_events.table_id}"
+    table          = "${google_bigquery_table.raw_order_events.project}.${google_bigquery_table.raw_order_events.dataset_id}.${google_bigquery_table.raw_order_events.table_id}"
     write_metadata = true
   }
-  
+
   depends_on = [
-    google_project_iam_member.pubsub_to_bq
+    google_project_iam_member.pubsub_bqEditor,
+    google_project_iam_member.pubsub_bqMetadata
   ]
 }
 
@@ -26,11 +27,12 @@ resource "google_pubsub_subscription" "unknown_to_bq_sub" {
   filter = "attributes.entity=\"unknown\""
 
   bigquery_config {
-    table          = "${data.google_project.project.name}.${google_bigquery_dataset.raw.dataset_id}.${google_bigquery_table.raw_order_events.table_id}"
+    table          = "${google_bigquery_table.raw_unknown.project}.${google_bigquery_table.raw_unknown.dataset_id}.${google_bigquery_table.raw_unknown.table_id}"
     write_metadata = true
   }
 
   depends_on = [
-    google_project_iam_member.pubsub_to_bq
+    google_project_iam_member.pubsub_bqEditor,
+    google_project_iam_member.pubsub_bqMetadata
   ]
 }

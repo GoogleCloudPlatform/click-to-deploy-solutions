@@ -46,10 +46,12 @@ steps:
     gsutil rm gs://$PROJECT_ID-sqlbackup/schema.sql
     gsutil rb gs://$PROJECT_ID-sqlbackup
   dir: sql
-
 options:
   env:
     - TF_VAR_project_id=$PROJECT_ID
     - TF_VAR_project_number=$PROJECT_NUMBER
-
 timeout: 3600s
+tags:
+  - terraform
+  - datastream
+  - apply

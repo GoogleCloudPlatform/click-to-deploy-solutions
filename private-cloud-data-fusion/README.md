@@ -10,6 +10,9 @@ Resources created
 - Cloud SQL for MySQL
 - Cloud Data Fusion
 
+:clock1: Estimated deployment time: 18 min 49 sec
+
+
 ## Architecture
 ![architecture](architecture.png)
 

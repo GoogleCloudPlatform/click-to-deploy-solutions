@@ -1,6 +1,6 @@
 [![banner](../banner.png)](https://cloud.google.com/?utm_source=github&utm_medium=referral&utm_campaign=GCP&utm_content=packages_repository_banner)
 
-# Configuration Example - Configuration Example - ECommerce Website Hosting
+# Configuration Example - ECommerce Website Hosting
 
 This is a stack that deploys a Configuration Example of Ecommerce Webhosting.
 
@@ -11,6 +11,10 @@ Resources created
 - GCE
 - Cloud SQL
 - Cloud Storage
+
+:clock1: Estimated deployment time: 20 min
+
+:heavy_dollar_sign: Estimated solution cost: [USD 224.42 per month](https://cloud.google.com/products/calculator/#id=c868657d-f5a4-4a09-8da1-a4d6b24b7862)
 
 ![arquitecture](architecture.png)
 

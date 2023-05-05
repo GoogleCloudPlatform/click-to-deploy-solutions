@@ -13,9 +13,9 @@ Resources created:
 - CloudSQL [cross-region read replica](https://cloud.google.com/sql/docs/postgres/intro-to-cloud-sql-disaster-recovery) instance
 
 
-Estimated deployment time: 16 min 30 sec
+:clock1: Estimated deployment time: 16 min 30 sec
 
-Estimated solution cost: [USD 706.44 per 1 month](https://cloud.google.com/products/calculator/#id=358b4a68-4f82-4e88-84f4-1da99a05548b)
+:heavy_dollar_sign: Estimated solution cost: [USD 706.44 per 1 month](https://cloud.google.com/products/calculator/#id=358b4a68-4f82-4e88-84f4-1da99a05548b)
 
 
 ## Architecture

@@ -12,31 +12,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-steps:
-- id: 'tf init'
-  name: 'hashicorp/terraform:1.0.0'
-  entrypoint: 'sh'
-  args: 
-  - '-c'
-  - | 
-    terraform init \
-    -backend-config="bucket=$PROJECT_ID-tf-state" \
-    -backend-config="prefix=replicating-databases-bigquery"
-  dir: terraform
+data "google_project" "project" {}
 
-- id: 'tf destroy'
-  name: 'hashicorp/terraform:1.0.0'
-  args: 
-  - destroy
-  - -auto-approve
-  dir: terraform
-
-options:
-  env:
-    - TF_VAR_project_id=$PROJECT_ID
-  
-timeout: 3600s
-tags:
-  - terraform
-  - datastream
-  - destroy
+resource "google_project_iam_member" "permissions" {
+  project = data.google_project.project.project_id
+  role    = "roles/iam.serviceAccountTokenCreator"
+  member  = "serviceAccount:service-${data.google_project.project.number}@gcp-sa-bigquerydatatransfer.iam.gserviceaccount.com"
+  depends_on = [
+    google_bigquery_data_transfer_config.gcs_load
+  ]
+}

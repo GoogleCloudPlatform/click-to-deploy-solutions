@@ -11,6 +11,8 @@ Resources created
 - Data Stream
 - Cloud SQL for MySQL
 
+:clock1: Estimated deployment time: 10 min 16 sec
+
 ![arquitecture](architecture.png)
 
 ## Deploy
