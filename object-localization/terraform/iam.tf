@@ -14,7 +14,7 @@
 
 data "google_project" "project" {}
 
-resource "google_service_account" "obj_detect_function" {
+resource "google_service_account" "obj_localization_function" {
   account_id   = local.function_name
   display_name = "Object Detection function"
 }
@@ -22,26 +22,25 @@ resource "google_service_account" "obj_detect_function" {
 resource "google_project_iam_member" "bq_editor" {
   project = var.project_id
   role    = "roles/bigquery.dataEditor"
-  member  = "serviceAccount:${google_service_account.obj_detect_function.email}"
+  member  = "serviceAccount:${google_service_account.obj_localization_function.email}"
 }
 
 resource "google_project_iam_member" "gcs_viewer" {
   project = var.project_id
   role    = "roles/storage.objectViewer"
-  member  = "serviceAccount:${google_service_account.obj_detect_function.email}"
+  member  = "serviceAccount:${google_service_account.obj_localization_function.email}"
 }
 
 resource "google_project_iam_member" "gcs_creator" {
   project = var.project_id
   role    = "roles/storage.objectCreator"
-  member  = "serviceAccount:${google_service_account.obj_detect_function.email}"
+  member  = "serviceAccount:${google_service_account.obj_localization_function.email}"
 }
-
 
 resource "google_project_iam_member" "event_receiver" {
   project = var.project_id
   role    = "roles/eventarc.eventReceiver"
-  member  = "serviceAccount:${data.google_project.project.number}-compute@developer.gserviceaccount.com"
+  member  = "serviceAccount:${google_service_account.obj_localization_function.email}"
 }
 
 data "google_storage_project_service_account" "gcs_account" {}

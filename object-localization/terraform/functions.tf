@@ -48,7 +48,7 @@ resource "google_cloudfunctions2_function" "function" {
     min_instance_count    = 0
     available_memory      = "256M"
     timeout_seconds       = 60
-    service_account_email = google_service_account.obj_detect_function.email
+    service_account_email = google_service_account.obj_localization_function.email
     environment_variables = {
       BQ_TABLE_ID      = local.bq_table_id
       BQ_LOCATION      = var.region
@@ -60,6 +60,7 @@ resource "google_cloudfunctions2_function" "function" {
     trigger_region = var.region
     event_type     = "google.cloud.storage.object.v1.finalized"
     retry_policy   = "RETRY_POLICY_DO_NOT_RETRY"
+    service_account_email = google_service_account.obj_localization_function.email
     event_filters {
       attribute = "bucket"
       value     = google_storage_bucket.images.name
