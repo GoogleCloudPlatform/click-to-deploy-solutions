@@ -59,18 +59,7 @@ EOF
 
 }
 
-data "google_project" "project" {
-}
-
-resource "google_project_iam_member" "permissions" {
-  project = data.google_project.project.project_id
-  role    = "roles/iam.serviceAccountTokenCreator"
-  member  = "serviceAccount:service-${data.google_project.project.number}@gcp-sa-bigquerydatatransfer.iam.gserviceaccount.com"
-}
-
 resource "google_bigquery_data_transfer_config" "gcs_load" {
-  depends_on = [google_project_iam_member.permissions]
-
   display_name           = "load-order-events-from-gcs-to-bq"
   location               = var.region
   data_source_id         = "google_cloud_storage"

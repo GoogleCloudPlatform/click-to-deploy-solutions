@@ -33,6 +33,8 @@ resource "google_compute_instance" "default" {
     network    = module.vpc.network_name
     subnetwork = google_compute_subnetwork.subnet.self_link
   }
+
+  tags = ["allow-rdp", "allow-ssh"]
 }
 
 resource "google_compute_disk" "windows-fileserver-data-disk" {
@@ -44,9 +46,9 @@ resource "google_compute_disk" "windows-fileserver-data-disk" {
 }
 
 resource "google_compute_disk_resource_policy_attachment" "attachment" {
-  name   = google_compute_resource_policy.policy.name
-  disk   = google_compute_disk.windows-fileserver-data-disk.name
-  zone   = var.zone
+  name = google_compute_resource_policy.policy.name
+  disk = google_compute_disk.windows-fileserver-data-disk.name
+  zone = var.zone
 }
 
 resource "google_compute_resource_policy" "policy" {
@@ -57,7 +59,7 @@ resource "google_compute_resource_policy" "policy" {
     schedule {
       daily_schedule {
         days_in_cycle = 1
-        start_time = "00:00"
+        start_time    = "00:00"
       }
     }
   }

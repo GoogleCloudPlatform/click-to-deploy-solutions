@@ -47,15 +47,16 @@ else
     echo Enabling required APIs...
     gcloud services enable cloudbuild.googleapis.com \
         bigquery.googleapis.com \
+        bigquerydatatransfer.googleapis.com \
         cloudresourcemanager.googleapis.com \
         compute.googleapis.com \
-        secretmanager.googleapis.com \
-        servicenetworking.googleapis.com \
-        storage.googleapis.com \
         eventarc.googleapis.com \
         iam.googleapis.com \
         run.googleapis.com \
         pubsub.googleapis.com \
+        secretmanager.googleapis.com \
+        servicenetworking.googleapis.com \
+        storage.googleapis.com \
         --project $PROJECT_ID
 
     echo Waiting for APIs activation...

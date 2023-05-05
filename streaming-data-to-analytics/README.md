@@ -11,6 +11,11 @@ Resources created:
 - Pub/Sub topic and BQ subscription
 - Cloud Run Ingest API
 
+:clock1: Estimated deployment time: 2 min
+
+## Architecture
+![architecture](architecture.png)
+
 ## Deploy
 
 1. Click on Open in Google Cloud Shell button below.
@@ -24,7 +29,7 @@ Resources created:
 sh cloudbuild.sh
 ```
 
-## Test your streaming architecture
+## Test your solution
 If you want to run a load test, please follow the instructions below.
 
 1. Set GCP_TOKEN env var
@@ -44,10 +49,16 @@ pip install -r requirements.txt
 ```
 locust -f locustfile.py --headless -u 100 -r 10 \
     --run-time 30m \
-    -H https://ingest-api-myuq-ue.a.run.app/
+    -H https://<YOUR CLOUD RUN SERVICE URL>/
 ```
 
-4. Check the events on [BigQuery](https://console.cloud.google.com/bigquery)
+4. Query the events on [BigQuery](https://console.cloud.google.com/bigquery)
+```
+SELECT *
+FROM `ecommerce_raw.order_event`
+WHERE DATE(publish_time) >= CURRENT_DATE()
+LIMIT 1000
+```
 
 
 ## Destroy

@@ -4,12 +4,14 @@
 
 ## Description
 
-This example demonstrates how to load files from Google Cloud Storage to BigQuery using an event-driven load function.
+This example demonstrates how to load files from Google Cloud Storage to BigQuery using an event-driven load function. 
 
-### Use case
-Upload the data into the upload bucket following the pattern `gs://your-upload-bucket/dataset-name/table-name/file.csv`.
+The user uploads the data into the Upload Bucket following the pattern `gs://your-upload-bucket/dataset-name/table-name/file.csv`, then it triggers a Cloud Function that extracts the parameters from the object path and then load the file into the proper destination table.
 
-This upload will trigger a Cloud Function that extracts the parameters from the object path and then load the file into the table.
+:clock1: Estimated deployment time: 8 min
+
+:heavy_dollar_sign: Estimated solution cost: it depends on the volume of data inserted, please estimate it using [Google Cloud Pricing Calculator](https://cloud.google.com/products/calculator)
+
 
 ## Architecture
 Please find below a reference architecture.

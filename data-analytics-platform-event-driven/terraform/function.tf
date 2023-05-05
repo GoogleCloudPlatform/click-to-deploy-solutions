@@ -63,6 +63,7 @@ resource "google_cloudfunctions2_function" "function" {
     }
   }
   depends_on = [
-    google_project_iam_member.publisher
+    google_project_iam_member.publisher,
+    google_project_iam_member.event_receiver
   ]
 }

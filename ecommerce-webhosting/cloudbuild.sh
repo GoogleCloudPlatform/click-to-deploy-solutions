@@ -17,12 +17,13 @@ set -e
 if [ -z "$GOOGLE_CLOUD_PROJECT" ]
 then
    echo Project not set!
-   echo What project do you want to deploy the solution to?
+   echo What Project Id do you want to deploy the solution to?
    read var_project_id
    gcloud config set project $var_project_id
-   export GOOGLE_CLOUD_PROJECT=$var_project_id
+   export PROJECT_ID=$var_project_id
+else
+   export PROJECT_ID=$GOOGLE_CLOUD_PROJECT
 fi
-
 
 if [ "$1" = "destroy" ]
 then

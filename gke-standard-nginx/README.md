@@ -13,6 +13,7 @@ Applications deployed:
 - Jenkins
 - Prometheus Stack (Prometheus, Grafana, and Alert Manager)
 
+:clock1: Estimated deployment time: 13 min
 
 ## Architecture
 ![architecture](architecture.png)
@@ -30,7 +31,8 @@ sh cloudbuild.sh
 ```
 
 
-## Accessing the applications
+## Testing
+
 In this example, we use an example domain (example.com), so you need to set the NGINX IP it in your `/etc/hosts` file in order to access the appications.
 
 Go to the [GKE Services](https://console.cloud.google.com/kubernetes/discovery) and copy the external IP assigned to `ingress-nginx-controller`, then add it to your machine's `/etc/hosts` alongside `<app>.example.com`, for example:
@@ -50,8 +52,10 @@ Go to the [GKE Services](https://console.cloud.google.com/kubernetes/discovery) 
 34.95.133.118   prometheus.example.com
 ```
 
-In your environment, please use a proper domain and set DNS records.
-Save the file and try to access the application, it should work:
+NOTE: In your environment, please use a proper domain and set DNS records.
+
+
+Save the file and try to access the application http://grafana.example.com, it should work:
 ![grafana](./assets/grafana.png)
 
 
@@ -66,6 +70,3 @@ Save the file and try to access the application, it should work:
 ```
 sh cloudbuild.sh destroy
 ```
-
-## Useful links
-- TODO

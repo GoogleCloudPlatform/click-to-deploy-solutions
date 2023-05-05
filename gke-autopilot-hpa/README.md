@@ -12,6 +12,8 @@ Resources created:
 - NAT
 - GKE Autopilot
 
+:clock1: Estimated deployment time: 10 min
+
 ## Architecture
 ![architecture](architecture.png)
 

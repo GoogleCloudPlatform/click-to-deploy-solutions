@@ -10,7 +10,7 @@ steps:
     -backend-config="prefix=streaming-data"
   dir: terraform
 
-- id: 'tf apply'
+- id: 'tf destroy'
   name: 'hashicorp/terraform:1.0.0'
   args: 
   - destroy

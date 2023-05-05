@@ -2,6 +2,8 @@
 
 # Three-tier Web Application using GKE
 
+
+## Description
 This is a stack that deploys a Three-tier Autoscaling Web Application using GKE.
 
 This repository contains Terraform sample code to deploy Gke, Cloud Storage and Cloud SQL private instances, and establish communication between them.
@@ -12,6 +14,9 @@ Resources created
 - Cloud SQL for MySQL
 - Cloud Storage
 
+:clock1: Estimated deployment time: 12 min
+
+## Architecture
 ![arquitecture](architecture.png)
 
 ## Deploy
@@ -25,6 +30,7 @@ Resources created
 ```
 sh cloudbuild.sh
 ```
+
 ## Destroy
 Execute the command below on Cloud Shell to destroy the resources.
 ```
