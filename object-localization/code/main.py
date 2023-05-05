@@ -23,12 +23,12 @@ def localize_objects(uri):
     return objects
 
 
-def save_results(bucket_name, object_name, objects):
+def save_results(object_name, objects):
     """
-    Parse objects detected to json and save it into the GCS bucket
+    Parse objects detected to json and save it into the GCS bucket set on GCS_OUTPUT
     """
-
     print("Process output started.")
+    bucket_name = os.getenv("GCS_OUTPUT")
     storage_client = storage.Client()
     destination_bucket = storage_client.bucket(bucket_name)
 
@@ -67,6 +67,6 @@ def trigger_gcs(cloud_event):
 
     uri = "gs://{}/{}".format(bucket, name)
     objects = localize_objects(uri)
-    save_results(bucket, name, objects)
+    save_results(name, objects)
 
     print("Object localization completed sucessfully")

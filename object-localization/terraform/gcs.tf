@@ -19,3 +19,11 @@ resource "google_storage_bucket" "images" {
   force_destroy               = true
   labels                      = local.resource_labels
 }
+
+resource "google_storage_bucket" "images_output" {
+  name                        = "${var.project_id}-images-output"
+  location                    = var.region
+  uniform_bucket_level_access = true
+  force_destroy               = true
+  labels                      = local.resource_labels
+}

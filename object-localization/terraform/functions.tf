@@ -52,6 +52,7 @@ resource "google_cloudfunctions2_function" "function" {
     environment_variables = {
       BQ_TABLE_ID      = local.bq_table_id
       BQ_LOCATION      = var.region
+      GCS_OUTPUT        = google_storage_bucket.images_output.name
     }
   }
 
