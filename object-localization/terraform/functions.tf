@@ -20,7 +20,7 @@ resource "google_storage_bucket" "gcf_source_bucket" {
 }
 
 resource "google_storage_bucket_object" "gcf_source_code" {
-  name   = "function-source-${formatdate("YYYYMMDDhhmmss", timestamp())}.zip"
+  name   = "function-source-${formatdate("YYYYMMDDhhmm", timestamp())}.zip"
   bucket = google_storage_bucket.gcf_source_bucket.name
   source = "/workspace/function-source.zip"
 }
