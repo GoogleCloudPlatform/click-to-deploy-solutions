@@ -13,6 +13,9 @@ Resources created:
 
 :clock1: Estimated deployment time: 2 min
 
+## Architecture
+![architecture](architecture.png)
+
 ## Deploy
 
 1. Click on Open in Google Cloud Shell button below.
