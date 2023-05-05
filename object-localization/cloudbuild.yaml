@@ -13,15 +13,15 @@
 # limitations under the License.
 
 steps:
-# - id: 'zip code'
-#   name: 'ubuntu'
-#   entrypoint: 'sh'
-#   args: 
-#   - '-c'
-#   - | 
-#     apt-get update; apt-get install zip -y
-#     zip /workspace/function-source.zip main.py requirements.txt
-#   dir: code
+- id: 'zip code'
+  name: 'ubuntu'
+  entrypoint: 'sh'
+  args: 
+  - '-c'
+  - | 
+    apt-get update; apt-get install zip -y
+    zip /workspace/function-source.zip main.py requirements.txt
+  dir: code
 - id: 'tf init'
   name: 'hashicorp/terraform:1.0.0'
   entrypoint: 'sh'

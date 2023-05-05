@@ -4,11 +4,15 @@
 
 This example deploys a solution for detecting objects on images with Cloud Vision API.
 
-The user uploads images to a bucket, it triggers a function and sends the images to the Cloud Vision API, then save the results into BigQuery.
+The user uploads images to a bucket, it triggers a function and call the Cloud Vision API to localize objects on the image, then save the results into BigQuery.
+
+
+![image](https://cloud.google.com/static/vision/docs/images/bicycle.jpg)
+
+Image credit: [Bogdan Dada](https://unsplash.com/photos/J9cBJjlpYKU) on [Unsplash](https://unsplash.com/) (annotations added).
+
 
 :clock1: Estimated deployment time: X min
-
-
 ## Architecture
 ![architecture](architecture.png)
 

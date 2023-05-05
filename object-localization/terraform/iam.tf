@@ -19,50 +19,35 @@ resource "google_service_account" "obj_detect_function" {
   display_name = "Object Detection function"
 }
 
-resource "google_project_iam_member" "storage_admin" {
+resource "google_project_iam_member" "bq_editor" {
   project = var.project_id
-  role    = "roles/storage.admin"
+  role    = "roles/bigquery.dataEditor"
   member  = "serviceAccount:${google_service_account.obj_detect_function.email}"
 }
 
-resource "google_project_iam_member" "bq_admin" {
+resource "google_project_iam_member" "gcs_viewer" {
   project = var.project_id
-  role    = "roles/bigquery.admin"
+  role    = "roles/storage.objectViewer"
   member  = "serviceAccount:${google_service_account.obj_detect_function.email}"
 }
 
-resource "google_project_iam_member" "doc_ai_user" {
+resource "google_project_iam_member" "gcs_creator" {
   project = var.project_id
-  role    = "roles/documentai.apiUser"
+  role    = "roles/storage.objectCreator"
   member  = "serviceAccount:${google_service_account.obj_detect_function.email}"
 }
 
-resource "google_project_iam_member" "cf_invoker" {
-  project = var.project_id
-  role    = "roles/cloudfunctions.invoker"
-  member  = "serviceAccount:${google_service_account.obj_detect_function.email}"
-}
-
-resource "google_project_iam_member" "eventarc" {
-  project = var.project_id
-  role    = "roles/eventarc.admin"
-  member  = "serviceAccount:${google_service_account.obj_detect_function.email}"
-}
-
-resource "google_project_iam_member" "iam_user" {
-  project = var.project_id
-  role    = "roles/iam.serviceAccountUser"
-  member  = "serviceAccount:${google_service_account.obj_detect_function.email}"
-}
-
-resource "google_project_iam_member" "gcs_to_pubsub" {
-  project = var.project_id
-  role    = "roles/pubsub.publisher"
-  member  = "serviceAccount:service-${data.google_project.project.number}@gs-project-accounts.iam.gserviceaccount.com"
-}
 
 resource "google_project_iam_member" "event_receiver" {
   project = var.project_id
   role    = "roles/eventarc.eventReceiver"
   member  = "serviceAccount:${data.google_project.project.number}-compute@developer.gserviceaccount.com"
+}
+
+data "google_storage_project_service_account" "gcs_account" {}
+
+resource "google_project_iam_member" "gcs_to_pubsub" {
+  project = var.project_id
+  role    = "roles/pubsub.publisher"
+  member  = "serviceAccount:${data.google_storage_project_service_account.gcs_account.email_address}"
 }

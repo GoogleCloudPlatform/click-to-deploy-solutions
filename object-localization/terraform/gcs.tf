@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-resource "google_storage_bucket" "doc_input" {
+resource "google_storage_bucket" "images" {
   name                        = "${var.project_id}-images"
   location                    = var.region
   uniform_bucket_level_access = true

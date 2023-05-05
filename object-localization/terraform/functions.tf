@@ -61,7 +61,7 @@ resource "google_cloudfunctions2_function" "function" {
     retry_policy   = "RETRY_POLICY_DO_NOT_RETRY"
     event_filters {
       attribute = "bucket"
-      value     = google_storage_bucket.doc_input.name
+      value     = google_storage_bucket.images.name
     }
   }
 

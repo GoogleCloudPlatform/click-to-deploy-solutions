@@ -12,22 +12,35 @@ def localize_objects(uri):
     """
     client = vision.ImageAnnotatorClient()
     response = client.annotate_image({
-    'image': {'source': {'image_uri': uri}},
-    'features': [{'type_': vision.Feature.Type.OBJECT_LOCALIZATION}]
+        'image': {'source': {'image_uri': uri}},
+        'features': [{'type_': vision.Feature.Type.OBJECT_LOCALIZATION}]
     })
 
-    print(response)
+    objects = []
+    for x in response.localized_object_annotations:
+        obj = {"name": x.name, "score": x.score}
+        objects.append(obj)
+    return objects
 
 
-# Download file from GCS
-def download_file(bucket_name, object_name):
-    file_path = "/tmp/{}".format(object_name)
-    print("download file to..."+file_path)
+def save_results(bucket_name, object_name, objects):
+    """
+    Parse objects detected to json and save it into the GCS bucket
+    """
+
+    print("Process output started.")
     storage_client = storage.Client()
-    bucket = storage_client.get_bucket(bucket_name)
-    blob = bucket.blob(object_name)
-    blob.download_to_filename(file_path)
-    return file_path
+    destination_bucket = storage_client.bucket(bucket_name)
+
+    print("Saving results...")
+    results_json = {
+        "file_name": object_name,
+        "objects": objects
+    }
+    results_json = json.dumps(results_json)
+    results_json_name = "{}.json".format(object_name)
+    results_json_blob = destination_bucket.blob(results_json_name)
+    results_json_blob.upload_from_string(results_json)
 
 
 # Triggered by a change in a storage bucket
@@ -53,4 +66,7 @@ def trigger_gcs(cloud_event):
     print(f"Updated: {updated}")
 
     uri = "gs://{}/{}".format(bucket, name)
-    localize_objects(uri)
+    objects = localize_objects(uri)
+    save_results(bucket, name, objects)
+
+    print("Object localization completed sucessfully")
