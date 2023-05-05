@@ -26,7 +26,7 @@ Resources created:
 sh cloudbuild.sh
 ```
 
-## Test your streaming architecture
+## Test your solution
 If you want to run a load test, please follow the instructions below.
 
 1. Set GCP_TOKEN env var
