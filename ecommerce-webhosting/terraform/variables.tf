@@ -32,6 +32,17 @@ locals {
   }
 
   application_name = "ecommerce"
+
+  health_check = {
+    check_interval_sec  = null
+    timeout_sec         = null
+    healthy_threshold   = null
+    unhealthy_threshold = null
+    request_path        = "/"
+    port                = 80
+    host                = null
+    logging             = null
+  }
 }
 
 variable "project_id" {
@@ -67,4 +78,8 @@ variable "resource_labels" {
   type        = map(string)
   description = "Resource labels"
   default     = {}
+}
+
+variable "group1_region" {
+  default = "us-west1"
 }

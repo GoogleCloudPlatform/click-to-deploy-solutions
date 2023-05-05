@@ -12,39 +12,33 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-module "vpc" {
-  source       = "terraform-google-modules/network/google"
-  version      = "~> 6.0"
-  project_id   = var.project_id
-  network_name = var.network_name
-  routing_mode = "GLOBAL"
-
-  subnets = [
-    {
-      subnet_name           = "subnet-${var.region}"
-      subnet_ip             = var.webapp_cidr
-      subnet_region         = var.region
-      subnet_private_access = true
-    },
-  ]
+resource "google_compute_network" "default" {
+  name                    = var.network_name
+  auto_create_subnetworks = "false"
 }
 
-resource "google_compute_firewall" "allow_ssh" {
-  name    = "${module.vpc.network_name}-allow-ssh-from-iap"
-  network = module.vpc.network_self_link
+resource "google_compute_subnetwork" "group1" {
+  name                     = var.network_name
+  ip_cidr_range            = "10.125.0.0/20"
+  network                  = google_compute_network.default.self_link
+  region                   = var.group1_region
+  private_ip_google_access = true
+}
 
-  allow {
-    protocol = "tcp"
-    ports    = ["22"]
-  }
+# Router and Cloud NAT are required for installing packages from repos (apache, php etc)
+resource "google_compute_router" "group1" {
+  name    = "${var.network_name}-gw-group1"
+  network = google_compute_network.default.self_link
+  region  = var.group1_region
+}
 
-  source_ranges = [
-    "35.235.240.0/20"
-  ]
-
-  target_tags = [
-    "allow-ssh"
-  ]
+module "cloud-nat-group1" {
+  source     = "terraform-google-modules/cloud-nat/google"
+  version    = "~> 2.2"
+  router     = google_compute_router.group1.name
+  project_id = var.project_id
+  region     = var.group1_region
+  name       = "${var.network_name}-cloud-nat-group1"
 }
 
 resource "google_compute_global_address" "service_range" {
@@ -53,11 +47,11 @@ resource "google_compute_global_address" "service_range" {
   address_type  = "INTERNAL"
   address       = "10.200.0.0"
   prefix_length = 16
-  network       = module.vpc.network_name
+  network       = google_compute_network.default.self_link
 }
 
 resource "google_service_networking_connection" "private_service_connection" {
-  network                 = module.vpc.network_id
+  network                 = google_compute_network.default.id
   service                 = "servicenetworking.googleapis.com"
   reserved_peering_ranges = [google_compute_global_address.service_range.name]
 }

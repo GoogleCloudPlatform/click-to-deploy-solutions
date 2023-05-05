@@ -12,38 +12,38 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-resource "google_storage_bucket" "static_website" {
-  name          = "${var.project_id}-static-website-bucket"
-  location      = "US"
-  storage_class = "STANDARD"
-
-  uniform_bucket_level_access = true
-
-  website {
-    main_page_suffix = "index.html"
-    not_found_page   = "index.html"
-  }
+resource "random_id" "assets-bucket" {
+  prefix      = "ecommerce-"
+  byte_length = 2
 }
 
-# Upload a simple index.html page to the bucket
-resource "google_storage_bucket_object" "indexpage" {
-  name         = "index.html"
-  content      = "<html><body>Hello World!</body></html>"
-  content_type = "text/html"
-  bucket       = google_storage_bucket.static_website.id
+resource "google_compute_backend_bucket" "assets" {
+  name        = random_id.assets-bucket.hex
+  description = "Contains static resources for example app"
+  bucket_name = google_storage_bucket.assets.name
+  enable_cdn  = true
 }
 
-# Upload a simple 404 / error page to the bucket
-resource "google_storage_bucket_object" "errorpage" {
-  name         = "404.html"
-  content      = "<html><body>404!</body></html>"
-  content_type = "text/html"
-  bucket       = google_storage_bucket.static_website.id
+resource "google_storage_bucket" "assets" {
+  name     = random_id.assets-bucket.hex
+  location = "US"
+
+  // delete bucket and contents on destroy.
+  force_destroy = true
 }
 
-# Make bucket public by granting allUsers READER access
-resource "google_storage_bucket_access_control" "public_rule" {
-  bucket = google_storage_bucket.static_website.id
-  role   = "READER"
-  entity = "allUsers"
+// The image object in Cloud Storage.
+// Note that the path in the bucket matches the paths in the url map path rule above.
+resource "google_storage_bucket_object" "image" {
+  name         = "assets/gcp-logo.svg"
+  content      = file(format("%s./code/gcp-logo.svg", path.module))
+  content_type = "image/svg+xml"
+  bucket       = google_storage_bucket.assets.name
+}
+
+// Make object public readable.
+resource "google_storage_object_acl" "image-acl" {
+  bucket         = google_storage_bucket.assets.name
+  object         = google_storage_bucket_object.image.name
+  predefined_acl = "publicRead"
 }
