@@ -44,6 +44,12 @@ resource "google_compute_instance" "cloudsql_proxy" {
     email  = google_service_account.sql_proxy_sa.email
     scopes = ["cloud-platform"]
   }
+
+shielded_instance_config {
+  enable_secure_boot = true
+  enable_vtpm = true
+  enable_integrity_monitoring = true
+  }
 }
 
 resource "google_compute_instance" "mysql_client" {
@@ -82,5 +88,11 @@ resource "google_compute_instance" "mysql_client" {
   service_account {
     email  = google_service_account.sql_proxy_sa.email
     scopes = ["cloud-platform"]
+  }
+
+  shielded_instance_config {
+  enable_secure_boot = true
+  enable_vtpm = true
+  enable_integrity_monitoring = true
   }
 }
