@@ -49,6 +49,7 @@ else
         aiplatform.googleapis.com \
         artifactregistry.googleapis.com \
         bigquery.googleapis.com \
+        bigquerydatatransfer.googleapis.com \
         cloudfunctions.googleapis.com \
         cloudresourcemanager.googleapis.com \
         compute.googleapis.com \
@@ -64,7 +65,7 @@ else
 
     # EventArc takes time to propagate, so sleep here is longer
     echo Waiting for APIs activation...
-    sleep 180
+    sleep 120
 
     echo "Granting Cloud Build's Service Account IAM roles to deploy the resources..."
     PROJECT_NUMBER=$(gcloud projects describe $PROJECT_ID --format='value(projectNumber)')

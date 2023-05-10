@@ -12,7 +12,8 @@ The user uploads images to a bucket, it triggers a function and call the Cloud V
 Image credit: [Bogdan Dada](https://unsplash.com/photos/J9cBJjlpYKU) on [Unsplash](https://unsplash.com/) (annotations added).
 
 
-:clock1: Estimated deployment time: X min
+:clock1: Estimated deployment time: 6 min
+
 ## Architecture
 ![architecture](architecture.png)
 
@@ -31,16 +32,16 @@ sh cloudbuild.sh
 
 ## Testing 
 
-Once you deployed the solution successfully, upload the `form.pdf` to the input bucket using either Cloud Console or `gsutil`.
+Once you deployed the solution successfully, upload an image to the image bucket using either Cloud Console or `gsutil`.
 ```
-gsutil cp form.pdf gs://<YOUR PROJECT NAME>-images
+gsutil cp my_image.png gs://<YOUR PROJECT NAME>-images
 ```
 
-Then, check the parsed results in the output bucket in text (OCR) and json (Key=value) formats
+Then, you can check the object localization results into a JSON file in the output bucket:
 
 ![gcs_results](gcs_results.png)
 
-Finally, check the json results on BigQuery
+The [BigQuery Transfer Service Job](https://console.cloud.google.com/bigquery/transfers) runs every 15-min, after it ran, you can check results on BigQuery.
 
 ![bq_results](bq_results.png)
 

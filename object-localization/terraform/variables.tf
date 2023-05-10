@@ -21,7 +21,6 @@ locals {
   })
   
   function_name   = "object-localization"
-  
   bq_table_name   = "object_localization"
   bq_dataset_name = "aiml"
   bq_table_id     = "${var.project_id}.${local.bq_dataset_name}.${local.bq_table_name}"
