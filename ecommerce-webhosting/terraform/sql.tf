@@ -32,7 +32,7 @@ resource "google_sql_database_instance" "main_instance" {
 
     ip_configuration {
       ipv4_enabled    = true
-      private_network = module.vpc.network_self_link
+      private_network = google_compute_network.default.self_link
     }
   }
 

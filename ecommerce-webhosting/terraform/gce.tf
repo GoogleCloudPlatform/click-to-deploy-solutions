@@ -12,49 +12,44 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-module "instance_template" {
-  source  = "terraform-google-modules/vm/google//modules/instance_template"
-  version = "~> 7.6"
+data "template_file" "group1-startup-script" {
+  template = file(format("%s./code/gceme.sh.tpl", path.module))
 
-  project_id           = var.project_id
-  name_prefix          = local.application_name
-  region               = var.region
-  network              = module.vpc.network_name
-  subnetwork           = "subnet-${var.region}"
-  service_account      = local.service_account
-  labels               = local.resource_labels
-  source_image         = "cos-stable-97-16919-29-40"
-  source_image_project = "cos-cloud"
-  machine_type         = "e2-small"
+  vars = {
+    PROXY_PATH = "/group1"
+  }
+}
 
-  startup_script = <<EOF
-  docker run --rm -p 80:3000 bkimminich/juice-shop:v14.0.1
-  EOF
-
+module "mig1_template" {
+  source     = "terraform-google-modules/vm/google//modules/instance_template"
+  version    = "~> 7.9"
+  network    = google_compute_network.default.self_link
+  subnetwork = google_compute_subnetwork.group1.self_link
+  service_account = {
+    email  = ""
+    scopes = ["cloud-platform"]
+  }
+  name_prefix          = "${var.network_name}-group1"
+  startup_script       = data.template_file.group1-startup-script.rendered
+  source_image_family  = "ubuntu-1804-lts"
+  source_image_project = "ubuntu-os-cloud"
   tags = [
-    "allow-hc",
-    "allow-ssh"
-  ]
-
-  depends_on = [
-    module.vpc
+    "${var.network_name}-group1",
+    module.cloud-nat-group1.router_name
   ]
 }
 
-module "mig" {
-  source  = "terraform-google-modules/vm/google//modules/mig"
-  version = "~> 7.6.0"
-
-  project_id        = var.project_id
-  region            = var.region
-  target_size       = 1
-  hostname          = local.application_name
-  instance_template = module.instance_template.self_link
-
-  named_ports = [
-    {
-      name = "http"
-      port = 80
-    }
-  ]
+module "mig1" {
+  source            = "terraform-google-modules/vm/google//modules/mig"
+  version           = "~> 7.9"
+  instance_template = module.mig1_template.self_link
+  region            = var.group1_region
+  hostname          = "${var.network_name}-group1"
+  target_size       = 2
+  named_ports = [{
+    name = "http",
+    port = 80
+  }]
+  network    = google_compute_network.default.self_link
+  subnetwork = google_compute_subnetwork.group1.self_link
 }
