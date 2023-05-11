@@ -45,10 +45,10 @@ resource "google_compute_instance" "cloudsql_proxy" {
     scopes = ["cloud-platform"]
   }
 
-shielded_instance_config {
-  enable_secure_boot = true
-  enable_vtpm = true
-  enable_integrity_monitoring = true
+  shielded_instance_config {
+    enable_secure_boot          = true
+    enable_vtpm                 = true
+    enable_integrity_monitoring = true
   }
 }
 
@@ -91,8 +91,8 @@ resource "google_compute_instance" "mysql_client" {
   }
 
   shielded_instance_config {
-  enable_secure_boot = true
-  enable_vtpm = true
-  enable_integrity_monitoring = true
+    enable_secure_boot          = true
+    enable_vtpm                 = true
+    enable_integrity_monitoring = true
   }
 }
