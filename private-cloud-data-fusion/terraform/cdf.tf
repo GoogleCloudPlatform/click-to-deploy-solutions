@@ -57,7 +57,17 @@ resource "google_service_account" "cdf_dataproc" {
 }
 
 resource "google_project_iam_member" "cdf_dataproc_admin" {
+  for_each = toset([
+    "roles/dataproc.admin",
+    "roles/dataproc.worker"
+  ])
   project = var.project_id
-  role    = "roles/dataproc.admin"
+  role    = each.key
   member  = "serviceAccount:${google_service_account.cdf_dataproc.email}"
+}
+
+resource "google_service_account_iam_member" "fusion_sa" {
+  service_account_id = google_service_account.cdf_dataproc.id
+  role               = "roles/iam.serviceAccountUser"
+  member             = "serviceAccount:service-${data.google_project.project.number}@gcp-sa-datafusion.iam.gserviceaccount.com"
 }
