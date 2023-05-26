@@ -24,6 +24,10 @@ terraform {
       version = "~> 4.32"
     }
   }
+
+  provider_meta "google" {
+    module_name = "cloud-solutions/data-analytics-platform-event-driven-v0.1"
+  }
 }
 
 provider "google" {
