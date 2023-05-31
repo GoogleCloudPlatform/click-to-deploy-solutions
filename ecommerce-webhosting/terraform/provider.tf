@@ -15,6 +15,10 @@
 terraform {
   backend "gcs" {
   }
+
+  provider_meta "google" {
+    module_name = "cloud-solutions/ecommerce-webhosting-v0.1"
+  }
 }
 
 provider "google" {

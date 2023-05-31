@@ -25,6 +25,10 @@ terraform {
       version = "4.46.0"
     }
   }
+
+  provider_meta "google" {
+    module_name = "cloud-solutions/three-tier-app-gce-v0.1"
+  }
 }
 
 provider "google" {
