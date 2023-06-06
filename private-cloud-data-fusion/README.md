@@ -2,7 +2,7 @@
 
 # Google Cloud Private Data Fusion
 
-This example deploys Cloud Data Fusion and Cloud SQL private instances, and establish communication between them.
+This example deploys Cloud Data Fusion and Cloud SQL private instances, and establishes communication between them.
 
 Resources created
 - VPC
