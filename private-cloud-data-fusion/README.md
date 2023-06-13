@@ -28,7 +28,6 @@ These are some examples of the use cases you can build on top of this architectu
 * __Data Exploration and Visualization__:Data Fusion can be used to prepare and transform data, and SQL can be used to query and aggregate the data into meaningful insights. These insights can then be visualized using tools like Google Data Studio, where you can create interactive dashboards and reports based on the SQL queries.
 * __Data Integration and Consolidation__:When you have data scattered across multiple systems, Data Fusion can be used to integrate and consolidate the data into a unified view. SQL can then be employed to perform data cleansing, deduplication, and data quality checks, ensuring the consistency and integrity of the merged data.
 
-:clock1: Estimated deployment time: 18 min 49 sec
 
 
 ## Architecture
@@ -42,6 +41,8 @@ The main components that we would be setting up are (to learn more about these p
 * [Cloud Data Fusion](https://cloud.google.com/data-fusion) : Fully managed, cloud-native data integration at any scale.
 
 ## Deploy
+
+:clock1: Estimated deployment time: 18 min 49 sec
 
 1. Click on Open in Google Cloud Shell button below.
 <a href="https://ssh.cloud.google.com/cloudshell/editor?cloudshell_git_repo=https://github.com/GoogleCloudPlatform/click-to-deploy-solutions&cloudshell_workspace=private-cloud-data-fusion" target="_new">
