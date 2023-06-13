@@ -1,14 +1,24 @@
 [![banner](../banner.png)](https://cloud.google.com/?utm_source=github&utm_medium=referral&utm_campaign=GCP&utm_content=packages_repository_banner)
 
-# Google Cloud Private Data Fusion
+# Unifying Cloud Data Fusion and Private Cloud SQL for a Robust Data Pipeline
 
+## Introduction
 This example deploys Cloud Data Fusion and Cloud SQL private instances, and establishes communication between them.
 
-Resources created
-- VPC
-- Compute Engine VM
-- Cloud SQL for MySQL
-- Cloud Data Fusion
+In today's data-driven world, businesses are challenged with efficiently ingesting, transforming, and analyzing large volumes of data from various sources. By combining the capabilities of Data Fusion and a Cloud SQL Private Instance, businesses can achieve their data processing and storage objectives while maintaining a high level of security and compliance.
+
+Data Fusion offers a visual interface and a wide range of connectors and transformations, simplifying the data integration process. With Data Fusion, businesses can efficiently ingest and process data in real-time, ensuring up-to-date insights for their analytical workflows.
+
+Cloud SQL Private Instance provides a dedicated, isolated environment for their database, protected by Google Cloud's robust security measures. It allows for fine-grained access control, encryption at rest, and network isolation, providing an added layer of protection for sensitive data.
+
+In short, Data Fusion and Cloud SQL Private Instance can help businesses to:
+
+* Efficiently ingest, transform, and analyze large volumes of data from various sources.
+* Achieve their data processing and storage objectives.
+* Maintain a high level of security and compliance.
+* Provide a dedicated, isolated environment for their database.
+* Protect their data with robust security measures.
+
 
 :clock1: Estimated deployment time: 18 min 49 sec
 
