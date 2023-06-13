@@ -19,6 +19,14 @@ In short, Data Fusion and Cloud SQL Private Instance can help businesses to:
 * Provide a dedicated, isolated environment for their database.
 * Protect their data with robust security measures.
 
+## Use cases
+
+These are some examples of the use cases you can build on top of this architecture:
+
+* __Real-time data processing__: Google Cloud Data Fusion supports real-time data ingestion and processing. You can build streaming pipelines to process data as it arrives, enabling real-time analytics, monitoring, and decision-making. SQL can be used to query and transform streaming data in real time, allowing you to derive insights and trigger actions based on the data.
+* __Data integration and ETL (Extract, Transform, Load)__:Google Cloud Data Fusion allows you to easily integrate data from multiple sources, such as databases, files, and APIs. With its visual interface, you can design data pipelines to extract data from various sources, apply transformations, and load it into target systems. SQL can be used within Data Fusion to perform complex transformations and data manipulation during the ETL process.
+* __Data Exploration and Visualization__:Data Fusion can be used to prepare and transform data, and SQL can be used to query and aggregate the data into meaningful insights. These insights can then be visualized using tools like Google Data Studio, where you can create interactive dashboards and reports based on the SQL queries.
+* __Data Integration and Consolidation__:When you have data scattered across multiple systems, Data Fusion can be used to integrate and consolidate the data into a unified view. SQL can then be employed to perform data cleansing, deduplication, and data quality checks, ensuring the consistency and integrity of the merged data.
 
 :clock1: Estimated deployment time: 18 min 49 sec
 
