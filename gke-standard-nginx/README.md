@@ -11,6 +11,16 @@ This architecture enables the company to achieve several key benefits. Firstly, 
 
 Overall, this architecture offers a robust and efficient solution for modern application deployment, enabling the company to accelerate their software development processes, improve scalability and reliability, and gain valuable insights into application performance. 
 
+## Use Cases
+
+These are some examples of the use cases you can build on top of this architecture:
+
+* __Web applications__: This architecture can be used to deploy and manage web applications. The Nginx controller can be used to load balance traffic across multiple pods or nodes in a cluster, and Jenkins can be used to automate the deployment of applications to Kubernetes. Prometheus can be used to collect metrics from the web applications and to generate alerts when applications are unhealthy or when performance metrics are outside of acceptable ranges.
+
+* __Automated Deployment and Testing__: With GKE and Jenkins, you can set up an automated CI/CD pipeline that enables seamless deployment of applications to the Kubernetes cluster.Jenkins can be configured to monitor source code repositories, trigger build processes, run automated tests, and deploy application containers to GKE.Utilize the Prometheus Stack to collect and analyze metrics from the deployment pipeline, monitoring the application's performance and ensuring its stability.
+
+* __Scalable and Resilient Deployment__: By combining GKE with NGINX, you can achieve scalable and resilient application deployments. NGINX acts as a reverse proxy and load balancer in front of the GKE cluster, efficiently distributing traffic to the application containers. GKE's built-in scalability features, combined with NGINX's load balancing capabilities, allow the infrastructure to handle increasing user loads and ensure high availability.
+
 Resources created:
 - VPC
 - Google Kubernetes Engine cluster
