@@ -1,8 +1,15 @@
 [![banner](../banner.png)](https://cloud.google.com/?utm_source=github&utm_medium=referral&utm_campaign=GCP&utm_content=packages_repository_banner)
 
-# Google Kubernetes Engine with NGINX
+# Automate the deployment of your Kubernetes applications
 
-This example deploys  a Google Kubernetes Engine (GKE) with NGINX Ingress.
+## Introduction
+This architecture uses click-to-deploy so you can spin up an infrastructure in minutes using terraform.
+
+In the fast-paced world of software development, organizations strive to achieve efficient and automated processes to deliver high-quality applications at a rapid pace. To accomplish this, companies leverage technologies like Google Kubernetes Engine (GKE) for container orchestration, Jenkins to implement CI/CD pipelines, and Prometheus Stack for monitoring.. 
+
+This architecture enables the company to achieve several key benefits. Firstly, it automates and streamlines the application deployment process, reducing manual intervention and improving deployment consistency. Secondly, it ensures scalability and high availability by leveraging GKE's container orchestration capabilities, allowing applications to scale dynamically to handle varying workloads. Thirdly, the integrated monitoring stack provides valuable insights into the system's performance, allowing the company to proactively address any issues, optimize resource usage, and ensure a high-quality user experience.
+
+Overall, this architecture offers a robust and efficient solution for modern application deployment, enabling the company to accelerate their software development processes, improve scalability and reliability, and gain valuable insights into application performance. 
 
 Resources created:
 - VPC
