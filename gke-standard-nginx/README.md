@@ -21,8 +21,6 @@ These are some examples of the use cases you can build on top of this architectu
 
 * __Scalable and Resilient Deployment__: By combining GKE with NGINX, you can achieve scalable and resilient application deployments. NGINX acts as a reverse proxy and load balancer in front of the GKE cluster, efficiently distributing traffic to the application containers. GKE's built-in scalability features, combined with NGINX's load balancing capabilities, allow the infrastructure to handle increasing user loads and ensure high availability.
 
-:clock1: Estimated deployment time: 13 min
-
 ## Architecture
 <p align="center"><img src="architecture.png"></p>
 
@@ -38,6 +36,7 @@ The main components that we would be setting up are (to learn more about these p
 * [Prometheus Stack](https://cloud.google.com/stackdriver/docs/managed-prometheus) (Prometheus, Grafana, and Alert Manager).
 
 ## Deploy
+:clock1: Estimated deployment time: 13 min
 
 1. Click on Open in Google Cloud Shell button below.
 <a href="https://ssh.cloud.google.com/cloudshell/editor?cloudshell_git_repo=https://github.com/GoogleCloudPlatform/click-to-deploy-solutions&cloudshell_workspace=gke-standard-nginx" target="_new">
