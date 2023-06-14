@@ -21,19 +21,21 @@ These are some examples of the use cases you can build on top of this architectu
 
 * __Scalable and Resilient Deployment__: By combining GKE with NGINX, you can achieve scalable and resilient application deployments. NGINX acts as a reverse proxy and load balancer in front of the GKE cluster, efficiently distributing traffic to the application containers. GKE's built-in scalability features, combined with NGINX's load balancing capabilities, allow the infrastructure to handle increasing user loads and ensure high availability.
 
-Resources created:
-- VPC
-- Google Kubernetes Engine cluster
-- Load Balancers
-
-Applications deployed:
-- Jenkins
-- Prometheus Stack (Prometheus, Grafana, and Alert Manager)
-
 :clock1: Estimated deployment time: 13 min
 
 ## Architecture
-![architecture](architecture.png)
+<p align="center"><img src="architecture.png"></p>
+
+The main components that we would be setting up are (to learn more about these products, click on the hyperlinks)
+
+* [VPC](https://cloud.google.com/vpc) with Private Service Access to deploy the instances and VM
+* [Google Kubernetes Engine cluster](https://cloud.google.com/kubernetes-engine) : The most scalable and fully automated Kubernetes service
+* [Load Balancers](https://cloud.google.com/load-balancing) : When your app usage spikes, it is important to scale, optimize and secure the app. Cloud Load Balancing is a fully distributed solution that balances user traffic to multiple backends to avoid congestion, reduce latency and increase security.
+
+#### Applications deployed:
+
+* [Jenkins](https://cloud.google.com/kubernetes-engine/docs/archive/jenkins-on-kubernetes-engine) : Jenkins is an open-source automation server that lets you flexibly orchestrate your build, test, and deployment pipelines.
+* [Prometheus Stack](https://cloud.google.com/stackdriver/docs/managed-prometheus) (Prometheus, Grafana, and Alert Manager).
 
 ## Deploy
 
