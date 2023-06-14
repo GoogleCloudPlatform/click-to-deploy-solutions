@@ -1,5 +1,3 @@
-﻿> Authors: Eva Rivarola, Gabriel Ruiz
-
 ## How to use this template
 This template is a reference, no every section applies to all the architectures. Feel free to use the sections that best apply to your solution. A good solution should have a testing your architecture section and a link to the calculator with estimate prices. We tried to provide examples of each section but if you have questions or comments please reach out to the team. Without further ado here is the template. 
 
