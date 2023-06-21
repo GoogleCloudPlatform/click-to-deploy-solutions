@@ -1,11 +1,17 @@
 [![banner](../banner.png)](https://cloud.google.com/?utm_source=github&utm_medium=referral&utm_campaign=GCP&utm_content=packages_repository_banner)
 
 
-# Cloud SQL with High Availability and Disaster Recovery  
+# Host a Highly Available SQL database on Google Cloud
 
-## Description
+## Introduction
 
-This example demonstrates how to deploy a CloudSQL instance with high-availability and cross-region replica.
+This architecture uses click-to-deploy to demonstrate how to deploy a CloudSQL instance with high-availability and cross-region replica
+
+With data being a vital asset for organizations, the high availability and disaster recovery capabilities offered by Cloud SQL allow businesses to meet stringent data availability and regulatory requirements. \
+
+By implementing this solution, organizations gain peace of mind knowing that their critical databases are protected and accessible, even during unforeseen events or outages. This solution ensures business continuity by minimizing downtime, providing robust data protection through automated backups, and enabling seamless failover and disaster recovery processes.
+
+This solution is suitable for a wide range of applications and industries, including e-commerce platforms, financial systems, customer relationship management (CRM) tools, and more.
 
 Resources created:
 - VPC
