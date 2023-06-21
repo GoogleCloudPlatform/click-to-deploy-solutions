@@ -21,8 +21,6 @@ These are some examples of the use cases you can build on top of this architectu
 
 * __Hybrid Cloud File Storage__ : This enables seamless integration between on-premises infrastructure and Google Cloud, facilitating data mobility and flexibility. Organizations can leverage the scalability and accessibility of the cloud while maintaining control over their data.
 
-:clock1: Estimated deployment time: 1 min 25 seg
-
 ## Arquitecture
 
 <p align="center"><img src="architecture.png"></p>
@@ -33,7 +31,15 @@ The main components that we would be setting up are (to learn more about these p
 * [GCP](https://cloud.google.com/compute) : Secure and customizable compute service that lets you create and run virtual machines on Google’s infrastructure.
 * [Persistent Disk](https://cloud.google.com/compute/docs/disks) : Persistent Disk volumes provide high-performance and redundant network storage.
 
+## Costs
+
+Pricing Estimates - We have created a sample estimate based on some usage we see from new startups looking to scale. This estimate would give you an idea of how much this deployment would essentially cost per month at this scale and you extend it to the scale you further prefer. Here's the [link](https://cloud.google.com/products/calculator/#id=a9b6f515-83c1-4ea3-833b-bdc18771afde).
+
+
 ## Deploy
+
+:clock1: Estimated deployment time: 1 min 25 seg
+
 
 1. Click on Open in Google Cloud Shell button below.
 <a href="https://ssh.cloud.google.com/cloudshell/editor?shellonly=true&cloudshell_git_repo=https://github.com/GoogleCloudPlatform/click-to-deploy-solutions&cloudshell_workspace=windows-fileserver" target="_new">
