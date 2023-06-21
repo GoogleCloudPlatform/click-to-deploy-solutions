@@ -27,9 +27,6 @@ Resources created:
 - Cloud Storage Buckets
 - BigQuery datasets and tables
 
-
-:clock1: Estimated deployment time: 26 min 48 sec
-
 ## Use cases
 
 These are some examples of the use cases you can build on top of this architecture:
@@ -63,6 +60,8 @@ Check more operators available in [Airflow Google Operators doc](https://airflow
 Pricing Estimates - We have created a sample estimate based on some usage we see from new startups looking to scale. This estimate would give you an idea of how much this deployment would essentially cost per month at this scale and you extend it to the scale you further prefer. Here's the [link](https://cloud.google.com/products/calculator/#id=f7caffab-fca3-490e-8654-f406df790929).
 
 ## Deploy
+
+:clock1: Estimated deployment time: 26 min 48 sec
 
 1. Click on Open in Google Cloud Shell button below.
 <a href="https://ssh.cloud.google.com/cloudshell/editor?cloudshell_git_repo=https://github.com/GoogleCloudPlatform/click-to-deploy-solutions&cloudshell_workspace=cloud-composer-etl" target="_new">
