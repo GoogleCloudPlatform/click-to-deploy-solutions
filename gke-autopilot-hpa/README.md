@@ -14,6 +14,16 @@ Horizontal Pod Autoscaling complements GKE Autopilot by dynamically scaling appl
 
 This solution offers several benefits for businesses. It allows them to focus on developing their applications and delivering value to customers, rather than dealing with infrastructure complexities. By leveraging GKE Autopilot and Horizontal Pod Autoscaling, businesses can achieve high availability without the need for extensive manual configuration or ongoing maintenance.
 
+## Use Cases
+
+* Any web page or application that might require the following:
+  * __Handling Variable Workloads__: During peak periods, HPA scales up the number of pods to accommodate increased traffic, ensuring optimal performance and responsiveness. Conversely, during periods of low utilization, HPA scales down the pods, optimizing resource utilization and reducing costs.
+
+  * __Optimizing Resource Allocation__: As CPU utilization increases, HPA scales up the number of pods, preventing resource bottlenecks and ensuring that the application has enough compute capacity to handle the load effectively.By scaling down pods during low utilization, HPA frees up resources, enabling other applications or services to use them efficiently.
+
+  * __Improve Performance and User Experience__: GKE HPA enables organizations to maintain optimal application performance and deliver an enhanced user experience. This results in a responsive and reliable application experience for end-users.
+
+
 Resources created:
 - VPC
 - Subnet
