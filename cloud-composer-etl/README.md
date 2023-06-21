@@ -1,11 +1,20 @@
 [![banner](../banner.png)](https://cloud.google.com/?utm_source=github&utm_medium=referral&utm_campaign=GCP&utm_content=packages_repository_banner)
 
 
-# Cloud Composer ETL  
+# Easily Orchestrate and Manage an ETL Pipeline in Google Cloud 
 
-## Description
+## Introduction
 
-This example demonstrates how to use Cloud Composer DAGS to:
+This architecture uses click-to-deploy so you can spin up infrastructure in minutes using terraform!
+
+The data analytics world relies on ETL and ETL pipelines to derive meaningful insights from data. Data engineers and ETL developers are often required to build dozens of interdependent pipelines as part of their data platform, but orchestrating, managing, and monitoring all these pipelines can be quite a challenge.
+
+Cloud Composer is the answer to this challenge. To guarantee reliability and fault tolerance, Cloud Composer automatically handles task scheduling, monitoring, and retries. It provides built-in support for managing dependencies between tasks, allowing us to easily orchestrate the entire ETL workflow. Additionally, Cloud Composer offers monitoring and alerting capabilities, allowing us to track the progress of our pipeline and take the necessary actions if any problems arise.
+
+In conclusion, our cloud ETL pipeline powered by Cloud Composer is a powerful and scalable solution for extracting, transforming, and loading data. It offers a wide range of features, including data source integration, transformation capabilities, fault tolerance, scalability, and seamless integration with other cloud services.
+
+The following click-to-deploy architecture demonstrates how to use Cloud Composer to:
+
 - [Restore a Postgres backup](./dags/postgres_restore.py)
 - [Extract data from Postgres and load to Cloud Storage (Data Lake)](./dags/postgres_to_datalake.py)
 - [Load data from Cloud Storage (Data Lake) to BigQuery (Data Warehouse)](./dags/datalake_to_dw.py)
@@ -17,8 +26,6 @@ Resources created:
 - Cloud SQL for Postgres
 - Cloud Storage Buckets
 - BigQuery datasets and tables
-
-Check more operators available in [Airflow Google Operators doc](https://airflow.apache.org/docs/apache-airflow-providers-google/stable/operators/index.html).
 
 
 :clock1: Estimated deployment time: 26 min 48 sec
