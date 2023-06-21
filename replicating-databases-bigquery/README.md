@@ -23,17 +23,19 @@ These are some examples of the use cases you can build on top of this architectu
 
 * __Business Intelligence and Machine Learning__ : Organizations can leverage the real-time data availability in BigQuery to power BI tools and ML models. BI teams can build interactive dashboards, perform ad-hoc analysis, and create data visualizations using the most current data. ML engineers and data scientists can access real-time data to train and deploy models, enabling them to make accurate predictions and automate decision-making processes.
 
+## Architecture
 
-Resources created
-- VPC
-- Data Stream
-- Cloud SQL for MySQL
+<p align="center"><img src="architecture.png"></p>
 
-:clock1: Estimated deployment time: 10 min 16 sec
+The main components that we would be setting up are (to learn more about these products, click on the hyperlinks)
 
-![arquitecture](architecture.png)
+* [VPC](https://cloud.google.com/vpc) Global virtual network that spans all regions. Single VPC for an entire organization, isolated within projects. Increase IP space with no downtime.
+* [Data Stream](https://cloud.google.com/datastream/docs/overview) : serverless and easy-to-use change data capture (CDC) and replication service. It allows you to synchronize data across heterogeneous databases and applications reliably, and with minimal latency and downtime.
+* [Cloud SQL for MySQL ](https://cloud.google.com/sql): Fully managed relational database service for MySQL, PostgreSQL, and SQL Server with rich extension collections, configuration flags, and developer ecosystems.
 
 ## Deploy
+
+:clock1: Estimated deployment time: 10 min 16 sec
 
 1. Click on Open in Google Cloud Shell button below.
 <a href="https://ssh.cloud.google.com/cloudshell/editor?shellonly=true&cloudshell_git_repo=https://github.com/GoogleCloudPlatform/click-to-deploy-solutions&cloudshell_workspace=replicating-databases-bigquery" target="_new">
