@@ -16,13 +16,30 @@ In this example, the user uploads images to a bucket. This event triggers the Vi
 
 <p align="center"><b>Image credit: <a href="https://unsplash.com/photos/J9cBJjlpYKU"> Bogdan Dada </a> on <a href="https://unsplash.com/">Unsplash </a>(annotations added).</b> </p>
 
+## Use cases
 
-:clock1: Estimated deployment time: 6 min
+These are some examples of the use cases you can build on top of this architecture:
+
+* __Visual Search and Recommendation Systems__ : The object detection and localization architecture can be utilized in visual search applications, allowing users to search for similar products or items based on specific objects within an image. 
+
+* __Content Moderation and Filtering__ : Online platforms and social media networks often face the challenge of moderating user-generated content to ensure compliance with community guidelines and policies. By leveraging object detection and localization, the architecture can automatically identify and extract specific objects, enabling efficient content moderation.
+
+* __Inventory Management and Product Categorization__ : Retail and e-commerce businesses can benefit from the solution's object detection capabilities to streamline inventory management and product categorization processes. By automatically extracting objects from product images, the architecture can assist in identifying and categorizing inventory items, improving stock management, and facilitating accurate product classification.
+
 
 ## Architecture
-![architecture](architecture.png)
+
+<p align="center"><img src="architecture.png"></p>
+
+The main components that we would be setting up are (to learn more about these products, click on the hyperlinks)
+
+* [Cloud Storage (GCS) bucket](https://cloud.google.com/storage/): for storing extracted data that must undergo some kind of transformation.
+* [BigQuery](https://cloud.google.com/bigquery) : BigQuery is a serverless and cost-effective enterprise data warehouse that works across clouds and scales with your data. Use built-in ML/AI and BI for insights at scale.
+* [Cloud Function](https://cloud.google.com/functions): Run your code in the cloud with no servers or containers to manage with our scalable, pay-as-you-go functions as a service (FaaS) product.
 
 ## Deploy
+
+:clock1: Estimated deployment time: 6 min
 
 1. Click on Open in Google Cloud Shell button below.
 
