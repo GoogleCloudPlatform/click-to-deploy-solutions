@@ -1,15 +1,20 @@
 [![banner](../banner.png)](https://cloud.google.com/?utm_source=github&utm_medium=referral&utm_campaign=GCP&utm_content=packages_repository_banner)
 
-# Object Detection
+# Extract Objects from Images using AI on Google Cloud
 
-This example deploys a solution for detecting objects on images with Cloud Vision API.
+## Introduction
 
-The user uploads images to a bucket, it triggers a function and call the Cloud Vision API to localize objects on the image, then save the results into BigQuery.
+This architecture uses click-to-deploy so you can spin up a solution for detecting objects on images with Cloud Vision API
 
+This architecture harnesses the power of Google Cloud Vision API to detect and extract objects from images with precise object localization. This architecture provides a robust and efficient solution for applications that require accurate object recognition and extraction capabilities.
 
-![image](https://cloud.google.com/static/vision/docs/images/bicycle.jpg)
+At the core of this architecture is the Cloud Vision API, a powerful machine learning-based service that analyzes images to detect objects and their spatial location within the image. By leveraging state-of-the-art computer vision algorithms, the API can accurately identify and localize objects, providing bounding boxes that outline their exact positions.
 
-Image credit: [Bogdan Dada](https://unsplash.com/photos/J9cBJjlpYKU) on [Unsplash](https://unsplash.com/) (annotations added).
+In this example, the user uploads images to a bucket. This event triggers the Vision API that analyzes the image and saves the object detection results into a JSON file on Google Cloud Storage. BigQuery Transfer Service loads JSONs from the output bucket to a BigQuery table.
+
+<p align="center"><img src="https://cloud.google.com/static/vision/docs/images/bicycle.jpg"></p>
+
+<p align="center"><b>Image credit: <a href="https://unsplash.com/photos/J9cBJjlpYKU"> Bogdan Dada </a> on <a href="https://unsplash.com/">Unsplash </a>(annotations added).</b> </p>
 
 
 :clock1: Estimated deployment time: 6 min
