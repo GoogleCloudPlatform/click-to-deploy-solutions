@@ -1,10 +1,16 @@
 [![banner](../banner.png)](https://cloud.google.com/?utm_source=github&utm_medium=referral&utm_campaign=GCP&utm_content=packages_repository_banner)
 
-# Windows File Server
+# Windows File Server on Google Cloud
 
-This is a stack that deploys a Configuration Example of Windows File Server.
+## Introduction
 
-This repository contains Terraform sample code to deploy Compute Engine and a Persistent Disk.
+This architecture uses click-to-deploy to create an example of building a 2TB capacity Windows file server environment on Google Cloud.
+
+The Windows File Server architecture on Google Cloud provides a robust and reliable environment for efficient data storage and management. This architecture utilizes a 2TB persistent disk, offering ample storage capacity to accommodate your growing file storage needs.
+
+With disk snapshot enabled, you can ensure data protection and quick disaster recovery. The snapshot feature allows you to capture the state of your disk at a specific point in time, creating a backup that can be easily restored in case of data loss or system failures.
+
+By leveraging the power of Google Cloud, this file server environment offers high scalability, performance, and security. You can effortlessly scale up or down your storage capacity as required, ensuring that your file server can adapt to your changing business demands. Additionally, Google Cloud's robust security measures, including encryption and access controls, provide a secure environment for your sensitive data.
 
 Resources created
 - VPC
