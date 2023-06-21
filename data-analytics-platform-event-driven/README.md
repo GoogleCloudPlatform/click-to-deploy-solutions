@@ -1,12 +1,18 @@
 [![banner](../banner.png)](https://cloud.google.com/?utm_source=github&utm_medium=referral&utm_campaign=GCP&utm_content=packages_repository_banner)
 
-# Data Analytics Platform event-driven
+# Implement a data analytics pipeline with an event-driven architecture on Google Cloud
 
-## Description
+## Introduction
 
-This example demonstrates how to load files from Google Cloud Storage to BigQuery using an event-driven load function. 
+This architecture uses click-to-deploy to demonstrate how to load data from Google Cloud Storage to BigQuery using an event-driven load function.
 
-The user uploads the data into the Upload Bucket following the pattern `gs://your-upload-bucket/dataset-name/table-name/file.csv`, then it triggers a Cloud Function that extracts the parameters from the object path and then load the file into the proper destination table.
+By adopting an event-driven architecture, companies can harness the power of real-time data processing. Events triggered by various sources, such as user interactions, system events, or data updates, can be seamlessly captured and processed in near real-time. This allows for a highly responsive and agile analytics pipeline, ensuring that data is continuously flowing into the system and insights are promptly generated.
+
+Cloud functions play a pivotal role in this setup. They serve as the bridge between the cloud storage and BigQuery, enabling smooth and automated data ingestion. As new data arrives in the cloud storage, the cloud functions can be configured to trigger automatically, instantly fetching and loading the data into BigQuery. This eliminates the need for manual intervention and guarantees a streamlined and efficient data transfer process.
+
+Utilizing Google Cloud's BigQuery as the data warehousing solution further enhances the value of this architecture. BigQuery offers a powerful and scalable analytics platform capable of handling large volumes of data. Its unique serverless architecture enables elastic scaling, allowing the customer to effortlessly accommodate data growth without worrying about infrastructure management. 
+
+In summary, a data analytics pipeline with an event-driven architecture, empowers the customer with a scalable, efficient, and real-time data processing solution. This architecture streamlines data ingestion, ensures prompt analysis, and leverages Google Cloud's comprehensive suite of analytics tools, ultimately enabling the customer to make data-driven decisions faster and stay ahead in today's competitive landscape.
 
 :clock1: Estimated deployment time: 8 min
 
