@@ -18,6 +18,15 @@ In summary, a data analytics pipeline with an event-driven architecture, empower
 
 :heavy_dollar_sign: Estimated solution cost: it depends on the volume of data inserted, please estimate it using [Google Cloud Pricing Calculator](https://cloud.google.com/products/calculator)
 
+## Use cases
+
+These are some examples of the use cases you can build on top of this architecture:
+
+* __Real-Time Data Analytics__ : This implementation allows organizations to perform real-time data analytics by loading data from Cloud Storage into BigQuery. This is particularly valuable in scenarios where data freshness is critical for making timely decisions. For example, a marketing team can continuously load customer behavior data from Cloud Storage into BigQuery using the event-driven cloud function. This enables them to analyze the latest customer interactions, identify trends, and personalize marketing campaigns in real-time, resulting in improved customer engagement and conversion rates.
+
+* __Streamlined ETL Pipelines__ : This architecture facilitates by automating the data loading process. Organizations can use the event-driven cloud function to trigger the ingestion of data from Cloud Storage into BigQuery as soon as new files are added or existing files are modified. This eliminates the need for manual intervention or scheduled jobs, reducing the time and effort required for data processing. For instance, a retail company can automatically load sales data from Cloud Storage into BigQuery, allowing them to generate daily sales reports without delay, enabling better inventory management and revenue forecasting.
+
+* __Data Archival and Compliance__ : Another important use case for this architecture is data archival and compliance. Many organizations have regulatory requirements or internal policies that dictate data retention periods. By automatically moving processed files from cloud storage to an archive cloud storage, this data analytics pipeline ensures that data is securely stored for long-term retention. This archival process helps organizations meet compliance requirements, facilitates audits and investigations, and preserves data integrity. Additionally, it optimizes primary storage costs by moving less frequently accessed data to a more cost-effective storage layer.
 
 ## Architecture
 Please find below a reference architecture.
