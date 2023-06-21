@@ -23,15 +23,6 @@ This solution offers several benefits for businesses. It allows them to focus on
 
   * __Improve Performance and User Experience__: GKE HPA enables organizations to maintain optimal application performance and deliver an enhanced user experience. This results in a responsive and reliable application experience for end-users.
 
-
-Resources created:
-- VPC
-- Subnet
-- NAT
-- GKE Autopilot
-
-:clock1: Estimated deployment time: 10 min
-
 ## Architecture
 <p align="center"><img src="architecture.png"></p>
 
@@ -43,6 +34,8 @@ The main components that we would be setting up are (to learn more about these p
 * [GKE Autopilot](https://cloud.google.com/kubernetes-engine/docs/concepts/autopilot-overview) : GKE Autopilot is a mode of operation in GKE in which Google manages your cluster   configuration, including your nodes, scaling, security, and other preconfigured settings.
 
 ## Deploy
+
+:clock1: Estimated deployment time: 10 min
 
 1. Click on Open in Google Cloud Shell button below.
 <a href="https://ssh.cloud.google.com/cloudshell/editor?cloudshell_git_repo=https://github.com/GoogleCloudPlatform/click-to-deploy-solutions&cloudshell_workspace=gke-autopilot-hpa" target="_new">
