@@ -10,6 +10,18 @@ In the world of modern web development, it is essential to create scalable and r
 
 This solution focuses on the combination of GKE clusters, which allows for automatic scaling as needed, Cloud SQL as a relational database, Cloud Storage for unstructured data, and Memorystore for caching, which reduces database access on frequent queries. This solution provides a powerful and robust infrastructure for hosting a three-tier web application.
 
+## Use cases
+
+These are some examples of the use cases you can build on top of this architecture:
+
+* __E-commerce Platform__ : Build a robust e-commerce platform where the presentation layer handles the user interface and shopping cart functionality. The business logic layer manages inventory, order processing, and payment integration. 
+
+* __Content Management System (CMS)__: Create a scalable CMS where the presentation layer handles content creation, editing, and publishing. The business logic layer manages user authentication, access controls, and content organization. Cloud SQL for MySQL stores content metadata, user profiles, and settings, while Cloud Storage stores media files, such as images and videos.
+
+* __Analytics Dashboard__ : Develop an analytics dashboard where users can visualize and explore data insights. The presentation layer provides interactive data visualizations and filtering options. The business logic layer handles data processing, aggregation, and query optimization. 
+
+Some common use examples include Cloud SQL for MySQL storing product catalogs, customer profiles, and transactional data, while Cloud Storage securely stores product images and other media assets.
+
 Resources created
 - VPC
 - GKE
