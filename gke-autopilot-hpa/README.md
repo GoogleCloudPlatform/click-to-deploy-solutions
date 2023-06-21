@@ -1,10 +1,18 @@
 [![banner](../banner.png)](https://cloud.google.com/?utm_source=github&utm_medium=referral&utm_campaign=GCP&utm_content=packages_repository_banner)
 
-# Google Kubernetes Engine HPA
+# Build a High availability application easily with GKE autopilot
 
-## Description
+## Introduction
 
-This example deploys Google Kubernetes Engine (GKE) Autopilot cluster with two sample deployments: hello-app-example and hpa-example. It demonstrate how to use Horizontal Pod Autoscaling (HPA) to scale the number of pods based on CPU utilization.
+This architecture uses click-to-deploy to demonstrate how to use Horizontal Pod Autoscaling (HPA) to scale the number of pods based on CPU utilization.
+
+Businesses need highly available applications to provide uninterrupted service to customers and ensure a seamless user experience. However, achieving high availability can be difficult and time-consuming, as it requires complex configuration and management of infrastructure components.
+
+GKE Autopilot is a managed Kubernetes environment that automates infrastructure management tasks, including cluster orchestration, scaling, and security updates. This allows businesses to focus on developing their applications rather than worrying about infrastructure management.
+
+Horizontal Pod Autoscaling complements GKE Autopilot by dynamically scaling application pods to match demand. As the workload increases, additional pods are automatically provisioned to distribute the load and maintain optimal performance. Conversely, during periods of low demand, the number of pods can be scaled down, optimizing resource utilization and cost-efficiency.
+
+This solution offers several benefits for businesses. It allows them to focus on developing their applications and delivering value to customers, rather than dealing with infrastructure complexities. By leveraging GKE Autopilot and Horizontal Pod Autoscaling, businesses can achieve high availability without the need for extensive manual configuration or ongoing maintenance.
 
 Resources created:
 - VPC
