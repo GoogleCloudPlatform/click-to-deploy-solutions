@@ -33,7 +33,14 @@ Resources created:
 :clock1: Estimated deployment time: 10 min
 
 ## Architecture
-![architecture](architecture.png)
+<p align="center"><img src="architecture.png"></p>
+
+The main components that we would be setting up are (to learn more about these products, click on the hyperlinks)
+
+* [VPC](https://cloud.google.com/vpc) : Global virtual network that spans all regions. Single VPC for an entire organization, isolated within projects. Increase IP space with no downtime
+* [Subnet](https://cloud.google.com/vpc/docs/subnets) : Subnets are regional resources, and have IP address ranges associated with them.
+* [NAT](https://cloud.google.com/nat/docs/overview) : Provides fully managed, software-defined network address translation support for Google Cloud.
+* [GKE Autopilot](https://cloud.google.com/kubernetes-engine/docs/concepts/autopilot-overview) : GKE Autopilot is a mode of operation in GKE in which Google manages your cluster   configuration, including your nodes, scaling, security, and other preconfigured settings.
 
 ## Deploy
 
