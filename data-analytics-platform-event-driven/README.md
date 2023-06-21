@@ -14,10 +14,6 @@ Utilizing Google Cloud's BigQuery as the data warehousing solution further enhan
 
 In summary, a data analytics pipeline with an event-driven architecture, empowers the customer with a scalable, efficient, and real-time data processing solution. This architecture streamlines data ingestion, ensures prompt analysis, and leverages Google Cloud's comprehensive suite of analytics tools, ultimately enabling the customer to make data-driven decisions faster and stay ahead in today's competitive landscape.
 
-:clock1: Estimated deployment time: 8 min
-
-:heavy_dollar_sign: Estimated solution cost: it depends on the volume of data inserted, please estimate it using [Google Cloud Pricing Calculator](https://cloud.google.com/products/calculator)
-
 ## Use cases
 
 These are some examples of the use cases you can build on top of this architecture:
@@ -40,7 +36,13 @@ The main components that we would be setting up are (to learn more about these p
 * [Cloud Function](https://cloud.google.com/functions): Run your code in the cloud with no servers or containers to manage with our scalable, pay-as-you-go functions as a service (FaaS) product.
 * [Looker Studio](https://support.google.com/looker-studio/answer/6283323?hl=en) : Looker Studio is a free tool that turns your data into informative, easy to read, easy to share, and fully customizable dashboards and reports.
 
+## Costs
+
+Pricing Estimates - We have created a sample estimate based on some usage we see from new startups looking to scale. This estimate would give you an idea of how much this deployment would essentially cost per month at this scale and you extend it to the scale you further prefer. Here's the [link](https://cloud.google.com/products/calculator/#id=662dbaa8-91e2-486f-bd28-2d828692a560).
+
 ## Deploy
+
+:clock1: Estimated deployment time: 8 min
 
 1. Click on Open in Google Cloud Shell button below.
 <a href="https://ssh.cloud.google.com/cloudshell/editor?cloudshell_git_repo=https://github.com/GoogleCloudPlatform/click-to-deploy-solutions&cloudshell_workspace=data-analytics-platform-event-driven" target="_new">
