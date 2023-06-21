@@ -21,17 +21,17 @@ These are some examples of the use cases you can build on top of this architectu
 
 * __Hybrid Cloud File Storage__ : This enables seamless integration between on-premises infrastructure and Google Cloud, facilitating data mobility and flexibility. Organizations can leverage the scalability and accessibility of the cloud while maintaining control over their data.
 
-
-Resources created
-- VPC
-- GCP
-- Persistent Disk
-
 :clock1: Estimated deployment time: 1 min 25 seg
 
 ## Arquitecture
 
-![arquitecture](architecture.png)
+<p align="center"><img src="architecture.png"></p>
+
+The main components that we would be setting up are (to learn more about these products, click on the hyperlinks)
+
+* [VPC](https://cloud.google.com/vpc) : Global virtual network that spans all regions. Single VPC for an entire organization, isolated within projects. Increase IP space with no downtime.
+* [GCP](https://cloud.google.com/compute) : Secure and customizable compute service that lets you create and run virtual machines on Google’s infrastructure.
+* [Persistent Disk](https://cloud.google.com/compute/docs/disks) : Persistent Disk volumes provide high-performance and redundant network storage.
 
 ## Deploy
 
