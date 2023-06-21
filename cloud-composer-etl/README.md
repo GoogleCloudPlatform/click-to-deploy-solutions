@@ -32,6 +32,19 @@ Resources created:
 
 :heavy_dollar_sign: Estimated solution cost: [USD 583.04 per 1 month](https://cloud.google.com/products/calculator/#id=f7caffab-fca3-490e-8654-f406df790929)
 
+## Use cases
+
+These are some examples of the use cases you can build on top of this architecture:
+
+* __Extracting data from a variety of sources__: Cloud Composer can be used to extract data from a variety of sources, including CSV files, JSON files, databases, and web APIs.
+
+* __Transforming data__: Cloud Composer can be used to transform data in a variety of ways, including cleaning, filtering, and aggregating data.
+
+* __Data integration from multiple sources__: Businesses often have data stored in various places, such as databases, third-party APIs, or log files. A data pipeline using Cloud Composer and BigQuery can integrate data from these different sources, harmonize it, and transform it into a unified format that is suitable for analysis. This ensures a consistent and reliable data source for decision-making.
+
+* __Data warehousing and reporting__: Businesses often require a central data repository for storing and querying data. BigQuery, a fully managed data warehouse, provides fast and scalable storage and powerful querying capabilities. Businesses can automate the process of loading data into BigQuery by combining Cloud Composer's workflow orchestration capabilities, ensuring timely and accurate data updates for reporting and analysis purposes.
+ 
+* __Data Quality and Governance__: A data pipeline can also be used to ensure data quality and compliance rules are met before loading data into BigQuery. Cloud Composer allows businesses to implement validation checks, data quality controls, and data cleansing processes as part of the data pipeline workflow. This guarantees that only high-quality and reliable data is loaded into BigQuery, enhancing the accuracy and integrity of analytical insights.
 
 ## Architecture
 Please find below a reference architecture.
