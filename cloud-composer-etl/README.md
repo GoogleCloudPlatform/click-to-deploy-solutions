@@ -47,8 +47,19 @@ These are some examples of the use cases you can build on top of this architectu
 * __Data Quality and Governance__: A data pipeline can also be used to ensure data quality and compliance rules are met before loading data into BigQuery. Cloud Composer allows businesses to implement validation checks, data quality controls, and data cleansing processes as part of the data pipeline workflow. This guarantees that only high-quality and reliable data is loaded into BigQuery, enhancing the accuracy and integrity of analytical insights.
 
 ## Architecture
-Please find below a reference architecture.
-![architecture](architecture.png)
+
+<p align="center"><img src="architecture.png"></p>
+
+The main components that we would be setting up are (to learn more about these products, click on the hyperlinks)
+
+* [VPC](https://cloud.google.com/vpc) : Global virtual network that spans all regions. Single VPC for an entire organization, isolated within projects. Increase IP space with no downtime.
+* [Cloud Composer v2](https://cloud.google.com/composer) : A fully managed workflow orchestration service built on Apache Airflow.
+* [Cloud SQL for Postgres](https://cloud.google.com/sql) :  Fully managed relational database service for MySQL, PostgreSQL, and SQL Server with rich extension collections, configuration flags, and developer ecosystems.
+* [Cloud Storage (GCS) bucket](https://cloud.google.com/storage/) : Cloud Storage is a managed service for storing unstructured data. Store any amount of data and retrieve it as often as you like.
+* [BigQuery datasets and tables ](https://cloud.google.com/bigquery): BigQuery is a serverless and cost-effective enterprise data warehouse that works across clouds and scales with your data. Use built-in ML/AI and BI for insights at scale. 
+
+Check more operators available in [Airflow Google Operators doc](https://airflow.apache.org/docs/apache-airflow-providers-google/stable/operators/index.html).
+
 
 ## Deploy
 
