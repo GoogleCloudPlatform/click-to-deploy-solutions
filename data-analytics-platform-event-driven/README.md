@@ -29,8 +29,16 @@ These are some examples of the use cases you can build on top of this architectu
 * __Data Archival and Compliance__ : Another important use case for this architecture is data archival and compliance. Many organizations have regulatory requirements or internal policies that dictate data retention periods. By automatically moving processed files from cloud storage to an archive cloud storage, this data analytics pipeline ensures that data is securely stored for long-term retention. This archival process helps organizations meet compliance requirements, facilitates audits and investigations, and preserves data integrity. Additionally, it optimizes primary storage costs by moving less frequently accessed data to a more cost-effective storage layer.
 
 ## Architecture
-Please find below a reference architecture.
-![architecture](architecture.png)
+
+<p align="center"><img src="architecture.png"></p>
+
+The main components that we would be setting up are (to learn more about these products, click on the hyperlinks)
+
+* [Cloud Storage (GCS) bucket](https://cloud.google.com/storage/): Cloud Storage is a managed service for storing unstructured data. Store any amount of data and retrieve it as often as you like.
+* [BigQuery](https://cloud.google.com/bigquery): managed data warehouse solution that offers a powerful scalable SQL engine for analytical workloads
+* [Service accounts:](https://cloud.google.com/iam/docs/service-accounts) credentials used by Google Cloud services to interact with other Google Cloud components
+* [Cloud Function](https://cloud.google.com/functions): Run your code in the cloud with no servers or containers to manage with our scalable, pay-as-you-go functions as a service (FaaS) product.
+* [Looker Studio](https://support.google.com/looker-studio/answer/6283323?hl=en) : Looker Studio is a free tool that turns your data into informative, easy to read, easy to share, and fully customizable dashboards and reports.
 
 ## Deploy
 
