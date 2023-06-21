@@ -12,6 +12,16 @@ With disk snapshot enabled, you can ensure data protection and quick disaster re
 
 By leveraging the power of Google Cloud, this file server environment offers high scalability, performance, and security. You can effortlessly scale up or down your storage capacity as required, ensuring that your file server can adapt to your changing business demands. Additionally, Google Cloud's robust security measures, including encryption and access controls, provide a secure environment for your sensitive data.
 
+## Use cases
+These are some examples of the use cases you can build on top of this architecture:
+
+* __Enterprise File Sharing and Collaboration__ : Teams can securely store, access, and collaborate on documents, presentations, and other files, ensuring data integrity and version control. With snapshot backups, accidental deletions or data corruption can be easily recovered, minimizing downtime and ensuring business continuity.
+
+* __Application Data Storage__ : Many applications require a reliable and scalable file storage solution to store user-generated content, configuration files, or other application-specific data.
+
+* __Hybrid Cloud File Storage__ : This enables seamless integration between on-premises infrastructure and Google Cloud, facilitating data mobility and flexibility. Organizations can leverage the scalability and accessibility of the cloud while maintaining control over their data.
+
+
 Resources created
 - VPC
 - GCP
