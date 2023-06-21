@@ -14,6 +14,16 @@ The replication process uses tools like Google Data Stream to ingest data from v
 
 In summary, replicating SQL databases to BigQuery provides organizations with a seamless pathway to leverage the strong analytical and machine learning capabilities of an enterprise-grade data warehouse. It allows them to transition from traditional databases to a high-performance environment, unlocking the potential for faster data processing, advanced analytics, and actionable insights that drive business success.
 
+## Use cases
+These are some examples of the use cases you can build on top of this architecture:
+
+* __Real-time analytics and reporting__ : Organizations that require up-to-the-minute insights for critical decision-making can benefit from this solution. By replicating data from transactional databases or other data sources to BigQuery in near real-time, businesses can generate real-time reports, dashboards, and visualizations that reflect the most current state of their data.
+
+* __Data warehousing and historical analysis__ : Many organizations need to store and analyze large volumes of historical data for compliance, auditing, or long-term trend analysis purposes. By replicating data from source databases to BigQuery using Google Data Stream, organizations can maintain an up-to-date data warehouse that includes historical records. This allows them to perform complex queries and advanced analytics on a comprehensive dataset, uncover hidden patterns, identify historical trends, and gain deeper insights into their business performance over time.
+
+* __Business Intelligence and Machine Learning__ : Organizations can leverage the real-time data availability in BigQuery to power BI tools and ML models. BI teams can build interactive dashboards, perform ad-hoc analysis, and create data visualizations using the most current data. ML engineers and data scientists can access real-time data to train and deploy models, enabling them to make accurate predictions and automate decision-making processes.
+
+
 Resources created
 - VPC
 - Data Stream
