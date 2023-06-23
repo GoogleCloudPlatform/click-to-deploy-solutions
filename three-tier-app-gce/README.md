@@ -12,8 +12,6 @@ To enhance security, this architecture incorporates several Google Cloud service
 
 The combination of auto scaling and security measures makes this architecture ideal for web applications with fluctuating traffic patterns and the need for protection against potential cyber threats. It ensures that the web application remains highly available, even during peak usage periods, while safeguarding sensitive data and maintaining a secure environment.
 
-:clock1: Estimated deployment time: 8 min
-
 ## Use cases
 
 These are some examples of the use cases you can build on top of this architecture:
@@ -39,7 +37,13 @@ The main components that we would be setting up are (to learn more about these p
 * [Load Balancer: ](https://cloud.google.com/load-balancing?hl=en) : High performance, scalable load balancing on Google Cloud.
 * [VPC](https://cloud.google.com/vpc) : Global virtual network that spans all regions. Single VPC for an entire organization, isolated within projects. Increase IP space with no downtime.
 
+## Costs
+
+Pricing Estimates - We have created a sample estimate based on some usage we see from new startups looking to scale. This estimate would give you an idea of how much this deployment would essentially cost per month at this scale and you extend it to the scale you further prefer. Here's the [link](https://cloud.google.com/products/calculator/#id=bfa6c5e2-8801-4a2a-8075-2d6588d06f13).
+
 ## Deploy
+
+:clock1: Estimated deployment time: 8 min
 
 1. Click on Open in Google Cloud Shell button below.
 <a href="https://ssh.cloud.google.com/cloudshell/editor?cloudshell_git_repo=https://github.com/GoogleCloudPlatform/click-to-deploy-solutions&cloudshell_workspace=three-tier-app-gce" target="_new">
