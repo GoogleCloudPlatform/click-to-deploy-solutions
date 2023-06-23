@@ -18,6 +18,17 @@ The following are some examples of how this architecture can be used to make pro
 
 * Load data from GCS into BigQuery in parallel. This can be useful for organizations that have large amounts of data to load, as it can significantly reduce the time it takes to load the data.
 
+## Use cases
+
+These are some examples of the use cases you can build on top of this architecture:
+
+* __Data Lake Consolidation__ : Organizations with multiple data lakes can utilize this architecture to consolidate their data into a centralized Data Warehouse. By scheduling jobs to extract data from various data lake repositories stored in GCS, organizations can transform and load the data into BigQuery for unified analytics.
+
+* __Data Warehousing and Analytics__ : The architecture enables organizations to efficiently load data from Google Cloud Storage (GCS) to BigQuery, providing a powerful data warehousing and analytics solution. With scheduled jobs, organizations can automate the process of data loading, ensuring that the Data Warehouse is continuously refreshed with the latest data.
+
+* __IoT Data Analysis__ : A manufacturing company could  implement the architecture to load sensor data from GCS into BigQuery in real-time. As sensors generate data from various manufacturing processes, the architecture ensures that the data is immediately ingested into BigQuery, allowing the organization to monitor and analyze the data in real-time.
+
+
 :clock1: Estimated deployment time: 2 min
 
 :heavy_dollar_sign: Estimated solution cost: it depends on the volume of data inserted, please estimate it using [Google Cloud Pricing Calculator](https://cloud.google.com/products/calculator)
