@@ -5,7 +5,7 @@
 
 ## Introduction
 
-This architecture uses click-to-deploy to demonstrate how to deploy a CloudSQL instance with high-availability and cross-region replica.
+This architecture uses click-to-deploy to demonstrate how to deploy a Cloud SQL instance with high-availability and cross-region replica.
 
 With data being a vital asset for organizations, the high availability and disaster recovery capabilities offered by Cloud SQL allow businesses to meet stringent data availability and regulatory requirements.
 
