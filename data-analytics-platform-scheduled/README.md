@@ -28,12 +28,6 @@ These are some examples of the use cases you can build on top of this architectu
 
 * __IoT Data Analysis__ : A manufacturing company could  implement the architecture to load sensor data from GCS into BigQuery in real-time. As sensors generate data from various manufacturing processes, the architecture ensures that the data is immediately ingested into BigQuery, allowing the organization to monitor and analyze the data in real-time.
 
-
-:clock1: Estimated deployment time: 2 min
-
-:heavy_dollar_sign: Estimated solution cost: it depends on the volume of data inserted, please estimate it using [Google Cloud Pricing Calculator](https://cloud.google.com/products/calculator)
-
-
 ## Architecture
 
 <p align="center"><img src="architecture.png"></p>
@@ -45,7 +39,13 @@ The main components that we would be setting up are (to learn more about these p
 * [Service accounts:](https://cloud.google.com/iam/docs/service-accounts) : credentials used by Google Cloud services to interact with other Google Cloud components
 * [BigQuery Data Transfer Service](https://cloud.google.com/bigquery/docs/dts-introduction) : automates data movement into BigQuery on a scheduled, managed basis.
 
+## Costs
+
+Pricing Estimates - We have created a sample estimate based on some usage we see from new startups looking to scale. This estimate would give you an idea of how much this deployment would essentially cost per month at this scale and you extend it to the scale you further prefer. Here's the [link](https://cloud.google.com/products/calculator#id=89190782-a6db-4d0b-977e-6fbdbe857a8a).
+
 ## Deploy
+
+:clock1: Estimated deployment time: 2 min
 
 1. Click on Open in Google Cloud Shell button below.
 <a href="https://ssh.cloud.google.com/cloudshell/editor?cloudshell_git_repo=https://github.com/GoogleCloudPlatform/click-to-deploy-solutions&cloudshell_workspace=data-analytics-platform-scheduled" target="_new">
