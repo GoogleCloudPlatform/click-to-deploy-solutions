@@ -14,6 +14,19 @@ Cloud Storage is used to store and serve static assets, such as images, videos, 
 
 In summary, this architecture ensures that your website or application can handle high traffic loads, delivers content quickly to users worldwide, and maintains data integrity and availability.
 
+## Use cases
+
+* __Any kind of Website that requires__ :
+
+    * __Cost Optimization__ : The architecture allows for cost optimization by leveraging Cloud Storage and Compute Engine. Cloud Storage provides a cost-effective solution for storing static content, such as images and CSS files, reducing storage costs. Compute Engine's scalability enables you to adjust resources based on demand, ensuring efficient resource allocation and cost savings during periods of lower traffic.
+
+    * __Multi-Region Deployment__ : For businesses operating globally, the architecture supports multi-region deployment. By deploying instances in multiple regions, you can provide low-latency access to your website for customers around the world. 
+
+    * __High Availability and Reliability__ : With Load Balancing and multiple Compute Engine instances, the architecture ensures high availability and reliability for your website. If any instance becomes unavailable or experiences issues, Load Balancing automatically directs traffic to healthy instances, minimizing disruptions and ensuring continuous availability of your website
+.
+* __For Ecommerce sites__:
+    * With this architecture, you can easily scale your ECommerce website to accommodate high volumes of traffic during peak periods, such as seasonal sales or promotional campaigns. Empowering you to deliver a seamless shopping experience, handle increased traffic, and efficiently manage your website's content and data.
+
 Resources created
 - VPC
 - GCE
