@@ -14,6 +14,16 @@ Real-time event streaming is a powerful solution that allows companies to captur
 
 * To simplify the development and deployment process. The seamless integration of Cloud Run API, Pub/Sub, and BigQuery allows organizations to focus on building event-driven applications and analytics workflows without the need for managing complex infrastructure or custom event processing pipelines. This accelerates time-to-market and reduces operational overhead.
 
+## Use cases
+
+These are some examples of the use cases you can build on top of this architecture:
+
+* __Real-time Personalization and Customer Engagement__ : valuable for organizations focused on providing personalized customer experiences and improving customer engagement. By streaming events directly to BigQuery, organizations can analyze customer interactions, preferences, and behaviors in real time. This data can be used to dynamically personalize content, recommendations, and offers, enhancing the customer journey and driving customer satisfaction.
+
+* __IoT Data Processing and Analytics__ : IoT devices generate a massive volume of events and sensor data in real time. By leveraging the Real-time Event Streaming Architecture, organizations can ingest and process IoT events in real time, enabling them to gain valuable insights and take immediate actions based on the data. For example, in a smart home environment, events from various sensors can be streamed to BigQuery for real-time analysis, allowing homeowners to automate tasks, monitor energy consumption, and enhance security in real time.
+
+* __Real-time Monitoring and Alerting__ : Organizations that need to track and respond to events as they happen can leverage this architecture to receive events in near real-time and perform real-time analytics. By streaming events directly to BigQuery, organizations can monitor key metrics, detect anomalies or patterns, and trigger alerts or notifications based on predefined thresholds. This use case is particularly valuable for applications that require proactive monitoring, such as fraud detection, system health monitoring, or real-time performance tracking.
+
 Overall, real-time event streaming is a powerful tool that can help companies stay ahead of the competition and make better decisions.
 
 
