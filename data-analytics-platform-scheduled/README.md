@@ -35,8 +35,15 @@ These are some examples of the use cases you can build on top of this architectu
 
 
 ## Architecture
-Please find below a reference architecture.
-![architecture](architecture.png)
+
+<p align="center"><img src="architecture.png"></p>
+
+The main components that we would be setting up are (to learn more about these products, click on the hyperlinks)
+
+* [BigQuery](https://cloud.google.com/bigquery) : managed data warehouse solution that offers a powerful scalable SQL engine for analytical workloads
+* [Cloud Storage (GCS) bucket](https://cloud.google.com/storage/) : Cloud Storage is a managed service for storing unstructured data. Store any amount of data and retrieve it as often as you like.
+* [Service accounts:](https://cloud.google.com/iam/docs/service-accounts) : credentials used by Google Cloud services to interact with other Google Cloud components
+* [BigQuery Data Transfer Service](https://cloud.google.com/bigquery/docs/dts-introduction) : automates data movement into BigQuery on a scheduled, managed basis.
 
 ## Deploy
 
