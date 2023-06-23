@@ -14,10 +14,6 @@ The Document AI form processor applies machine learning models to automatically 
 
 In summary , this architecture allows for seamless integration between the Document AI form processor and BigQuery, enabling organizations to automate the extraction of structured data from documents and leverage it for various analytics and decision-making purposes.
 
-:clock1: Estimated deployment time: 10 min
-
-:heavy_dollar_sign: Estimated solution cost: it depends on the volume of data stored, please take a look at [this example](https://cloud.google.com/products/calculator/#id=7e79b4d5-7060-4ab4-a78e-d81dadc8a9fb).
-
 ## Use cases
 These are some examples of the use cases you can build on top of this architecture:
 
@@ -39,7 +35,13 @@ The main components that we would be setting up are (to learn more about these p
 * [Document AI ](https://cloud.google.com/document-ai) : Extract structured data from documents and analyze, search and store this data. 
 * [Cloud Function](https://cloud.google.com/functions) : Run your code in the cloud with no servers or containers to manage with our scalable, pay-as-you-go functions as a service (FaaS) product.
 
+## Costs
+
+Pricing Estimates - We have created a sample estimate based on some usage we see from new startups looking to scale. This estimate would give you an idea of how much this deployment would essentially cost per month at this scale and you extend it to the scale you further prefer. Here's the [link](https://cloud.google.com/products/calculator/#id=7e79b4d5-7060-4ab4-a78e-d81dadc8a9fb).
+
 ## Deploy
+
+:clock1: Estimated deployment time: 10 min
 
 1. Click on Open in Google Cloud Shell button below.
 
