@@ -33,7 +33,7 @@ The main components that we would be setting up are (to learn more about these p
 
 * [VPC](https://cloud.google.com/vpc) : Global virtual network that spans all regions. Single VPC for an entire organization, isolated within projects. Increase IP space with no downtime.
 * Cloud SQL for Postgres instance with [high-availability](https://cloud.google.com/sql/docs/postgres/high-availability) : The purpose of an HA configuration is to reduce downtime when a zone or instance becomes unavailable. 
-* CloudSQL [cross-region read replica](https://cloud.google.com/sql/docs/postgres/intro-to-cloud-sql-disaster-recovery) instance : database disaster recovery (DR) is about providing continuity of processing, specifically when a region fails or becomes unavailable.
+* Cloud SQL [cross-region read replica](https://cloud.google.com/sql/docs/postgres/intro-to-cloud-sql-disaster-recovery) instance : database disaster recovery (DR) is about providing continuity of processing, specifically when a region fails or becomes unavailable.
 
 
 ## Costs
