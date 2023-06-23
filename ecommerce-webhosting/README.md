@@ -27,19 +27,26 @@ In summary, this architecture ensures that your website or application can handl
 * __For Ecommerce sites__:
     * With this architecture, you can easily scale your ECommerce website to accommodate high volumes of traffic during peak periods, such as seasonal sales or promotional campaigns. Empowering you to deliver a seamless shopping experience, handle increased traffic, and efficiently manage your website's content and data.
 
-Resources created
-- VPC
-- GCE
-- Cloud SQL
-- Cloud Storage
+## Architecture 
 
-:clock1: Estimated deployment time: 20 min
+<p align="center"><img src="architecture.png"></p>
 
-:heavy_dollar_sign: Estimated solution cost: [USD 224.42 per month](https://cloud.google.com/products/calculator/#id=c868657d-f5a4-4a09-8da1-a4d6b24b7862)
+The main components that we would be setting up are (to learn more about these products, click on the hyperlinks)
 
-![arquitecture](architecture.png)
+* [Cloud Storage (GCS) bucket](https://cloud.google.com/storage/): For storing extracted data that must undergo some kind of transformation.
+* [VPC](https://cloud.google.com/vpc) : Global virtual network that spans all regions. Single VPC for an entire organization, isolated within projects. Increase IP space with no downtime.
+* [GCE](https://cloud.google.com/compute) : Secure and customizable compute service that lets you create and run virtual machines on Google’s infrastructure.
+* [Load Balancer](https://cloud.google.com/load-balancing?hl=en) : High performance, scalable load balancing on Google Cloud.
+* [Cloud SQL](https://cloud.google.com/sql) : Fully managed relational database service for MySQL, PostgreSQL, and SQL Server with rich extension collections, configuration flags, and developer ecosystems.
+
+
+# Costs
+
+Pricing Estimates - We have created a sample estimate based on some usage we see from new startups looking to scale. This estimate would give you an idea of how much this deployment would essentially cost per month at this scale and you extend it to the scale you further prefer. Here's the [link](https://cloud.google.com/products/calculator/#id=e179591b-2b56-4558-82f6-cefa64168687).
 
 ## Deploy
+
+:clock1: Estimated deployment time: 20 min
 
 1. Click on Open in Google Cloud Shell button below.
 <a href="https://ssh.cloud.google.com/cloudshell/editor?shellonly=true&cloudshell_git_repo=https://github.com/GoogleCloudPlatform/click-to-deploy-solutions&cloudshell_workspace=ecommerce-webhosting" target="_new">
