@@ -26,16 +26,17 @@ These are some examples of the use cases you can build on top of this architectu
 
 Overall, real-time event streaming is a powerful tool that can help companies stay ahead of the competition and make better decisions.
 
-
-Resources created:
-- BigQuery dataset and table
-- Pub/Sub topic and BQ subscription
-- Cloud Run Ingest API
-
 :clock1: Estimated deployment time: 2 min
 
 ## Architecture
-![architecture](architecture.png)
+<p align="center"><img src="architecture.png"></p>
+
+The main components that we would be setting up are (to learn more about these products, click on the hyperlinks)
+
+* [BigQuery](https://cloud.google.com/bigquery): managed data warehouse solution that offers a powerful scalable SQL engine for analytical workloads
+* [Pub/Sub topic](https://cloud.google.com/pubsub/docs/overview) : Pub/Sub is an asynchronous and scalable messaging service that decouples services producing messages from services processing those messages.
+* [BQ subscription](https://cloud.google.com/pubsub/docs/bigquery) : A BigQuery subscription writes messages to an existing BigQuery table as they are received. You're not required to configure a subscriber client separately.
+* [Cloud Run Ingest API](https://cloud.google.com/run) : Build and deploy scalable containerized apps written in any language (including Go, Python, Java, Node.js, .NET, and Ruby) on a fully managed platform. 
 
 ## Deploy
 
