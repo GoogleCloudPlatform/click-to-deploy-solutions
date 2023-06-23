@@ -33,7 +33,7 @@ The main components that we would be setting up are (to learn more about these p
 * [Cloud Storage (GCS) bucket](https://cloud.google.com/storage/): Cloud Storage is a managed service for storing unstructured data. Store any amount of data and retrieve it as often as you like.
 * [BigQuery](https://cloud.google.com/bigquery): managed data warehouse solution that offers a powerful scalable SQL engine for analytical workloads
 * [Service accounts:](https://cloud.google.com/iam/docs/service-accounts) credentials used by Google Cloud services to interact with other Google Cloud components
-* [Cloud Function](https://cloud.google.com/functions): Run your code in the cloud with no servers or containers to manage with our scalable, pay-as-you-go functions as a service (FaaS) product.
+* [Cloud Functions](https://cloud.google.com/functions): Run your code in the cloud with no servers or containers to manage with our scalable, pay-as-you-go functions as a service (FaaS) product.
 * [Looker Studio](https://support.google.com/looker-studio/answer/6283323?hl=en) : Looker Studio is a free tool that turns your data into informative, easy to read, easy to share, and fully customizable dashboards and reports.
 
 ## Costs
