@@ -14,6 +14,15 @@ The combination of auto scaling and security measures makes this architecture id
 
 :clock1: Estimated deployment time: 8 min
 
+## Use cases
+
+These are some examples of the use cases you can build on top of this architecture:
+
+* __E-commerce Websites__ : The architecture is well-suited for e-commerce websites that experience fluctuating traffic patterns. During peak shopping seasons or promotional events, the auto scaling feature of the Managed Instance Group ensures that the web application can handle the increased user load without performance degradation.
+* __Content Management Systems (CMS)__ : Content-heavy websites or applications that rely on a CMS can benefit from this architecture. The auto scaling capability allows the application to handle varying content creation and publishing demands efficiently.
+* __Media and Entertainment Websites__ : Websites or applications that deliver media-rich content, such as streaming platforms, can benefit from this architecture. The auto scaling capability ensures that the platform can handle high traffic volumes during popular events, show releases, or live streaming sessions.
+* __Lift-and-shift  migration__ : The lift-and-shift strategy is a good option for companies that want to migrate monolithic applications to the cloud without making significant changes to the code or architecture. The strategy is simple, cost-effective and minimizes migration risk.
+
 ## Architecture
 ![architecture](architecture.png)
 
