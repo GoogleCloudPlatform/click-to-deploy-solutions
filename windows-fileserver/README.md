@@ -28,7 +28,7 @@ These are some examples of the use cases you can build on top of this architectu
 The main components that we would be setting up are (to learn more about these products, click on the hyperlinks)
 
 * [VPC](https://cloud.google.com/vpc) : Global virtual network that spans all regions. Single VPC for an entire organization, isolated within projects. Increase IP space with no downtime.
-* [GCP](https://cloud.google.com/compute) : Secure and customizable compute service that lets you create and run virtual machines on Google’s infrastructure.
+* [Compute Engine](https://cloud.google.com/compute) : Secure and customizable compute service that lets you create and run virtual machines on Google’s infrastructure.
 * [Persistent Disk](https://cloud.google.com/compute/docs/disks) : Persistent Disk volumes provide high-performance and redundant network storage.
 
 ## Costs
