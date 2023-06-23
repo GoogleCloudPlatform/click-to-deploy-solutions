@@ -26,8 +26,6 @@ These are some examples of the use cases you can build on top of this architectu
 
 Overall, real-time event streaming is a powerful tool that can help companies stay ahead of the competition and make better decisions.
 
-:clock1: Estimated deployment time: 2 min
-
 ## Architecture
 <p align="center"><img src="architecture.png"></p>
 
@@ -38,7 +36,15 @@ The main components that we would be setting up are (to learn more about these p
 * [BQ subscription](https://cloud.google.com/pubsub/docs/bigquery) : A BigQuery subscription writes messages to an existing BigQuery table as they are received. You're not required to configure a subscriber client separately.
 * [Cloud Run Ingest API](https://cloud.google.com/run) : Build and deploy scalable containerized apps written in any language (including Go, Python, Java, Node.js, .NET, and Ruby) on a fully managed platform. 
 
+## Costs
+
+Pricing Estimates - We have created a sample estimate based on some usage we see from new startups looking to scale. This estimate would give you an idea of how much this deployment would essentially cost per month at this scale and you extend it to the scale you further prefer. Here's the [link](https://cloud.google.com/products/calculator/#id=72845cbb-a872-46f2-930d-48280241d364).
+
+Note : The estimated example considers a single event ingestion.
+
 ## Deploy
+
+:clock1: Estimated deployment time: 2 min
 
 1. Click on Open in Google Cloud Shell button below.
 
