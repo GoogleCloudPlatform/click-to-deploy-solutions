@@ -36,6 +36,7 @@ The main components that we would be setting up are (to learn more about these p
 * [Cloud Storage (GCS) bucket](https://cloud.google.com/storage/): for storing extracted data that must undergo some kind of transformation.
 * [BigQuery](https://cloud.google.com/bigquery) : BigQuery is a serverless and cost-effective enterprise data warehouse that works across clouds and scales with your data. Use built-in ML/AI and BI for insights at scale.
 * [Cloud Function](https://cloud.google.com/functions): Run your code in the cloud with no servers or containers to manage with our scalable, pay-as-you-go functions as a service (FaaS) product.
+* [Cloud Vision API](https://cloud.google.com/vision): Use our game-changing fully managed development environment Vertex AI Vision to create your own computer vision applications or derive insights from images and videos with pre-trained APIs,  AutoML, or custom models.
 
 ## Deploy
 
