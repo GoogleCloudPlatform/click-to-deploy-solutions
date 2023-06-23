@@ -24,7 +24,20 @@ These are some examples of the use cases you can build on top of this architectu
 * __Lift-and-shift  migration__ : The lift-and-shift strategy is a good option for companies that want to migrate monolithic applications to the cloud without making significant changes to the code or architecture. The strategy is simple, cost-effective and minimizes migration risk.
 
 ## Architecture
-![architecture](architecture.png)
+
+<p align="center"><img src="architecture.png"></p>
+
+The main components that we would be setting up are (to learn more about these products, click on the hyperlinks)
+
+* [Cloud CDN](https://cloud.google.com/cdn) : Google's content delivery networks—Cloud CDN and Media CDN—scale to bring content closer to a global audience.
+* [Compute Engine MIG](https://cloud.google.com/compute/docs/instance-groups) : An instance group is a collection of virtual machine (VM) instances that you can manage as a single entity.
+* [MemoryStore](https://cloud.google.com/memorystore) : Reduce latency with scalable, secure, and highly available in-memory service for Redis and Memcached.
+* [Cloud SQL](https://cloud.google.com/sql) : Fully managed relational database service for MySQL, PostgreSQL, and SQL Server with rich extension collections, configuration flags, and developer ecosystems.
+* [Cloud NAT](https://cloud.google.com/nat/docs/overview) : Lets certain resources without external IP addresses create outbound connections to the internet.
+* [Cloud Armor](https://cloud.google.com/armor?hl=en) : Help protect your applications and websites against denial of service and web attacks.
+* [Service Account](https://cloud.google.com/iam/docs/service-account-overview) : A service account is a special kind of account typically used by an application or compute workload, such as a Compute Engine instance, rather than a person.
+* [Load Balancer: ](https://cloud.google.com/load-balancing?hl=en) : High performance, scalable load balancing on Google Cloud.
+* [VPC](https://cloud.google.com/vpc) : Global virtual network that spans all regions. Single VPC for an entire organization, isolated within projects. Increase IP space with no downtime.
 
 ## Deploy
 
