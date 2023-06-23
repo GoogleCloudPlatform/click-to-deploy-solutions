@@ -18,6 +18,16 @@ In summary , this architecture allows for seamless integration between the Docum
 
 :heavy_dollar_sign: Estimated solution cost: it depends on the volume of data stored, please take a look at [this example](https://cloud.google.com/products/calculator/#id=7e79b4d5-7060-4ab4-a78e-d81dadc8a9fb).
 
+## Use cases
+These are some examples of the use cases you can build on top of this architecture:
+
+* __Invoice Processing Automation__ : This pipeline can automate the extraction of key data from invoices, such as vendor details, invoice numbers, line item information, and total amounts. Organizations can streamline their accounts payable processes, reduce manual data entry, and improve accuracy in invoice processing.
+
+* __Contract Management and Analysis__ : Organizations can utilize the pipeline to efficiently process and analyze contracts. Document AI can extract critical information from contracts, such as parties involved, key terms and conditions, effective dates, and obligations.
+
+* __Document Classification and Sorting__ : The document processing pipeline can be utilized to classify and sort large volumes of documents automatically. By leveraging Document AI's capabilities, the pipeline can analyze the content of documents, identify patterns, and classify them into specific categories.
+
+
 ## Architecture
 ![architecture](architecture.png)
 
