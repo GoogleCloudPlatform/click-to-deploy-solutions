@@ -1,10 +1,21 @@
 [![banner](../banner.png)](https://cloud.google.com/?utm_source=github&utm_medium=referral&utm_campaign=GCP&utm_content=packages_repository_banner)
 
-# Streaming Data to Analytics
+# Stream events in real-time for data analytics on Google Cloud
 
-## Description
+## Introduction
 
-This example demonstrates how to stream data from your application to BigQuery using Pub/sub.
+This architecture uses click-to-deploy so you can spin up infrastructure in minutes using terraform!
+
+Real-time event streaming is a powerful solution that allows companies to capture and analyze data as it happens, providing immediate insights and opportunities for real-time decision-making. There are several reasons why a company would want to stream real-time events:
+
+* To stay proactive and responsive to rapidly changing conditions. By capturing and analyzing data as it happens, companies can quickly detect and react to critical events, emerging trends, or anomalies, enabling them to make data-driven decisions in near-real time.
+
+* To unlock valuable insights that would otherwise be lost or delayed. Traditional batch processing methods often involve analyzing data after it has been stored, which can lead to a time lag between data collection and analysis. By streaming events in real time, companies can gain immediate visibility into customer behaviors, operational performance, and market dynamics, enabling them to make timely adjustments to strategies, campaigns, and operations.
+
+* To simplify the development and deployment process. The seamless integration of Cloud Run API, Pub/Sub, and BigQuery allows organizations to focus on building event-driven applications and analytics workflows without the need for managing complex infrastructure or custom event processing pipelines. This accelerates time-to-market and reduces operational overhead.
+
+Overall, real-time event streaming is a powerful tool that can help companies stay ahead of the competition and make better decisions.
+
 
 Resources created:
 - BigQuery dataset and table
