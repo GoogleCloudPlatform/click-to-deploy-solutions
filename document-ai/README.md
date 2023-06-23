@@ -29,7 +29,15 @@ These are some examples of the use cases you can build on top of this architectu
 
 
 ## Architecture
-![architecture](architecture.png)
+
+<p align="center"><img src="architecture.png"></p>
+
+The main components that we would be setting up are (to learn more about these products, click on the hyperlinks)
+
+* [Cloud Storage (GCS) bucket](https://cloud.google.com/storage/) : for storing extracted data that must undergo some kind of transformation.
+* [Big Query](https://cloud.google.com/bigquery) : Serverless and cost-effective enterprise data warehouse that works across clouds and scales with your data.
+* [Document AI ](https://cloud.google.com/document-ai) : Extract structured data from documents and analyze, search and store this data. 
+* [Cloud Function](https://cloud.google.com/functions) : Run your code in the cloud with no servers or containers to manage with our scalable, pay-as-you-go functions as a service (FaaS) product.
 
 ## Deploy
 
