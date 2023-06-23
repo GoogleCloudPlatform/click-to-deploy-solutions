@@ -8,7 +8,7 @@ This architecture uses click-to-deploy to load files from your Data Lake on Goog
 
 At the core of this architecture is Google Cloud Storage (GCS), a highly scalable and durable object storage service, serving as the central repository for storing raw or structured data in the Data Lake.
 
-The data loading process is orchestrated through scheduled jobs, which are automated tasks that run at predefined intervals. These jobs are responsible for extracting data from GCS and loading it into BigQuery, a fully managed, serverless data warehouse provided by Google Cloud. BigQuery offers powerful querying and analytics capabilities, enabling organizations to gain valuable insights from their data.
+The data loading process is orchestrated through [scheduled jobs](https://cloud.google.com/bigquery/docs/dts-introduction), which are automated tasks that run at predefined intervals. These jobs are responsible for extracting data from GCS and loading it into BigQuery, a fully managed, serverless data warehouse provided by Google Cloud. BigQuery offers powerful querying and analytics capabilities, enabling organizations to gain valuable insights from their data.
 
 The following are some examples of how this architecture can be used to make processes more efficient and reduce manual labor:
 
