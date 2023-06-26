@@ -1,6 +1,6 @@
 [![banner](../banner.png)](https://cloud.google.com/?utm_source=github&utm_medium=referral&utm_campaign=GCP&utm_content=packages_repository_banner)
 
-# Build a High availability application easily with GKE autopilot
+# Build an auto scaling application easily with GKE autopilot
 
 ## Introduction
 
