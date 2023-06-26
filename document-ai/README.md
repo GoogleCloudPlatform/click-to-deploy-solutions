@@ -1,19 +1,47 @@
 [![banner](../banner.png)](https://cloud.google.com/?utm_source=github&utm_medium=referral&utm_campaign=GCP&utm_content=packages_repository_banner)
 
-# Document AI
+# Extract data from your documents using AI on Google Cloud
 
-This example deploys a solution for extracting data from documents with Document AI.
+## Introduction
 
-The user uploads documents to a bucket, it triggers a function and sends the document to the Document AI API, then save the results into Google Cloud Storage and BigQuery.
+This architecture uses click-to-deploy to create a pipeline for extracting data from documents with Document AI and storing valuable data on Big Query.
 
-:clock1: Estimated deployment time: 10 min
+This architecture is designed to extract data from documents using Google Document AI form processor and combine the power of a scalable data warehouse like Big Query enabling organizations to automate the extraction of structured data from various types of documents, such as forms, invoices, receipts, and more. 
 
-:heavy_dollar_sign: Estimated solution cost: it depends on the volume of data stored, please take a look at [this example](https://cloud.google.com/products/calculator/#id=7e79b4d5-7060-4ab4-a78e-d81dadc8a9fb).
+In this architecture, documents are uploaded to Google Cloud Storage. An event trigger is set up to detect new document uploads, which then triggers a primary Cloud Function which utilizes the Google Document AI form processor, a powerful machine learning-based service, to analyze the documents and extract structured data from them.
+
+The Document AI form processor applies machine learning models to automatically identify form fields, extract their values, and map them to appropriate data types. It leverages advanced techniques such as optical character recognition (OCR), natural language processing, and entity extraction to accurately extract structured data from the documents. The extracted form data is then saved to BigQuery so Organizations can leverage BigQuery's powerful querying capabilities, data visualization tools, and machine learning capabilities to gain insights from the extracted form data. 
+
+In summary , this architecture allows for seamless integration between the Document AI form processor and BigQuery, enabling organizations to automate the extraction of structured data from documents and leverage it for various analytics and decision-making purposes.
+
+## Use cases
+These are some examples of the use cases you can build on top of this architecture:
+
+* __Invoice Processing Automation__ : This pipeline can automate the extraction of key data from invoices, such as vendor details, invoice numbers, line item information, and total amounts. Organizations can streamline their accounts payable processes, reduce manual data entry, and improve accuracy in invoice processing.
+
+* __Contract Management and Analysis__ : Organizations can utilize the pipeline to efficiently process and analyze contracts. Document AI can extract critical information from contracts, such as parties involved, key terms and conditions, effective dates, and obligations.
+
+* __Document Classification and Sorting__ : The document processing pipeline can be utilized to classify and sort large volumes of documents automatically. By leveraging Document AI's capabilities, the pipeline can analyze the content of documents, identify patterns, and classify them into specific categories.
+
 
 ## Architecture
-![architecture](architecture.png)
+
+<p align="center"><img src="architecture.png"></p>
+
+The main components that we would be setting up are (to learn more about these products, click on the hyperlinks)
+
+* [Cloud Storage (GCS) bucket](https://cloud.google.com/storage/) : for storing extracted data that must undergo some kind of transformation.
+* [Big Query](https://cloud.google.com/bigquery) : Serverless and cost-effective enterprise data warehouse that works across clouds and scales with your data.
+* [Document AI ](https://cloud.google.com/document-ai) : Extract structured data from documents and analyze, search and store this data. 
+* [Cloud Function](https://cloud.google.com/functions) : Run your code in the cloud with no servers or containers to manage with our scalable, pay-as-you-go functions as a service (FaaS) product.
+
+## Costs
+
+Pricing Estimates - We have created a sample estimate based on some usage we see from new startups looking to scale. This estimate would give you an idea of how much this deployment would essentially cost per month at this scale and you extend it to the scale you further prefer. Here's the [link](https://cloud.google.com/products/calculator/#id=7e79b4d5-7060-4ab4-a78e-d81dadc8a9fb).
 
 ## Deploy
+
+:clock1: Estimated deployment time: 10 min
 
 1. Click on Open in Google Cloud Shell button below.
 
