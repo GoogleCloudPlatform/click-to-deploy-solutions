@@ -1,7 +1,7 @@
 [![banner](../banner.png)](https://cloud.google.com/?utm_source=github&utm_medium=referral&utm_campaign=GCP&utm_content=packages_repository_banner)
 
 
-# Easily Orchestrate and Manage an ETL Pipeline in Google Cloud 
+# Easily Orchestrate and Manage Data Pipelines in Google Cloud 
 
 ## Introduction
 
