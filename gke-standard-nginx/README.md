@@ -3,7 +3,7 @@
 # Automate the deployment of your Kubernetes applications
 
 ## Introduction
-This architecture uses click-to-deploy so you can spin up an infrastructure in minutes using terraform.
+This architecture uses click-to-deploy so you can spin up a GKE cluster with [NGINX](https://www.nginx.com/) for load balancing.
 
 In the fast-paced world of software development, organizations strive to achieve efficient and automated processes to deliver high-quality applications at a rapid pace. To accomplish this, companies leverage technologies like Google Kubernetes Engine (GKE) for container orchestration, Jenkins to implement CI/CD pipelines, and Prometheus Stack for monitoring.. 
 
