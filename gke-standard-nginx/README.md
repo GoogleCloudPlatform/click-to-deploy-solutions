@@ -1,6 +1,6 @@
 [![banner](../banner.png)](https://cloud.google.com/?utm_source=github&utm_medium=referral&utm_campaign=GCP&utm_content=packages_repository_banner)
 
-# Automate the deployment of your Kubernetes applications
+# Leverage NGINX for Load Balancing in a Kubernetes Architecture
 
 ## Introduction
 This architecture uses click-to-deploy so you can spin up a GKE cluster with [NGINX](https://www.nginx.com/) for load balancing.
