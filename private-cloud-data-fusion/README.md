@@ -48,7 +48,7 @@ sh cloudbuild.sh destroy
 3. get the password for the database in the Secret Manager
 4. The MySQL database preconfigured is called employees
 
-## For Argolis only
+## For organizations with Shielded VMs enforcing policies
 1. Configure the Dataproc nodes to use Shielded VMs
 To do this, after you deployed the pipeline in Data Fusion, click in "Configure" and go to "Compute config"
 Click in "Customize" in the prefered Profile Name
