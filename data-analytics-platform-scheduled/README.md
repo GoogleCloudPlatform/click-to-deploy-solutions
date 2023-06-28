@@ -1,6 +1,6 @@
 [![banner](../banner.png)](https://cloud.google.com/?utm_source=github&utm_medium=referral&utm_campaign=GCP&utm_content=packages_repository_banner)
 
-# Automate transfer of data between Data Lake and Data Warehouse on Google Cloud
+# Automate transfer of data between Data Lake and Data Warehouse on Google Cloud using scheduled Jobs
 
 ## Introduction
 
