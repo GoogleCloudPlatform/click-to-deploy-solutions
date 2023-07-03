@@ -20,13 +20,6 @@ The following click-to-deploy architecture demonstrates how to use Cloud Compose
 - [Load data from Cloud Storage (Data Lake) to BigQuery (Data Warehouse)](./dags/datalake_to_dw.py)
 - [Transform data on BigQuery](./dags/bigquery_transform.py)
 
-Resources created:
-- VPC with firewall rules
-- Cloud Composer v2
-- Cloud SQL for Postgres
-- Cloud Storage Buckets
-- BigQuery datasets and tables
-
 ## Use cases
 
 These are some examples of the use cases you can build on top of this architecture:
