@@ -12,43 +12,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-module "vpc" {
-  count = var.create_vpc ? 1 : 0
-
-  source       = "terraform-google-modules/network/google"
-  version      = "~> 6.0"
-  project_id   = var.project_id
-  network_name = var.network_name
-  routing_mode = "GLOBAL"
-
-  subnets = [
-    {
-      subnet_name           = var.cluster_name
-      subnet_ip             = var.cluster_ip_ranges.nodes
-      subnet_region         = var.region
-      subnet_private_access = true
-    },
-  ]
-
-  secondary_ranges = {
-    "${var.cluster_name}" = [
-      {
-        range_name    = "pods"
-        ip_cidr_range = var.cluster_ip_ranges.pods
-      },
-      {
-        range_name    = "services"
-        ip_cidr_range = var.cluster_ip_ranges.services
-      },
-    ]
-  }
+resource "google_compute_network" "vpc" {
+  count                   = var.create_vpc ? 1 : 0
+  name                    = var.network_name
+  auto_create_subnetworks = false
 }
 
 resource "google_compute_router" "nat_router" {
   count = var.create_vpc ? 1 : 0
-  
+
   name    = "${var.network_name}-nat-router"
-  network = local.network_self_link
+  network = local.network_id
   region  = var.region
 
   bgp {
@@ -68,5 +42,21 @@ resource "google_compute_router_nat" "nat_gateway" {
   log_config {
     enable = true
     filter = "ERRORS_ONLY"
+  }
+}
+
+resource "google_compute_subnetwork" "gke_subnet" {
+  name          = var.cluster_name
+  ip_cidr_range = var.cluster_ip_ranges.nodes
+  region        = var.region
+  network       = local.network_id
+  
+  secondary_ip_range {
+    range_name    = "pods"
+    ip_cidr_range = var.cluster_ip_ranges.pods
+  }
+  secondary_ip_range {
+    range_name    = "services"
+    ip_cidr_range = var.cluster_ip_ranges.services
   }
 }

@@ -20,8 +20,8 @@ locals {
     terraform   = "true"
   })
 
-  network_project   = var.create_vpc ? var.project_id : var.network_project_id
-  network_self_link = var.create_vpc ? module.vpc[0].network_self_link : data.google_compute_network.vpc.self_link
+  network_project = var.create_vpc ? var.project_id : var.network_project_id
+  network_id = var.create_vpc ? google_compute_network.vpc[0].id : data.google_compute_network.vpc.id
 }
 
 variable "project_id" {

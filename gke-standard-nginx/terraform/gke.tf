@@ -78,6 +78,6 @@ module "gke" {
   }
 
   depends_on = [
-    module.vpc
+    google_compute_subnetwork.gke_subnet
   ]
 }
