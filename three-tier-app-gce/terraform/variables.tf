@@ -38,7 +38,6 @@ variable "application_name" {
 variable "network_name" {
   type        = string
   description = "VPC name"
-  default     = "vpc-gce-tests"
 }
 
 variable "project_id" {
@@ -48,11 +47,9 @@ variable "project_id" {
 variable "region" {
   type        = string
   description = "GCP region"
-  default     = "southamerica-east1"
 }
 
 variable "subnet_cidr" {
   type        = string
   description = "Subnet CIDR"
-  default     = "10.0.1.0/24"
 }

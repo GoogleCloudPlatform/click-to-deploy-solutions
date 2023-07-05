@@ -1,13 +1,13 @@
 locals {
-  resource_labels = {
-    terraform = "true"
-    app       = "ingest-api"
-    env       = "sandbox"
-    repo      = "gcp-streaming-data"
-  }
+  resource_labels = merge(var.resource_labels, {
+    deployed_by = "cloudbuild"
+    repo        = "click-to-deploy-solutions"
+    solution    = "streaming-data-to-analytics"
+    terraform = "true" }
+  )
 
   ingest_api_container = "us-central1-docker.pkg.dev/${var.project_id}/docker-repo/gcp-ingest-api:${var.ingest_api_tag}"
-  function_name = "ingest-api"
+  function_name        = "ingest-api"
 }
 
 variable "project_id" {
@@ -18,10 +18,15 @@ variable "project_id" {
 variable "region" {
   type        = string
   description = "GCP region"
-  default     = "us-east1"
 }
 
 variable "ingest_api_tag" {
   description = "Ingest API container tag"
   default     = "latest"
+}
+
+variable "resource_labels" {
+  type        = map(string)
+  description = "Resource labels"
+  default     = {}
 }

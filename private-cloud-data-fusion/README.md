@@ -45,7 +45,7 @@ The main components that we would be setting up are (to learn more about these p
 :clock1: Estimated deployment time: 18 min 49 sec
 
 1. Click on Open in Google Cloud Shell button below.
-<a href="https://ssh.cloud.google.com/cloudshell/editor?cloudshell_git_repo=https://github.com/GoogleCloudPlatform/click-to-deploy-solutions&cloudshell_workspace=private-cloud-data-fusion" target="_new">
+<a href="https://ssh.cloud.google.com/cloudshell/editor?cloudshell_git_repo=https://github.com/GoogleCloudPlatform/click-to-deploy-solutions&cloudshell_workspace=private-cloud-data-fusion&cloudshell_open_in_editor=terraform/terraform.tfvars" target="_new">
     <img alt="Open in Cloud Shell" src="https://gstatic.com/cloudssh/images/open-btn.svg">
 </a>
 
