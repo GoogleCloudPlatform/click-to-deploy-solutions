@@ -19,7 +19,7 @@ locals {
     solution    = "object-localization"
     terraform   = "true"
   })
-  
+
   function_name   = "object-localization"
   bq_table_name   = "object_localization"
   bq_dataset_name = "aiml"

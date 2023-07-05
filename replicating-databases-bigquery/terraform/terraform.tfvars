@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-network_name      = "vpc-replicating-databases"
+network_name = "vpc-replicating-databases"
 
 resource_labels = {
   env = "sandbox"

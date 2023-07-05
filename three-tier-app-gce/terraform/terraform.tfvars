@@ -13,8 +13,8 @@
 # limitations under the License.
 
 network_name = "vpc-gce-tests"
-subnet_cidr = "10.0.1.0/24"
-region = "southamerica-east1"
+subnet_cidr  = "10.0.1.0/24"
+region       = "southamerica-east1"
 resource_labels = {
   env = "sandbox"
 }

@@ -32,14 +32,14 @@ module "composer" {
   use_private_environment          = true
   enable_private_endpoint          = true
 
-  airflow_config_overrides ={
-      secrets-backend = "airflow.providers.google.cloud.secrets.secret_manager.CloudSecretManagerBackend"
+  airflow_config_overrides = {
+    secrets-backend = "airflow.providers.google.cloud.secrets.secret_manager.CloudSecretManagerBackend"
   }
 
   env_variables = {
-    GCS_DATA_LAKE_BUCKET      = google_storage_bucket.data_lake.name
-    GCS_SQL_BACKUP_BUCKET     = google_storage_bucket.sql_backup.name
-    SQL_INSTANCE_NAME         = google_sql_database_instance.instance.name
+    GCS_DATA_LAKE_BUCKET  = google_storage_bucket.data_lake.name
+    GCS_SQL_BACKUP_BUCKET = google_storage_bucket.sql_backup.name
+    SQL_INSTANCE_NAME     = google_sql_database_instance.instance.name
   }
 
   pypi_packages = {

@@ -25,8 +25,8 @@ resource "google_bigquery_dataset" "dataset" {
 }
 
 resource "google_bigquery_table" "default" {
-  dataset_id = google_bigquery_dataset.dataset.dataset_id
-  table_id   = "todo"
+  dataset_id          = google_bigquery_dataset.dataset.dataset_id
+  table_id            = "todo"
   deletion_protection = false # not recommended for PROD
 
   time_partitioning {

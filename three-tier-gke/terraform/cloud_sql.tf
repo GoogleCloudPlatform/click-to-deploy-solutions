@@ -29,7 +29,7 @@ resource "google_sql_database_instance" "cloud_sql" {
     disk_autoresize_limit = 0
     disk_size             = 10
     disk_type             = "PD_SSD"
-    
+
     ip_configuration {
       ipv4_enabled    = false
       private_network = module.vpc.network_self_link
@@ -43,8 +43,8 @@ resource "google_sql_database_instance" "cloud_sql" {
 }
 
 resource "null_resource" "create_db" {
- provisioner "local-exec" {
+  provisioner "local-exec" {
     working_dir = "${path.module}/code/database"
-    command = "/bin/bash load_schema.sh ${var.project_id} ${google_sql_database_instance.cloud_sql.name}"
+    command     = "/bin/bash load_schema.sh ${var.project_id} ${google_sql_database_instance.cloud_sql.name}"
   }
 }

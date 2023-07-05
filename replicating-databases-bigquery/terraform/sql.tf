@@ -14,7 +14,7 @@
 
 locals {
   db_instance_name = "mysql-${random_id.db_name_suffix.hex}"
-  datastream_ips = ["35.199.77.203", "35.198.52.22", "35.198.0.15", "35.247.212.140", "34.95.239.160"]
+  datastream_ips   = ["35.199.77.203", "35.198.52.22", "35.198.0.15", "35.247.212.140", "34.95.239.160"]
 }
 
 resource "random_id" "db_name_suffix" {
@@ -72,8 +72,8 @@ resource "random_password" "db_password" {
 }
 
 resource "google_sql_user" "user" {
-    name     = "user"
-    instance = google_sql_database_instance.cloud_sql.id
-    host     = "%"
-    password = random_password.db_password.result
+  name     = "user"
+  instance = google_sql_database_instance.cloud_sql.id
+  host     = "%"
+  password = random_password.db_password.result
 }
