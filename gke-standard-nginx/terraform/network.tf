@@ -13,6 +13,8 @@
 # limitations under the License.
 
 module "vpc" {
+  count = var.create_vpc ? 1 : 0
+
   source       = "terraform-google-modules/network/google"
   version      = "~> 6.0"
   project_id   = var.project_id
@@ -43,8 +45,10 @@ module "vpc" {
 }
 
 resource "google_compute_router" "nat_router" {
-  name    = "${module.vpc.network_name}-nat-router"
-  network = module.vpc.network_self_link
+  count = var.create_vpc ? 1 : 0
+  
+  name    = "${var.network_name}-nat-router"
+  network = local.network_self_link
   region  = var.region
 
   bgp {
@@ -53,9 +57,11 @@ resource "google_compute_router" "nat_router" {
 }
 
 resource "google_compute_router_nat" "nat_gateway" {
-  name                               = "${module.vpc.network_name}-nat-gw"
-  router                             = google_compute_router.nat_router.name
-  region                             = google_compute_router.nat_router.region
+  count = var.create_vpc ? 1 : 0
+
+  name                               = "${var.network_name}-nat-gw"
+  router                             = google_compute_router.nat_router[0].name
+  region                             = google_compute_router.nat_router[0].region
   nat_ip_allocate_option             = "AUTO_ONLY"
   source_subnetwork_ip_ranges_to_nat = "ALL_SUBNETWORKS_ALL_IP_RANGES"
 
@@ -63,36 +69,4 @@ resource "google_compute_router_nat" "nat_gateway" {
     enable = true
     filter = "ERRORS_ONLY"
   }
-}
-
-
-# Firewall for nginx
-# https://cloud.google.com/kubernetes-engine/docs/how-to/private-clusters#add_firewall_rules
-resource "google_compute_firewall" "nginx_admission" {
-  name        = "${var.cluster_name}-master-to-worker"
-  network     = module.vpc.network_self_link
-  description = "Creates a nginx firewall rule from master to workers"
-
-  allow {
-    protocol = "tcp"
-    ports    = ["80", "443", "8443", "10254"]
-  }
-
-  source_ranges = [var.cluster_ip_ranges.master]
-  target_tags   = [var.cluster_name]
-}
-
-
-resource "google_compute_firewall" "allow_ssh_iap" {
-  name        = "${var.cluster_name}-allow-ssh-iap"
-  network     = module.vpc.network_self_link
-  description = "Allow SSH from IAP to VMs"
-
-  allow {
-    protocol = "tcp"
-    ports    = ["22"]
-  }
-
-  source_ranges = ["35.235.240.0/20"]
-  target_tags   = [var.cluster_name]
 }

@@ -19,6 +19,9 @@ locals {
     solution    = "gke-standard-nginx"
     terraform   = "true"
   })
+
+  network_project   = var.create_vpc ? var.project_id : var.network_project_id
+  network_self_link = var.create_vpc ? module.vpc[0].network_self_link : data.google_compute_network.vpc.self_link
 }
 
 variable "project_id" {
@@ -29,10 +32,22 @@ variable "region" {
   description = "GCP region"
 }
 
+# Network variables 
+variable "create_vpc" {
+  description = "Should terraform create a new VPC or use an existing one?"
+  default     = true
+}
+
 variable "network_name" {
   description = "VPC name"
 }
 
+variable "network_project_id" {
+  description = "VPC project name in case of Shared VPC"
+  default     = ""
+}
+
+# Cluster variables
 variable "cluster_name" {
   description = "GKE cluster name"
 }

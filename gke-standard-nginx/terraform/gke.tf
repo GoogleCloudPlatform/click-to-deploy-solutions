@@ -27,7 +27,8 @@ module "gke" {
   region     = var.region
   name       = var.cluster_name
 
-  network                   = module.vpc.network_name
+  network                   = var.network_name
+  network_project_id        = local.network_project
   subnetwork                = var.cluster_name
   ip_range_pods             = "pods"
   ip_range_services         = "services"
