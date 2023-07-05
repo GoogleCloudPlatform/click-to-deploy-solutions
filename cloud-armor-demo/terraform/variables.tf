@@ -39,7 +39,7 @@ variable "region" {
 }
 
 variable "network_name" {
-  type = string
+  type        = string
   description = "VPC name"
 }
 

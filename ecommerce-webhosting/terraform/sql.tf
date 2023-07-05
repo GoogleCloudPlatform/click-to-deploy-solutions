@@ -27,8 +27,8 @@ resource "google_sql_database_instance" "main_instance" {
   deletion_protection = false # not recommended for PROD
 
   settings {
-    tier              = "db-f1-micro"
-    user_labels       = local.resource_labels
+    tier        = "db-f1-micro"
+    user_labels = local.resource_labels
 
     ip_configuration {
       ipv4_enabled    = true
