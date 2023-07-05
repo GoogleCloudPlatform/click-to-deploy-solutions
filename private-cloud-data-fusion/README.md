@@ -1,6 +1,6 @@
 [![banner](../banner.png)](https://cloud.google.com/?utm_source=github&utm_medium=referral&utm_campaign=GCP&utm_content=packages_repository_banner)
 
-# Unifying Cloud Data Fusion and Private Cloud SQL for a Robust Data Pipeline
+# Integrate Cloud Data Fusion and Private Cloud SQL for a Robust Data Pipeline
 
 ## Introduction
 This example deploys Cloud Data Fusion and Cloud SQL private instances, and establishes communication between them.
