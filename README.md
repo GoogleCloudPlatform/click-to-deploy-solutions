@@ -8,22 +8,29 @@ In the catalog below you will find all solutions ready to deploy, click on it an
 
 ## Catalog
 
-- [Cloud Armor Demo](./cloud-armor-demo/)
-- [Cloud Composer ETL](./cloud-composer-etl/)
-- [CloudSQL with HA and DR](./cloudsql-ha-dr/)
-- [Data Analytics Platform event-driven](./data-analytics-platform-event-driven)
-- [Data Analytics Platform scheduled](./data-analytics-platform-scheduled)
-- [Document AI](./document-ai)
-- [Ecommerce Hosting](./ecommerce-webhosting/)
-- [GKE Autopilot with HPA example](./gke-autopilot-hpa/)
-- [GKE Standard with NGINX](./gke-standard-nginx/)
-- [Object Localization](./object-localization/)
-- [Private Cloud Data Fusion](./private-cloud-data-fusion/)
-- [Replicating Databases to BigQuery](./replicating-databases-bigquery/)
-- [Streaming Data to Analytics](./streaming-data-to-analytics/)
-- [Three Tier Application on GCE](./three-tier-app-gce/)
-- [Three Tier Application on GKE](./three-tier-gke/)
-- [Windows File Server](./windows-fileserver/)
+### AI/ML
+- [Extract data from your documents using AI](./document-ai)
+- [Identify Objects from Images using AI](./object-localization/)
+
+### Compute
+- [Host your Website](./ecommerce-webhosting/)
+- [Build an auto scaling application easily with GKE autopilo](./gke-autopilot-hpa/)
+- [Leverage NGINX for Load Balancing in a Kubernetes Architecture](./gke-standard-nginx/)
+- [Three-Tier Web Application using Managed Instance Groups](./three-tier-app-gce/)
+- [Three-tier web application with Google Kubernetes Engine (GKE)](./three-tier-gke/)
+- [Windows File Server on Google Cloud](./windows-fileserver/)
+
+### Data
+- [Orchestrate and Manage Data Pipelines](./cloud-composer-etl/)
+- [Host a Highly Available SQL database](./cloudsql-ha-dr/)
+- [Implement a data analytics pipeline with an event-driven architecture](./data-analytics-platform-event-driven)
+- [Automate transfer of data between Data Lake and Data Warehouse](./data-analytics-platform-scheduled)
+- [Integrate Cloud Data Fusion and Private Cloud SQL for a Robust Data Pipeline](./private-cloud-data-fusion/)
+- [Replicate your Databases into a Data Warehouse solution for data analysis in Google Cloud](./replicating-databases-bigquery/)
+- [Stream events in real-time for data analytics on Google Cloud](./streaming-data-to-analytics/)
+
+### Security
+- [Protect applications with Cloud Armor](./cloud-armor-demo/)
 
 
 ## Contribute
