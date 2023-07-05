@@ -46,6 +46,8 @@ resource "google_compute_router_nat" "nat_gateway" {
 }
 
 resource "google_compute_subnetwork" "gke_subnet" {
+  count = var.create_vpc ? 1 : 0
+
   name          = var.cluster_name
   ip_cidr_range = var.cluster_ip_ranges.nodes
   region        = var.region

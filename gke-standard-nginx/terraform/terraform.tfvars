@@ -12,17 +12,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+region       = "southamerica-east1"
+cluster_name = "gke-std-sandbox"
+resource_labels = {
+  env = "sandbox"
+}
+
 # Create a new VPC
 create_vpc   = true
 network_name = "vpc-gke-std"
-
-# Use an existing Shared VPC
-# create_vpc         = false
-# network_name       = "syl-vpc-nonprod"
-# network_project_id = "syl-network-359815"
-
-region       = "southamerica-east1"
-cluster_name = "gke-std-sandbox"
 cluster_ip_ranges = {
   pods     = "10.1.0.0/22"
   services = "10.1.4.0/24"
@@ -30,6 +28,8 @@ cluster_ip_ranges = {
   master   = "10.1.6.0/28"
 }
 
-resource_labels = {
-  env = "sandbox"
-}
+# Use an existing Shared VPC and subnet
+# create_vpc         = false
+# network_project_id = "syl-network-359815"
+# network_name       = "syl-vpc-nonprod"
+# subnetwork_name    = "mycluster-subnet"
