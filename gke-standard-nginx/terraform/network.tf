@@ -80,6 +80,24 @@ resource "google_compute_firewall" "nginx_admission" {
   target_tags   = [var.cluster_name]
 }
 
+# resource "google_compute_firewall" "gke_internal" {
+#   project = local.network_project
+
+#   name        = "${var.cluster_name}-internal"
+#   network     = local.network_id
+#   description = "Communication between pods, nodes and services"
+
+#   allow {
+#     protocol = "tcp"
+#   }
+
+#   allow {
+#     protocol = "udp"
+#   }
+
+#   source_ranges = [var.cluster_ip_ranges.pods, var.cluster_ip_ranges.services, var.cluster_ip_ranges.nodes]
+#   target_tags   = [var.cluster_name]
+# }
 
 resource "google_compute_firewall" "allow_ssh_iap" {
   project = local.network_project
@@ -95,30 +113,4 @@ resource "google_compute_firewall" "allow_ssh_iap" {
 
   source_ranges = ["35.235.240.0/20"]
   target_tags   = [var.cluster_name]
-}
-
-# In case of Shared VPC, grant IAM permissions
-
-resource "google_project_iam_member" "gke_network_user" {
-  count = var.create_vpc ? 0 : 1
-
-  project = local.network_project
-  role    = "roles/compute.networkAdmin"
-  member  = "serviceAccount:service-${data.google_project.project.number}@container-engine-robot.iam.gserviceaccount.com"
-}
-
-resource "google_project_iam_member" "gke_host_admin" {
-  count = var.create_vpc ? 0 : 1
-
-  project = local.network_project
-  role    = "roles/container.hostServiceAgentUser"
-  member  = "serviceAccount:service-${data.google_project.project.number}@container-engine-robot.iam.gserviceaccount.com"
-}
-
-resource "google_project_iam_member" "apis_network_user" {
-  count = var.create_vpc ? 0 : 1
-
-  project = local.network_project
-  role    = "roles/compute.networkUser"
-  member  = "serviceAccount:${data.google_project.project.number}@cloudservices.gserviceaccount.com"
 }
