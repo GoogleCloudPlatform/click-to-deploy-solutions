@@ -78,6 +78,9 @@ module "gke" {
   }
 
   depends_on = [
-    google_compute_subnetwork.gke_subnet
+    google_compute_subnetwork.gke_subnet,
+    google_project_iam_member.gke_network_user,
+    google_project_iam_member.gke_host_admin,
+    google_project_iam_member.apis_network_user,
   ]
 }

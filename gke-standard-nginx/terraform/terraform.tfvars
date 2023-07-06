@@ -12,15 +12,18 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Example 1: Create a new VPC
+create_vpc   = true
+network_name = "vpc-gke"
+
+# Example 2: Use existing Shared VPC, please make sure you followed the steps on the README.md page before deploying.
+# create_vpc         = false
+# network_project_id = "network-359815"
+# network_name       = "vpc-nonprod"
+
+# Cluster configuration
 region       = "southamerica-east1"
 cluster_name = "gke-std-sandbox"
-resource_labels = {
-  env = "sandbox"
-}
-
-# Create a new VPC
-create_vpc   = true
-network_name = "vpc-gke-std"
 cluster_ip_ranges = {
   pods     = "10.1.0.0/22"
   services = "10.1.4.0/24"
@@ -28,8 +31,6 @@ cluster_ip_ranges = {
   master   = "10.1.6.0/28"
 }
 
-# Use an existing Shared VPC and subnet
-# create_vpc         = false
-# network_project_id = "syl-network-359815"
-# network_name       = "syl-vpc-nonprod"
-# subnetwork_name    = "mycluster-subnet"
+resource_labels = {
+  env = "sandbox"
+}

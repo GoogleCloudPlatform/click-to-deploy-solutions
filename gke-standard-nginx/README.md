@@ -43,15 +43,21 @@ The main components that we would be setting up are (to learn more about these p
     <img alt="Open in Cloud Shell" src="https://gstatic.com/cloudssh/images/open-btn.svg">
 </a>
 
-2. Run the `cloudbuild.sh` script and follow the instructions
+2. Run the `pre_req.sh` script. It will enable APIs and set proper permissions for the deployment.
 ```
-sh cloudbuild.sh
+sh pre_req.sh
 ```
 
+3. Run the Cloud Build Job
+```
+gcloud builds submit . --config cloudbuild.yaml
+```
+
+For Shared VPC, please check the Shared VPC section below.
 
 ## Testing
 
-In this example, we use an example domain (example.com), so you need to set the NGINX IP it in your `/etc/hosts` file in order to access the appications.
+In this example, we use an example domain (example.com), so you need to set the NGINX IP in your `/etc/hosts` file in order to access the applications.
 
 Go to the [GKE Services](https://console.cloud.google.com/kubernetes/discovery) and copy the external IP assigned to `ingress-nginx-controller`, then add it to your machine's `/etc/hosts` alongside `<app>.example.com`, for example:
 ```
@@ -84,7 +90,16 @@ Save the file and try to access the application http://grafana.example.com, it s
     <img alt="Open in Cloud Shell" src="https://gstatic.com/cloudssh/images/open-btn.svg">
 </a>
 
-2. Run the `cloudbuild.sh` script with `destroy` argument.
+2. Run the Cloud Build Job
 ```
-sh cloudbuild.sh destroy
+gcloud builds submit . --config cloudbuild_destroy.yaml
 ```
+
+## Shared VPC
+If you want to deploy the cluster onto a Shared VPC, please follow the instructions:
+- First, execute deploy steps 1 and 2 only.
+- Next, in your Shared VPC host project:
+    - [Attach the service project](https://console.cloud.google.com/networking/xpn/details). This is the project that hosts the GKE cluster. Make sure you check "Kubernetes Engine access" and select "Share all subnets (project-level permissions)" in the Sharing Mode.
+    - Grant `Owner` role to the Service Project's Cloud Build service account `<SERVICE_PROJECT_NUMBER>@cloudbuild.gserviceaccount.com`. This grant is required so that Cloud Build can create the cluster's subnet, firewall rules, and set permissions.
+- Then, in the terraform.tfvars file, please set `create_vpc = false`, and update the `network_name` and `network_project`.
+- Finally, execute step 3.

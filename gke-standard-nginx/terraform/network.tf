@@ -46,13 +46,14 @@ resource "google_compute_router_nat" "nat_gateway" {
 }
 
 resource "google_compute_subnetwork" "gke_subnet" {
-  count = var.create_vpc ? 1 : 0
+  project = local.network_project
 
-  name          = var.cluster_name
-  ip_cidr_range = var.cluster_ip_ranges.nodes
-  region        = var.region
-  network       = local.network_id
-  
+  name                     = var.cluster_name
+  ip_cidr_range            = var.cluster_ip_ranges.nodes
+  region                   = var.region
+  network                  = local.network_id
+  private_ip_google_access = true
+
   secondary_ip_range {
     range_name    = "pods"
     ip_cidr_range = var.cluster_ip_ranges.pods
@@ -61,4 +62,63 @@ resource "google_compute_subnetwork" "gke_subnet" {
     range_name    = "services"
     ip_cidr_range = var.cluster_ip_ranges.services
   }
+}
+
+resource "google_compute_firewall" "nginx_admission" {
+  project = local.network_project
+
+  name        = "${var.cluster_name}-master-to-worker"
+  network     = local.network_id
+  description = "Creates a nginx firewall rule from master to workers"
+
+  allow {
+    protocol = "tcp"
+    ports    = ["80", "443", "8443", "10254"]
+  }
+
+  source_ranges = [var.cluster_ip_ranges.master]
+  target_tags   = [var.cluster_name]
+}
+
+
+resource "google_compute_firewall" "allow_ssh_iap" {
+  project = local.network_project
+
+  name        = "${var.cluster_name}-allow-ssh-iap"
+  network     = local.network_id
+  description = "Allow SSH from IAP to VMs"
+
+  allow {
+    protocol = "tcp"
+    ports    = ["22"]
+  }
+
+  source_ranges = ["35.235.240.0/20"]
+  target_tags   = [var.cluster_name]
+}
+
+# In case of Shared VPC, grant IAM permissions
+
+resource "google_project_iam_member" "gke_network_user" {
+  count = var.create_vpc ? 0 : 1
+
+  project = local.network_project
+  role    = "roles/compute.networkAdmin"
+  member  = "serviceAccount:service-${data.google_project.project.number}@container-engine-robot.iam.gserviceaccount.com"
+}
+
+resource "google_project_iam_member" "gke_host_admin" {
+  count = var.create_vpc ? 0 : 1
+
+  project = local.network_project
+  role    = "roles/container.hostServiceAgentUser"
+  member  = "serviceAccount:service-${data.google_project.project.number}@container-engine-robot.iam.gserviceaccount.com"
+}
+
+resource "google_project_iam_member" "apis_network_user" {
+  count = var.create_vpc ? 0 : 1
+
+  project = local.network_project
+  role    = "roles/compute.networkUser"
+  member  = "serviceAccount:${data.google_project.project.number}@cloudservices.gserviceaccount.com"
 }
