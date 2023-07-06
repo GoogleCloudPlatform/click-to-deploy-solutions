@@ -80,25 +80,6 @@ resource "google_compute_firewall" "nginx_admission" {
   target_tags   = [var.cluster_name]
 }
 
-# resource "google_compute_firewall" "gke_internal" {
-#   project = local.network_project
-
-#   name        = "${var.cluster_name}-internal"
-#   network     = local.network_id
-#   description = "Communication between pods, nodes and services"
-
-#   allow {
-#     protocol = "tcp"
-#   }
-
-#   allow {
-#     protocol = "udp"
-#   }
-
-#   source_ranges = [var.cluster_ip_ranges.pods, var.cluster_ip_ranges.services, var.cluster_ip_ranges.nodes]
-#   target_tags   = [var.cluster_name]
-# }
-
 resource "google_compute_firewall" "allow_ssh_iap" {
   project = local.network_project
 
