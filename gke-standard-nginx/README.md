@@ -53,7 +53,7 @@ sh pre_req.sh
 gcloud builds submit . --config cloudbuild.yaml
 ```
 
-For Shared VPC, please check the Shared VPC section below.
+For Shared VPC, please check the [Shared VPC section](#shared-vpc) below.
 
 ## Testing
 
@@ -96,7 +96,7 @@ gcloud builds submit . --config cloudbuild_destroy.yaml
 ```
 
 ## Shared VPC
-If you want to deploy the cluster onto a Shared VPC, please follow the instructions:
+If you want to deploy the cluster onto a Shared VPC, please follow the instructions below:
 - First, execute deploy steps 1 and 2 only.
 - Next, in your Shared VPC host project:
     - [Attach the service project](https://console.cloud.google.com/networking/xpn/details). This is the project that hosts the GKE cluster. Make sure you check "Kubernetes Engine access" and select "Share all subnets (project-level permissions)" in the Sharing Mode.
