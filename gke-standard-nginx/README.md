@@ -99,7 +99,7 @@ gcloud builds submit . --config cloudbuild_destroy.yaml
 If you want to deploy the cluster onto a Shared VPC, please follow the instructions below:
 - First, execute deploy steps 1 and 2 only.
 - Next, in your Shared VPC host project:
-    - [Attach the service project](https://console.cloud.google.com/networking/xpn/details). This is the project that hosts the GKE cluster. Make sure you check "Kubernetes Engine access" and select "Share all subnets (project-level permissions)" in the Sharing Mode.
+    - [Attach the service project](https://console.cloud.google.com/networking/xpn/details). This is the project that hosts the GKE cluster. Make sure you checked the "Kubernetes Engine access" box and select "Share all subnets (project-level permissions)" in the Sharing Mode.
     - Grant `Owner` role to the Service Project's Cloud Build service account `<SERVICE_PROJECT_NUMBER>@cloudbuild.gserviceaccount.com`. This grant is required so that Cloud Build can create the cluster's subnet, firewall rules, and set permissions.
 - Then, in the terraform.tfvars file, please set `create_vpc = false`, and update the `network_name` and `network_project`.
 - Finally, execute step 3.
