@@ -59,8 +59,4 @@ resource "google_bigquery_data_transfer_config" "gcs_load" {
     ignore_unknown_values = "true"
     delete_source_files   = "true"
   }
-
-  depends_on = [
-    google_project_iam_member.bq_transfer_iam
-  ]
 }
