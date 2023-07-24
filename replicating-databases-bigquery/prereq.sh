@@ -35,7 +35,7 @@ then
     echo Destroying solution on project $PROJECT_ID
     gcloud builds submit . --config cloudbuild_destroy.yaml
 else
-    echo Deploying solution onto project $PROJECT_ID
+    echo Running prerequisites on project $PROJECT_ID
     BUCKET_NAME=gs://$PROJECT_ID-tf-state
     if gsutil ls $BUCKET_NAME; then
         echo Terraform bucket already created!
@@ -49,13 +49,11 @@ else
         bigquery.googleapis.com \
         cloudresourcemanager.googleapis.com \
         compute.googleapis.com \
-        composer.googleapis.com \
-        container.googleapis.com \
-        secretmanager.googleapis.com \
         servicenetworking.googleapis.com \
         sqladmin.googleapis.com \
         storage.googleapis.com \
-        --project $PROJECT_ID
+        iam.googleapis.com \
+        datastream.googleapis.com
 
     echo Waiting for APIs activation...
     sleep 30

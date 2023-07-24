@@ -14,11 +14,6 @@
 
 set -e
 
-add_iam_member()
-{
-  gcloud projects add-iam-policy-binding $PROJECT_ID --member=$1 --role=$2
-}
-
 if [ -z "$GOOGLE_CLOUD_PROJECT" ]
 then
    echo Project not set!
@@ -32,11 +27,11 @@ fi
 
 if [ "$1" = "destroy" ]
 then
-    echo Destroying solution on project $PROJECT_ID
+    echo Destroying solution on project $GOOGLE_CLOUD_PROJECT
     gcloud builds submit . --config cloudbuild_destroy.yaml
 else
-    echo Deploying solution onto project $PROJECT_ID
-    BUCKET_NAME=gs://$PROJECT_ID-tf-state
+    echo Running prerequisites on project $GOOGLE_CLOUD_PROJECT
+    BUCKET_NAME=gs://$GOOGLE_CLOUD_PROJECT-tf-state
     if gsutil ls $BUCKET_NAME; then
         echo Terraform bucket already created!
     else
@@ -46,27 +41,24 @@ else
 
     echo Enabling required APIs...
     gcloud services enable cloudbuild.googleapis.com \
-        bigquery.googleapis.com \
         cloudresourcemanager.googleapis.com \
         compute.googleapis.com \
-        container.googleapis.com \
-        datafusion.googleapis.com \
-        dataproc.googleapis.com \
-        secretmanager.googleapis.com \
         servicenetworking.googleapis.com \
         sqladmin.googleapis.com \
-        storage.googleapis.com
+        storage.googleapis.com \
+        --project $PROJECT_ID
+
 
     echo Waiting for APIs activation...
-    sleep 30
+    sleep 5
 
     echo "Granting Cloud Build's Service Account IAM roles to deploy the resources..."
-    PROJECT_NUMBER=$(gcloud projects describe $PROJECT_ID --format='value(projectNumber)')
+    PROJECT_NUMBER=$(gcloud projects describe $GOOGLE_CLOUD_PROJECT --format='value(projectNumber)')
     MEMBER=serviceAccount:$PROJECT_NUMBER@cloudbuild.gserviceaccount.com
-    add_iam_member $MEMBER roles/editor
-    add_iam_member $MEMBER roles/iam.securityAdmin
-    add_iam_member $MEMBER roles/compute.networkAdmin
-    add_iam_member $MEMBER roles/secretmanager.secretAccessor
+    gcloud projects add-iam-policy-binding $GOOGLE_CLOUD_PROJECT --member=$MEMBER --role=roles/editor
+    gcloud projects add-iam-policy-binding $GOOGLE_CLOUD_PROJECT --member=$MEMBER --role=roles/iam.securityAdmin
+    gcloud projects add-iam-policy-binding $GOOGLE_CLOUD_PROJECT --member=$MEMBER --role=roles/compute.networkAdmin
+    gcloud projects add-iam-policy-binding $GOOGLE_CLOUD_PROJECT --member=$MEMBER --role=roles/secretmanager.secretAccessor
 
     echo Triggering Cloud Build job...
     gcloud builds submit . --config cloudbuild.yaml

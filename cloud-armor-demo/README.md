@@ -19,13 +19,19 @@ This example deploys a web application called [OWASP Juice Shop](https://owasp.o
     <img alt="Open in Cloud Shell" src="https://gstatic.com/cloudssh/images/open-btn.svg">
 </a>
 
-2. Run the `cloudbuild.sh` script and follow the instructions
+2. Run the prerequisites script to enable APIs and set Cloud Build permissions.
 ```
-sh cloudbuild.sh
+sh prereq.sh
 ```
 
-## Destroy
-Execute the command below on Cloud Shell to destroy the resources.
+3. Run the Cloud Build Job
 ```
-sh cloudbuild.sh destroy
+gcloud builds submit . --config cloudbuild.yaml
+```
+
+
+## Destroy
+Run the command below on Cloud Shell to destroy the resources.
+```
+gcloud builds submit . --config cloudbuild_destroy.yaml
 ```

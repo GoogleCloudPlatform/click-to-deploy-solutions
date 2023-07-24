@@ -45,7 +45,7 @@ Our projects use Terraform to write infrastructure as code, and Cloud Build to r
  * cloudbuild_destroy.yaml: destroy pipeline
  * readme.md: solution documentation
  * architecture.png: architecture diagram that demonstrates the solution
- * cloudbuild.sh: execute pre-reqs and trigger Cloud Build jobs
+ * prereq.sh: execute prerequisites to deploy the solutions, such as permissions and API settings.
 
 ### Label Strategy
 You must to have a variable to define resource labels, and aggregate this variables with the solution's labels with locals.
