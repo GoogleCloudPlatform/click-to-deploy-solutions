@@ -97,6 +97,8 @@ If you recently started to use Eventarc, it may take a few minutes before all ne
 
 It happens because the Eventarc permissions take some time to propagate. First, make sure you ran the `pre-req.sh` script. Then, wait some minutes and trigger the deploy job again.
 
+You can see other issues related to Eventarc [here](https://cloud.google.com/eventarc/docs/issues).
+
 ## Useful links
 - [Form Parsing with Object Detection](https://codelabs.developers.google.com/codelabs/docai-form-parser-v1-python#0)
 - [Use a Object Detection para processar seus formulários escritos à mão de maneira inteligente (Python)](https://codelabs.developers.google.com/codelabs/docai-form-parser-v3-python?hl=pt-br#0) (Portuguese)
