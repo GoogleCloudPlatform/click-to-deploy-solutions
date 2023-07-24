@@ -50,9 +50,14 @@ Pricing Estimates - We have created a sample estimate based on some usage we see
     <img alt="Open in Cloud Shell" src="https://gstatic.com/cloudssh/images/open-btn.svg">
 </a>
 
-2. Run the `cloudbuild.sh` script and follow the instructions
+2. Run the script below to execute the pre-reqs required to deploy the solution.
 ```
-sh cloudbuild.sh
+sh prereq.sh
+```
+
+3. Run the Cloud Build Job
+```
+gcloud builds submit . --config cloudbuild.yaml
 ```
 
 ## Destroy
@@ -61,7 +66,7 @@ sh cloudbuild.sh
     <img alt="Open in Cloud Shell" src="https://gstatic.com/cloudssh/images/open-btn.svg">
 </a>
 
-2. Run the `cloudbuild.sh` script with the `destroy` argument
+2. Run the command below on Cloud Shell to destroy the resources.
 ```
-sh cloudbuild.sh destroy
+gcloud builds submit . --config cloudbuild_destroy.yaml
 ```

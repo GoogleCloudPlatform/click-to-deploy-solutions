@@ -48,9 +48,9 @@ The main components that we would be setting up are (to learn more about these p
     <img alt="Open in Cloud Shell" src="https://gstatic.com/cloudssh/images/open-btn.svg">
 </a>
 
-2. Run the `cloudbuild.sh` script and follow the instructions
+2. Run the script below to execute the pre-reqs required to deploy the solution.
 ```
-sh pre-req.sh
+sh prereq.sh
 ```
 
 3. Run the Cloud Build Job

@@ -49,9 +49,14 @@ The main components that we would be setting up are (to learn more about these p
     <img alt="Open in Cloud Shell" src="https://gstatic.com/cloudssh/images/open-btn.svg">
 </a>
 
-2. Run the `cloudbuild.sh` script and follow the instructions
+2. Run the script below to execute the pre-reqs required to deploy the solution.
 ```
-sh cloudbuild.sh
+sh prereq.sh
+```
+
+3. Run the Cloud Build Job
+```
+gcloud builds submit . --config cloudbuild.yaml
 ```
 
 After you created the resources, you can use the Cloud SQL Proxy VM's internal IP to connect from Cloud Data Fusion to Cloud SQL. Before you can connect to the MySQL instance from the Cloud Data Fusion instance, install the MySQL JDBC driver from the Cloud Data Fusion Hub.
@@ -61,7 +66,7 @@ For more information on how to setup this connection, please refer to [this link
 ## Destroy
 Execute the command below on Cloud Shell to destroy the resources.
 ```
-sh cloudbuild.sh destroy
+gcloud builds submit . --config cloudbuild_destroy.yaml
 ```
 
 ## Useful links

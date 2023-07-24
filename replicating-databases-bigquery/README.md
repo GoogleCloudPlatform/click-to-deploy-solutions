@@ -42,14 +42,20 @@ The main components that we would be setting up are (to learn more about these p
     <img alt="Open in Cloud Shell" src="https://gstatic.com/cloudssh/images/open-btn.svg">
 </a>
 
-2. Run the `deploy.sh` script
+2. Run the script below to execute the pre-reqs required to deploy the solution.
 ```
-sh cloudbuild.sh
+sh prereq.sh
 ```
+
+3. Run the Cloud Build Job
+```
+gcloud builds submit . --config cloudbuild.yaml
+```
+
 ## Destroy
 Execute the command below on Cloud Shell to destroy the resources.
 ```
-sh cloudbuild.sh destroy
+gcloud builds submit . --config cloudbuild_destroy.yaml
 ```
 
 This is not an official Google product.
