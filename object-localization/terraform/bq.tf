@@ -59,5 +59,4 @@ resource "google_bigquery_data_transfer_config" "gcs_load" {
     ignore_unknown_values = "true"
     delete_source_files   = "true"
   }
-
 }
