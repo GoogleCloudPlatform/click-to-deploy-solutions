@@ -63,15 +63,17 @@ If you face problems with the EventArc API? Please check the #known-issues instr
 ## Testing 
 
 Once you deployed the solution successfully, upload an image to the image bucket using either Cloud Console or `gsutil`.
+
+For example, you can download [this image](https://cloud.google.com/static/vision/docs/images/bicycle.jpg), and upload it to GCS using the command below. Note you must to replace the bucket name.
 ```
-gsutil cp my_image.png gs://<YOUR PROJECT NAME>-images
+gsutil cp bicycle.jpg gs://<YOUR PROJECT NAME>-images
 ```
 
 Then, you can check the object localization results into a JSON file in the output bucket:
 
 ![gcs_results](gcs_results.png)
 
-The [BigQuery Transfer Service Job](https://console.cloud.google.com/bigquery/transfers) runs every 15-min, after it ran, you can check results on BigQuery.
+The [BigQuery Transfer Service Job](https://console.cloud.google.com/bigquery/transfers) we create on this example runs every 15-min, and it will upload to BigQuery all image results in the output bucket. After it ran, you can check results on BigQuery.
 
 ![bq_results](bq_results.png)
 

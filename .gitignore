@@ -31,6 +31,8 @@ override.tf.json
 
 # Others
 .DS_Store
+bicycle.jpg
+
 *.pyc
 venv
 __pycache__
