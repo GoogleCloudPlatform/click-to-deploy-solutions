@@ -61,7 +61,7 @@ Pricing Estimates - We have created a sample estimate based on some usage we see
     <img alt="Open in Cloud Shell" src="https://gstatic.com/cloudssh/images/open-btn.svg">
 </a>
 
-2. Run the prerequisite script below to set project permissions and APIs before submitting the Cloud Build deploy job.
+2. Run the prerequisites script to enable APIs and set Cloud Build permissions.
 ```
 sh prereq.sh
 ```
