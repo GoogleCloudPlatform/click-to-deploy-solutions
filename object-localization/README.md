@@ -50,8 +50,15 @@ The main components that we would be setting up are (to learn more about these p
 
 2. Run the `cloudbuild.sh` script and follow the instructions
 ```
-sh cloudbuild.sh
+sh pre-req.sh
 ```
+
+3. Run the Cloud Build Job
+```
+gcloud builds submit . --config cloudbuild.yaml
+```
+
+If you face problems with the EventArc API? Please check the #known-issues instructions.
 
 ## Testing 
 
@@ -68,23 +75,25 @@ The [BigQuery Transfer Service Job](https://console.cloud.google.com/bigquery/tr
 
 ![bq_results](bq_results.png)
 
+Also, feel free to trigger the job anytime by clicking on the `RUN TRANSFER NOW` button.
+
 ## Destroy
 Execute the command below on Cloud Shell to destroy the resources.
 ```
-sh cloudbuild.sh destroy
+gcloud builds submit . --config cloudbuild_destroy.yaml
 ```
 
 ## Known issues
 
-You might face the error below while running it for the first time.
+You might face errors related to Eventarc, for example:
 
 ```
-Step #2 - "tf apply": │ Error: Error creating function: googleapi: Error 400: Cannot create trigger projects/doc-ai-test4/locations/us-central1/triggers/form-parser-868560: Invalid resource state for "": Permission denied while using the Eventarc Service Agent.
+Error: Error creating function: googleapi: Error 400: Validation failed for trigger projects/obj-localization/locations/us-central1/triggers/object-localization-109804: Invalid resource state for "": Permission denied while using the Eventarc Service Agent. If you recently started to use Eventarc, it may take a few minutes before all necessary permissions are propagated to the Service Agent. Otherwise, verify that it has Eventarc Service Agent role.
 
 If you recently started to use Eventarc, it may take a few minutes before all necessary permissions are propagated to the Service Agent. Otherwise, verify that it has Eventarc Service Agent role.
 ```
 
-That happens because the Eventarc permissions take time to propagate. Please wait some minutes and try again.
+It happens because the Eventarc permissions take some time to propagate. Please wait some minutes and trigger the deploy job again.
 
 ## Useful links
 - [Form Parsing with Object Detection](https://codelabs.developers.google.com/codelabs/docai-form-parser-v1-python#0)
