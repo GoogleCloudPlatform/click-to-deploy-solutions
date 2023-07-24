@@ -19,7 +19,7 @@ This example deploys a web application called [OWASP Juice Shop](https://owasp.o
     <img alt="Open in Cloud Shell" src="https://gstatic.com/cloudssh/images/open-btn.svg">
 </a>
 
-2. Run the script below to execute the pre-reqs required to deploy the solution.
+2. Run the prerequisites script to enable APIs and set Cloud Build permissions.
 ```
 sh prereq.sh
 ```
