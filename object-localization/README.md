@@ -95,9 +95,7 @@ Error: Error creating function: googleapi: Error 400: Validation failed for trig
 If you recently started to use Eventarc, it may take a few minutes before all necessary permissions are propagated to the Service Agent. Otherwise, verify that it has Eventarc Service Agent role.
 ```
 
-It happens because the Eventarc permissions take some time to propagate. First, make sure you ran the `pre-req.sh` script. Then, wait some minutes and trigger the deploy job again.
-
-You can see other issues related to Eventarc [here](https://cloud.google.com/eventarc/docs/issues).
+It happens because the Eventarc permissions take some time to propagate. First, make sure you ran the `pre-req.sh` script. Then, wait some minutes and trigger the deploy job again. Please see the [Known issues for Eventarc](https://cloud.google.com/eventarc/docs/issues).
 
 ## Useful links
 - [Form Parsing with Object Detection](https://codelabs.developers.google.com/codelabs/docai-form-parser-v1-python#0)
