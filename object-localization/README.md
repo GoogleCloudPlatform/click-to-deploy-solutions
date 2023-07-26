@@ -38,6 +38,9 @@ The main components that we would be setting up are (to learn more about these p
 * [Cloud Function](https://cloud.google.com/functions): Run your code in the cloud with no servers or containers to manage with our scalable, pay-as-you-go functions as a service (FaaS) product.
 * [Cloud Vision API](https://cloud.google.com/vision): Use our game-changing fully managed development environment Vertex AI Vision to create your own computer vision applications or derive insights from images and videos with pre-trained APIs,  AutoML, or custom models.
 
+## Costs
+Pricing Estimates - We have created a sample estimate based on some usage we see from new startups looking to scale. This estimate would give you an idea of how much this deployment would essentially cost per month at this scale and you extend it to the scale you further prefer. Here's the [link](https://cloud.google.com/products/calculator#id=c6c2f491-a991-44a6-9180-c7e26d6b81ee).
+
 ## Deploy
 
 :clock1: Estimated deployment time: 6 min
