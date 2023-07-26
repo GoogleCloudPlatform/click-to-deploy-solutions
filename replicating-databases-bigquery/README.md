@@ -33,6 +33,9 @@ The main components that we would be setting up are (to learn more about these p
 * [Data Stream](https://cloud.google.com/datastream/docs/overview) : serverless and easy-to-use change data capture (CDC) and replication service. It allows you to synchronize data across heterogeneous databases and applications reliably, and with minimal latency and downtime.
 * [Cloud SQL for MySQL ](https://cloud.google.com/sql): Fully managed relational database service for MySQL, PostgreSQL, and SQL Server with rich extension collections, configuration flags, and developer ecosystems.
 
+## Costs
+Pricing Estimates - We have created a sample estimate based on some usage we see from new startups looking to scale. This estimate would give you an idea of how much this deployment would essentially cost per month at this scale and you extend it to the scale you further prefer. Here's the [link](https://cloud.google.com/products/calculator#id=512b38c3-7fcc-465e-9254-eb356903639e).
+
 ## Deploy
 
 :clock1: Estimated deployment time: 10 min 16 sec
