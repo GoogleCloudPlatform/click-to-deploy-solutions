@@ -33,6 +33,10 @@ The main components that we would be setting up are (to learn more about these p
 * [NAT](https://cloud.google.com/nat/docs/overview) : Provides fully managed, software-defined network address translation support for Google Cloud.
 * [GKE Autopilot](https://cloud.google.com/kubernetes-engine/docs/concepts/autopilot-overview) : GKE Autopilot is a mode of operation in GKE in which Google manages your cluster   configuration, including your nodes, scaling, security, and other preconfigured settings.
 
+## Costs
+
+Due to the nature of GKE autopilot it is difficult to provide a price estimate. For general information about GKE autopilot pricing please see [Appendix]().
+
 ## Deploy
 
 :clock1: Estimated deployment time: 10 min
@@ -75,3 +79,16 @@ Execute the command below on Cloud Shell to destroy the resources.
 ```
 gcloud builds submit . --config cloudbuild_destroy.yaml
 ```
+## Appendix
+
+Autopilot clusters are a cost-effective way to run Kubernetes workloads. You are only billed for the resources that your Pods actually use, so you are not charged for unused capacity. Autopilot also includes an SLA that guarantees availability of your workloads.
+
+Here are the key points in simpler terms:
+
+* Autopilot clusters are billed based on the CPU, memory, and ephemeral storage resources that your Pods use.
+* A flat fee of $0.10/hour is charged for each cluster after the free tier.
+* You are not charged for system Pods, operating system overhead, unallocated space, or unscheduled Pods.
+* All Autopilot resources are charged in 1 second increments, there is no minimum duration.
+* Committed use discounts for Autopilot clusters are available.
+
+For more information visit the [pricing](https://cloud.google.com/kubernetes-engine/pricing#autopilot_mode) page.
