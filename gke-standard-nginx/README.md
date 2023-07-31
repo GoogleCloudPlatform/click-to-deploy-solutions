@@ -35,6 +35,9 @@ The main components that we would be setting up are (to learn more about these p
 * [Jenkins](https://cloud.google.com/kubernetes-engine/docs/archive/jenkins-on-kubernetes-engine) : Jenkins is an open-source automation server that lets you flexibly orchestrate your build, test, and deployment pipelines.
 * [Prometheus Stack](https://cloud.google.com/stackdriver/docs/managed-prometheus) (Prometheus, Grafana, and Alert Manager).
 
+## Costs
+Pricing Estimates - We have created a sample estimate based on some usage we see from new startups looking to scale. This estimate would give you an idea of how much this deployment would essentially cost per month at this scale and you extend it to the scale you further prefer. Here's the [link.](https://cloud.google.com/products/calculator#id=eea97fd1-e561-4e78-9af3-72c263d5fcd9)
+
 ## Deploy
 :clock1: Estimated deployment time: 13 min
 
