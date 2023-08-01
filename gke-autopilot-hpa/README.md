@@ -35,7 +35,7 @@ The main components that we would be setting up are (to learn more about these p
 
 ## Costs
 
-Due to the nature of GKE autopilot it is difficult to provide a price estimate. For general information about GKE autopilot pricing please see [Appendix](https://github.com/GoogleCloudPlatform/click-to-deploy-solutions/blob/bc87c7d377cec5225d36277b626b5a75e11b2ead/gke-autopilot-hpa/README.md#appendix).
+Due to the nature of GKE autopilot it is difficult to provide a price estimate. For general information about GKE autopilot pricing please see [Appendix](https://github.com/GoogleCloudPlatform/click-to-deploy-solutions/tree/main/gke-autopilot-hpa#appendix).
 
 ## Deploy
 
