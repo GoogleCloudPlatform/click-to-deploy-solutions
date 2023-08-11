@@ -42,28 +42,42 @@ resource "google_cloudfunctions2_function" "function" {
   }
 
   service_config {
-    max_instance_count = 3
-    min_instance_count = 0
-    available_memory   = "256M"
-    timeout_seconds    = 60
+    max_instance_count    = 3
+    min_instance_count    = 0
+    available_memory      = "256M"
+    timeout_seconds       = 60
+    service_account_email = google_service_account.function_sa.email
     environment_variables = {
       DW_PROJECT_ID      = var.project_id
       GCS_ARCHIVE_BUCKET = google_storage_bucket.archive_bucket.name
     }
-    service_account_email = google_service_account.function_sa.email
   }
 
   event_trigger {
-    trigger_region = var.region
-    event_type     = "google.cloud.storage.object.v1.finalized"
-    retry_policy   = "RETRY_POLICY_RETRY"
+    trigger_region        = var.region
+    event_type            = "google.cloud.storage.object.v1.finalized"
+    retry_policy          = "RETRY_POLICY_DO_NOT_RETRY"
+    service_account_email = google_service_account.function_sa.email
     event_filters {
       attribute = "bucket"
       value     = google_storage_bucket.upload_bucket.name
     }
   }
+  
   depends_on = [
-    google_project_iam_member.publisher,
+    google_project_iam_member.gcs_to_pubsub,
     google_project_iam_member.event_receiver
   ]
+}
+
+data "google_cloud_run_service" "run_service" {
+  name     = google_cloudfunctions2_function.function.name
+  location = var.region
+}
+
+resource "google_cloud_run_service_iam_member" "run_service_member" {
+  location = data.google_cloud_run_service.run_service.location
+  service  = data.google_cloud_run_service.run_service.name
+  role     = "roles/run.invoker"
+  member   = "allUsers"
 }
