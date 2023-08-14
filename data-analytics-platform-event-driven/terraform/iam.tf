@@ -14,12 +14,6 @@
 
 data "google_project" "project" {}
 
-resource "google_project_iam_member" "publisher" {
-  project = var.project_id
-  role    = "roles/pubsub.publisher"
-  member  = "serviceAccount:service-${data.google_project.project.number}@gs-project-accounts.iam.gserviceaccount.com"
-}
-
 resource "google_service_account" "function_sa" {
   account_id   = local.function_name
   display_name = "Cloud Function service account"
@@ -46,5 +40,19 @@ resource "google_project_iam_member" "iam_user" {
 resource "google_project_iam_member" "event_receiver" {
   project = var.project_id
   role    = "roles/eventarc.eventReceiver"
-  member  = "serviceAccount:${data.google_project.project.number}-compute@developer.gserviceaccount.com"
+  member  = "serviceAccount:${google_service_account.function_sa.email}"
+}
+
+resource "google_project_iam_member" "invoker" {
+  project = var.project_id
+  role    = "roles/run.invoker"
+  member  = "serviceAccount:${google_service_account.function_sa.email}"
+}
+
+data "google_storage_project_service_account" "gcs_account" {}
+
+resource "google_project_iam_member" "gcs_to_pubsub" {
+  project = var.project_id
+  role    = "roles/pubsub.publisher"
+  member  = "serviceAccount:${data.google_storage_project_service_account.gcs_account.email_address}"
 }
