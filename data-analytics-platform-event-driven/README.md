@@ -60,7 +60,7 @@ gcloud builds submit . --config cloudbuild.yaml
 ```
 
 
-Once it is finished, you can go to [Cloud Composer](https://console.cloud.google.com/composer/environments) to see the dags' results and explore the Cloud Composers's functionalities.
+Once it is finished, you can go to the next section to test your architecture.
 
 
 ## Testing
