@@ -62,7 +62,7 @@ sh prereq.sh
 gcloud builds submit . --config cloudbuild.yaml
 ```
 
-## Test your solution
+## Testing
 If you want to run a load test, please follow the instructions below.
 
 1. Set GCP_TOKEN env var
