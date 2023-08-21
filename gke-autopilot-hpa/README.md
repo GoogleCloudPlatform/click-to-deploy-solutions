@@ -56,7 +56,7 @@ sh prereq.sh
 gcloud builds submit . --config cloudbuild.yaml
 ```
 
-## Executing a load test
+## Testing
 Once you deployed the solution, you can run a load test and see the HPA in action.
 
 Go to [Workloads](https://console.cloud.google.com/kubernetes/workload/overview) page and see the `hpa-example` application has one replica.
@@ -79,6 +79,7 @@ Execute the command below on Cloud Shell to destroy the resources.
 ```
 gcloud builds submit . --config cloudbuild_destroy.yaml
 ```
+
 ## Appendix
 
 Autopilot clusters are a cost-effective way to run Kubernetes workloads. You are only billed for the resources that your Pods actually use, so you are not charged for unused capacity. Autopilot also includes an SLA that guarantees availability of your workloads.
