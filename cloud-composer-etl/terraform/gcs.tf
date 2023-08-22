@@ -17,6 +17,7 @@ resource "google_storage_bucket" "sql_backup" {
   location                    = var.region
   uniform_bucket_level_access = true
   force_destroy               = true
+  labels                      = local.resource_labels
 }
 
 resource "google_storage_bucket" "data_lake" {
@@ -24,4 +25,5 @@ resource "google_storage_bucket" "data_lake" {
   location                    = var.region
   uniform_bucket_level_access = true
   force_destroy               = true
+  labels                      = local.resource_labels
 }

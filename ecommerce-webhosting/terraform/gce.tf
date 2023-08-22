@@ -21,22 +21,24 @@ data "template_file" "group1-startup-script" {
 }
 
 module "mig1_template" {
-  source     = "terraform-google-modules/vm/google//modules/instance_template"
-  version    = "~> 7.9"
-  network    = google_compute_network.default.self_link
-  subnetwork = google_compute_subnetwork.group1.self_link
-  service_account = {
-    email  = ""
-    scopes = ["cloud-platform"]
-  }
-  name_prefix          = "${var.network_name}-group1"
+  source  = "terraform-google-modules/vm/google//modules/instance_template"
+  version = "~> 7.9"
+
+  name_prefix          = "${local.application_name}-group1"
+  network              = google_compute_network.default.self_link
+  subnetwork           = google_compute_subnetwork.group1.self_link
+  labels               = local.resource_labels
   startup_script       = data.template_file.group1-startup-script.rendered
-  source_image_family  = "ubuntu-1804-lts"
+  source_image_family  = "ubuntu-2004-lts"
   source_image_project = "ubuntu-os-cloud"
   tags = [
-    "${var.network_name}-group1",
+    "${local.application_name}-group1",
     module.cloud-nat-group1.router_name
   ]
+  service_account = {
+    email  = google_service_account.service_account.email
+    scopes = ["cloud-platform"]
+  }
 }
 
 module "mig1" {
@@ -44,7 +46,7 @@ module "mig1" {
   version           = "~> 7.9"
   instance_template = module.mig1_template.self_link
   region            = var.group1_region
-  hostname          = "${var.network_name}-group1"
+  hostname          = "${local.application_name}-group1"
   target_size       = 2
   named_ports = [{
     name = "http",

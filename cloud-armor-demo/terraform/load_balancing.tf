@@ -20,6 +20,7 @@ module "gce-lb-http" {
   name              = "${local.application_name}-http-lb"
   target_tags       = ["allow-hc"]
   firewall_networks = [module.vpc.network_name]
+  labels            = local.resource_labels
 
   backends = {
     default = {

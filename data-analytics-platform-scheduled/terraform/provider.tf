@@ -20,9 +20,6 @@ terraform {
     google = {
       version = "~> 4.32"
     }
-    google-beta = {
-      version = "~> 4.32"
-    }
   }
 
   provider_meta "google" {
@@ -31,11 +28,6 @@ terraform {
 }
 
 provider "google" {
-  project = var.project_id
-  region  = var.region
-}
-
-provider "google-beta" {
   project = var.project_id
   region  = var.region
 }

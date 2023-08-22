@@ -25,11 +25,11 @@ resource "google_compute_backend_bucket" "assets" {
 }
 
 resource "google_storage_bucket" "assets" {
-  name     = random_id.assets-bucket.hex
-  location = "US"
-
-  // delete bucket and contents on destroy.
-  force_destroy = true
+  name                        = random_id.assets-bucket.hex
+  location                    = "US"
+  uniform_bucket_level_access = true
+  force_destroy               = true
+  labels                      = local.resource_labels
 }
 
 // The image object in Cloud Storage.
@@ -41,9 +41,8 @@ resource "google_storage_bucket_object" "image" {
   bucket       = google_storage_bucket.assets.name
 }
 
-// Make object public readable.
-resource "google_storage_object_acl" "image-acl" {
-  bucket         = google_storage_bucket.assets.name
-  object         = google_storage_bucket_object.image.name
-  predefined_acl = "publicRead"
+resource "google_storage_bucket_iam_member" "public_bucket_iam" {
+  bucket   = google_storage_bucket.assets.name
+  role     = "roles/storage.objectViewer"
+  member   = "allUsers"
 }
