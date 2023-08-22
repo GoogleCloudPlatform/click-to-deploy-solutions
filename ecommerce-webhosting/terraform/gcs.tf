@@ -41,9 +41,8 @@ resource "google_storage_bucket_object" "image" {
   bucket       = google_storage_bucket.assets.name
 }
 
-// Make object public readable.
-resource "google_storage_object_acl" "image-acl" {
-  bucket         = google_storage_bucket.assets.name
-  object         = google_storage_bucket_object.image.name
-  predefined_acl = "publicRead"
+resource "google_storage_bucket_iam_member" "public_bucket_iam" {
+  bucket   = google_storage_bucket.assets.name
+  role     = "roles/storage.objectViewer"
+  member   = "allUsers"
 }
