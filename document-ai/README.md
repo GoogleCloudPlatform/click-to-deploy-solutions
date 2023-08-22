@@ -92,7 +92,8 @@ Step #2 - "tf apply": │ Error: Error creating function: googleapi: Error 400: 
 If you recently started to use Eventarc, it may take a few minutes before all necessary permissions are propagated to the Service Agent. Otherwise, verify that it has Eventarc Service Agent role.
 ```
 
-That happens because the Eventarc permissions take time to propagate. Please wait some minutes and try again.
+It happens because the Eventarc permissions take some time to propagate. First, make sure you ran the `pre-req.sh` script. Then, wait some minutes and trigger the deploy job again. Please see the [Known issues for Eventarc](https://cloud.google.com/eventarc/docs/issues).
+
 
 ## Useful links
 - [Form Parsing with Document AI](https://codelabs.developers.google.com/codelabs/docai-form-parser-v1-python#0)
