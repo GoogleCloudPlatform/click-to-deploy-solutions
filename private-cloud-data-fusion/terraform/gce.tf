@@ -61,7 +61,7 @@ resource "google_compute_instance" "mysql_client" {
 
   boot_disk {
     initialize_params {
-      image = "ubuntu-os-cloud/ubuntu-1804-lts"
+      image = data.google_compute_image.ubuntu.name
     }
   }
 
