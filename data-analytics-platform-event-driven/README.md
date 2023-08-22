@@ -59,6 +59,7 @@ sh prereq.sh
 gcloud builds submit . --config cloudbuild.yaml
 ```
 
+If you face a problem with the EventArc API during the deployment, please check out the [known issues section](#known-issues).
 
 Once it is finished, you can go to the next section to test your architecture.
 

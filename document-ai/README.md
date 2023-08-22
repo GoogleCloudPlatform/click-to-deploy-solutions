@@ -59,6 +59,8 @@ sh prereq.sh
 gcloud builds submit . --config cloudbuild.yaml
 ```
 
+If you face a problem with the EventArc API during the deployment, please check out the [known issues section](#known-issues).
+
 ## Testing 
 
 Once you deployed the solution successfully, upload the `form.pdf` to the input bucket using either Cloud Console or `gsutil`.
