@@ -16,6 +16,7 @@ resource "google_storage_bucket" "gcf_source_bucket" {
   name                        = "${var.project_id}-gcf-source-bucket"
   location                    = var.region
   uniform_bucket_level_access = true
+  labels                      = local.resource_labels
 }
 
 resource "google_storage_bucket_object" "gcf_source_code" {
@@ -28,7 +29,8 @@ resource "google_cloudfunctions2_function" "function" {
   name        = local.function_name
   location    = var.region
   description = "Load data from GCS to BQ"
-
+  labels      = local.resource_labels
+  
   build_config {
     runtime     = "python310"
     entry_point = "trigger_gcs" # Set the entry point in the code
@@ -63,7 +65,7 @@ resource "google_cloudfunctions2_function" "function" {
       value     = google_storage_bucket.upload_bucket.name
     }
   }
-  
+
   depends_on = [
     google_project_iam_member.gcs_to_pubsub,
     google_project_iam_member.event_receiver
