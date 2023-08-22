@@ -27,6 +27,7 @@ module "gce-lb-https" {
   ssl               = true
   private_key       = tls_private_key.example.private_key_pem
   certificate       = tls_self_signed_cert.example.cert_pem
+  labels            = local.resource_labels
 
   backends = {
     default = {

@@ -25,11 +25,11 @@ resource "google_compute_backend_bucket" "assets" {
 }
 
 resource "google_storage_bucket" "assets" {
-  name     = random_id.assets-bucket.hex
-  location = "US"
-
-  // delete bucket and contents on destroy.
-  force_destroy = true
+  name                        = random_id.assets-bucket.hex
+  location                    = "US"
+  uniform_bucket_level_access = true
+  force_destroy               = true
+  labels                      = local.resource_labels
 }
 
 // The image object in Cloud Storage.
