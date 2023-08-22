@@ -38,6 +38,7 @@ echo Enabling required APIs...
 gcloud services enable cloudbuild.googleapis.com \
     cloudresourcemanager.googleapis.com \
     compute.googleapis.com \
+    iam.googleapis.com \
     servicenetworking.googleapis.com \
     sqladmin.googleapis.com \
     storage.googleapis.com \

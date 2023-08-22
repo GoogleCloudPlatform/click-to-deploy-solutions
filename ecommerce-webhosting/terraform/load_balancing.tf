@@ -15,10 +15,11 @@
 module "gce-lb-https" {
   source  = "GoogleCloudPlatform/lb-http/google"
   version = "~> 6.0"
-  name    = var.network_name
+  
+  name    = local.application_name
   project = var.project_id
   target_tags = [
-    "${var.network_name}-group1",
+    "${local.application_name}-group1",
     module.cloud-nat-group1.router_name
   ]
   firewall_networks = [google_compute_network.default.self_link]
@@ -119,7 +120,7 @@ module "gce-lb-https" {
 
 resource "google_compute_url_map" "ml-bkd-ml-mig-bckt-s-lb" {
   // note that this is the name of the load balancer
-  name            = var.network_name
+  name            = local.application_name
   default_service = module.gce-lb-https.backend_services["default"].self_link
 
   host_rule {
