@@ -20,10 +20,6 @@ terraform {
       source  = "hashicorp/google"
       version = "4.59.0"
     }
-    google-beta = {
-      source  = "hashicorp/google-beta"
-      version = "4.59.0"
-    }
   }
   provider_meta "google" {
     module_name = "cloud-solutions/document-ai-v0.1"
@@ -31,11 +27,6 @@ terraform {
 }
 
 provider "google" {
-  project = var.project_id
-  region  = var.region
-}
-
-provider "google-beta" {
   project = var.project_id
   region  = var.region
 }
