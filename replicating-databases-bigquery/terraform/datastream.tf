@@ -16,7 +16,8 @@ resource "google_datastream_connection_profile" "source_connection_profile" {
   display_name          = "Source connection profile"
   location              = var.region
   connection_profile_id = "source-profile"
-
+  labels                = local.resource_labels
+  
   mysql_profile {
     hostname = google_sql_database_instance.cloud_sql.public_ip_address
     username = google_sql_user.user.name
@@ -28,7 +29,7 @@ resource "google_datastream_connection_profile" "destination_connection_profile"
   display_name          = "Destination Connection profile"
   location              = var.region
   connection_profile_id = "destination-profile"
-
+  labels                = local.resource_labels
   bigquery_profile {}
 }
 

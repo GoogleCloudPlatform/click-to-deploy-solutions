@@ -3,7 +3,8 @@ locals {
     deployed_by = "cloudbuild"
     repo        = "click-to-deploy-solutions"
     solution    = "streaming-data-to-analytics"
-    terraform = "true" }
+    terraform   = "true"
+    }
   )
 
   ingest_api_container = "us-central1-docker.pkg.dev/${var.project_id}/docker-repo/gcp-ingest-api:${var.ingest_api_tag}"

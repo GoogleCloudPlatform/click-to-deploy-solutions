@@ -17,4 +17,5 @@ resource "google_storage_bucket" "cdf_output" {
   location                    = var.region
   uniform_bucket_level_access = true
   force_destroy               = true
+  labels                      = local.resource_labels
 }

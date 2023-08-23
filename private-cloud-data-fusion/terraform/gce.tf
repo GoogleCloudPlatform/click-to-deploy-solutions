@@ -16,8 +16,8 @@ resource "google_compute_instance" "cloudsql_proxy" {
   name         = "cloudsql-proxy-${local.sql_instance_name}"
   machine_type = "e2-small"
   zone         = data.google_compute_zones.available.names[0]
-
-  tags = ["allow-ssh"]
+  labels       = local.resource_labels
+  tags         = ["allow-ssh"]
 
   boot_disk {
     initialize_params {
@@ -56,12 +56,12 @@ resource "google_compute_instance" "mysql_client" {
   name         = "mysql-client"
   machine_type = "e2-small"
   zone         = data.google_compute_zones.available.names[0]
-
-  tags = ["allow-ssh"]
+  labels       = local.resource_labels
+  tags         = ["allow-ssh"]
 
   boot_disk {
     initialize_params {
-      image = "ubuntu-os-cloud/ubuntu-1804-lts"
+      image = data.google_compute_image.ubuntu.name
     }
   }
 

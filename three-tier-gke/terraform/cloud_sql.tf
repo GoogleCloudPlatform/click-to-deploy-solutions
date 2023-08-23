@@ -25,6 +25,7 @@ resource "google_sql_database_instance" "cloud_sql" {
   project          = var.project_id
   settings {
     tier                  = "db-g1-small"
+    user_labels           = local.resource_labels
     disk_autoresize       = true
     disk_autoresize_limit = 0
     disk_size             = 10

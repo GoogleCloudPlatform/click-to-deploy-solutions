@@ -18,23 +18,17 @@ resource "google_bigquery_dataset" "dataset" {
   description                 = "Todo Dataset Demo"
   location                    = "US"
   default_table_expiration_ms = 3600000
-
-  labels = {
-    env = "default"
-  }
+  labels                      = local.resource_labels
 }
 
 resource "google_bigquery_table" "default" {
   dataset_id          = google_bigquery_dataset.dataset.dataset_id
   table_id            = "todo"
   deletion_protection = false # not recommended for PROD
+  labels              = local.resource_labels
 
   time_partitioning {
     type = "DAY"
-  }
-
-  labels = {
-    env = "default"
   }
 
   schema = <<EOF
