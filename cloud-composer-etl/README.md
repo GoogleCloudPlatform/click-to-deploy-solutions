@@ -71,8 +71,33 @@ sh prereq.sh
 gcloud builds submit . --config cloudbuild.yaml
 ```
 
+Once it is finished, go ahead to the Testing section.
 
-Once it is finished, you can go to [Cloud Composer](https://console.cloud.google.com/composer/environments) to see the dags' results and explore the Cloud Composers's functionalities.
+## Testing 
+
+After you deployed the solution, you can check the resources created and see how they work together.
+
+First, go to  [Cloud Composer](https://console.cloud.google.com/composer/environments) and click on the `composer-af2` instance. Then, click on `DAGS`.
+
+![dags](assets/dags.png)
+
+You can see all the DAGs running in that instance and the execution history. For example, click on the `postgres_to_datalake`.
+
+In the run view, click on the most recent run. You will see each task executed by this DAG and individual logs per task at the bottom. 
+
+![task](assets/task.png)
+
+In the image above, you can see the execution that happened on `8/24/23, 6:04PM` and its tasks status. For example, the task `extract_table_trips` used a `PostgresToGCSOperator`, which takes data from a Postgres directly to Google Cloud Storage, and it completed successfully in two seconds. If you want to inspect its code, you can click on Code tab.
+
+![task_code](assets/task_code.png)
+
+In the image above, you can see that the `extract_table_trips` task queries the `trips` table in Postgres, then store the results into Google Cloud Storage using the path `citibike/trips/dt={{ ds }}/records.csv`. Airflow has [macros](https://airflow.apache.org/docs/apache-airflow/stable/templates-ref.html) like `{{ ds }}` that replaces it with the execution date, so you can separate the data you extracted each execution.
+
+Finally, you can see the data store into GCS by going to the Data Lake bucket and accessing the path mentioned above.
+
+![gcs](assets/gcs.png)
+
+Next step: do this same analysis with other dags.
 
 
 ## Destroy
