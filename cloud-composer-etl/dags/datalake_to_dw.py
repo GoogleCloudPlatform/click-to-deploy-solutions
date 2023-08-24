@@ -50,22 +50,28 @@ with models.DAG(
         location="US"
     )
 
-    table_list = ["stations", "trips"]
+    load_stations = GCSToBigQueryOperator(
+        task_id='bq_load_stations',
+        bucket=GCS_DATA_LAKE_BUCKET,
+        source_objects=["citibike/stations/dt={{ ds }}/records.csv"],
+        skip_leading_rows=1,
+        destination_project_dataset_table="{}.{}".format(
+            DATASET_NAME, "stations"),
+        autodetect=True,
+        write_disposition='WRITE_TRUNCATE',
+    )
 
-    def load_table(table):
-        object_name = "citibike/" + table + "/dt={{ ds }}/records.csv"
-
-        return GCSToBigQueryOperator(
-            task_id='bq_load_{}'.format(table),
-            bucket=GCS_DATA_LAKE_BUCKET,
-            source_objects=[object_name],
-            skip_leading_rows=1,
-            destination_project_dataset_table="{}.{}".format(DATASET_NAME, table),
-            autodetect=True,
-            write_disposition='WRITE_TRUNCATE',
-        )
-
-    for t in table_list:
-        create_dataset >> load_table(t)
+    load_trips = GCSToBigQueryOperator(
+        task_id='bq_load_trips',
+        bucket=GCS_DATA_LAKE_BUCKET,
+        source_objects=["citibike/trips/dt={{ ds }}/records.csv"],
+        skip_leading_rows=1,
+        destination_project_dataset_table="{}.{}".format(
+            DATASET_NAME, "trips"),
+        autodetect=True,
+        write_disposition='WRITE_TRUNCATE',
+    )
 
 trigger_datalake_dag >> create_dataset
+create_dataset >> load_stations
+create_dataset >> load_trips

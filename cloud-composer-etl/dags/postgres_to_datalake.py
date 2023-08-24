@@ -36,25 +36,26 @@ with models.DAG(
     tags=['cloudsql', 'postgres', 'gcs'],
 ) as dag:
 
-    table_list = ["stations", "trips"]
+    task_stations = PostgresToGCSOperator(
+        task_id="extract_table_stations",
+        postgres_conn_id=CONN_ID,
+        sql="select * from stations;",
+        bucket=GCS_DATA_LAKE_BUCKET,
+        filename="citibike/stations/dt={{ ds }}/records.csv",
+        export_format='csv',
+        gzip=False,
+        use_server_side_cursor=True,
+    )
 
-    def extract_table(table: string):
-        object_name = "citibike/" + table + "/dt={{ ds }}/records.csv"
+    task_trips = PostgresToGCSOperator(
+        task_id="extract_table_trips",
+        postgres_conn_id=CONN_ID,
+        sql="select * from trips;",
+        bucket=GCS_DATA_LAKE_BUCKET,
+        filename="citibike/trips/dt={{ ds }}/records.csv",
+        export_format='csv',
+        gzip=False,
+        use_server_side_cursor=True,
+    )
 
-        return PostgresToGCSOperator(
-            task_id="extract_table_{}".format(table),
-            postgres_conn_id=CONN_ID,
-            sql="select * from {};".format(table),
-            bucket=GCS_DATA_LAKE_BUCKET,
-            filename=object_name,
-            export_format='csv',
-            gzip=False,
-            use_server_side_cursor=True,
-        )
-
-    task_root = DummyOperator(
-        task_id='group_tasks',
-        dag=dag)
-
-    for t in table_list:
-        task_root >> extract_table(t)
+task_stations >> task_trips
