@@ -25,7 +25,7 @@ module "gce-lb-https" {
   firewall_networks = [google_compute_network.default.self_link]
   url_map           = google_compute_url_map.ml-bkd-ml-mig-bckt-s-lb.self_link
   create_url_map    = false
-  ssl               = true
+  ssl               = false
   private_key       = tls_private_key.example.private_key_pem
   certificate       = tls_self_signed_cert.example.cert_pem
   labels            = local.resource_labels

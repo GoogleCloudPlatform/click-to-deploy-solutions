@@ -12,32 +12,39 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-resource "random_id" "assets-bucket" {
-  prefix      = "ecommerce-"
-  byte_length = 2
-}
-
 resource "google_compute_backend_bucket" "assets" {
-  name        = random_id.assets-bucket.hex
+  name        = "ecommerce-${var.project_id}"
   description = "Contains static resources for example app"
   bucket_name = google_storage_bucket.assets.name
   enable_cdn  = true
 }
 
 resource "google_storage_bucket" "assets" {
-  name                        = random_id.assets-bucket.hex
+  name                        = "ecommerce-${var.project_id}"
   location                    = "US"
   uniform_bucket_level_access = true
   force_destroy               = true
   labels                      = local.resource_labels
 }
 
-// The image object in Cloud Storage.
-// Note that the path in the bucket matches the paths in the url map path rule above.
-resource "google_storage_bucket_object" "image" {
-  name         = "assets/gcp-logo.svg"
-  content      = file(format("%s./code/gcp-logo.svg", path.module))
-  content_type = "image/svg+xml"
+resource "google_storage_bucket_object" "style" {
+  name         = "assets/css/style.css"
+  content      = file(format("%s./code/style.css", path.module))
+  content_type = "text/css"
+  bucket       = google_storage_bucket.assets.name
+}
+
+resource "google_storage_bucket_object" "style_prefix" {
+  name         = "assets/css/style-prefix.css"
+  content      = file(format("%s./code/style-prefix.css", path.module))
+  content_type = "text/css"
+  bucket       = google_storage_bucket.assets.name
+}
+
+resource "google_storage_bucket_object" "script" {
+  name         = "assets/js/script.js"
+  content      = file(format("%s./code/script.js", path.module))
+  content_type = "text/javascript"
   bucket       = google_storage_bucket.assets.name
 }
 

@@ -4,7 +4,7 @@
 
 ## Introduction
 
-This architecture uses click-to-deploy so you can spin up a configuration example of an Ecommerce Web Hosting.
+This architecture uses click-to-deploy so you can spin up a configuration example of an [Ecommerce Web Hosting template](https://github.com/codewithsadee/anon-ecommerce-website).
 
 This architecture creates a scalable, reliable, and consistent hosting environment. It enables automatic scaling of compute resources, efficient content delivery, robust storage and serving of static assets, and a managed database service for data persistence.
 
@@ -62,6 +62,22 @@ sh prereq.sh
 ```
 gcloud builds submit . --config cloudbuild.yaml
 ```
+
+## Testing 
+
+After you deployed the solution, you can check the resources created and see how they work together.
+
+First, go to  [Cloud LoadBalancing](https://console.cloud.google.com/net-services/loadbalancing/list/loadBalancers) and click on the created Load Balancer.
+
+![loadbalancer](assets/loadbalancer.png)
+
+You can see all the details of the Load Balancer, and you can copy the Frontend IP section to access the application.
+
+![details](assets/details.png)
+
+Finally, if you paste the ip and enter in your browser, you see the template
+
+![template](assets/template.png)
 
 ## Destroy
 Execute the command below on Cloud Shell to destroy the resources.
