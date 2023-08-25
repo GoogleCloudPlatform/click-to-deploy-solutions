@@ -71,7 +71,7 @@ First, go to  [Cloud LoadBalancing](https://console.cloud.google.com/net-service
 
 ![loadbalancer](assets/loadbalancer.png)
 
-You can see all the details of your Load Balancer, we will use our ip in Frontend section to access our teamplate.
+You can see all the details of the Load Balancer, and you can copy the Frontend IP section to access the application.
 
 ![details](assets/details.png)
 
