@@ -13,14 +13,14 @@
 # limitations under the License.
 
 resource "google_compute_backend_bucket" "assets" {
-  name        = "ecommerce-${var.var.project_id}"
+  name        = "ecommerce-${var.project_id}"
   description = "Contains static resources for example app"
   bucket_name = google_storage_bucket.assets.name
   enable_cdn  = true
 }
 
 resource "google_storage_bucket" "assets" {
-  name                        = "ecommerce-${var.var.project_id}"
+  name                        = "ecommerce-${var.project_id}"
   location                    = "US"
   uniform_bucket_level_access = true
   force_destroy               = true
@@ -47,13 +47,6 @@ resource "google_storage_bucket_object" "script" {
   content_type = "text/javascript"
   bucket       = google_storage_bucket.assets.name
 }
-
-resource "google_storage_bucket_object" "images_folder" {
-  name         = "assets/images/"
-  content      = " "
-  bucket       = google_storage_bucket.assets.name
-}
-
 
 resource "google_storage_bucket_iam_member" "public_bucket_iam" {
   bucket   = google_storage_bucket.assets.name
