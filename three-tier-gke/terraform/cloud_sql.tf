@@ -42,10 +42,3 @@ resource "google_sql_database_instance" "cloud_sql" {
     google_project_service.api
   ]
 }
-
-resource "null_resource" "create_db" {
-  provisioner "local-exec" {
-    working_dir = "${path.module}/code/database"
-    command     = "/bin/bash load_schema.sh ${var.project_id} ${google_sql_database_instance.cloud_sql.name}"
-  }
-}

@@ -13,6 +13,14 @@
 # limitations under the License.
 
 steps:
+- id: k8s delete todo-backend-example
+  name: 'gcr.io/cloud-builders/kubectl'
+  args: ['delete', '-f', 'todo-backend-example.yaml', '-n', 'back-end']
+  dir: k8s
+- id: k8s delete todo-front-example
+  name: 'gcr.io/cloud-builders/kubectl'
+  args: ['delete', '-f', 'todo-front-example.yaml', '-n', 'front-end']
+  dir: k8s
 - id: 'tf init'
   name: 'hashicorp/terraform:1.0.0'
   entrypoint: 'sh'
@@ -36,6 +44,8 @@ options:
   env:
     - TF_VAR_project_id=$PROJECT_ID
     - TF_VAR_project_number=$PROJECT_NUMBER
+    - 'CLOUDSDK_COMPUTE_REGION=us-central1'
+    - 'CLOUDSDK_CONTAINER_CLUSTER=gke-autopilot-treetier'
 
 tags:
   - terraform

@@ -31,17 +31,49 @@ steps:
   dir: terraform
 
 - id: 'tf apply'
-  name: 'fellipemedeiros/terraformgcloud:latest'
+  name: 'hashicorp/terraform:1.0.0'
   args: 
   - apply
   - -auto-approve
   dir: terraform
 
+- id: 'upload data'
+  name: 'gcr.io/cloud-builders/gcloud-slim'
+  entrypoint: 'sh'
+  args: 
+  - '-c'
+  - |
+    export DATABASE_INSTANCE=$(gcloud sql instances list --format='value(name)' --filter='labels.solution:three-tier-gke')
+    export SERVICE_ACCOUNT=$(gcloud sql instances describe $$DATABASE_INSTANCE --format='value(serviceAccountEmailAddress)')
+    gsutil mb gs://$PROJECT_ID-sqldata
+    gsutil cp schema.sql gs://$PROJECT_ID-sqldata
+    gsutil iam ch serviceAccount:$$SERVICE_ACCOUNT:objectAdmin gs://$PROJECT_ID-sqldata
+    gcloud sql import sql $$DATABASE_INSTANCE gs://$PROJECT_ID-sqldata/schema.sql -q
+    gsutil rm gs://$PROJECT_ID-sqldata/schema.sql
+    gsutil rb gs://$PROJECT_ID-sqldata
+  dir: sql
+
+- id: k8s create namespaces
+  name: 'gcr.io/cloud-builders/kubectl'
+  args: ['apply', '-f', 'namespaces.yaml']
+  dir: k8s
+
+- id: k8s deploy todo-backend-example
+  name: 'gcr.io/cloud-builders/kubectl'
+  args: ['apply', '-f', 'todo-backend-example.yaml', '-n', 'back-end']
+  dir: k8s
+
+- id: k8s deploy todo-front-example
+  name: 'gcr.io/cloud-builders/kubectl'
+  args: ['apply', '-f', 'todo-front-example.yaml', '-n', 'front-end']
+  dir: k8s
 
 options:
   env:
     - TF_VAR_project_id=$PROJECT_ID
     - TF_VAR_project_number=$PROJECT_NUMBER
+    - 'CLOUDSDK_COMPUTE_REGION=us-central1'
+    - 'CLOUDSDK_CONTAINER_CLUSTER=gke-autopilot-treetier'
 
 tags:
   - terraform

@@ -62,14 +62,3 @@ resource "google_container_cluster" "primary" {
     //google_sql_database_instance.cloud_sql
   ]
 }
-
-resource "null_resource" "create_namespace" {
-  provisioner "local-exec" {
-    working_dir = "${path.module}/code/yaml"
-    command     = "gcloud builds submit ."
-  }
-
-  depends_on = [
-    google_container_cluster.primary
-  ]
-}

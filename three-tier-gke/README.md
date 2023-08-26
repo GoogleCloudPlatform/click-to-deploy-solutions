@@ -56,6 +56,30 @@ sh prereq.sh
 gcloud builds submit . --config cloudbuild.yaml
 ```
 
+## Testing 
+
+After you deployed the solution, you can check the resources created and see how they work together.
+
+First, go to [Google Kubernetes Engine](https://console.cloud.google.com/kubernetes) and click on the created Cluster.
+
+![GKE](assets/gke.png)
+
+You can see all the details of you applications in Worloads menu
+
+![Workloads](assets/workloads.png)
+
+Lastly,go to [Cloud LoadBalancing](https://console.cloud.google.com/net-services/loadbalancing/list/loadBalancers) and click on the frontend Load Balancer
+
+![loadbalancer](assets/loadbalancer.png)
+
+You can see all the details of the Load Balancer, and you can copy the Frontend IP section to access the application.
+
+![details](assets/details.png)
+
+Finally, if you paste the ip and enter in your browser, you see the example application
+
+![template](assets/application.png)
+
 ## Destroy
 Execute the command below on Cloud Shell to destroy the resources.
 ```
