@@ -59,6 +59,17 @@ sh prereq.sh
 gcloud builds submit . --config cloudbuild.yaml
 ```
 
+## Testing
+
+1. Test the Cloud SQL instance high availability by initiating a failover, causing the instance fails over and unavailable to serve data for a few minutes.
+```
+gcloud sql instances failover INSTANCE_NAME
+```
+2. Verify that the Cloud SQL instance has high availability configuration.
+```
+gcloud sql instances describe INSTANCE_NAME
+```
+The output should indicate availabilityType as REGIONAL. The gceZone and secondaryGceZone fields should show the current primary and secondary zones of the instance
 
 ## Destroy
 
