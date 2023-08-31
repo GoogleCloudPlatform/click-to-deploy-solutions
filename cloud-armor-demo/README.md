@@ -28,7 +28,52 @@ sh prereq.sh
 ```
 gcloud builds submit . --config cloudbuild.yaml
 ```
+## Testing
 
+1. Verify that the Juice Shop Application is running
+```
+PUBLIC_SVC_IP="$(gcloud compute forwarding-rules describe juice-shop-http-lb  --global --format="value(IPAddress)")"
+```
+```
+echo $PUBLIC_SVC_IP
+```
+Paste the output IP Address into your url bar to see the application
+
+2. Verify that the Cloud Armor policies are blocking malicious attacks
+
+LFI vulnerability
+
+```
+curl -Ii http://$PUBLIC_SVC_IP/?a=../
+```
+
+RCE Attack
+
+```
+curl -Ii http://$PUBLIC_SVC_IP/ftp?doc=/bin/ls
+```
+
+Well-known scanner detection
+```
+curl -Ii http://$PUBLIC_SVC_IP -H "User-Agent: blackwidow"
+```
+
+Protocol attack mitigation
+```
+curl -Ii "http://$PUBLIC_SVC_IP/index.html?foo=advanced%0d%0aContent-Length:%200%0d%0a%0d%0aHTTP/1.1%20200%20OK%0d%0aContent-Type:%20text/html%0d%0aContent-Length:%2035%0d%0a%0d%0a<html>Sorry,%20System%20Down</html>"
+```
+
+Session fixation attempt
+```
+curl -Ii http://$PUBLIC_SVC_IP/?session_id=a
+```
+3. All the above commands should return
+```
+HTTP/1.1 403 Forbidden
+<..>
+```
+
+4. You can view the logs in Cloud Armor policies to verify these.
 
 ## Destroy
 Run the command below on Cloud Shell to destroy the resources.
