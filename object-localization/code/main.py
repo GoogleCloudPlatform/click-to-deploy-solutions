@@ -4,7 +4,7 @@ import os
 import json
 
 
-def localize_objects(uri):
+def detect_objects_uri(uri):
     """Localize objects in the image on Google Cloud Storage
 
     Args:
@@ -23,7 +23,7 @@ def localize_objects(uri):
     return objects
 
 
-def save_results(object_name, objects):
+def save_results(object_name, vision_results):
     """
     Parse objects detected to json and save it into the GCS bucket set on GCS_OUTPUT
     """
@@ -33,11 +33,8 @@ def save_results(object_name, objects):
     destination_bucket = storage_client.bucket(bucket_name)
 
     print("Saving results...")
-    results_json = {
-        "file_name": object_name,
-        "objects": objects
-    }
-    results_json = json.dumps(results_json)
+    print(vision_results)
+    results_json = json.dumps(vision_results)
     results_json_name = "{}.json".format(object_name)
     results_json_blob = destination_bucket.blob(results_json_name)
     results_json_blob.upload_from_string(results_json)
@@ -66,7 +63,97 @@ def trigger_gcs(cloud_event):
     print(f"Updated: {updated}")
 
     uri = "gs://{}/{}".format(bucket, name)
-    objects = localize_objects(uri)
-    save_results(name, objects)
+    vision_results = {
+        "object_name": name,
+        "objects": detect_objects_uri(uri),
+        "labels": detect_labels_uri(uri),
+        "logos": detect_logos_uri(uri),
+        "safe_search": detect_safe_search_uri(uri)
+    }
 
+    save_results(name, vision_results)
     print("Object localization completed sucessfully")
+
+
+def detect_labels_uri(uri):
+    """Provides a quick start example for Cloud Vision."""
+
+    # Instantiates a client
+    client = vision.ImageAnnotatorClient()
+
+    image = vision.Image()
+    image.source.image_uri = uri
+
+    # Performs label detection on the image file
+    response = client.label_detection(image=image)
+    labels = response.label_annotations
+
+    label_results = []
+    for label in labels:
+        label_results.append(
+            {"label": label.description, "score": label.score})
+    return label_results
+
+
+def detect_logos_uri(uri):
+    """Detects logos in the file located in Google Cloud Storage or on the Web."""
+    from google.cloud import vision
+
+    client = vision.ImageAnnotatorClient()
+    image = vision.Image()
+    image.source.image_uri = uri
+
+    response = client.logo_detection(image=image)
+    logos = response.logo_annotations
+
+    logo_results = []
+    for logo in logos:
+        logo_results.append({"label": logo.description, "score": logo.score})
+
+    if response.error.message:
+        raise Exception(
+            "{}\nFor more info on error messages, check: "
+            "https://cloud.google.com/apis/design/errors".format(
+                response.error.message)
+        )
+    return logo_results
+
+
+def detect_safe_search_uri(uri):
+    """Detects unsafe features in the file located in Google Cloud Storage or
+    on the Web."""
+    from google.cloud import vision
+
+    client = vision.ImageAnnotatorClient()
+    image = vision.Image()
+    image.source.image_uri = uri
+
+    response = client.safe_search_detection(image=image)
+    safe = response.safe_search_annotation
+
+    # Names of likelihood from google.cloud.vision.enums
+    likelihood_name = (
+        "UNKNOWN",
+        "VERY_UNLIKELY",
+        "UNLIKELY",
+        "POSSIBLE",
+        "LIKELY",
+        "VERY_LIKELY",
+    )
+
+    if response.error.message:
+        raise Exception(
+            "{}\nFor more info on error messages, check: "
+            "https://cloud.google.com/apis/design/errors".format(
+                response.error.message)
+        )
+
+    safe_search = {
+        "adult": likelihood_name[safe.adult],
+        "medical": likelihood_name[safe.medical],
+        "spoofed": likelihood_name[safe.spoof],
+        "violence": likelihood_name[safe.violence],
+        "racy": likelihood_name[safe.racy]
+    }
+
+    return safe_search
