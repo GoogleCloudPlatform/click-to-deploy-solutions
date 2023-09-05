@@ -4,7 +4,7 @@
 
 ## Introduction
 
-This architecture uses click-to-deploy so you can spin up a solution for detecting objects on images with Cloud Vision API
+This architecture uses click-to-deploy so you can spin up a solution for detecting objects, labels, logos and perform safe search on images with Cloud Vision API
 
 This architecture harnesses the power of Google Cloud Vision API to detect and extract objects from images with precise object localization. This architecture provides a robust and efficient solution for applications that require accurate object recognition and extraction capabilities.
 

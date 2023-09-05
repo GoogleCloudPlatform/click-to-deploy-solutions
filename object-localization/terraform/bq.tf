@@ -21,19 +21,34 @@ resource "google_bigquery_dataset" "aiml_dataset" {
 resource "google_bigquery_table" "object_localization" {
   dataset_id          = google_bigquery_dataset.aiml_dataset.dataset_id
   table_id            = local.bq_table_name
-  description         = "Store object localization results"
+  description         = "Store Cloud Vision API results"
   deletion_protection = false
   labels              = local.resource_labels
 
   schema = <<EOF
 [
   {
-    "name": "file_name",
+    "name": "object_name",
     "type": "STRING",
     "mode": "NULLABLE"
   },
   {
     "name": "objects",
+    "type": "JSON",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "labels",
+    "type": "JSON",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "logos",
+    "type": "JSON",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "safe_search",
     "type": "JSON",
     "mode": "NULLABLE"
   }
