@@ -73,9 +73,7 @@ The main components that we would be setting up are:
 
 ## Costs 
 
-Due to the nature of GKE autopilot it is difficult to provide a price estimate.
-For general information about GKE autopilot pricing please see
-[Appendix][5].
+GKE Autopilot is charged by resources allocated for each pod - vCPU, Memory and Storage. So, if you want to estimate GKE Autopilot costs, please check how many resources your workloads need and check the resources' pricing [here][5].
 
 ## Setup 
 
@@ -186,7 +184,7 @@ gcloud builds submit . --config cloudbuild_destroy.yaml
 [2]: https://cloud.google.com/vpc/docs/subnets
 [3]: https://cloud.google.com/nat/docs/overview
 [4]: https://cloud.google.com/kubernetes-engine/docs/concepts/autopilot-overview
-[5]: https://github.com/GoogleCloudPlatform/click-to-deploy-solutions/tree/main/gke-autopilot-hpa#appendix
+[5]: https://cloud.google.com/kubernetes-engine/pricing
 [6]: https://github.com/GoogleCloudPlatform/click-to-deploy-solutions/tree/main/gke-autopilot-hpa
 [7]: https://cloud.google.com/resource-manager/docs/creating-managing-organization
 [8]: https://cloud.google.com/billing/docs/how-to/manage-billing-account
