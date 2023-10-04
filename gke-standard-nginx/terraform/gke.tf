@@ -65,7 +65,7 @@ module "gke" {
       disk_type          = "pd-standard"
       auto_repair        = true
       auto_upgrade       = true
-      preemptible        = true
+      preemptible        = false
       enable_secure_boot = true
     },
   ]
