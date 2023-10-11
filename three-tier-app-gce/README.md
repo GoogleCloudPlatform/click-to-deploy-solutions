@@ -66,7 +66,7 @@ After you deployed the solution, you can check the resources created and see how
 
 First, go to [Google Compute Engine](https://console.cloud.google.com/compute/instances) you can see your VMs.
 
-![GCE](assets/gke.png)
+![GCE](assets/gce.png)
 
 Lastly,go to [Cloud LoadBalancing](https://console.cloud.google.com/net-services/loadbalancing/list/loadBalancers) and click on the frontend Load Balancer
 
