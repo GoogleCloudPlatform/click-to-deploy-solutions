@@ -12,64 +12,31 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-locals {
-  db_instance_name = "${var.application_name}-${random_id.db_name_suffix.hex}"
+resource "random_id" "id" {
+  byte_length = 2
 }
 
-resource "random_id" "db_name_suffix" {
-  byte_length = 4
-}
-
-resource "google_sql_database_instance" "instance" {
-  name                = local.db_instance_name
-  region              = var.region
-  database_version    = "POSTGRES_14"
-  deletion_protection = false # not recommended for PROD
-
+resource "google_sql_database_instance" "cloud_sql" {
+  name             = "${var.application_name}-db-${random_id.id.hex}"
+  database_version = "MYSQL_5_7"
+  region           = var.region
+  project          = var.project_id
   settings {
-    tier        = "db-custom-1-3840"
-    user_labels = local.resource_labels
+    tier                  = "db-g1-small"
+    user_labels           = local.resource_labels
+    disk_autoresize       = true
+    disk_autoresize_limit = 0
+    disk_size             = 10
+    disk_type             = "PD_SSD"
 
     ip_configuration {
       ipv4_enabled    = false
       private_network = module.vpc.network_self_link
     }
   }
-
+  deletion_protection = false
   depends_on = [
     google_service_networking_connection.service_networking,
+    google_project_service.api
   ]
-}
-
-resource "google_sql_database" "database" {
-  instance = google_sql_database_instance.instance.id
-  name     = "${var.application_name}-db"
-}
-
-resource "random_password" "password" {
-  length  = 16
-  special = true
-}
-
-resource "google_secret_manager_secret" "db_password" {
-  secret_id = "${local.db_instance_name}-password"
-  labels    = local.resource_labels
-  replication {
-    user_managed {
-      replicas {
-        location = var.region
-      }
-    }
-  }
-}
-
-resource "google_secret_manager_secret_version" "db_password_version" {
-  secret      = google_secret_manager_secret.db_password.id
-  secret_data = random_password.password.result
-}
-
-resource "google_sql_user" "user" {
-  instance = google_sql_database_instance.instance.id
-  name     = var.application_name
-  password = random_password.password.result
 }

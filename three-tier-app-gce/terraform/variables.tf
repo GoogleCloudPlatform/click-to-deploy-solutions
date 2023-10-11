@@ -20,7 +20,7 @@ locals {
     deployed_by = "cloudbuild"
     env         = "sandbox"
     repo        = "click-to-deploy-solutions"
-    solution    = "gke-autopilot-hpa"
+    solution    = "three-tier-app-gce"
     terraform   = "true"
   }
 
@@ -40,6 +40,10 @@ variable "network_name" {
   description = "VPC name"
 }
 
+variable "project_number" {
+  description = "GCP Project Number"
+}
+
 variable "project_id" {
   description = "GCP Project ID"
 }
@@ -52,4 +56,9 @@ variable "region" {
 variable "subnet_cidr" {
   type        = string
   description = "Subnet CIDR"
+}
+
+variable "apis" {
+  description = "APIs required to deploy the project"
+  default     = ["redis.googleapis.com", "compute.googleapis.com", "sqladmin.googleapis.com", "secretmanager.googleapis.com", "servicenetworking.googleapis.com", "cloudbuild.googleapis.com", "cloudresourcemanager.googleapis.com"]
 }
