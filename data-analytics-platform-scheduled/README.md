@@ -43,7 +43,7 @@ The main components that we would be setting up are (to learn more about these p
 
 Pricing Estimates - We have created a sample estimate based on some usage we see from new startups looking to scale. This estimate would give you an idea of how much this deployment would essentially cost per month at this scale and you extend it to the scale you further prefer. Here's the [link](https://cloud.google.com/products/calculator#id=89190782-a6db-4d0b-977e-6fbdbe857a8a).
 
-## Deploy
+## Deploy the architecture
 
 :clock1: Estimated deployment time: 2 min
 
@@ -65,7 +65,7 @@ gcloud builds submit . --config cloudbuild.yaml
 Once it is finished, you can go to [Cloud Composer](https://console.cloud.google.com/composer/environments) to see the dags' results and explore the Cloud Composers's functionalities.
 
 
-## Testing
+## Testing the architecture
 After you deployed the solution, you can test it by loading the sample file from this repository to the Data Lake bucket by running the `gsutil` command below, or using the console.
 ```
 gsutil cp sample_data/order_events_001.csv gs://your-upload-bucket/order-events/
@@ -73,7 +73,7 @@ gsutil cp sample_data/order_events_001.csv gs://your-upload-bucket/order-events/
 
 Then, check the uploaded data on BigQuery > ecommerce dataset > order_events table.
 
-## Destroy
+## Cleaning up your environment
 
 1. Click on Open in Google Cloud Shell button below.
 <a href="https://ssh.cloud.google.com/cloudshell/editor?cloudshell_git_repo=https://github.com/GoogleCloudPlatform/click-to-deploy-solutions&cloudshell_workspace=data-platform-scheduled" target="_new">

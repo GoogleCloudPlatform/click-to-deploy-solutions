@@ -43,7 +43,7 @@ The main components that we would be setting up are (to learn more about these p
 ## Costs
 Pricing Estimates - We have created a sample estimate based on some usage we see from new startups looking to scale. This estimate would give you an idea of how much this deployment would essentially cost per month at this scale and you extend it to the scale you further prefer. Here's the [link](https://cloud.google.com/products/calculator#id=78109407-bdd1-4934-bfff-bf45c21756f3).
 
-## Deploy
+## Deploy the architecture
 
 :clock1: Estimated deployment time: 18 min 49 sec
 
@@ -66,7 +66,7 @@ After you created the resources, you can use the Cloud SQL Proxy VM's internal I
 
 For more information on how to setup this connection, please refer to [this link](https://cloud.google.com/data-fusion/docs/how-to/connect-to-cloud-sql-source).
 
-## Destroy
+## Cleaning up your environment
 Execute the command below on Cloud Shell to destroy the resources.
 ```
 gcloud builds submit . --config cloudbuild_destroy.yaml

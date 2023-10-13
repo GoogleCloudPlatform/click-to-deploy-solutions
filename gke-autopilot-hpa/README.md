@@ -95,7 +95,7 @@ In order to spin up this architecture, you will need to be a user with the **Pro
 
 > __Note__: To grant a user a role, take a look at the [Granting and Revoking Access][12] documentation.
 
-### Spinning up the architecture 
+### Deploy the architecture
 
 :clock1: Estimated deployment time: 10 min
 
