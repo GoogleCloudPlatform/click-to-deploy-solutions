@@ -52,7 +52,7 @@ Check more operators available in [Airflow Google Operators doc](https://airflow
 
 Pricing Estimates - We have created a sample estimate based on some usage we see from new startups looking to scale. This estimate would give you an idea of how much this deployment would essentially cost per month at this scale and you extend it to the scale you further prefer. Here's the [link](https://cloud.google.com/products/calculator/#id=f7caffab-fca3-490e-8654-f406df790929).
 
-## Deploy
+## Deploying the architecture
 
 :clock1: Estimated deployment time: 26 min 48 sec
 
@@ -73,7 +73,7 @@ gcloud builds submit . --config cloudbuild.yaml
 
 Once it is finished, go ahead to the Testing section.
 
-## Testing 
+## Testing the architecture 
 
 After you deployed the solution, you can check the resources created and see how they work together.
 
@@ -100,7 +100,7 @@ Finally, you can see the data store into GCS by going to the Data Lake bucket an
 Next step: do this same analysis with other dags.
 
 
-## Destroy
+## Cleaning up your environment
 
 1. Click on Open in Google Cloud Shell button below.
 <a href="https://ssh.cloud.google.com/cloudshell/editor?cloudshell_git_repo=https://github.com/GoogleCloudPlatform/click-to-deploy-solutions&cloudshell_workspace=cloud-composer-etl&cloudshell_open_in_editor=terraform/terraform.tfvars" target="_new">

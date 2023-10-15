@@ -40,7 +40,7 @@ The main components that we would be setting up are (to learn more about these p
 
 Pricing Estimates - We have created a sample estimate based on some usage we see from new startups looking to scale. This estimate would give you an idea of how much this deployment would essentially cost per month at this scale and you extend it to the scale you further prefer. Here's the [link](https://cloud.google.com/products/calculator/#id=35b50e4b-8292-43b7-b909-d29213b80fea).
 
-## Deploy
+## Deploy the architecture
 
 :clock1: Estimated deployment time: 16 min 30 sec
 
@@ -59,7 +59,7 @@ sh prereq.sh
 gcloud builds submit . --config cloudbuild.yaml
 ```
 
-## Testing
+## Testing the architecture
 
 1. Test the Cloud SQL instance high availability by initiating a failover, causing the instance fails over and unavailable to serve data for a few minutes.
 ```
@@ -71,7 +71,7 @@ gcloud sql instances describe INSTANCE_NAME
 ```
 The output should indicate availabilityType as REGIONAL. The gceZone and secondaryGceZone fields should show the current primary and secondary zones of the instance
 
-## Destroy
+## Cleaning up your environment
 
 1. Click on Open in Google Cloud Shell button below.
 <a href="https://ssh.cloud.google.com/cloudshell/editor?cloudshell_git_repo=https://github.com/GoogleCloudPlatform/click-to-deploy-solutions&cloudshell_workspace=cloudsql-ha-dr" target="_new">

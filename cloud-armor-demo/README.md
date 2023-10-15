@@ -12,7 +12,7 @@ This example deploys a web application called [OWASP Juice Shop](https://owasp.o
 ## Architecture
 ![architecture](architecture.png)
 
-## Deploy
+## Deploy the architecture
 
 1. Click on Open in Google Cloud Shell button below.
 <a href="https://ssh.cloud.google.com/cloudshell/editor?cloudshell_git_repo=https://github.com/GoogleCloudPlatform/click-to-deploy-solutions&cloudshell_workspace=cloud-armor-demo&cloudshell_open_in_editor=terraform/terraform.tfvars" target="_new">
@@ -28,7 +28,7 @@ sh prereq.sh
 ```
 gcloud builds submit . --config cloudbuild.yaml
 ```
-## Testing
+## Testing the architecture
 
 1. Verify that the Juice Shop Application is running
 ```
@@ -75,7 +75,7 @@ HTTP/1.1 403 Forbidden
 
 4. You can view the logs in Cloud Armor policies to verify these.
 
-## Destroy
+## Cleaning up your environment
 Run the command below on Cloud Shell to destroy the resources.
 ```
 gcloud builds submit . --config cloudbuild_destroy.yaml
