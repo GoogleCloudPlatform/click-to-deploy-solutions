@@ -86,10 +86,7 @@ extend it to the scale you further prefer. Here's the [link][7].
 ## Setup
 
 This solution assumes you already have a project created and set up where you
-wish to host these resources. If not, and you would like for the project to
-create a new project as well, please refer to the [github
-repository][8] for instructions.
-
+wish to host these resources. If you haven't created a project yet or want to create a new one, please follow the instructions in this [guide][8].
 ### Prerequisites
 
 - Have an [organization][9] set up in Google cloud.
@@ -127,8 +124,7 @@ gcloud builds submit . --config cloudbuild.yaml
 
 ### Testing your architecture
 
-In this example, we use an example domain (example.com), so you need to set the
-NGINX IP in your `/etc/hosts` file in order to access the applications.
+In this example, we demonstrate the usage of a sample domain (example.com). To access the applications, you should set the NGINX IP in your /etc/hosts file.
 
 
 Go to the [GKE Services][15] and copy the external IP assigned to `ingress-nginx-controller`, then add it to your machine's `/etc/hosts` alongside `<app>.example.com`, for example:
@@ -153,7 +149,7 @@ Looking at the grafana.example.com should look like this:
 
 ## Cleaning up your environment
 
-Run the command below on Cloud Shell to destroy the resources.
+Run the command below on Cloud Shell to delete the resources.
 
 ```bash
 gcloud builds submit . --config cloudbuild_destroy.yaml
