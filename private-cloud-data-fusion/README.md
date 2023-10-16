@@ -77,12 +77,12 @@ gcloud builds submit . --config cloudbuild_destroy.yaml
 - [Cloud SQL](https://cloud.google.com/sql)
 
 ## Tips
-1. Use the private ip of the CloudSQL proxy in the Connection Name field in Fusion, not the CloudSLQ private ip
+1. Ensure you use the private IP address of the CloudSQL proxy in the Connection Name field in Fusion, rather than the CloudSQL private IP address.
 2. username for the database is: datafusion
 3. get the password for the database in the Secret Manager
 4. The MySQL database preconfigured is called employees
 
-## For organizations with Shielded VMs enforcing policies
+## For organizations with policies enforcing Shielded VMs.
 1. Configure the Dataproc nodes to use Shielded VMs
 To do this, after you deployed the pipeline in Data Fusion, click in "Configure" and go to "Compute config"
 Click in "Customize" in the prefered Profile Name
