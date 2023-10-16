@@ -61,7 +61,7 @@ gcloud builds submit . --config cloudbuild.yaml
 
 ## Testing the architecture
 
-1. Test the Cloud SQL instance high availability by initiating a failover, causing the instance fails over and unavailable to serve data for a few minutes.
+1. Initiate a failover to test Cloud SQL instance high availability. During this process, the instance will temporarily be unavailable for a few minutes while it switches over.
 ```
 gcloud sql instances failover INSTANCE_NAME
 ```
@@ -69,7 +69,7 @@ gcloud sql instances failover INSTANCE_NAME
 ```
 gcloud sql instances describe INSTANCE_NAME
 ```
-The output should indicate availabilityType as REGIONAL. The gceZone and secondaryGceZone fields should show the current primary and secondary zones of the instance
+The output should indicate availability Type as REGIONAL. The GceZone and secondary GceZone fields should show the current primary and secondary zones of the instance
 
 ## Cleaning up your environment
 
@@ -78,7 +78,7 @@ The output should indicate availabilityType as REGIONAL. The gceZone and seconda
     <img alt="Open in Cloud Shell" src="https://gstatic.com/cloudssh/images/open-btn.svg">
 </a>
 
-2. Run the command below on Cloud Shell to destroy the resources.
+2. Run the command below on Cloud Shell to delete the resources.
 ```
 gcloud builds submit . --config cloudbuild_destroy.yaml
 ```
