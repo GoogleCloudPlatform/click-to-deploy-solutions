@@ -80,7 +80,7 @@ Finally, if you paste the ip and enter in your browser, you see the template
 ![template](assets/template.png)
 
 ## Cleaning up your environment
-Execute the command below on Cloud Shell to destroy the resources.
+Execute the command below on Cloud Shell to delete the resources.
 ```
 gcloud builds submit . --config cloudbuild_destroy.yaml
 ```
