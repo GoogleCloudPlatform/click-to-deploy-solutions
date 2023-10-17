@@ -77,7 +77,7 @@ Finally, check the json results on BigQuery
 ![bq_results](bq_results.png)
 
 ## Cleaning up your environment
-Execute the command below on Cloud Shell to destroy the resources.
+Execute the command below on Cloud Shell to delete the resources.
 ```
 gcloud builds submit . --config cloudbuild_destroy.yaml
 ```
