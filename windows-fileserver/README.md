@@ -57,7 +57,7 @@ gcloud builds submit . --config cloudbuild.yaml
 ```
 
 ## Testing the architecture
-Execute the command below on Cloud Shell to destroy the resources.
+Execute the command below on Cloud Shell to delete the resources.
 ```
 gcloud builds submit . --config cloudbuild_destroy.yaml
 ```
