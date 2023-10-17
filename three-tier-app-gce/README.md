@@ -66,7 +66,7 @@ gcloud builds submit . --config cloudbuild.yaml
     <img alt="Open in Cloud Shell" src="https://gstatic.com/cloudssh/images/open-btn.svg">
 </a>
 
-2. Run the command below on Cloud Shell to destroy the resources.
+2. Run the command below on Cloud Shell to delete the resources.
 ```
 gcloud builds submit . --config cloudbuild_destroy.yaml
 ```
