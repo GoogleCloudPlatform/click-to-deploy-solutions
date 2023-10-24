@@ -43,7 +43,7 @@ The main components that we would be setting up are (to learn more about these p
 ## Costs
 Pricing Estimates - We have created a sample estimate based on some usage we see from new startups looking to scale. This estimate would give you an idea of how much this deployment would essentially cost per month at this scale and you extend it to the scale you further prefer. Here's the [link](https://cloud.google.com/products/calculator#id=78109407-bdd1-4934-bfff-bf45c21756f3).
 
-## Deploy
+## Deploy the architecture
 
 :clock1: Estimated deployment time: 18 min 49 sec
 
@@ -66,7 +66,7 @@ After you created the resources, you can use the Cloud SQL Proxy VM's internal I
 
 For more information on how to setup this connection, please refer to [this link](https://cloud.google.com/data-fusion/docs/how-to/connect-to-cloud-sql-source).
 
-## Destroy
+## Cleaning up your environment
 Execute the command below on Cloud Shell to destroy the resources.
 ```
 gcloud builds submit . --config cloudbuild_destroy.yaml
@@ -77,12 +77,12 @@ gcloud builds submit . --config cloudbuild_destroy.yaml
 - [Cloud SQL](https://cloud.google.com/sql)
 
 ## Tips
-1. Use the private ip of the CloudSQL proxy in the Connection Name field in Fusion, not the CloudSLQ private ip
+1. Ensure you use the private IP address of the CloudSQL proxy in the Connection Name field in Fusion, rather than the CloudSQL private IP address.
 2. username for the database is: datafusion
 3. get the password for the database in the Secret Manager
 4. The MySQL database preconfigured is called employees
 
-## For organizations with Shielded VMs enforcing policies
+## For organizations with policies enforcing Shielded VMs.
 1. Configure the Dataproc nodes to use Shielded VMs
 To do this, after you deployed the pipeline in Data Fusion, click in "Configure" and go to "Compute config"
 Click in "Customize" in the prefered Profile Name

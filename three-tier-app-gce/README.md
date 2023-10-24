@@ -41,7 +41,7 @@ The main components that we would be setting up are (to learn more about these p
 
 Pricing Estimates - We have created a sample estimate based on some usage we see from new startups looking to scale. This estimate would give you an idea of how much this deployment would essentially cost per month at this scale and you extend it to the scale you further prefer. Here's the [link](https://cloud.google.com/products/calculator/#id=bfa6c5e2-8801-4a2a-8075-2d6588d06f13).
 
-## Deploy
+## Deploy the architecture
 
 :clock1: Estimated deployment time: 8 min
 
@@ -80,13 +80,15 @@ Finally, if you paste the ip and enter in your browser, you see the example appl
 
 ![template](assets/application.png)
 
-## Destroy
+
+## Cleaning up your environment
+
 1. Click on Open in Google Cloud Shell button below.
 <a href="https://ssh.cloud.google.com/cloudshell/editor?cloudshell_git_repo=https://github.com/GoogleCloudPlatform/click-to-deploy-solutions&cloudshell_workspace=three-tier-app-gce" target="_new">
     <img alt="Open in Cloud Shell" src="https://gstatic.com/cloudssh/images/open-btn.svg">
 </a>
 
-2. Run the command below on Cloud Shell to destroy the resources.
+2. Run the command below on Cloud Shell to delete the resources.
 ```
 gcloud builds submit . --config cloudbuild_destroy.yaml
 ```

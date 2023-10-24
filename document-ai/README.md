@@ -39,7 +39,7 @@ The main components that we would be setting up are (to learn more about these p
 
 Pricing Estimates - We have created a sample estimate based on some usage we see from new startups looking to scale. This estimate would give you an idea of how much this deployment would essentially cost per month at this scale and you extend it to the scale you further prefer. Here's the [link](https://cloud.google.com/products/calculator/#id=7e79b4d5-7060-4ab4-a78e-d81dadc8a9fb).
 
-## Deploy
+## Deploy the architecture
 
 :clock1: Estimated deployment time: 10 min
 
@@ -61,7 +61,7 @@ gcloud builds submit . --config cloudbuild.yaml
 
 If you face a problem with the EventArc API during the deployment, please check out the [known issues section](#known-issues).
 
-## Testing 
+## Testing the architecture 
 
 Once you deployed the solution successfully, upload the `form.pdf` to the input bucket using either Cloud Console or `gsutil`.
 ```
@@ -76,8 +76,8 @@ Finally, check the json results on BigQuery
 
 ![bq_results](bq_results.png)
 
-## Destroy
-Execute the command below on Cloud Shell to destroy the resources.
+## Cleaning up your environment
+Execute the command below on Cloud Shell to delete the resources.
 ```
 gcloud builds submit . --config cloudbuild_destroy.yaml
 ```

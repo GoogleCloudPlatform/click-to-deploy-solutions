@@ -40,7 +40,7 @@ The main components that we would be setting up are (to learn more about these p
 
 Pricing Estimates - We have created a sample estimate based on some usage we see from new startups looking to scale. This estimate would give you an idea of how much this deployment would essentially cost per month at this scale and you extend it to the scale you further prefer. Here's the [link](https://cloud.google.com/products/calculator/#id=662dbaa8-91e2-486f-bd28-2d828692a560).
 
-## Deploy
+## Deploy the architecture
 
 :clock1: Estimated deployment time: 8 min
 
@@ -64,7 +64,7 @@ If you face a problem with the EventArc API during the deployment, please check 
 Once it is finished, you can go to the next section to test your architecture.
 
 
-## Testing
+## Testing the architecture
 After you deployed the solution, you can test it by loading the sample file on this repository to the upload bucket by running the `gsutil` command below, or uploading using the console.
 ```
 gsutil cp sample_data/order_events_001.csv gs://your-upload-bucket/ecommerce/order_events/
@@ -72,7 +72,7 @@ gsutil cp sample_data/order_events_001.csv gs://your-upload-bucket/ecommerce/ord
 
 Then, check the uploaded data on BigQuery > ecommerce dataset > order_events table.
 
-## Destroy
+## Cleaning up your environment
 
 1. Click on Open in Google Cloud Shell button below.
 <a href="https://ssh.cloud.google.com/cloudshell/editor?cloudshell_git_repo=https://github.com/GoogleCloudPlatform/click-to-deploy-solutions&cloudshell_workspace=data-analytics-platform-event-driven&cloudshell_open_in_editor=terraform/terraform.tfvars" target="_new">

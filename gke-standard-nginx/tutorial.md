@@ -25,7 +25,7 @@ In order to spin up this architecture, you will need to be a user with the
 
 > __Note__: To grant a user a role, take a look at the [Granting and Revoking Access][7] documentation.
 
-## Spinning up the architecture 
+## Deploy the architecture 
 
 1. Before we deploy the architecture, you will need to set the **Project ID**.
 

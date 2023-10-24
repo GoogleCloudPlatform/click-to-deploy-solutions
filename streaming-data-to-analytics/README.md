@@ -42,7 +42,7 @@ Pricing Estimates - We have created a sample estimate based on some usage we see
 
 Note : The estimated example considers a single event ingestion.
 
-## Deploy
+## Deploy the architecture
 
 :clock1: Estimated deployment time: 2 min
 
@@ -62,7 +62,7 @@ sh prereq.sh
 gcloud builds submit . --config cloudbuild.yaml
 ```
 
-## Testing
+## Testing the architecture
 If you want to run a load test, please follow the instructions below.
 
 1. Set GCP_TOKEN env var
@@ -94,8 +94,8 @@ LIMIT 1000
 ```
 
 
-## Destroy
-Execute the command below on Cloud Shell to destroy the resources.
+## Cleaning up your environment
+Execute the command below on Cloud Shell to delete the resources.
 ```
 gcloud builds submit . --config cloudbuild_destroy.yaml
 ```

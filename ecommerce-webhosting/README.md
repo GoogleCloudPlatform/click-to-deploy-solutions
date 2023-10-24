@@ -44,7 +44,7 @@ The main components that we would be setting up are (to learn more about these p
 
 Pricing Estimates - We have created a sample estimate based on some usage we see from new startups looking to scale. This estimate would give you an idea of how much this deployment would essentially cost per month at this scale and you extend it to the scale you further prefer. Here's the [link](https://cloud.google.com/products/calculator/#id=e179591b-2b56-4558-82f6-cefa64168687).
 
-## Deploy
+## Deploy the architecture
 
 :clock1: Estimated deployment time: 20 min
 
@@ -63,7 +63,7 @@ sh prereq.sh
 gcloud builds submit . --config cloudbuild.yaml
 ```
 
-## Testing 
+## Testing the architecture  
 
 After you deployed the solution, you can check the resources created and see how they work together.
 
@@ -79,8 +79,8 @@ Finally, if you paste the ip and enter in your browser, you see the template
 
 ![template](assets/template.png)
 
-## Destroy
-Execute the command below on Cloud Shell to destroy the resources.
+## Cleaning up your environment
+Execute the command below on Cloud Shell to delete the resources.
 ```
 gcloud builds submit . --config cloudbuild_destroy.yaml
 ```

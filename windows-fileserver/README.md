@@ -21,7 +21,7 @@ These are some examples of the use cases you can build on top of this architectu
 
 * __Hybrid Cloud File Storage__ : This enables seamless integration between on-premises infrastructure and Google Cloud, facilitating data mobility and flexibility. Organizations can leverage the scalability and accessibility of the cloud while maintaining control over their data.
 
-## Arquitecture
+## Architecture
 
 <p align="center"><img src="architecture.png"></p>
 
@@ -36,7 +36,7 @@ The main components that we would be setting up are (to learn more about these p
 Pricing Estimates - We have created a sample estimate based on some usage we see from new startups looking to scale. This estimate would give you an idea of how much this deployment would essentially cost per month at this scale and you extend it to the scale you further prefer. Here's the [link](https://cloud.google.com/products/calculator/#id=a9b6f515-83c1-4ea3-833b-bdc18771afde).
 
 
-## Deploy
+## Deploy the architecture
 
 :clock1: Estimated deployment time: 1 min 25 seg
 
@@ -56,8 +56,8 @@ sh prereq.sh
 gcloud builds submit . --config cloudbuild.yaml
 ```
 
-## Destroy
-Execute the command below on Cloud Shell to destroy the resources.
+## Testing the architecture
+Execute the command below on Cloud Shell to delete the resources.
 ```
 gcloud builds submit . --config cloudbuild_destroy.yaml
 ```

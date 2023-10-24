@@ -78,9 +78,7 @@ GKE Autopilot is charged by resources allocated for each pod - vCPU, Memory and 
 ## Setup 
 
 This solution assumes you already have a project created and set up where you
-wish to host these resources. If not, and you would like for the project to
-create a new project as well, please refer to the [github
-repository][6] for instructions.
+wish to host these resources. If not, and you prefer the solution to create a new project, please follow the instructions in the [GitHub repository][6].
 
 ### Prerequisites 
 
@@ -95,7 +93,7 @@ In order to spin up this architecture, you will need to be a user with the **Pro
 
 > __Note__: To grant a user a role, take a look at the [Granting and Revoking Access][12] documentation.
 
-### Spinning up the architecture 
+### Deploy the architecture
 
 :clock1: Estimated deployment time: 10 min
 
@@ -129,8 +127,7 @@ Once you have deployed the solution, you can run a load test and see the HPA in
 action.
 
 Go to [Workloads][13] page and see the `hpa-example` application has
-one replica. After the script is finished you may see that the pods have not
-been finished spinning up. It may take an additional few minutes to see the
+one replica. After the script is finished, it may take a few additional minutes for the pods to fully spin up. It may take an additional few minutes to see the
 following:
 
 <figure id = "image-1">
@@ -158,7 +155,7 @@ defined in the HPA for scaling out.
 
 ## Cleaning up your environment 
 
-Execute the command below on Cloud Shell to destroy the resources.
+Execute the command below on Cloud Shell to delete the resources.
 
 ```bash
 gcloud builds submit . --config cloudbuild_destroy.yaml

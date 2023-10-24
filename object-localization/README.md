@@ -10,7 +10,7 @@ This architecture harnesses the power of Google Cloud Vision API to detect and e
 
 At the core of this architecture is the Cloud Vision API, a powerful machine learning-based service that analyzes images to detect objects and their spatial location within the image. By leveraging state-of-the-art computer vision algorithms, the API can accurately identify and localize objects, providing bounding boxes that outline their exact positions.
 
-In this example, the user uploads images to a bucket. This event triggers the Vision API that analyzes the image and saves the object detection results into a JSON file on Google Cloud Storage. BigQuery Transfer Service loads JSONs from the output bucket to a BigQuery table.
+In this example, the user uploads images to a bucket. This event triggers the Vision API that analyzes the image and saves the object detection results into a JSON file on Google Cloud Storage. BigQuery Transfer Service imports JSONs from the output bucket to a BigQuery table.
 
 <p align="center"><img src="https://cloud.google.com/static/vision/docs/images/bicycle.jpg"></p>
 
@@ -41,7 +41,7 @@ The main components that we would be setting up are (to learn more about these p
 ## Costs
 Pricing Estimates - We have created a sample estimate based on some usage we see from new startups looking to scale. This estimate would give you an idea of how much this deployment would essentially cost per month at this scale and you extend it to the scale you further prefer. Here's the [link](https://cloud.google.com/products/calculator#id=2fcc45ca-26e9-4089-aab2-d901b81886c6).
 
-## Deploy
+## Deploy the architecture
 
 :clock1: Estimated deployment time: 6 min
 
@@ -64,7 +64,7 @@ gcloud builds submit . --config cloudbuild.yaml
 If you face a problem with the EventArc API during the deployment, please check out the [known issues section](#known-issues).
 
 
-## Testing 
+## Testing the architecture 
 
 Once you deployed the solution successfully, upload an image to the image bucket using either Cloud Console or `gsutil`.
 
@@ -83,8 +83,8 @@ The [BigQuery Transfer Service Job](https://console.cloud.google.com/bigquery/tr
 
 Also, feel free to trigger the job anytime by clicking on the `RUN TRANSFER NOW` button.
 
-## Destroy
-Execute the command below on Cloud Shell to destroy the resources.
+## Cleaning up your environment
+Execute the command below on Cloud Shell to delete the resources.
 ```
 gcloud builds submit . --config cloudbuild_destroy.yaml
 ```
