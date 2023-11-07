@@ -23,15 +23,34 @@ steps:
     -backend-config="bucket=$PROJECT_ID-tf-state" \
     -backend-config="prefix=three-tier-app-gce"
   dir: terraform   
+
 - id: 'tf apply'
   name: 'hashicorp/terraform:1.0.0'
   args: 
   - apply
   - -auto-approve
   dir: terraform
+
+- id: 'upload data'
+  name: 'gcr.io/cloud-builders/gcloud-slim'
+  entrypoint: 'sh'
+  args: 
+  - '-c'
+  - |
+    export DATABASE_INSTANCE=$(gcloud sql instances list --format='value(name)' --filter='labels.solution:three-tier-app-gce')
+    export SERVICE_ACCOUNT=$(gcloud sql instances describe $$DATABASE_INSTANCE --format='value(serviceAccountEmailAddress)')
+    gsutil mb gs://$PROJECT_ID-sqldata
+    gsutil cp schema.sql gs://$PROJECT_ID-sqldata
+    gsutil iam ch serviceAccount:$$SERVICE_ACCOUNT:objectAdmin gs://$PROJECT_ID-sqldata
+    gcloud sql import sql $$DATABASE_INSTANCE gs://$PROJECT_ID-sqldata/schema.sql -q
+    gsutil rm gs://$PROJECT_ID-sqldata/schema.sql
+    gsutil rb gs://$PROJECT_ID-sqldata
+  dir: sql
+
 options:
   env:
     - TF_VAR_project_id=$PROJECT_ID
+    - TF_VAR_project_number=$PROJECT_NUMBER
 tags:
   - terraform
   - three-tier-app-gce

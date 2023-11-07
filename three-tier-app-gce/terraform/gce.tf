@@ -29,7 +29,8 @@ module "instance_template" {
   preemptible          = true
 
   startup_script = <<EOF
-  docker run --rm -p 80:3000 bkimminich/juice-shop:v14.0.1
+  docker run --rm -p 80:80 fellipemedeiros/todo-frontend:latest
+  docker run --rm -p 8080:8080 fellipemedeiros/todo-backend:latest
   EOF
 
   tags = [

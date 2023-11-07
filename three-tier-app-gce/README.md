@@ -60,7 +60,29 @@ sh prereq.sh
 gcloud builds submit . --config cloudbuild.yaml
 ```
 
+## Testing 
+
+After you deployed the solution, you can check the resources created and see how they work together.
+
+First, go to [Google Compute Engine](https://console.cloud.google.com/compute/instances) you can see your VMs.
+
+![GCE](assets/gce.png)
+
+Lastly,go to [Cloud LoadBalancing](https://console.cloud.google.com/net-services/loadbalancing/list/loadBalancers) and click on the frontend Load Balancer
+
+![loadbalancer](assets/loadbalancer.png)
+
+You can see all the details of the Load Balancer, and you can copy the Frontend IP section to access the application.
+
+![details](assets/details.png)
+
+Finally, if you paste the ip and enter in your browser, you see the example application
+
+![template](assets/application.png)
+
+
 ## Cleaning up your environment
+
 1. Click on Open in Google Cloud Shell button below.
 <a href="https://ssh.cloud.google.com/cloudshell/editor?cloudshell_git_repo=https://github.com/GoogleCloudPlatform/click-to-deploy-solutions&cloudshell_workspace=three-tier-app-gce" target="_new">
     <img alt="Open in Cloud Shell" src="https://gstatic.com/cloudssh/images/open-btn.svg">
