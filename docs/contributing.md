@@ -37,15 +37,16 @@ Your Pull Request must be approved by one of the [code owners](CODEOWNERS).
 
 ## Solution development guidelines
 
-### Solution directory structure
-Our projects use Terraform to write infrastructure as code, and Cloud Build to run the deploy and destroy pipelines on Cloud Build. So your project must have at least the following structure to be deployable:
- * terraform: folder with .tf files
- * terraform.tfvars: with variables values
- * cloudbuild.yaml: deploy pipeline
- * cloudbuild_destroy.yaml: destroy pipeline
- * readme.md: solution documentation
- * architecture.png: architecture diagram that demonstrates the solution
- * prereq.sh: execute prerequisites to deploy the solutions, such as permissions and API settings.
+### Directory structure
+Each solution must follow the directory structure below so that our CI/CD and Deploy pipelines can run properly.
+
+- app: application code and necessary files to build i, for example: Dockerfile, requirements.txt
+- assets: static files such as architecture.png used in the README.md
+- build: [Cloud Build yaml](https://cloud.google.com/build/docs/build-config-file-schema) files to deploy and destroy the solution
+- infra: Terraform files
+- README.md: Readme file following [this template](./template_readme.md)
+- prereq.sh: Shell script with all pre-requisities required before running Cloud Build.
+
 
 ### Label Strategy
 You must to have a variable to define resource labels, and aggregate this variables with the solution's labels with locals.
