@@ -12,9 +12,21 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-network_name      = "vpc-etl"
-composer_env_name = "composer-af2"
+terraform {
+  backend "gcs" {
+  }
+  required_providers {
+    google = {
+      source  = "hashicorp/google"
+      version = "~> 5.6.0"
+    }
+  }
+  provider_meta "google" {
+    module_name = "cloud-solutions/cloud-composer-etl-v0.1"
+  }
+}
 
-resource_labels = {
-  env = "sandbox"
+provider "google" {
+  project = var.project_id
+  region  = var.region
 }

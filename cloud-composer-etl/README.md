@@ -36,7 +36,7 @@ These are some examples of the use cases you can build on top of this architectu
 
 ## Architecture
 
-<p align="center"><img src="architecture.png"></p>
+<p align="center"><img src="assets/architecture.png"></p>
 
 The main components that we would be setting up are (to learn more about these products, click on the hyperlinks)
 
@@ -68,7 +68,7 @@ sh prereq.sh
 
 3. Run the Cloud Build Job
 ```
-gcloud builds submit . --config cloudbuild.yaml
+gcloud builds submit . --config build/cloudbuild.yaml
 ```
 
 Once it is finished, go ahead to the Testing section.
@@ -109,5 +109,5 @@ Next step: do this same analysis with other dags.
 
 2. Run the command below on Cloud Shell to delete the resources.
 ```
-gcloud builds submit . --config cloudbuild_destroy.yaml
+gcloud builds submit . --config build/cloudbuild_destroy.yaml
 ```

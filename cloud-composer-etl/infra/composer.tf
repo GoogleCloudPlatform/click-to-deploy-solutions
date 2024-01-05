@@ -12,15 +12,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+data "google_composer_image_versions" "all" {
+  region = var.region
+}
+
 module "composer" {
   source  = "terraform-google-modules/composer/google//modules/create_environment_v2"
-  version = "3.2.0"
+  version = "~> 4.0"
 
   project_id               = var.project_id
   region                   = var.region
   composer_env_name        = var.composer_env_name
   composer_service_account = google_service_account.service_account.email
-  image_version            = "composer-2.0.30-airflow-2.3.3"
+  image_version            = data.google_composer_image_versions.all.image_versions[0].image_version_id
   environment_size         = "ENVIRONMENT_SIZE_SMALL"
   labels                   = local.resource_labels
 
