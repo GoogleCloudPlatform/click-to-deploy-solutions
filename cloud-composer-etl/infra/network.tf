@@ -56,7 +56,7 @@ resource "google_service_networking_connection" "private_service_connection" {
   service                 = "servicenetworking.googleapis.com"
   reserved_peering_ranges = [google_compute_global_address.service_range.name]
 }
-# NAT and Router
+
 resource "google_compute_router" "nat_router" {
   name    = "${module.vpc.network_name}-nat-router"
   network = module.vpc.network_self_link
