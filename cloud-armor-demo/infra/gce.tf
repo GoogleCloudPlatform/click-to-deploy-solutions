@@ -27,6 +27,7 @@ module "instance_template" {
   source_image_project = "cos-cloud"
   machine_type         = "e2-small"
   preemptible          = true
+  enable_shielded_vm   = true
 
   startup_script = <<EOF
   docker run --rm -p 80:3000 bkimminich/juice-shop:v14.0.1
