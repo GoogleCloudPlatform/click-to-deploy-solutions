@@ -12,6 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+data "google_compute_image" "cos_image" {
+  family  = "cos-stable"
+  project = "cos-cloud"
+}
+
 module "instance_template" {
   source  = "terraform-google-modules/vm/google//modules/instance_template"
   version = "~> 7.6"
@@ -23,8 +28,7 @@ module "instance_template" {
   subnetwork           = "webapp-${var.region}"
   service_account      = local.service_account
   labels               = local.resource_labels
-  source_image         = "cos-stable-97-16919-29-40"
-  source_image_project = "cos-cloud"
+  source_image         = data.google_compute_image.cos_image.self_link
   machine_type         = "e2-small"
   preemptible          = true
   enable_shielded_vm   = true
