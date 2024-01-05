@@ -23,7 +23,7 @@ resource "google_compute_security_policy" "policy" {
     description = "Deny SQL injection"
     match {
       expr {
-        expression = "evaluatePreconfiguredExpr('sqli-stable')"
+        expression = "evaluatePreconfiguredWaf('sqli-stable', {'sensitivity': 1})"
       }
     }
   }
