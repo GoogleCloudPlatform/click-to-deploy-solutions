@@ -10,12 +10,12 @@ This example deploys a web application called [OWASP Juice Shop](https://owasp.o
 :heavy_dollar_sign: Estimated solution cost: [USD 86.68 per 1 month](https://cloud.google.com/products/calculator/#id=4690c11f-35e2-4eb1-9565-efb1fdd5faba)
 
 ## Architecture
-![architecture](architecture.png)
+![architecture](assets/architecture.png)
 
 ## Deploy the architecture
 
 1. Click on Open in Google Cloud Shell button below.
-<a href="https://ssh.cloud.google.com/cloudshell/editor?cloudshell_git_repo=https://github.com/GoogleCloudPlatform/click-to-deploy-solutions&cloudshell_workspace=cloud-armor-demo&cloudshell_open_in_editor=terraform/terraform.tfvars" target="_new">
+<a href="https://ssh.cloud.google.com/cloudshell/editor?cloudshell_git_repo=https://github.com/GoogleCloudPlatform/click-to-deploy-solutions&cloudshell_workspace=cloud-armor-demo&cloudshell_open_in_editor=infra/terraform.tfvars" target="_new">
     <img alt="Open in Cloud Shell" src="https://gstatic.com/cloudssh/images/open-btn.svg">
 </a>
 
@@ -26,7 +26,7 @@ sh prereq.sh
 
 3. Run the Cloud Build Job
 ```
-gcloud builds submit . --config cloudbuild.yaml
+gcloud builds submit . --config build/cloudbuild.yaml
 ```
 ## Testing the architecture
 
@@ -78,5 +78,5 @@ HTTP/1.1 403 Forbidden
 ## Cleaning up your environment
 Run the command below on Cloud Shell to destroy the resources.
 ```
-gcloud builds submit . --config cloudbuild_destroy.yaml
+gcloud builds submit . --config build/cloudbuild_destroy.yaml
 ```
