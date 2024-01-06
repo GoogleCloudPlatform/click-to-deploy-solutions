@@ -22,25 +22,25 @@ steps:
     terraform init \
     -backend-config="bucket=$PROJECT_ID-tf-state" \
     -backend-config="prefix=gke-autopilot-hpa"
-  dir: terraform
+  dir: infra
 - id: 'tf apply'
   name: 'hashicorp/terraform:1.0.0'
   args: 
   - apply
   - -auto-approve
-  dir: terraform
+  dir: infra
 - id: k8s create namespaces
   name: 'gcr.io/cloud-builders/kubectl'
   args: ['apply', '-f', 'namespaces.yaml']
-  dir: k8s
+  dir: build
 - id: k8s deploy hello-app-example
   name: 'gcr.io/cloud-builders/kubectl'
   args: ['apply', '-f', 'hello-app-example.yaml', '-n', 'hello-app-example']
-  dir: k8s
+  dir: build
 - id: k8s deploy hpa-example
   name: 'gcr.io/cloud-builders/kubectl'
   args: ['apply', '-f', 'hpa-example.yaml', '-n', 'hpa-example']
-  dir: k8s
+  dir: build
 options:
   env:
     - TF_VAR_project_id=$PROJECT_ID
