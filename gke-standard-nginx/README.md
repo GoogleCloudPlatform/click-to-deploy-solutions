@@ -54,7 +54,7 @@ architecture:
 
 ## Architecture
 
-![Design Architecture](architecture.png)
+![Design Architecture](assets/architecture.png)
 
 The main components that we would be setting up are (to learn more about these
 products, click on the hyperlinks)
@@ -119,7 +119,7 @@ sh prereq.sh
 3. Run the Cloud Build Job
 
 ```bash
-gcloud builds submit . --config cloudbuild.yaml
+gcloud builds submit . --config build/cloudbuild.yaml
 ```
 
 ### Testing your architecture
@@ -152,7 +152,7 @@ Looking at the grafana.example.com should look like this:
 Run the command below on Cloud Shell to delete the resources.
 
 ```bash
-gcloud builds submit . --config cloudbuild_destroy.yaml
+gcloud builds submit . --config build/cloudbuild_destroy.yaml
 ```
 
 <!-- BEGIN TFDOC -->

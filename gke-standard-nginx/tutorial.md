@@ -42,7 +42,7 @@ sh prereq.sh
 3. Run the Cloud Build Job
 
 ```bash
-gcloud builds submit . --config cloudbuild.yaml
+gcloud builds submit . --config build/cloudbuild.yaml
 ```
 Next we are going to test the architecture and finally clean up your
 environment.
@@ -77,7 +77,7 @@ The easiest way to remove all the deployed resources is to run the following
 command in Cloud Shell:
 
 ```bash
-gcloud builds submit . --config cloudbuild_destroy.yaml
+gcloud builds submit . --config build/cloudbuild_destroy.yaml
 ```
 
 The above command will delete the associated resources so there will be no
