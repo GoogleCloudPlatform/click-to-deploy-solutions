@@ -22,13 +22,13 @@ steps:
     terraform init \
     -backend-config="bucket=$PROJECT_ID-tf-state" \
     -backend-config="prefix=gke-standard-nginx"
-  dir: terraform   
+  dir: infra   
 - id: 'tf apply'
   name: 'hashicorp/terraform:1.0.0'
   args: 
   - apply
   - -auto-approve
-  dir: terraform
+  dir: infra
   
 - id: git-clone
   name: 'gcr.io/cloud-builders/git'
@@ -46,7 +46,7 @@ steps:
 - id: create-namespaces
   name: 'gcr.io/cloud-builders/kubectl'
   args: ['apply', '-f', 'namespaces.yaml']
-  dir: k8s
+  dir: build
 - id: deploy-ingress-nginx
   name: 'gcr.io/$PROJECT_ID/helm:latest'
   args: ['upgrade', '--install', 'ingress-nginx', 
@@ -58,7 +58,7 @@ steps:
   env:
   - 'HELM_REPO_NAME=ingress-nginx'
   - 'HELM_REPO_URL=https://kubernetes.github.io/ingress-nginx'
-  dir: k8s
+  dir: build
 - id: deploy-kube-prometheus
   name: 'gcr.io/$PROJECT_ID/helm:latest'
   args: ['upgrade', '--install', 'prometheus-stack',
@@ -70,7 +70,7 @@ steps:
   env:
   - 'HELM_REPO_NAME=prometheus-community'
   - 'HELM_REPO_URL=https://prometheus-community.github.io/helm-charts'
-  dir: k8s
+  dir: build
 - id: deploy-jenkins
   name: 'gcr.io/$PROJECT_ID/helm:latest'
   args: ['upgrade', '--install', 'jenkins',
@@ -82,7 +82,7 @@ steps:
   env:
   - 'HELM_REPO_NAME=jenkinsci'
   - 'HELM_REPO_URL=https://charts.jenkins.io'
-  dir: k8s
+  dir: build
 options:
   env:
     - TF_VAR_project_id=$PROJECT_ID
