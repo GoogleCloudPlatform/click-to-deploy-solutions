@@ -51,12 +51,8 @@ Any web page or application that might require the following:
   for end-users.
 
 ## Architecture 
+![architecture](assets/architecture.png)
 
-<figure id = "image-0">
-  <img src = "architecture.png"
-  width = "100%"
-  alt = "Architecture diagram for the project.">
-</figure>
 
 The main components that we would be setting up are:
 
@@ -105,20 +101,20 @@ target="_new"><img alt="Open in Cloud Shell" src="https://gstatic.com/cloudssh/i
 
 1. Set the **Project ID** for the deployment.
 
-```bash
+```
 gcloud config set project PROJECT_ID
 ```
 
 1. Run the prerequisites script to enable APIs and set Cloud Build permissions. You should see the script end with `Script completed successfully!`
 
-```bash
+```
 sh prereq.sh
 ```
 
 1. Run the Cloud Build Job
 
-```bash
-gcloud builds submit . --config cloudbuild.yaml
+```
+gcloud builds submit . --config build/cloudbuild.yaml
 ```
 
 ### Testing your architecture 
@@ -130,11 +126,7 @@ Go to [Workloads][13] page and see the `hpa-example` application has
 one replica. After the script is finished, it may take a few additional minutes for the pods to fully spin up. It may take an additional few minutes to see the
 following:
 
-<figure id = "image-1">
-  <img src = "./assets/hpa-example-replicas.png"
-  width = "100%"
-  alt = "Example of cloud console for GKE replicas.">
-</figure>
+![architecture](assets/hpa-example-replicas.png)
 
 To run the load test and see the HPA working, go back to the Cloud Shell
 console, then run the load test script:
@@ -147,18 +139,14 @@ sh load_test.sh $HPA_LB_IP
 The script will call the service many times causing the CPU to cross the target
 defined in the HPA for scaling out.
 
-<figure id = "image-2">
-  <img src = "./assets/hpa-scale-events.png"
-  width = "100%"
-  alt = "events">
-</figure>
+![architecture](assets/hpa-scale-events.png)
 
 ## Cleaning up your environment 
 
 Execute the command below on Cloud Shell to delete the resources.
 
-```bash
-gcloud builds submit . --config cloudbuild_destroy.yaml
+```
+gcloud builds submit . --config build/cloudbuild_destroy.yaml
 ```
 
 <!-- BEGIN TFDOC -->
