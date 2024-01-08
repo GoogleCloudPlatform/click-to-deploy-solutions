@@ -22,21 +22,19 @@ steps:
     terraform init \
     -backend-config="bucket=$PROJECT_ID-tf-state" \
     -backend-config="prefix=cloudsql-ha-dr"
-  dir: terraform
-- id: 'tf destroy'
+  dir: infra
+- id: 'tf apply'
   name: 'hashicorp/terraform:1.0.0'
   args: 
-  - destroy
+  - apply
   - -auto-approve
-  dir: terraform
-
+  dir: infra
 options:
   env:
     - TF_VAR_project_id=$PROJECT_ID
-
 tags:
   - terraform
   - cloudsql-ha-dr
-  - destroy
+  - apply
 
 timeout: 3600s
