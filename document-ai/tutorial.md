@@ -28,7 +28,7 @@ Before we deploy the architecture, you will need the following information:
 
 Once the repository is cloned please run the following command to install the prerequisistes:
 
-```bash
+```
 sh prereq.sh
 ```
 
@@ -36,8 +36,8 @@ You will then be prompted to provide the project-id for the destination project.
 
 After this is complete, you can kick off the Cloud Build pipeline with the following command:
 
-```bash
-gcloud builds submit . --config cloudbuild.yaml
+```
+gcloud builds submit . --config build/cloudbuild.yaml
 ```
 
 If you encounter errors when running these commands, please attempt to run them again in a clean project.
@@ -67,7 +67,7 @@ Next we are going to test the architecture and finally clean up your environment
 Once you deployed the solution successfully, upload the form.pdf to the input bucket using either Cloud Console or gsutil.
 
 ```bash
-gsutil cp form.pdf gs://<YOUR PROJECT NAME>-doc-ai-form-input
+gsutil cp assets/form.pdf gs://<YOUR PROJECT NAME>-doc-ai-form-input
 ```
 
 Then, check the parsed results in the output bucket in text (OCR) and json (Key=value) formats
@@ -79,7 +79,7 @@ Finally, check the json results on BigQuery
 Execute the command below on Cloud Shell to destroy the resources.
 
 ``` {shell}
-gcloud builds submit . --config cloudbuild_destroy.yaml
+gcloud builds submit . --config build/cloudbuild_destroy.yaml
 ```
 
 The above command will delete the associated resources so there will be no billable charges made afterwards.

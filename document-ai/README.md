@@ -56,7 +56,7 @@ sh prereq.sh
 
 3. Run the Cloud Build Job
 ```
-gcloud builds submit . --config cloudbuild.yaml
+gcloud builds submit . --config build/cloudbuild.yaml
 ```
 
 If you face a problem with the EventArc API during the deployment, please check out the [known issues section](#known-issues).
@@ -65,7 +65,7 @@ If you face a problem with the EventArc API during the deployment, please check 
 
 Once you deployed the solution successfully, upload the `form.pdf` to the input bucket using either Cloud Console or `gsutil`.
 ```
-gsutil cp form.pdf gs://<YOUR PROJECT NAME>-doc-ai-form-input
+gsutil cp assets/form.pdf gs://<YOUR PROJECT NAME>-doc-ai-form-input
 ```
 
 Then, check the parsed results in the output bucket in text (OCR) and json (Key=value) formats
@@ -79,7 +79,7 @@ Finally, check the json results on BigQuery
 ## Cleaning up your environment
 Execute the command below on Cloud Shell to delete the resources.
 ```
-gcloud builds submit . --config cloudbuild_destroy.yaml
+gcloud builds submit . --config build/cloudbuild_destroy.yaml
 ```
 
 ## Known issues
