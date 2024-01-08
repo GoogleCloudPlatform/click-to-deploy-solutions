@@ -18,7 +18,7 @@ data "google_composer_image_versions" "all" {
 
 module "composer" {
   source  = "terraform-google-modules/composer/google//modules/create_environment_v2"
-  version = "~> 4.0"
+  version = "~> 3.4"
 
   project_id               = var.project_id
   region                   = var.region

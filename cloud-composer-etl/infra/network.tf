@@ -52,6 +52,7 @@ resource "google_compute_global_address" "service_range" {
 }
 
 resource "google_service_networking_connection" "private_service_connection" {
+  provider                = google-beta
   network                 = module.vpc.network_id
   service                 = "servicenetworking.googleapis.com"
   reserved_peering_ranges = [google_compute_global_address.service_range.name]
