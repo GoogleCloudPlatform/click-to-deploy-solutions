@@ -14,7 +14,7 @@
 
 module "vpc" {
   source       = "terraform-google-modules/network/google"
-  version      = "~> 6.0"
+  version      = "~> 9.0"
   project_id   = var.project_id
   network_name = var.network_name
   routing_mode = "GLOBAL"
@@ -52,11 +52,12 @@ resource "google_compute_global_address" "service_range" {
 }
 
 resource "google_service_networking_connection" "private_service_connection" {
+  provider                = google-beta
   network                 = module.vpc.network_id
   service                 = "servicenetworking.googleapis.com"
   reserved_peering_ranges = [google_compute_global_address.service_range.name]
 }
-# NAT and Router
+
 resource "google_compute_router" "nat_router" {
   name    = "${module.vpc.network_name}-nat-router"
   network = module.vpc.network_self_link

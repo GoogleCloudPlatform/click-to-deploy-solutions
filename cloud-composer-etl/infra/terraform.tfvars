@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-network_name      = "vpc-etl"
+network_name      = "cloud-composer-etl-vpc"
 composer_env_name = "composer-af2"
 
 resource_labels = {

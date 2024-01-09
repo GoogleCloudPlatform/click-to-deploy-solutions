@@ -12,31 +12,30 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-steps:
-- id: 'tf init'
-  name: 'hashicorp/terraform:1.0.0'
-  entrypoint: 'sh'
-  args: 
-  - '-c'
-  - | 
-    terraform init \
-    -backend-config="bucket=$PROJECT_ID-tf-state" \
-    -backend-config="prefix=cloud-composer"
-  dir: terraform
-- id: 'tf destroy'
-  name: 'hashicorp/terraform:1.0.0'
-  args: 
-  - destroy
-  - -auto-approve
-  dir: terraform
+terraform {
+  backend "gcs" {
+  }
+  required_providers {
+    google = {
+      source  = "hashicorp/google"
+      version = "~> 4"
+    }
+    google-beta = {
+      source  = "hashicorp/google-beta"
+      version = "~> 4"
+    }
+  }
+  provider_meta "google" {
+    module_name = "cloud-solutions/cloud-composer-etl-v0.1"
+  }
+}
 
-options:
-  env:
-    - TF_VAR_project_id=$PROJECT_ID
+provider "google" {
+  project = var.project_id
+  region  = var.region
+}
 
-tags:
-  - terraform
-  - cloud-composer
-  - destroy
-
-timeout: 3600s
+provider "google-beta" {
+  project = var.project_id
+  region  = var.region
+}
