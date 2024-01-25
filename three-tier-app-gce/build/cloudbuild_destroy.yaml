@@ -22,13 +22,13 @@ steps:
     terraform init \
     -backend-config="bucket=$PROJECT_ID-tf-state" \
     -backend-config="prefix=three-tier-app-gce"
-  dir: terraform
+  dir: infra
 - id: 'tf destroy'
   name: 'hashicorp/terraform:1.0.0'
   args: 
   - destroy
   - -auto-approve
-  dir: terraform
+  dir: infra
 options:
   env:
     - TF_VAR_project_id=$PROJECT_ID
