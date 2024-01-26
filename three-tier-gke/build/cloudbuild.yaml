@@ -22,20 +22,20 @@ steps:
     terraform init \
     -backend-config="bucket=$PROJECT_ID-tf-state" \
     -backend-config="prefix=three-tier"
-  dir: terraform
+  dir: infra
       
 - id: 'tf plan'
   name: 'hashicorp/terraform:1.0.0'
   args: 
   - plan
-  dir: terraform
+  dir: infra
 
 - id: 'tf apply'
   name: 'hashicorp/terraform:1.0.0'
   args: 
   - apply
   - -auto-approve
-  dir: terraform
+  dir: infra
 
 - id: 'upload data'
   name: 'gcr.io/cloud-builders/gcloud-slim'
@@ -51,22 +51,22 @@ steps:
     gcloud sql import sql $$DATABASE_INSTANCE gs://$PROJECT_ID-sqldata/schema.sql -q
     gsutil rm gs://$PROJECT_ID-sqldata/schema.sql
     gsutil rb gs://$PROJECT_ID-sqldata
-  dir: sql
+  dir: build
 
 - id: k8s create namespaces
   name: 'gcr.io/cloud-builders/kubectl'
   args: ['apply', '-f', 'namespaces.yaml']
-  dir: k8s
+  dir: build
 
 - id: k8s deploy todo-backend-example
   name: 'gcr.io/cloud-builders/kubectl'
   args: ['apply', '-f', 'todo-backend-example.yaml', '-n', 'back-end']
-  dir: k8s
+  dir: build
 
 - id: k8s deploy todo-front-example
   name: 'gcr.io/cloud-builders/kubectl'
   args: ['apply', '-f', 'todo-front-example.yaml', '-n', 'front-end']
-  dir: k8s
+  dir: build
 
 options:
   env:
