@@ -22,13 +22,13 @@ steps:
     terraform init \
     -backend-config="bucket=$PROJECT_ID-tf-state" \
     -backend-config="prefix=data-analytics-platform-scheduled"
-  dir: terraform
+  dir: infra
 - id: 'tf apply'
   name: 'hashicorp/terraform:1.3.9'
   args: 
   - apply
   - -auto-approve
-  dir: terraform
+  dir: infra
 options:
   env:
     - TF_VAR_project_id=$PROJECT_ID
