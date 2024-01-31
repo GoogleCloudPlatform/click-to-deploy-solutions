@@ -17,3 +17,8 @@ resource "google_document_ai_processor" "form_parser" {
   display_name = local.processor_name
   type         = "FORM_PARSER_PROCESSOR"
 }
+resource "google_document_ai_processor" "doc_summarizer" {
+  location     = var.location
+  display_name = local.summarizer_name
+  type         = "SUMMARY_PROCESSOR"
+}

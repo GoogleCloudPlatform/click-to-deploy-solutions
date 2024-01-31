@@ -37,6 +37,11 @@ resource "google_bigquery_table" "form_parser" {
     "name": "document_content",
     "type": "JSON",
     "mode": "NULLABLE"
+  },
+  {
+    "name": "document_summary",
+    "type": "STRING",
+    "mode": "NULLABLE"
   }
 ]
 EOF
