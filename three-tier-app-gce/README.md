@@ -57,7 +57,7 @@ sh prereq.sh
 
 3. Run the Cloud Build Job
 ```
-gcloud builds submit . --config cloudbuild.yaml
+gcloud builds submit . --config build/cloudbuild.yaml
 ```
 
 ## Testing 
@@ -90,5 +90,5 @@ Finally, if you paste the ip and enter in your browser, you see the example appl
 
 2. Run the command below on Cloud Shell to delete the resources.
 ```
-gcloud builds submit . --config cloudbuild_destroy.yaml
+gcloud builds submit . --config build/cloudbuild_destroy.yaml
 ```
