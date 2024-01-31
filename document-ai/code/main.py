@@ -21,7 +21,7 @@ def process_document(bucket_name, object_name):
     with open(file_path, "rb") as image:
         image_content = image.read()
     # Set the document content in the request
-    document = {"content": image_content, "mime_type": "application/pdf"}
+    document = {"content": image_content, "mime_type": blob.content_type}
 
     # Configure the process request
     processor_name = os.getenv("FORM_PARSER_PROCESSOR")
@@ -47,7 +47,7 @@ def process_document(bucket_name, object_name):
 
     # Extract Summary
     # Set the document content in the request
-    document = {"content": image_content, "mime_type": "application/pdf"}
+    document = {"content": image_content, "mime_type": blob.content_type}
     print("Summarizing Document")    
     summary_processor_name = os.getenv("SUMMARY_PROCESSOR")
     if not summary_processor_name:
@@ -55,13 +55,9 @@ def process_document(bucket_name, object_name):
         return
 
     summary_request = {"name": summary_processor_name, "document": document}
-    print(summary_processor_name)    
     summary_result = client.process_document(request=summary_request)
     document = summary_result.document
-    print(document)
     summary_text = document.entities[0].mention_text
-    print(summary_text)
-
     print("Document processing complete.")
     process_output(bucket_name, object_name, document_text, summary_text, document_dict)
 
