@@ -16,11 +16,11 @@ steps:
 - id: k8s delete todo-backend-example
   name: 'gcr.io/cloud-builders/kubectl'
   args: ['delete', '-f', 'todo-backend-example.yaml', '-n', 'back-end']
-  dir: k8s
+  dir: build
 - id: k8s delete todo-front-example
   name: 'gcr.io/cloud-builders/kubectl'
   args: ['delete', '-f', 'todo-front-example.yaml', '-n', 'front-end']
-  dir: k8s
+  dir: build
 - id: 'tf init'
   name: 'hashicorp/terraform:1.0.0'
   entrypoint: 'sh'
@@ -30,14 +30,14 @@ steps:
     terraform init \
     -backend-config="bucket=$PROJECT_ID-tf-state" \
     -backend-config="prefix=three-tier"
-  dir: terraform
+  dir: infra
 
 - id: 'tf apply'
   name: 'hashicorp/terraform:1.0.0'
   args: 
   - destroy
   - -auto-approve
-  dir: terraform
+  dir: infra
 
 
 options:
