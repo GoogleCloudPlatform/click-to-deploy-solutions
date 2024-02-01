@@ -1,8 +1,8 @@
 from google.cloud import bigquery, documentai_v1beta3, storage
 import functions_framework
+from google.cloud import documentai
 import os
 import json
-
 
 def process_document(bucket_name, object_name):
     """Process a document stored in GCS."""
@@ -20,13 +20,15 @@ def process_document(bucket_name, object_name):
     # Read the file into memory
     with open(file_path, "rb") as image:
         image_content = image.read()
+    # Set the document content in the request
     document = {"content": image_content, "mime_type": blob.content_type}
 
     # Configure the process request
-    processor_name = os.getenv("DOC_AI_PROCESSOR")
+    processor_name = os.getenv("FORM_PARSER_PROCESSOR")
     if not processor_name:
-        print("Environment variable DOC_AI_PROCESSOR not set")
-        exit(1)
+        print("Environment variable FORM_PARSER_PROCESSOR not set")
+        return
+
     request = {"name": processor_name, "document": document}
 
     # Use the Document AI client to process the request
@@ -43,10 +45,24 @@ def process_document(bucket_name, object_name):
             fieldValue = get_text(form_field.field_value, document)
             document_dict[f"{fieldName}"] = fieldValue
 
+    # Extract Summary
+    # Set the document content in the request
+    document = {"content": image_content, "mime_type": blob.content_type}
+    print("Summarizing Document")    
+    summary_processor_name = os.getenv("SUMMARY_PROCESSOR")
+    if not summary_processor_name:
+        print("Environment variable SUMMARY_PROCESSOR not set")
+        return
+
+    summary_request = {"name": summary_processor_name, "document": document}
+    summary_result = client.process_document(request=summary_request)
+    document = summary_result.document
+    summary_text = document.entities[0].mention_text
     print("Document processing complete.")
-    process_output(bucket_name, object_name, document_text, document_dict)
+    process_output(bucket_name, object_name, document_text, summary_text, document_dict)
 
 
+    
 def get_text(doc_element: dict, document: dict):
     """
     Document AI identifies form fields by their offsets
@@ -67,7 +83,7 @@ def get_text(doc_element: dict, document: dict):
     return response
 
 
-def process_output(bucket_name, object_name, document_text, document_dict):
+def process_output(bucket_name, object_name, document_text, summary_text, document_dict):
     """Moves a blob from one bucket to another."""
     print("Process output started.")
     storage_client = storage.Client()
@@ -80,10 +96,16 @@ def process_output(bucket_name, object_name, document_text, document_dict):
     results_text_blob = destination_bucket.blob(results_text_name)
     results_text_blob.upload_from_string(document_text)
 
+    print("Saving summary results into the output bucket...")
+    results_summary_name = "{}.summary".format(object_name)
+    results_summary_blob = destination_bucket.blob(results_summary_name)
+    results_summary_blob.upload_from_string(summary_text)
+
     print("Saving json results into the output bucket...")
     results_json = {
         "document_file_name": object_name,
-        "document_content": document_dict
+        "document_content": document_dict,
+        "document_summary": summary_text       
     }
     results_json = json.dumps(results_json)
     results_json_name = "{}.json".format(object_name)
@@ -105,6 +127,7 @@ def process_output(bucket_name, object_name, document_text, document_dict):
         schema=[
             bigquery.SchemaField("document_file_name", "STRING"),
             bigquery.SchemaField("document_content", "JSON"),
+            bigquery.SchemaField("document_summary", "STRING"),
         ],
         source_format=bigquery.SourceFormat.NEWLINE_DELIMITED_JSON,
     )

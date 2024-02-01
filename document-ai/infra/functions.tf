@@ -50,7 +50,8 @@ resource "google_cloudfunctions2_function" "function" {
     timeout_seconds       = 60
     service_account_email = google_service_account.doc_ai_form_function.email
     environment_variables = {
-      DOC_AI_PROCESSOR = google_document_ai_processor.form_parser.id
+      FORM_PARSER_PROCESSOR = google_document_ai_processor.form_parser.id
+      SUMMARY_PROCESSOR = google_document_ai_processor.doc_summarizer.id
       GCS_OUTPUT       = google_storage_bucket.doc_output.name
       BQ_TABLE_ID      = local.bq_table_id
       BQ_LOCATION      = var.region

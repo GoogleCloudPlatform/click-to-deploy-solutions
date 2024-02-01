@@ -22,6 +22,7 @@ locals {
 
   function_name  = "form-parser"
   processor_name = "form-parser-${var.location}"
+  summarizer_name = "summary-parser-${var.location}"  
 
   bq_table_name   = "form_parser"
   bq_dataset_name = "document_ai"
