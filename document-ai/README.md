@@ -1,10 +1,10 @@
 [![banner](../banner.png)](https://cloud.google.com/?utm_source=github&utm_medium=referral&utm_campaign=GCP&utm_content=packages_repository_banner)
 
-# Extract data from your documents using generative AI on Google Cloud
+# Extract data from your documents using Generative AI on Google Cloud
 
 ## Introduction
 
-This architecture uses click-to-deploy to create a pipeline for extracting data from documents with Document AI and storing valuable data on Big Query.It leverages AI summarization to provide concise overviews of the extracted insights, improving accessibility and efficiency.
+This architecture uses click-to-deploy to create a pipeline for extracting data from documents with Document AI and storing valuable data on Big Query. It leverages AI summarization to provide concise overviews of the extracted insights, improving accessibility and efficiency.
 
 This architecture is designed to extract data from documents using Google Document AI form processor and combine the power of a scalable data warehouse like Big Query enabling organizations to automate the extraction of structured data from various types of documents, such as forms, invoices, receipts, and more. 
 
@@ -12,9 +12,7 @@ In this architecture, documents are uploaded to Google Cloud Storage. An event t
 
 The Document AI form processor applies machine learning models to automatically identify form fields, extract their values, and map them to appropriate data types. It leverages advanced techniques such as optical character recognition (OCR), natural language processing, and entity extraction. Along with structured data extraction, the processor can generate concise AI-powered summaries of the document's key points. The extracted form data is then saved to BigQuery so organizations can leverage BigQuery's powerful querying capabilities, data visualization tools, and machine learning capabilities to gain insights from the extracted form data. 
 
-In summary , this architecture allows for seamless integration between the Document AI form processor, AI summarization capabilities,and BigQuery, enabling organizations to automate the extraction of structured data from documents, obtain quick summaries of essential content, and leverage the combined information for various analytics and decision-making purposes.
-
-
+In summary, this architecture allows for seamless integration between the Document AI form processor, AI summarization capabilities, and BigQuery, enabling organizations to automate the extraction of structured data from documents, obtain quick summaries of essential content, and leverage the combined information for various analytics and decision-making purposes.
 
 ## Use cases
 These are some examples of the use cases you can build on top of this architecture:
