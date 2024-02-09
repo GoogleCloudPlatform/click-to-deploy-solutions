@@ -1,4 +1,4 @@
-# Host your Website on Google Cloud 
+# Extract data from your documents using Generative AI on Google Cloud
 
 ## Let's get started
 
