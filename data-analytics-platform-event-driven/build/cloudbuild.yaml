@@ -13,6 +13,16 @@
 # limitations under the License.
 
 steps:
+- id: 'zip code'
+  name: 'ubuntu:bionic'
+  entrypoint: 'sh'
+  args: 
+  - '-c'
+  - | 
+    apt-get update; apt install zip -y
+    zip /workspace/function-source.zip main.py requirements.txt
+  dir: code
+
 - id: 'tf init'
   name: 'hashicorp/terraform:1.3.9'
   entrypoint: 'sh'
@@ -22,17 +32,18 @@ steps:
     terraform init \
     -backend-config="bucket=$PROJECT_ID-tf-state" \
     -backend-config="prefix=data-analytics-platform-event-driven"
-  dir: terraform
+  dir: infra
 - id: 'tf apply'
   name: 'hashicorp/terraform:1.3.9'
   args: 
-  - destroy
+  - apply
   - -auto-approve
-  dir: terraform
+  dir: infra
 options:
   env:
     - TF_VAR_project_id=$PROJECT_ID
+    - REGION=southamerica-east1
 tags:
   - terraform
   - data-analytics-platform-event-driven
-  - destroy
+  - apply
