@@ -22,20 +22,20 @@ steps:
     terraform init \
     -backend-config="bucket=$PROJECT_ID-tf-state" \
     -backend-config="prefix=ecommerce-web-hosting"
-  dir: terraform
+  dir: infra
       
 - id: 'tf plan'
   name: 'hashicorp/terraform:1.0.0'
   args: 
   - plan
-  dir: terraform
+  dir: infra
 
 - id: 'tf apply'
   name: 'hashicorp/terraform:1.0.0'
   args: 
   - apply
   - -auto-approve
-  dir: terraform
+  dir: infra
 
 - id: 'upload images'
   name: 'gcr.io/cloud-builders/gcloud-slim'
