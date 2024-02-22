@@ -43,7 +43,8 @@ gcloud services enable redis.googleapis.com \
     sqladmin.googleapis.com \
     storage.googleapis.com \
     cloudbuild.googleapis.com \
-    cloudresourcemanager.googleapis.com
+    cloudresourcemanager.googleapis.com \
+    serviceusage.googleapis.com
 
 echo "Granting Cloud Build's Service Account IAM roles to deploy the resources..."
 PROJECT_NUMBER=$(gcloud projects describe $GOOGLE_CLOUD_PROJECT --format='value(projectNumber)')
