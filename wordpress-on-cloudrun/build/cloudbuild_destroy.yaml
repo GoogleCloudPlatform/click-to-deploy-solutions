@@ -1,0 +1,4 @@
+steps:
+  - name: 'hashicorp/terraform'
+    args: ['destroy', '-var', 'project_id=$PROJECT_ID', '-var', 'prefix=wordpress-on-cloudrun']
+    dir: infra

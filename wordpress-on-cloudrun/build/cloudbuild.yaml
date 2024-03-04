@@ -1,0 +1,13 @@
+steps:
+  - name: 'hashicorp/terraform'
+    args: 
+      - 'init'
+      - '-backend-config=bucket=$PROJECT_ID-tf-state' 
+      - '-backend-config=prefix=wordpress-on-cloudrun'
+    dir: infra
+  - name: 'hashicorp/terraform'
+    args: ['plan', '-var', 'project_id=$PROJECT_ID', '-var', 'prefix=wordpress-on-cloudrun']
+    dir: infra
+  - name: 'hashicorp/terraform'
+    args: ['apply', '-var', 'project_id=$PROJECT_ID', '-var', 'prefix=wordpress-on-cloudrun', '-auto-approve']
+    dir: infra
