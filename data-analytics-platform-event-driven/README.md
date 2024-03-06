@@ -69,7 +69,7 @@ Once it is finished, you can go to the next section to test your architecture.
 ## Testing the architecture
 After you deployed the solution, you can test it by loading the sample file on this repository to the upload bucket by running the `gsutil` command below, or uploading using the console.
 ```
-gsutil cp sample_data/order_events_001.csv gs://your-upload-bucket/ecommerce/order_events/
+gsutil cp assets/order_events_001.csv gs://your-upload-bucket/ecommerce/order_events/
 ```
 
 Then, check the uploaded data on BigQuery > ecommerce dataset > order_events table.
