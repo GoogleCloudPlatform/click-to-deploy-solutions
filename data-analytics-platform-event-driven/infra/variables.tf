@@ -22,15 +22,20 @@ locals {
   })
 }
 
+# ID of the project in which you want to deploy the solution
+# This can be modify during deplopyment ONLY as it is part of the guided deployment. Do not modify this on the terraform.tfvars.
+
 variable "project_id" {
   description = "GCP Project ID"
 }
 
+#Defines the deployment region for cloud resources.
 variable "region" {
   type        = string
   description = "GCP region"
 }
 
+#Assigns a label to provisioned cloud resources
 variable "resource_labels" {
   type        = map(string)
   description = "Resource labels"
