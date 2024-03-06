@@ -14,6 +14,9 @@
 
 region = "southamerica-east1"
 
+# ID of the project in which you want to deploy the solution
+project_id = ""
+
 resource_labels = {
   env = "sandbox"
 }
