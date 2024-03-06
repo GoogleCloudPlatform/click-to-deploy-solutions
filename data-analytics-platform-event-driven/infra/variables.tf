@@ -23,8 +23,6 @@ locals {
 }
 
 # ID of the project in which you want to deploy the solution
-# This can be modify during deplopyment ONLY as it is part of the guided deployment. Do not modify this on the terraform.tfvars.
-
 variable "project_id" {
   description = "GCP Project ID"
 }
