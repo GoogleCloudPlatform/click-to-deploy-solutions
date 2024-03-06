@@ -58,7 +58,7 @@ Please note - New organizations have the 'Enforce Domain Restricted Sharing' pol
 
 3. Run the Cloud Build Job
 ```
-gcloud builds submit . --config cloudbuild.yaml
+gcloud builds submit . --config ./build/cloudbuild.yaml
 ```
 
 If you face a problem with the EventArc API during the deployment, please check out the [known issues section](#known-issues).
@@ -83,7 +83,7 @@ Then, check the uploaded data on BigQuery > ecommerce dataset > order_events tab
 
 2. Run the command below on Cloud Shell to destroy the resources.
 ```
-gcloud builds submit . --config cloudbuild_destroy.yaml
+gcloud builds submit . --config ./build/cloudbuild_destroy.yaml
 ```
 
 ## Known issues
