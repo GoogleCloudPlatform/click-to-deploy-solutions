@@ -46,7 +46,7 @@ Pricing Estimates - We have created a sample estimate based on some usage we see
 :clock1: Estimated deployment time: 8 min
 
 1. Click on Open in Google Cloud Shell button below.
-<a href="https://ssh.cloud.google.com/cloudshell/editor?cloudshell_git_repo=https://github.com/GoogleCloudPlatform/click-to-deploy-solutions&cloudshell_workspace=three-tier-app-gce&cloudshell_open_in_editor=terraform/terraform.tfvars" target="_new">
+<a href="https://ssh.cloud.google.com/cloudshell/editor?cloudshell_git_repo=https://github.com/GoogleCloudPlatform/click-to-deploy-solutions&cloudshell_workspace=three-tier-app-gce&cloudshell_open_in_editor=infra/terraform.tfvars" target="_new">
     <img alt="Open in Cloud Shell" src="https://gstatic.com/cloudssh/images/open-btn.svg">
 </a>
 
