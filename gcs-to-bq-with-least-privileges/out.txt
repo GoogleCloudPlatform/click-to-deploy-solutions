@@ -1,0 +1,122 @@
+Creating temporary tarball archive of 39 file(s) totalling 812.7 KiB before compression.
+Some files were not included in the source upload.
+
+Check the gcloud log [/tmp/tmp.c2ChAjhrPE/logs/2024.03.12/15.17.51.846091.log] to see which files and the contents of the
+default gcloudignore file used (see `$ gcloud topic gcloudignore` to learn
+more).
+
+Uploading tarball of [.] to [gs://gcs-to-bq-416503_cloudbuild/source/1710256672.034266-ae243272a03d400a800a35ddddb5f4df.tgz]
+Created [https://cloudbuild.googleapis.com/v1/projects/gcs-to-bq-416503/locations/global/builds/197a10db-4d42-4afb-9dc8-f3eac6928473].
+Logs are available at [ https://console.cloud.google.com/cloud-build/builds/197a10db-4d42-4afb-9dc8-f3eac6928473?project=543271471197 ].
+
+BUILD FAILURE: Build step failure: build step 0 "hashicorp/terraform:1.4.4" failed: step exited with non-zero status: 1
+ERROR: (gcloud.builds.submit) build 197a10db-4d42-4afb-9dc8-f3eac6928473 completed with status "FAILURE"
+--------------------------------------------------------------------------- REMOTE BUILD OUTPUT ---------------------------------------------------------------------------
+starting build "197a10db-4d42-4afb-9dc8-f3eac6928473"
+
+FETCHSOURCE
+Fetching storage object: gs://gcs-to-bq-416503_cloudbuild/source/1710256672.034266-ae243272a03d400a800a35ddddb5f4df.tgz#1710256672611903
+Copying gs://gcs-to-bq-416503_cloudbuild/source/1710256672.034266-ae243272a03d400a800a35ddddb5f4df.tgz#1710256672611903...
+/ [0 files][    0.0 B/711.7 KiB]                                                / [1 files][711.7 KiB/711.7 KiB]                                                
+Operation completed over 1 objects/711.7 KiB.
+BUILD
+Starting Step #0 - "tf init"
+Step #0 - "tf init": Pulling image: hashicorp/terraform:1.4.4
+Step #0 - "tf init": 1.4.4: Pulling from hashicorp/terraform
+Step #0 - "tf init": f56be85fc22e: Pulling fs layer
+Step #0 - "tf init": 9ad63c827f1d: Pulling fs layer
+Step #0 - "tf init": b6503fa041a9: Pulling fs layer
+Step #0 - "tf init": f56be85fc22e: Verifying Checksum
+Step #0 - "tf init": f56be85fc22e: Download complete
+Step #0 - "tf init": 9ad63c827f1d: Verifying Checksum
+Step #0 - "tf init": 9ad63c827f1d: Download complete
+Step #0 - "tf init": f56be85fc22e: Pull complete
+Step #0 - "tf init": b6503fa041a9: Verifying Checksum
+Step #0 - "tf init": b6503fa041a9: Download complete
+Step #0 - "tf init": 9ad63c827f1d: Pull complete
+Step #0 - "tf init": b6503fa041a9: Pull complete
+Step #0 - "tf init": Digest: sha256:ae02539998f078b7c0b635ada1e80473a0e9d2d9c41224197ed9a0549650c759
+Step #0 - "tf init": Status: Downloaded newer image for hashicorp/terraform:1.4.4
+Step #0 - "tf init": docker.io/hashicorp/terraform:1.4.4
+Step #0 - "tf init": [31mUsage: terraform [global options] init [options]
+Step #0 - "tf init": 
+Step #0 - "tf init":   Initialize a new or existing Terraform working directory by creating
+Step #0 - "tf init":   initial files, loading any remote state, downloading modules, etc.
+Step #0 - "tf init": 
+Step #0 - "tf init":   This is the first command that should be run for any new or existing
+Step #0 - "tf init":   Terraform configuration per machine. This sets up all the local data
+Step #0 - "tf init":   necessary to run Terraform that is typically not committed to version
+Step #0 - "tf init":   control.
+Step #0 - "tf init": 
+Step #0 - "tf init":   This command is always safe to run multiple times. Though subsequent runs
+Step #0 - "tf init":   may give errors, this command will never delete your configuration or
+Step #0 - "tf init":   state. Even so, if you have important information, please back it up prior
+Step #0 - "tf init":   to running this command, just in case.
+Step #0 - "tf init": 
+Step #0 - "tf init": Options:
+Step #0 - "tf init": 
+Step #0 - "tf init":   -backend=false          Disable backend or Terraform Cloud initialization
+Step #0 - "tf init":                           for this configuration and use what was previously
+Step #0 - "tf init":                           initialized instead.
+Step #0 - "tf init": 
+Step #0 - "tf init":                           aliases: -cloud=false
+Step #0 - "tf init": 
+Step #0 - "tf init":   -backend-config=path    Configuration to be merged with what is in the
+Step #0 - "tf init":                           configuration file's 'backend' block. This can be
+Step #0 - "tf init":                           either a path to an HCL file with key/value
+Step #0 - "tf init":                           assignments (same format as terraform.tfvars) or a
+Step #0 - "tf init":                           'key=value' format, and can be specified multiple
+Step #0 - "tf init":                           times. The backend type must be in the configuration
+Step #0 - "tf init":                           itself.
+Step #0 - "tf init": 
+Step #0 - "tf init":   -force-copy             Suppress prompts about copying state data when
+Step #0 - "tf init":                           initializating a new state backend. This is
+Step #0 - "tf init":                           equivalent to providing a "yes" to all confirmation
+Step #0 - "tf init":                           prompts.
+Step #0 - "tf init": 
+Step #0 - "tf init":   -from-module=SOURCE     Copy the contents of the given module into the target
+Step #0 - "tf init":                           directory before initialization.
+Step #0 - "tf init": 
+Step #0 - "tf init":   -get=false              Disable downloading modules for this configuration.
+Step #0 - "tf init": 
+Step #0 - "tf init":   -input=false            Disable interactive prompts. Note that some actions may
+Step #0 - "tf init":                           require interactive prompts and will error if input is
+Step #0 - "tf init":                           disabled.
+Step #0 - "tf init": 
+Step #0 - "tf init":   -lock=false             Don't hold a state lock during backend migration.
+Step #0 - "tf init":                           This is dangerous if others might concurrently run
+Step #0 - "tf init":                           commands against the same workspace.
+Step #0 - "tf init": 
+Step #0 - "tf init":   -lock-timeout=0s        Duration to retry a state lock.
+Step #0 - "tf init": 
+Step #0 - "tf init":   -no-color               If specified, output won't contain any color.
+Step #0 - "tf init": 
+Step #0 - "tf init":   -plugin-dir             Directory containing plugin binaries. This overrides all
+Step #0 - "tf init":                           default search paths for plugins, and prevents the
+Step #0 - "tf init":                           automatic installation of plugins. This flag can be used
+Step #0 - "tf init":                           multiple times.
+Step #0 - "tf init": 
+Step #0 - "tf init":   -reconfigure            Reconfigure a backend, ignoring any saved
+Step #0 - "tf init":                           configuration.
+Step #0 - "tf init": 
+Step #0 - "tf init":   -migrate-state          Reconfigure a backend, and attempt to migrate any
+Step #0 - "tf init":                           existing state.
+Step #0 - "tf init": 
+Step #0 - "tf init":   -upgrade                Install the latest module and provider versions
+Step #0 - "tf init":                           allowed within configured constraints, overriding the
+Step #0 - "tf init":                           default behavior of selecting exactly the version
+Step #0 - "tf init":                           recorded in the dependency lockfile.
+Step #0 - "tf init": 
+Step #0 - "tf init":   -lockfile=MODE          Set a dependency lockfile mode.
+Step #0 - "tf init":                           Currently only "readonly" is valid.
+Step #0 - "tf init": 
+Step #0 - "tf init":   -ignore-remote-version  A rare option used for Terraform Cloud and the remote backend
+Step #0 - "tf init":                           only. Set this to ignore checking that the local and remote
+Step #0 - "tf init":                           Terraform versions use compatible state representations, making
+Step #0 - "tf init":                           an operation proceed even when there is a potential mismatch.
+Step #0 - "tf init":                           See the documentation on configuring Terraform with
+Step #0 - "tf init":                           Terraform Cloud for more information.[0m[0m
+Finished Step #0 - "tf init"
+ERROR
+ERROR: build step 0 "hashicorp/terraform:1.4.4" failed: step exited with non-zero status: 1
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
