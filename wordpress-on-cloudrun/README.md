@@ -37,16 +37,15 @@ Pricing Estimates - We have created a sample estimate based on some usage we see
 
 ## Setting up the project for the deployment
 
-This example will deploy all its resources into the project defined by the `project_id` variable. Please note that we assume this project already exists. However, if you provide the appropriate values to the `project_create` variable, the project will be created as part of the deployment.
+This example will deploy all its resources into the project defined by the user during the guided tutorial. Note, during the guided tutorial you can create a new project if needed in this case the identity performing the deployment needs `resourcemanager.projectCreator` on the resource hierarchy node specified by `project_create.parent` and `billing.user` on the billing account specified by `project_create.billing_account_id`.
 
-If `project_create` is set to null, the identity performing the deployment needs the `owner` role on the project defined by the `project_id` variable. Otherwise, the identity performing the deployment needs `resourcemanager.projectCreator` on the resource hierarchy node specified by `project_create.parent` and `billing.user` on the billing account specified by `project_create.billing_account_id`.
+![project_setup](assets/project_setup.png)
 
 ## Deploy the architecture
 
 Before we deploy the architecture, you will need the following information:
 
-* The __service project ID__.
-* A __unique prefix__ that you want all the deployed resources to have (for example: awesomestartup). This must be a string with no spaces or tabs.
+* A __Google cloud Region__ that you want all the deployed resources to be on.
 * A __Wordpress image__ if you want to use your own, otherwise you can use the provided standard image.
 * A __list of Groups or Users__ with Service Account Token creator role on Service Accounts in IAM format, eg 'group:group@domain.com'.
 
@@ -68,21 +67,10 @@ During the process, you will be asked for some user input. All necessary variabl
 
 <center>
 <h4>🎉 Congratulations! 🎉  <br />
+
 You have successfully deployed the foundation for running Wordpress using CloudRun on Google Cloud.</h4></center>
 
-
-**Note**: 
-You might get the following error (or a similar one):
-
-``` {shell}
-│ Error: resource is in failed state "Ready:False", message: Revision '...' is not ready and cannot serve traffic.│
-```
-
-In case this happens, manually run
-``` {shell}
-    deploystack install
-```
-to run the installation again.
+If you face a problem, please check out the [known issues section](#known-issues).
 
 ## Using the Wordpress Installation
 
@@ -105,6 +93,21 @@ deploystack uninstall
 ```
 
 The above command will delete the associated resources so there will be no billable charges made afterwards.
+
+
+## Known issues
+ 
+You might get the following error (or a similar one):
+
+``` {shell}
+│ Error: resource is in failed state "Ready:False", message: Revision '...' is not ready and cannot serve traffic.│
+```
+
+In case this happens, manually run
+``` {shell}
+    deploystack install
+```
+to run the installation again.
 <!-- BEGIN TFDOC -->
 
 ## Special Thanks
