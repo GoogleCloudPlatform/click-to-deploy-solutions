@@ -48,7 +48,8 @@ Before we deploy the architecture, you will need the following information:
 * A __Google cloud Region__ that you want all the deployed resources to be on.
 * A __unique prefix__ that you want all the deployed resources to have (for example: awesomestartup). This must be a string with no spaces or tabs.
 * A __Wordpress image__ if you want to use your own, otherwise you can use the provided standard image.
-* A __list of Groups or Users__ with Service Account Token creator role on Service Accounts in IAM format, eg 'group:group@domain.com'.
+* A __list of Groups or Users__ IAM member authorized to access the end-point (for example, 'user:YOUR_IAM_USER' for only you      
+     or 'allUsers' for everyone).
 
 **Notes**:
 
