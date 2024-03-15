@@ -33,7 +33,7 @@ locals {
     "roles/iam.serviceAccountTokenCreator" = local.all_principals_iam
   }
   connector = var.connector == null ? google_vpc_access_connector.connector.0.self_link : var.connector
-  prefix    = var.prefix == null ? "" : "${var.prefix}-"
+  prefix    = "wordpress-on-cloudrun"
 }
 
 # either create a project or set up the given one
@@ -65,7 +65,7 @@ resource "random_password" "wp_password" {
 module "cloud_run" {
   source     = "github.com/GoogleCloudPlatform/cloud-foundation-fabric//modules/cloud-run?ref=v23.0.0"
   project_id = module.project.project_id
-  name       = "${local.prefix}cr-wordpress"
+  name       = "cr-wordpress"
   region     = var.region
 
   containers = {

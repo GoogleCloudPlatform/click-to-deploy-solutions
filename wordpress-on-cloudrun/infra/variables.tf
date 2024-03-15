@@ -57,7 +57,7 @@ variable "ip_ranges" {
 variable "prefix" {
   description = "Unique prefix used for resource names. Not used for project if 'project_create' is null."
   type        = string
-  default     = ""
+  default     = "wordpress-on-cloudrun"
 }
 
 variable "principals" {
