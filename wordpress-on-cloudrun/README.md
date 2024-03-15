@@ -35,42 +35,35 @@ The main components that are deployed in this architecture are the following (yo
 Pricing Estimates - We have created a sample estimate based on some usage we see from new startups looking to scale. This estimate would give you an idea of how much this deployment would essentially cost per month at this scale and you extend it to the scale you further prefer. Here's the [link](https://cloud.google.com/products/calculator#id=8a7471c9-98df-4b71-97de-6222d22484c8).
 
 
-## Setting up the project for the deployment
-
-This example will deploy all its resources into the project defined by the user during the guided tutorial. Note, during the guided tutorial you can create a new project if needed in this case the identity performing the deployment needs `resourcemanager.projectCreator` on the resource hierarchy node specified by `project_create.parent` and `billing.user` on the billing account specified by `project_create.billing_account_id`.
-
-![project_setup](assets/project_setup.png)
-
 ## Deploy the architecture
 
-Before we deploy the architecture, you will need the following information:
+1. Click on Open in Google Cloud Shell button below. Sign in if required and when the prompt appears, click on “confirm”. It will walk you through setting up your architecture.
 
-* A __Google cloud Region__ that you want all the deployed resources to be on.
-* A __unique prefix__ that you want all the deployed resources to have (for example: awesomestartup). This must be a string with no spaces or tabs.
-* A __Wordpress image__ if you want to use your own, otherwise you can use the provided standard image.
-* A __list of Groups or Users__ IAM member authorized to access the end-point (for example, 'user:YOUR_IAM_USER' for only you      
-     or 'allUsers' for everyone).
+<a href="https://ssh.cloud.google.com/cloudshell/editor?cloudshell_git_repo=https://github.com/GoogleCloudPlatform/click-to-deploy-solutions&cloudshell_workspace=wordpress-on-cloudrun&cloudshell_open_in_editor=infra/variables.tf&cloudshell_tutorial=tutorial.md" target="_new">
+    <img alt="Open in Cloud Shell" src="https://gstatic.com/cloudssh/images/open-btn.svg">
+</a>
+
+2. Run the prerequisites script to enable APIs and set Cloud Build permissions.
+```
+sh prereq.sh
+```
+
+Please note - New organizations have the 'Enforce Domain Restricted Sharing' policy enforced by default. You may have to edit the policy to allow public access to your Cloud Run instance. Please refer to this [page](https://cloud.google.com/resource-manager/docs/organization-policy/restricting-domains#setting_the_organization_policy) for more information.
+
+3. Run the Cloud Build Job
+```
+gcloud builds submit . --config build/cloudbuild.yaml
+```
+<center>
+<h4>🎉 Congratulations! 🎉  <br />
+
+You have successfully deployed the foundation for running Wordpress using CloudRun on Google Cloud.</h4></center>
 
 **Notes**:
 
 1. If you want to change your admin password later on, please note that you can only do so via the Wordpress user interface.
 2. If you have the [domain restriction org. policy](https://cloud.google.com/resource-manager/docs/organization-policy/restricting-domains) on your organization, you have to edit the `cloud_run_invoker` variable and give it a value that will be accepted in accordance to your policy.
 
-Click on the button below, sign in if required and when the prompt appears, click on “confirm”. It will walk you through setting up your architecture.
-
-[![Open Cloud Shell](https://gstatic.com/cloudssh/images/open-btn.svg)](https://shell.cloud.google.com/cloudshell/editor?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2FGoogleCloudPlatform%2Fdeploystack-wordpress-on-cloudrun&cloudshell_image=gcr.io%2Fds-artifacts-cloudshell%2Fdeploystack_custom_image&cloudshell_git_branch=main&cloudshell_tutorial=tutorial.md)
-
-
-This is the startup screen that appears after clicking the button and confirming:
-
-![cloud_shell](assets/cloud_shell.png)
-
-During the process, you will be asked for some user input. All necessary variables are explained at the bottom of this ReadMe file. In case of failure, you can simply click the button again.
-
-<center>
-<h4>🎉 Congratulations! 🎉  <br />
-
-You have successfully deployed the foundation for running Wordpress using CloudRun on Google Cloud.</h4></center>
 
 If you face a problem, please check out the [known issues section](#known-issues).
 
@@ -86,16 +79,15 @@ terraform output cloud_run_service
 
 When clicking on the Wordpress link, it will immediately prompt you to register as an administrator. The password will be pre-filled and can be changed after registration. 
 
+![Wordpress on Cloud Run](assets/wordPress_setup.png "Wordpress on Cloud Run")
+
 ## Cleaning Up Your Environment
 
-The easiest way to remove all deployed resources is to run the following command in Cloud Shell:
-
-``` {shell}
-deploystack uninstall
+Execute the command below on Cloud Shell to delete the resources, so there will be no billable charges made afterwards..
 ```
+gcloud builds submit . --config build/cloudbuild_destroy.yaml
 
-The above command will delete the associated resources so there will be no billable charges made afterwards.
-
+```
 
 ## Known issues
  
@@ -107,9 +99,11 @@ You might get the following error (or a similar one):
 
 In case this happens, manually run
 ``` {shell}
-    deploystack install
+    gcloud builds submit . --config build/cloudbuild.yaml
 ```
 to run the installation again.
+
+
 <!-- BEGIN TFDOC -->
 
 ## Special Thanks
