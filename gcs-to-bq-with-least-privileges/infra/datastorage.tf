@@ -54,7 +54,7 @@ module "bigquery-dataset" {
         range = null # use start/end/interval for range
         time  = null
       }
-      schema              = file("${path.module}/data-demo/person.json")
+      schema              = file("../app/demo-data/person.json")
       deletion_protection = false
       options = {
         clustering      = null

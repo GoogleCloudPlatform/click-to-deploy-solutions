@@ -56,7 +56,7 @@ architecture:
 ## Architecture
 
 <figure id = "image-1">
-  <img src = "./diagram.png"
+  <img src = "./assets/diagram.png"
   width = "100%"
   alt = "GCS to BigQuery High-level diagram">
 </figure>
@@ -133,7 +133,7 @@ sh prereq.sh
 3. Run the Cloud Build Job
 
 ```bash
-gcloud builds submit . --config cloudbuild.yaml
+gcloud builds submit . --config ./build/cloudbuild.yaml
 ```
 
 ### Testing your architecture
@@ -152,7 +152,7 @@ gcloud auth application-default login
 Follow the instructions in the cloudshell to authenticate the user.
 
 To make the next steps easier, create two environment variables with the service
-project id and the prefix:
+project id:
 
 ```bash
 export PROJECT_ID=[PROJECT_ID]
@@ -170,13 +170,12 @@ We need to create 3 files:
 - **person_schema.json** This file should contain the table schema used to
   import the CSV data.
 
-An example of those files can be found in the folder `./data-demo` inside the same
-repository you're currently in.
+An example of those files can be found in the folder `./app/demo-data` inside the same repository you're currently in.
 
 You can copy the example files into the GCS bucket by running:
 
 ```bash
-gsutil cp data-demo/ gs://$PROJECT_ID-data/
+gsutil cp -r ./app/demo-data/* gs://$PROJECT_ID-data/
 ```
 
 After completion, the three essential files required to execute the Dataflow Job
@@ -185,21 +184,22 @@ will be copied to the GCS bucket created alongside the resources.
 Run the following command to start the dataflow job:
 
 ```bash
-gcloud dataflow jobs run test_batch_01 \ 
-    --gcs-location gs://dataflow-templates/latest/GCS_Text_to_BigQuery \ 
+gcloud dataflow jobs run test_batch_01 \
+    --gcs-location gs://dataflow-templates/latest/GCS_Text_to_BigQuery \
     --project $PROJECT_ID \
     --region europe-west1 \
     --disable-public-ips \
-    --subnetwork https://www.googleapis.com/compute/v1/projects/$PROJECT_ID/regions/europe-west1/subnetworks/subnet \ 
-    --staging-location gs://$PROJECT_ID-df-tmp \ 
-    --service-account-email df-loading@$PROJECT_ID.iam.gserviceaccount.com \ 
-    --parameters \ 
-        javascriptTextTransformFunctionName=transform,\ 
-        JSONPath=gs://$PROJECT_ID-data/person_schema.json,\ 
-        javascriptTextTransformGcsPath=gs://$PROJECT_ID-data/person_udf.js,\ 
-        inputFilePattern=gs://$PROJECT_ID-data/person.csv,\ 
-        outputTable=$PROJECT_ID:datalake.person,\ 
-        bigQueryLoadingTemporaryDirectory=gs://$PROJECT_ID-df-tmp
+    --subnetwork https://www.googleapis.com/compute/v1/projects/$PROJECT_ID/regions/europe-west1/subnetworks/subnet \
+    --staging-location gs://$PROJECT_ID-df-tmp \
+    --service-account-email df-loading@$PROJECT_ID.iam.gserviceaccount.com \
+    --parameters \
+javascriptTextTransformFunctionName=transform,\
+JSONPath=gs://$PROJECT_ID-data/person_schema.json,\
+javascriptTextTransformGcsPath=gs://$PROJECT_ID-data/person_udf.js,\
+inputFilePattern=gs://$PROJECT_ID-data/person.csv,\
+outputTable=$PROJECT_ID:datalake.person,\
+bigQueryLoadingTemporaryDirectory=gs://$PROJECT_ID-df-tmp
+
 ```
 
 This command will start a Dataflow job called `test_batch_01` that uses a Dataflow
@@ -208,7 +208,7 @@ transformation script stored in the public GCS bucket `gs://dataflow-templates/l
 The expected output is the following:
 
 <figure id = "image-2">
-  <img src = "./second_output.png"
+  <img src = "./assets/second_output.png"
   width = "100%"
   alt = "second_output">
 </figure>
@@ -216,7 +216,7 @@ The expected output is the following:
 Then, if you navigate to Dataflow on the console, you will see the following:
 
 <figure id = "image-3">
-  <img src = "./dataflow_console.png"
+  <img src = "./assets/dataflow_console.png"
   width = "100%"
   alt = "dataflow_console">
 </figure>
@@ -226,7 +226,7 @@ Dataflow. If you click on the job name, you can see the job graph created and
 how every step of the Dataflow pipeline is moving along:
 
 <figure id = "image-4">
-  <img src = "./dataflow_execution.png"
+  <img src = "./assets/dataflow_execution.png"
   width = "100%"
   alt = "dataflow_execution">
 </figure>
@@ -241,7 +241,7 @@ The easiest way to remove all the deployed resources is to run the following
 command in Cloud Shell:
 
 ```bash
-gcloud builds submit . --config cloudbuild_destroy.yaml
+gcloud builds submit . --config ./build/cloudbuild_destroy.yaml
 ```
 
 The above command will remove the associated resources so there will be no
