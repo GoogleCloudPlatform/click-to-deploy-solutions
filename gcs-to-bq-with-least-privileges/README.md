@@ -1,4 +1,4 @@
-[![GC Start](gcp_banner.png)](https://cloud.google.com/?utm_source=github&utm_medium=referral&utm_campaign=GCP&utm_content=packages_repository_banner)
+[![banner](../banner.png)](https://cloud.google.com/?utm_source=github&utm_medium=referral&utm_campaign=GCP&utm_content=packages_repository_banner)
 
 # Foundation Data Pipeline with Google Cloud
 
@@ -120,7 +120,7 @@ Before we deploy the architecture, you will need the following information:
 - The **service project ID**
 1. Click on the Open in Google Cloud Shell button below.
 
-<a href="https://ssh.cloud.google.com/cloudshell/editor?cloudshell_git_repo=https://github.com/GoogleCloudPlatform/click-to-deploy-solutions&cloudshell_workspace=gcs-to-bq-with-least-privileges&cloudshell_open_in_editor=terraform/terraform.tfvars" target="_new">
+<a href="https://ssh.cloud.google.com/cloudshell/editor?cloudshell_git_repo=https://github.com/GoogleCloudPlatform/click-to-deploy-solutions&cloudshell_workspace=gcs-to-bq-with-least-privileges&cloudshell_open_in_editor=infra/main.tf&cloudshell_tutorial=tutorial.md" target="_new">
     <img alt="Open in Cloud Shell" src="https://gstatic.com/cloudssh/images/open-btn.svg">
 </a>
 

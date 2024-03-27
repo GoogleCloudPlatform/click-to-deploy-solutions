@@ -33,13 +33,13 @@ In order to spin up this architecture, you will need to be a user with the
 export PROJECT_ID=[PROJECT_ID]
 ```
 
-1. Run the prerequisites script to enable APIs and set Cloud Build permissions.
+2. Run the prerequisites script to enable APIs and set Cloud Build permissions.
 
 ```bash
 sh prereq.sh
 ```
 
-1. Run the Cloud Build Job
+3. Run the Cloud Build Job
 
 ```bash
 gcloud builds submit . --config ./build/cloudbuild.yaml
