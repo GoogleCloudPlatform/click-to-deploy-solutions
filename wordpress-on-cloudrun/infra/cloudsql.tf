@@ -22,7 +22,7 @@ resource "random_password" "cloudsql_password" {
 module "vpc" {
   source     = "github.com/GoogleCloudPlatform/cloud-foundation-fabric//modules/net-vpc?ref=v23.0.0"
   project_id = module.project.project_id
-  name       = "${local.prefix}sql-vpc"
+  name       = "sql-vpc"
   subnets = [
     {
       ip_cidr_range = var.ip_ranges.sql_vpc
@@ -41,7 +41,7 @@ module "vpc" {
 resource "google_vpc_access_connector" "connector" {
   count         = var.create_connector ? 1 : 0
   project       = module.project.project_id
-  name          = "${local.prefix}wp-connector"
+  name          = "wp-connector"
   region        = var.region
   ip_cidr_range = var.ip_ranges.connector
   network       = module.vpc.self_link
@@ -52,7 +52,7 @@ module "cloudsql" {
   source           = "github.com/GoogleCloudPlatform/cloud-foundation-fabric//modules/cloudsql-instance?ref=v23.0.0"
   project_id       = module.project.project_id
   network          = module.vpc.self_link
-  name             = "${local.prefix}mysql"
+  name             = "mysql"
   region           = var.region
   database_version = local.cloudsql_conf.database_version
   tier             = local.cloudsql_conf.tier

@@ -1,4 +1,4 @@
-# Copyright 2023 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,28 +12,20 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-steps:
-- id: 'tf init'
-  name: 'hashicorp/terraform'
-  entrypoint: 'sh'
-  args: 
-  - '-c'
-  - | 
-    terraform init \
-    -backend-config="bucket=$PROJECT_ID-tf-state" \
-    -backend-config="prefix=wordpress-on-cloudrun"
-  dir: infra
-- id: 'tf apply'
-  name: 'hashicorp/terraform'
-  args: 
-  - apply
-  - -auto-approve
-  dir: infra
-options:
-  env:
-    - TF_VAR_project_id=$PROJECT_ID
-tags:
-  - terraform
-  - wordpress-on-cloudrun
-  - apply
-timeout: 3600s
+terraform {
+  required_version = ">= 1.4.4"
+  required_providers {
+    google = {
+      source  = "hashicorp/google"
+      version = ">= 4.69.1" # tftest
+    }
+    google-beta = {
+      source  = "hashicorp/google-beta"
+      version = ">= 4.69.1" # tftest
+    }
+  }
+
+  provider_meta "google" {
+    module_name = "cloud-solutions/gcs-to-bq-with-least-privileges-v1.0"
+  }
+}

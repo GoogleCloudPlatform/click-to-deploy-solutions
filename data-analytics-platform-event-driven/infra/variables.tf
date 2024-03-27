@@ -22,15 +22,18 @@ locals {
   })
 }
 
+# ID of the project in which you want to deploy the solution
 variable "project_id" {
   description = "GCP Project ID"
 }
 
+#Defines the deployment region for cloud resources.
 variable "region" {
   type        = string
   description = "GCP region"
 }
 
+#Assigns a label to provisioned cloud resources
 variable "resource_labels" {
   type        = map(string)
   description = "Resource labels"

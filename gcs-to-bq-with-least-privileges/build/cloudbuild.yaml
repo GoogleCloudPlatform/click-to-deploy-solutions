@@ -14,26 +14,40 @@
 
 steps:
 - id: 'tf init'
-  name: 'hashicorp/terraform'
+  name: 'hashicorp/terraform:1.4.4'
   entrypoint: 'sh'
   args: 
   - '-c'
   - | 
     terraform init \
     -backend-config="bucket=$PROJECT_ID-tf-state" \
-    -backend-config="prefix=wordpress-on-cloudrun"
+    -backend-config="prefix=gcs-to-bq" \
+    -var-file="terraform.tfvars"
   dir: infra
+      
+- id: 'tf plan'
+  name: 'hashicorp/terraform:1.4.4'
+  args: 
+  - plan
+  dir: infra
+
 - id: 'tf apply'
-  name: 'hashicorp/terraform'
+  name: 'hashicorp/terraform:1.4.4'
   args: 
   - apply
   - -auto-approve
   dir: infra
+
+
 options:
   env:
     - TF_VAR_project_id=$PROJECT_ID
+    - TF_VAR_project_number=$PROJECT_NUMBER
+    - TF_VAR_prefix=$PROJECT_ID
+
 tags:
   - terraform
-  - wordpress-on-cloudrun
-  - apply
+  - gcs-to-bq
+  - plan-apply
+
 timeout: 3600s
