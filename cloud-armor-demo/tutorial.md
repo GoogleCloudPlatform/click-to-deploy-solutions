@@ -2,9 +2,8 @@
 
 ## Let's get started
 
-This solution assumes you already have a project created and set up where you
-wish to host these resources. If not, and you would like for the project to
-create a new project as well, please refer to the [Creating and managing organization resources][1] for instructions.
+This example will deploy all its resources into the project defined by the `project_id` variable. 
+Please note that we assume this project already exists. 
 
 **Time to complete**: About 10 minutes
 
