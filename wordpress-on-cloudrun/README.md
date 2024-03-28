@@ -73,7 +73,11 @@ Upon completion, you will see the output with the values for the Cloud Run servi
 
 ``` {shell}
 terraform output
-# or for the concrete variable:
+```
+
+or for the concrete variable:
+
+``` {shell}
 terraform output cloud_run_service
 ```
 
