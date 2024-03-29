@@ -29,7 +29,7 @@ In summary, this architecture ensures that your website or application can handl
 
 ## Architecture 
 
-<p align="center"><img src="architecture.png"></p>
+<p align="center"><img src="assets/architecture.png"></p>
 
 The main components that we would be setting up are (to learn more about these products, click on the hyperlinks)
 
@@ -60,7 +60,7 @@ sh prereq.sh
 
 3. Run the Cloud Build Job
 ```
-gcloud builds submit . --config cloudbuild.yaml
+gcloud builds submit . --config build/cloudbuild.yaml
 ```
 
 ## Testing the architecture  
@@ -82,7 +82,7 @@ Finally, if you paste the ip and enter in your browser, you see the template
 ## Cleaning up your environment
 Execute the command below on Cloud Shell to delete the resources.
 ```
-gcloud builds submit . --config cloudbuild_destroy.yaml
+gcloud builds submit . --config build/cloudbuild_destroy.yaml
 ```
 
 This is not an official Google product.

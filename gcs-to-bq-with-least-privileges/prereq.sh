@@ -1,4 +1,3 @@
-# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,18 +13,24 @@
 
 set -e
 
+add_iam_member()
+{
+  gcloud projects add-iam-policy-binding $PROJECT_ID --member=$1 --role=$2
+}
+
 if [ -z "$GOOGLE_CLOUD_PROJECT" ]
 then
    echo Project not set!
-   echo What project do you want to deploy the solution to?
+   echo What Project Id do you want to deploy the solution to?
    read var_project_id
    gcloud config set project $var_project_id
-   export GOOGLE_CLOUD_PROJECT=$var_project_id
+   export PROJECT_ID=$var_project_id
+else
+   export PROJECT_ID=$GOOGLE_CLOUD_PROJECT
 fi
 
-
-echo Running prerequisites on project $GOOGLE_CLOUD_PROJECT
-BUCKET_NAME=gs://$GOOGLE_CLOUD_PROJECT-tf-state
+echo Running prerequisites on project $PROJECT_ID
+BUCKET_NAME=gs://$PROJECT_ID-tf-state
 if gsutil ls $BUCKET_NAME; then
     echo Terraform bucket already created!
 else
@@ -34,24 +39,26 @@ else
 fi
 
 echo Enabling required APIs...
-gcloud services enable redis.googleapis.com \
-    compute.googleapis.com \
-    sqladmin.googleapis.com \
-    secretmanager.googleapis.com \
-    container.googleapis.com \
-    servicenetworking.googleapis.com \
-    sqladmin.googleapis.com \
-    storage.googleapis.com \
-    cloudbuild.googleapis.com \
+gcloud services enable cloudbuild.googleapis.com \
+    bigquery.googleapis.com \
     cloudresourcemanager.googleapis.com \
-    serviceusage.googleapis.com
+    compute.googleapis.com \
+    iam.googleapis.com \
+    secretmanager.googleapis.com \
+    storage.googleapis.com \
+    storage-component.googleapis.com \
+    dataflow.googleapis.com \
+--project $PROJECT_ID
+
 
 echo "Granting Cloud Build's Service Account IAM roles to deploy the resources..."
-PROJECT_NUMBER=$(gcloud projects describe $GOOGLE_CLOUD_PROJECT --format='value(projectNumber)')
+PROJECT_NUMBER=$(gcloud projects describe $PROJECT_ID --format='value(projectNumber)')
 MEMBER=serviceAccount:$PROJECT_NUMBER@cloudbuild.gserviceaccount.com
-gcloud projects add-iam-policy-binding $GOOGLE_CLOUD_PROJECT --member=$MEMBER --role=roles/editor
-gcloud projects add-iam-policy-binding $GOOGLE_CLOUD_PROJECT --member=$MEMBER --role=roles/iam.securityAdmin
-gcloud projects add-iam-policy-binding $GOOGLE_CLOUD_PROJECT --member=$MEMBER --role=roles/compute.networkAdmin
-gcloud projects add-iam-policy-binding $GOOGLE_CLOUD_PROJECT --member=$MEMBER --role=roles/secretmanager.secretAccessor
+add_iam_member $MEMBER roles/editor
+add_iam_member $MEMBER roles/iam.securityAdmin
+add_iam_member $MEMBER roles/compute.networkAdmin
+add_iam_member $MEMBER roles/secretmanager.admin
+add_iam_member $MEMBER roles/eventarc.admin
 
 echo Script completed successfully!
+

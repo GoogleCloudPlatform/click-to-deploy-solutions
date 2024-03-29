@@ -12,8 +12,28 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-region = "southamerica-east1"
+steps:
+- id: 'tf init'
+  name: 'hashicorp/terraform:1.0.0'
+  entrypoint: 'sh'
+  args: 
+  - '-c'
+  - | 
+    terraform init \
+    -backend-config="bucket=$PROJECT_ID-tf-state" \
+    -backend-config="prefix=ecommerce-web-hosting"
+  dir: infra
 
-resource_labels = {
-  env = "sandbox"
-}
+- id: 'tf destroy'
+  name: 'hashicorp/terraform:1.0.0'
+  args: 
+  - destroy
+  - -auto-approve
+  dir: infra
+
+options:
+  env:
+    - TF_VAR_project_id=$PROJECT_ID
+    - TF_VAR_project_number=$PROJECT_NUMBER
+  
+timeout: 3600s

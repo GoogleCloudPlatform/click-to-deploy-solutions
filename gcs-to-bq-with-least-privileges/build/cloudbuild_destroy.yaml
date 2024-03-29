@@ -14,26 +14,30 @@
 
 steps:
 - id: 'tf init'
-  name: 'hashicorp/terraform:1.0.0'
+  name: 'hashicorp/terraform:1.4.4'
   entrypoint: 'sh'
   args: 
   - '-c'
   - | 
     terraform init \
     -backend-config="bucket=$PROJECT_ID-tf-state" \
-    -backend-config="prefix=ecommerce-web-hosting"
-  dir: terraform
+    -backend-config="prefix=streaming-data"
+  dir: infra
 
 - id: 'tf destroy'
-  name: 'hashicorp/terraform:1.0.0'
+  name: 'hashicorp/terraform:1.4.4'
   args: 
   - destroy
   - -auto-approve
-  dir: terraform
+  dir: infra
 
 options:
   env:
     - TF_VAR_project_id=$PROJECT_ID
-    - TF_VAR_project_number=$PROJECT_NUMBER
-  
+
+tags:
+  - terraform
+  - gcs-to-bq
+  - destroy
+
 timeout: 3600s

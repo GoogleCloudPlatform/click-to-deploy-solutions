@@ -26,7 +26,7 @@ These are some examples of the use cases you can build on top of this architectu
 
 ## Architecture
 
-<p align="center"><img src="architecture.png"></p>
+<p align="center"><img src="assets/architecture.png"></p>
 
 The main components that we would be setting up are (to learn more about these products, click on the hyperlinks)
 
@@ -45,7 +45,7 @@ Pricing Estimates - We have created a sample estimate based on some usage we see
 :clock1: Estimated deployment time: 8 min
 
 1. Click on Open in Google Cloud Shell button below.
-<a href="https://ssh.cloud.google.com/cloudshell/editor?cloudshell_git_repo=https://github.com/GoogleCloudPlatform/click-to-deploy-solutions&cloudshell_workspace=data-analytics-platform-event-driven&cloudshell_open_in_editor=terraform/terraform.tfvars" target="_new">
+<a href="https://ssh.cloud.google.com/cloudshell/editor?cloudshell_git_repo=https://github.com/GoogleCloudPlatform/click-to-deploy-solutions&cloudshell_workspace=data-analytics-platform-event-driven&cloudshell_open_in_editor=infra/terraform.tfvars" target="_new">
     <img alt="Open in Cloud Shell" src="https://gstatic.com/cloudssh/images/open-btn.svg">
 </a>
 
@@ -58,7 +58,7 @@ Please note - New organizations have the 'Enforce Domain Restricted Sharing' pol
 
 3. Run the Cloud Build Job
 ```
-gcloud builds submit . --config cloudbuild.yaml
+gcloud builds submit . --config ./build/cloudbuild.yaml
 ```
 
 If you face a problem with the EventArc API during the deployment, please check out the [known issues section](#known-issues).
@@ -69,7 +69,7 @@ Once it is finished, you can go to the next section to test your architecture.
 ## Testing the architecture
 After you deployed the solution, you can test it by loading the sample file on this repository to the upload bucket by running the `gsutil` command below, or uploading using the console.
 ```
-gsutil cp sample_data/order_events_001.csv gs://your-upload-bucket/ecommerce/order_events/
+gsutil cp assets/order_events_001.csv gs://your-upload-bucket/ecommerce/order_events/
 ```
 
 Then, check the uploaded data on BigQuery > ecommerce dataset > order_events table.
@@ -83,7 +83,7 @@ Then, check the uploaded data on BigQuery > ecommerce dataset > order_events tab
 
 2. Run the command below on Cloud Shell to destroy the resources.
 ```
-gcloud builds submit . --config cloudbuild_destroy.yaml
+gcloud builds submit . --config ./build/cloudbuild_destroy.yaml
 ```
 
 ## Known issues

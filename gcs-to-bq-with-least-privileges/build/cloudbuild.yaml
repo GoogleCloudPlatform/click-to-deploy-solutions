@@ -13,37 +13,41 @@
 # limitations under the License.
 
 steps:
-- id: 'zip code'
-  name: 'ubuntu:bionic'
-  entrypoint: 'sh'
-  args: 
-  - '-c'
-  - | 
-    apt-get update; apt install zip -y
-    zip /workspace/function-source.zip main.py requirements.txt
-  dir: load_function
-
 - id: 'tf init'
-  name: 'hashicorp/terraform:1.3.9'
+  name: 'hashicorp/terraform:1.4.4'
   entrypoint: 'sh'
   args: 
   - '-c'
   - | 
     terraform init \
     -backend-config="bucket=$PROJECT_ID-tf-state" \
-    -backend-config="prefix=data-analytics-platform-event-driven"
-  dir: terraform
+    -backend-config="prefix=gcs-to-bq" \
+    -var-file="terraform.tfvars"
+  dir: infra
+      
+- id: 'tf plan'
+  name: 'hashicorp/terraform:1.4.4'
+  args: 
+  - plan
+  dir: infra
+
 - id: 'tf apply'
-  name: 'hashicorp/terraform:1.3.9'
+  name: 'hashicorp/terraform:1.4.4'
   args: 
   - apply
   - -auto-approve
-  dir: terraform
+  dir: infra
+
+
 options:
   env:
     - TF_VAR_project_id=$PROJECT_ID
-    - REGION=southamerica-east1
+    - TF_VAR_project_number=$PROJECT_NUMBER
+    - TF_VAR_prefix=$PROJECT_ID
+
 tags:
   - terraform
-  - data-analytics-platform-event-driven
-  - apply
+  - gcs-to-bq
+  - plan-apply
+
+timeout: 3600s

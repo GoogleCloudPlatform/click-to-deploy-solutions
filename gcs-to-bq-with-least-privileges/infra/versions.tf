@@ -1,4 +1,4 @@
-# Copyright 2023 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,27 +12,20 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-locals {
-  function_name = "gcs-to-bq-trigger"
-  resource_labels = merge(var.resource_labels, {
-    deployed_by = "cloudbuild"
-    repo        = "click-to-deploy-solutions"
-    solution    = "cloud-composer-etl"
-    terraform   = "true"
-  })
-}
+terraform {
+  required_version = ">= 1.4.4"
+  required_providers {
+    google = {
+      source  = "hashicorp/google"
+      version = ">= 4.69.1" # tftest
+    }
+    google-beta = {
+      source  = "hashicorp/google-beta"
+      version = ">= 4.69.1" # tftest
+    }
+  }
 
-variable "project_id" {
-  description = "GCP Project ID"
-}
-
-variable "region" {
-  type        = string
-  description = "GCP region"
-}
-
-variable "resource_labels" {
-  type        = map(string)
-  description = "Resource labels"
-  default     = {}
+  provider_meta "google" {
+    module_name = "cloud-solutions/gcs-to-bq-with-least-privileges-v1.0"
+  }
 }
