@@ -81,5 +81,5 @@ resource "google_cloud_run_service_iam_member" "run_service_member" {
   location = data.google_cloud_run_service.run_service.location
   service  = data.google_cloud_run_service.run_service.name
   role     = "roles/run.invoker"
-  member   = "allUsers"
+member  = "serviceAccount:${data.google_project.project.number}-compute@developer.gserviceaccount.com"
 }
