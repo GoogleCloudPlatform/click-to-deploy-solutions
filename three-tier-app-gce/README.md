@@ -23,7 +23,7 @@ These are some examples of the use cases you can build on top of this architectu
 
 ## Architecture
 
-<p align="center"><img src="architecture.png"></p>
+<p align="center"><img src="assets/architecture.png"></p>
 
 The main components that we would be setting up are (to learn more about these products, click on the hyperlinks)
 
