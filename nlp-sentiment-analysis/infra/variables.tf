@@ -16,16 +16,14 @@ locals {
   resource_labels = merge(var.resource_labels, {
     deployed_by = "cloudbuild"
     repo        = "click-to-deploy-solutions"
-    solution    = "document-ai"
+    solution    = "nlp-sentiment-analysis"
     terraform   = "true"
   })
 
-  function_name  = "form-parser"
-  processor_name = "form-parser-${var.location}"
-  summarizer_name = "summary-parser-${var.location}"  
+  function_name  = "sentiment-analysis"
 
-  bq_table_name   = "form_parser"
-  bq_dataset_name = "document_ai"
+  bq_table_name   = "sentiment_analysis"
+  bq_dataset_name = "natural_language"
   bq_table_id     = "${var.project_id}.${local.bq_dataset_name}.${local.bq_table_name}"
 }
 

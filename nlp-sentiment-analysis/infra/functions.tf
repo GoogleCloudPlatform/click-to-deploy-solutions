@@ -48,7 +48,7 @@ resource "google_cloudfunctions2_function" "function" {
     min_instance_count    = 0
     available_memory      = "256M"
     timeout_seconds       = 60
-    service_account_email = google_service_account.NLP_function.email
+    service_account_email = google_service_account.sentiment_analysis_function.email
     environment_variables = {
       GCS_OUTPUT       = google_storage_bucket.doc_output.name
       BQ_TABLE_ID      = local.bq_table_id

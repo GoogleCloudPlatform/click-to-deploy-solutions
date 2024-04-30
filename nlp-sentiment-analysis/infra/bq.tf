@@ -12,17 +12,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-resource "google_bigquery_dataset" "document_ai" {
-  dataset_id  = "document_ai"
+resource "google_bigquery_dataset" "natural_language" {
+  dataset_id  = "natural_language"
   description = "Store documents parsed by Document AI"
   location    = var.region
   labels      = local.resource_labels
 }
 
-resource "google_bigquery_table" "form_parser" {
-  dataset_id          = google_bigquery_dataset.document_ai.dataset_id
-  table_id            = "form_parser"
-  description         = "Store form documents"
+resource "google_bigquery_table" "sentiment_analysis" {
+  dataset_id          = google_bigquery_dataset.natural_language.dataset_id
+  table_id            = "sentiment_analysis"
+  description         = "Store  documents"
   deletion_protection = false
   labels              = local.resource_labels
 
