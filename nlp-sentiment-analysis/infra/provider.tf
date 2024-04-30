@@ -21,9 +21,6 @@ terraform {
       version = "4.59.0"
     }
   }
-  provider_meta "google" {
-    module_name = "cloud-solutions/document-ai-v0.1"
-  }
 }
 
 provider "google" {
