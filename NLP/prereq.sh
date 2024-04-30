@@ -68,6 +68,5 @@ add_iam_member $MEMBER roles/eventarc.admin
 echo "Granting Cloud Storage's Service Account permissions required by EventArc..."
 GCS_SERVICE_ACCOUNT="$(gsutil kms serviceaccount -p $PROJECT_ID)"
 MEMBER=serviceAccount:$GCS_SERVICE_ACCOUNT
-add_iam_member $MEMBER roles/pubsub.publisher
 
 echo Script completed successfully!
