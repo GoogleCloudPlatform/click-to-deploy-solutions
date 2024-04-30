@@ -1,5 +1,6 @@
 from google.cloud import bigquery, documentai_v1beta3, storage
 from google.cloud import language_v2
+import functions_framework
 import os
 import json
 
@@ -21,63 +22,65 @@ def process_document(bucket_name, object_name):
 
     print("Performing sentiment analysis...")
     document = language_v2.Document(content=document_content, type_=language_v2.Document.Type.PLAIN_TEXT)
-    sentiment = language_client.analyze_sentiment(request={"document": document}).document_sentiment    
-    sentiment_score = sentiment.score
-    sentiment_magnitude = sentiment.magnitude
+    response = language_client.analyze_sentiment(request={"document": document})
 
-    print("Sentiment analysis complete.")
-    process_output(bucket_name, object_name, document_content, sentiment_score, sentiment_magnitude)  
+    # Get results
+    sentiment_score = response.document_sentiment.score
+    sentiment_magnitude = response.document_sentiment.magnitude
+    sentences = [
+        {"text": sentence.text.content, "sentiment": sentence.sentiment.score}
+        for sentence in response.sentences
+    ]
+
+    process_output(
+        bucket_name,
+        object_name,
+        sentiment_score,
+        sentiment_magnitude,
+        sentences,
+    )  
 
 
 
-def process_output(bucket_name, object_name, document_content, sentiment_score, sentiment_magnitude):
-    """Moves a blob from one bucket to another."""
-    print("Process output started.")
-    storage_client = storage.Client()
-    destination_bucket_name = os.environ['GCS_OUTPUT']
-    destination_bucket = storage_client.bucket(destination_bucket_name)
+def process_output(
+    bucket_name, object_name, sentiment_score, sentiment_magnitude, sentences
+):
+    print("Storing results in GCS and BigQuery.")
 
-    print("Saving json results into the output bucket...")
+    # Prepare results JSON
     results_json = {
         "document_file_name": object_name,
-        "document_content": sentiment_score,
-        "document_summary": sentiment_magnitude       
+        "sentiment_score": sentiment_score,
+        "sentiment_magnitude": sentiment_magnitude,
+        "sentences": sentences,
     }
-    results_json = json.dumps(results_json)
-    results_json_name = "{}.json".format(object_name)
-    results_json_blob = destination_bucket.blob(results_json_name)
-    results_json_blob.upload_from_string(results_json)
+    results_json_str = json.dumps(results_json)
 
-    # Move object from input to output bucket
-    print("Moving object {} from {} to {}".format(object_name, bucket_name, destination_bucket_name))
-    source_bucket = storage_client.bucket(bucket_name)
-    source_blob = source_bucket.blob(object_name)
-    blob_copy = source_bucket.copy_blob(source_blob, destination_bucket, object_name)
-    source_bucket.delete_blob(object_name)
+    # Load to GCS
+    storage_client = storage.Client()
+    destination_bucket_name = os.environ["GCS_OUTPUT"]
+    destination_bucket = storage_client.bucket(destination_bucket_name)
+    results_json_blob = destination_bucket.blob(f"{object_name}.json")
+    results_json_blob.upload_from_string(results_json_str)
 
-    # Persist results into BigQuery
-    print("Persisting data to BigQuery...")
+    # Load to BigQuery (error handling omitted for brevity)
     bq_client = bigquery.Client()
     table_id = os.getenv("BQ_TABLE_ID")
     job_config = bigquery.LoadJobConfig(
         schema=[
             bigquery.SchemaField("document_file_name", "STRING"),
-            bigquery.SchemaField("document_content", "JSON"),
-            bigquery.SchemaField("document_summary", "STRING"),
+            bigquery.SchemaField("sentiment_score", "FLOAT"),
+            bigquery.SchemaField("sentiment_magnitude", "FLOAT"),
+            bigquery.SchemaField("sentences", "RECORD", mode="REPEATED", fields=[
+                bigquery.SchemaField("text", "STRING"),
+                bigquery.SchemaField("sentiment", "FLOAT"),
+            ]),
         ],
         source_format=bigquery.SourceFormat.NEWLINE_DELIMITED_JSON,
     )
-    uri = "gs://{}/{}".format(destination_bucket_name, results_json_name)
-    print("Load file {} into BigQuery".format(uri))
-    load_job = bq_client.load_table_from_uri(
-        uri,
-        table_id,
-        location=os.getenv("BQ_LOCATION"),  # Must match the destination dataset location.
-        job_config=job_config,
-    )
+    uri = f"gs://{destination_bucket_name}/{object_name}.json"
+    load_job = bq_client.load_table_from_uri(uri, table_id, job_config=job_config)
     load_job.result()
-
-    print("Process output completed.")
 
 
 # Triggered by a change in a storage bucket

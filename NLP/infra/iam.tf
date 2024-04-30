@@ -14,45 +14,45 @@
 
 data "google_project" "project" {}
 
-resource "google_service_account" "doc_ai_form_function" {
+resource "google_service_account" "NLP_function" {
   account_id   = local.function_name
-  display_name = "Document AI Form Parser function"
+  display_name = "NLP function"
 }
 
 resource "google_project_iam_member" "storage_admin" {
   project = var.project_id
   role    = "roles/storage.admin"
-  member  = "serviceAccount:${google_service_account.doc_ai_form_function.email}"
+  member  = "serviceAccount:${google_service_account.NLP_function.email}"
 }
 
 resource "google_project_iam_member" "bq_admin" {
   project = var.project_id
   role    = "roles/bigquery.admin"
-  member  = "serviceAccount:${google_service_account.doc_ai_form_function.email}"
+  member  = "serviceAccount:${google_service_account.NLP_function.email}"
 }
 
 resource "google_project_iam_member" "doc_ai_user" {
   project = var.project_id
   role    = "roles/documentai.apiUser"
-  member  = "serviceAccount:${google_service_account.doc_ai_form_function.email}"
+  member  = "serviceAccount:${google_service_account.NLP_function.email}"
 }
 
 resource "google_project_iam_member" "cf_invoker" {
   project = var.project_id
   role    = "roles/cloudfunctions.invoker"
-  member  = "serviceAccount:${google_service_account.doc_ai_form_function.email}"
+  member  = "serviceAccount:${google_service_account.NLP_function.email}"
 }
 
 resource "google_project_iam_member" "eventarc" {
   project = var.project_id
   role    = "roles/eventarc.admin"
-  member  = "serviceAccount:${google_service_account.doc_ai_form_function.email}"
+  member  = "serviceAccount:${google_service_account.NLP_function.email}"
 }
 
 resource "google_project_iam_member" "iam_user" {
   project = var.project_id
   role    = "roles/iam.serviceAccountUser"
-  member  = "serviceAccount:${google_service_account.doc_ai_form_function.email}"
+  member  = "serviceAccount:${google_service_account.NLP_function.email}"
 }
 
 resource "google_project_iam_member" "gcs_to_pubsub" {

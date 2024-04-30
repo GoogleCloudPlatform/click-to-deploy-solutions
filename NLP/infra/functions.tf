@@ -28,7 +28,7 @@ resource "google_storage_bucket_object" "gcf_source_code" {
 resource "google_cloudfunctions2_function" "function" {
   name        = local.function_name
   location    = var.region
-  description = "Trigger Document AI OCR when an object is placed into input bucket"
+  description = "Trigger NLP when an object is placed into input bucket"
   labels      = local.resource_labels
 
   build_config {
@@ -48,10 +48,8 @@ resource "google_cloudfunctions2_function" "function" {
     min_instance_count    = 0
     available_memory      = "256M"
     timeout_seconds       = 60
-    service_account_email = google_service_account.doc_ai_form_function.email
+    service_account_email = google_service_account.NLP_function.email
     environment_variables = {
-      FORM_PARSER_PROCESSOR = google_document_ai_processor.form_parser.id
-      SUMMARY_PROCESSOR = google_document_ai_processor.doc_summarizer.id
       GCS_OUTPUT       = google_storage_bucket.doc_output.name
       BQ_TABLE_ID      = local.bq_table_id
       BQ_LOCATION      = var.region

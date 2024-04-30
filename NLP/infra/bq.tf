@@ -34,14 +34,23 @@ resource "google_bigquery_table" "form_parser" {
     "mode": "NULLABLE"
   },
   {
-    "name": "document_content",
-    "type": "JSON",
+    "name": "sentiment_score",
+    "type": "FLOAT",
     "mode": "NULLABLE"
   },
   {
-    "name": "document_summary",
-    "type": "STRING",
+    "name": "sentiment_magnitude",
+    "type": "FLOAT",
     "mode": "NULLABLE"
+  },
+  {
+    "name": "sentences",
+    "type": "RECORD",
+    "mode": "REPEATED",
+    "fields": [
+      {"name": "text", "type": "STRING", "mode": "NULLABLE"},
+      {"name": "sentiment", "type": "FLOAT", "mode": "NULLABLE"}
+    ]
   }
 ]
 EOF
