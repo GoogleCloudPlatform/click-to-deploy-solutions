@@ -21,6 +21,9 @@ terraform {
       version = "4.59.0"
     }
   }
+  provider_meta "google" {
+    module_name = "cloud-solutions/nlp-sentiment-analysis-v0.1"
+  }
 }
 
 provider "google" {
