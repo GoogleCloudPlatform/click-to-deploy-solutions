@@ -1,6 +1,6 @@
 [![banner](../banner.png)](https://cloud.google.com/?utm_source=github&utm_medium=referral&utm_campaign=GCP&utm_content=packages_repository_banner)
 
-# Perform Sentiment Analysis on your Text Data
+# Perform Sentiment Analysis on your Text Data using Google Cloud
 
 ## Introduction
 This architecture uses click-to-deploy to orchestrate a seamless sentiment analysis pipeline by leveraging Google Cloud's robust suite of services. It empowers users to glean valuable insights from text data through automated processes and intuitive visualizations.
