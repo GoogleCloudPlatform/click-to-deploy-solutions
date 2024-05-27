@@ -1,4 +1,4 @@
-# Extract data from your documents using Generative AI on Google Cloud
+# Perform Sentiment Analysis on your Text Data using Google Cloud
 
 ## Let's get started
 
@@ -57,7 +57,7 @@ It happens because the Eventarc permissions take some time to propagate. First, 
 
 ## Result
 
-At this point you should have successfully deployed the foundations for a Three Tier Web Application!.
+At this point you should have successfully deployed sentiment analysis for text in Google Cloud.
 
 This process may take a while to deploy, please do not close the window when deploying.
 
@@ -67,10 +67,10 @@ Next we are going to test the architecture and finally clean up your environment
 Once you deployed the solution successfully, upload the form.pdf to the input bucket using either Cloud Console or gsutil.
 
 ```bash
-gsutil cp assets/form.pdf gs://<YOUR PROJECT NAME>-doc-ai-form-input
+gsutil cp assets/form.pdf gs://<YOUR PROJECT NAME>-sentiment-analysis_input
 ```
 
-Then, check the parsed results in the output bucket in text (OCR) and json (Key=value) formats
+Then, check the parsed results in the output bucket in json (Key=value) format.
 
 Finally, check the json results on BigQuery
 
