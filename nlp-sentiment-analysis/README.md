@@ -21,7 +21,7 @@ In essence, this architecture delivers a cohesive solution for sentiment analysi
 
 ## Architecture
 
-<p align="center"><img src="/assets/architecture.png"></p>
+<p align="center"><img src="assets/architecture.png"></p>
 
 The main components that we would be setting up are (to learn more about these products, click on the hyperlinks)
 
@@ -37,6 +37,8 @@ Pricing Estimates - We have created a sample estimate based on some usage we see
 
 
 ## Deploy the architecture
+
+**Time to complete**: About 10 minutes
 
 1. Click on Open in Google Cloud Shell button below.
 
