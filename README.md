@@ -11,7 +11,7 @@ In the catalog below you will find all solutions ready to deploy, click on it an
 ### AI & ML
 - [Extract data from your documents using AI](./document-ai)
 - [Identify Objects from Images using AI](./object-localization/)
--[Perform Sentiment Analysis on your Text Data using Google Cloud](./nlp-sentiment-analysis/)
+- [Perform Sentiment Analysis on your Text Data using Google Cloud](./nlp-sentiment-analysis/)
 
 ### Application Modernization
 - [Host a Serverless Wordpress Site with Cloud Run](./wordpress-on-cloudrun/)
