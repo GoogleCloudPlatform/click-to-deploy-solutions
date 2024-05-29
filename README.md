@@ -11,9 +11,10 @@ In the catalog below you will find all solutions ready to deploy, click on it an
 ### AI & ML
 - [Extract data from your documents using AI](./document-ai)
 - [Identify Objects from Images using AI](./object-localization/)
+-[Perform Sentiment Analysis on your Text Data using Google Cloud](./nlp-sentiment-analysis/)
 
 ### Application Modernization
-- [Host a Serverless Wordpress Site with Cloud Run] (./wordpress-on-cloudrun/)
+- [Host a Serverless Wordpress Site with Cloud Run](./wordpress-on-cloudrun/)
 - [Host your Website](./ecommerce-webhosting/)
 - [Build an auto scaling application easily with GKE autopilo](./gke-autopilot-hpa/)
 - [Leverage NGINX for Load Balancing in a Kubernetes Architecture](./gke-standard-nginx/)
@@ -22,7 +23,7 @@ In the catalog below you will find all solutions ready to deploy, click on it an
 - [Windows File Server on Google Cloud](./windows-fileserver/)
 
 ### Data Analytics & Data Management
-- [Foundation Data Pipeline with Google Cloud] (./gcs-to-bq-with-least-privileges/)
+- [Foundation Data Pipeline with Google Cloud](./gcs-to-bq-with-least-privileges/)
 - [Orchestrate and Manage Data Pipelines](./cloud-composer-etl/)
 - [Prepare your Database for Disaster Recovery with Cloud SQL](./cloudsql-ha-dr/)
 - [Implement a data analytics pipeline with an event-driven architecture](./data-analytics-platform-event-driven)

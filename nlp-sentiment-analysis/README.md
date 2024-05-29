@@ -38,9 +38,6 @@ Pricing Estimates - We have created a sample estimate based on some usage we see
 
 ## Deploy the architecture
 
-:clock1: 
-
-
 1. Click on Open in Google Cloud Shell button below.
 
 <a href="https://ssh.cloud.google.com/cloudshell/editor?shellonly=true&cloudshell_git_repo=https://github.com/GoogleCloudPlatform/click-to-deploy-solutions&cloudshell_workspace=nlp-sentiment-analysis&cloudshell_open_in_editor=terraform/terraform.tfvars" target="_new">
