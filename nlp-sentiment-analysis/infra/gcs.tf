@@ -13,7 +13,7 @@
 # limitations under the License.
 
 resource "google_storage_bucket" "doc_input" {
-  name                        = "${var.project_id}-sentiment-analysis"
+  name                        = "${var.project_id}-sentiment-analysis-input"
   location                    = var.region
   uniform_bucket_level_access = true
   force_destroy               = true
@@ -21,7 +21,7 @@ resource "google_storage_bucket" "doc_input" {
 }
 
 resource "google_storage_bucket" "doc_output" {
-  name                        = "${var.project_id}-sentiment-analysis"
+  name                        = "${var.project_id}-sentiment-analysis-output"
   location                    = var.region
   uniform_bucket_level_access = true
   force_destroy               = true
