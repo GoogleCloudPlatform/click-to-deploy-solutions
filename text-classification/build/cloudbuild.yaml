@@ -16,7 +16,7 @@ steps:
 
 - name: 'gcr.io/cloud-builders/gcloud'
   entrypoint: 'gcloud'
-  args: ['builds', 'submit', 'code/', '--pack', 'image=${LOCATION}-docker.pkg.dev/${PROJECT_ID}/cloud-run-source-deploy/theimage']
+  args: ['builds', 'submit', 'code/', '--pack', 'image=${LOCATION}-docker.pkg.dev/${PROJECT_ID}/cloud-run-source-deploy/text-classification']
 
 - id: 'terraform init'
   name: 'hashicorp/terraform:1.0.0'
@@ -26,7 +26,7 @@ steps:
   - | 
     terraform init \
     -backend-config="bucket=$PROJECT_ID-tf-state" \
-    -backend-config="prefix=document-ai"
+    -backend-config="prefix=text-classification"
   dir: infra   
 - id: 'tf apply'
   name: 'hashicorp/terraform:1.0.0'
@@ -39,9 +39,9 @@ options:
     - TF_VAR_project_id=$PROJECT_ID
 tags:
   - terraform
-  - document-ai
+  - text-classification
   - apply
 timeout: 3600s
 
 images:
-  - ${LOCATION}-docker.pkg.dev/${PROJECT_ID}/cloud-run-source-deploy/theimage
+  - ${LOCATION}-docker.pkg.dev/${PROJECT_ID}/cloud-run-source-deploy/text-classification:latest

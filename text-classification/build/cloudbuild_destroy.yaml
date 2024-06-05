@@ -21,7 +21,7 @@ steps:
   - | 
     terraform init \
     -backend-config="bucket=$PROJECT_ID-tf-state" \
-    -backend-config="prefix=document-ai"
+    -backend-config="prefix=text-classification"
   dir: infra
 - id: 'tf destroy'
   name: 'hashicorp/terraform:1.0.0'
@@ -34,6 +34,6 @@ options:
     - TF_VAR_project_id=$PROJECT_ID
 tags:
   - terraform
-  - document-ai
+  - text-classification
   - destroy
 timeout: 3600s

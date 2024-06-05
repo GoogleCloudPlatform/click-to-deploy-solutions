@@ -6,7 +6,7 @@ resource "google_cloud_run_v2_service" "default" {
 
   template {
     containers {
-      image = "${var.region}-docker.pkg.dev/${var.project_id}/cloud-run-source-deploy/theimage:latest"
+      image = "${var.region}-docker.pkg.dev/${var.project_id}/cloud-run-source-deploy/text-classification:latest"
       env {
         name  = "PROJECT"
         value = var.project_id
@@ -31,20 +31,3 @@ resource "google_cloud_run_service_iam_binding" "default" {
   ]
 }
 
-# resource "null_resource" "public_access" {
-#   provisioner "local-exec" {
-#     command = <<-EOT
-#       gcloud run services add-iam-policy-binding ${google_cloud_run_service.default.name} \
-#         --member=allUsers --role=roles/run.invoker \
-#         --project=${google_cloud_run_service.default.project} \
-#         --region=${google_cloud_run_service.default.location}
-#     EOT
-#   }
-# }
-
-# TODO
-# resource "google_project_iam_member" "cloud_run_vertex_ai_user" {
-#   project = var.project_id  # Your project ID
-#   role    = "roles/aiplatform.user"
-#   member  = "serviceAccount:332904768527-compute@developer.gserviceaccount.com"
-# }
