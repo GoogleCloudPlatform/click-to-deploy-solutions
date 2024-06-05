@@ -12,21 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-terraform {
-  backend "gcs" {
-  }
-  required_providers {
-    google = {
-      source  = "hashicorp/google"
-      version = "~> 5.30"  # Allow versions 5.30.x
-    }
-  }
-  provider_meta "google" {
-    module_name = "cloud-solutions/text-ai-classification-v0.1"
-  }
-}
+location = "us"
+region   = "us-central1"
 
-provider "google" {
-  project = var.project_id
-  region  = var.region
+resource_labels = {
+  env = "sandbox"
 }

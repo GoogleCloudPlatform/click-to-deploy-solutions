@@ -24,7 +24,9 @@ steps:
   args: 
   - '-c'
   - | 
-    terraform init 
+    terraform init \
+    -backend-config="bucket=$PROJECT_ID-tf-state" \
+    -backend-config="prefix=document-ai"
   dir: infra   
 - id: 'tf apply'
   name: 'hashicorp/terraform:1.0.0'

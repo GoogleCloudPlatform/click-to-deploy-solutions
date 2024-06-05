@@ -61,7 +61,7 @@ def analyze_sentiment():
     # response = generation_model.predict(
     #     f"""Classify the emotion in this text: "{text}". Give me a simple answer such as happy, sad, angry, doubtful, thoughtful, kind, stressed."""
     # )
-    prompt = f"""Classify the emotion in this text: "{text}". Give me a simple answer in only one word nothing else such as happy, sad, angry, doubtful, thoughtful, kind, stressed."""
+    prompt = f"""Classify the emotion in this text in one word: "{text}". Give me a simple answer in only one word nothing else such as happy, sad, angry, doubtful, thoughtful, kind, stressed."""
     
 
     emotion =  get_chat_response(chat, prompt)    
