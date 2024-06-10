@@ -28,13 +28,14 @@ steps:
     -backend-config="bucket=$PROJECT_ID-tf-state" \
     -backend-config="prefix=text-classification"
   dir: infra   
+
 - id: 'tf apply'
   name: 'hashicorp/terraform:1.0.0'
   args: 
   - apply
   - -auto-approve
   dir: infra
-options:
+options:  
   env:
     - TF_VAR_project_id=$PROJECT_ID
 tags:
@@ -43,5 +44,3 @@ tags:
   - apply
 timeout: 3600s
 
-images:
-  - ${LOCATION}-docker.pkg.dev/${PROJECT_ID}/cloud-run-source-deploy/text-classification:latest
