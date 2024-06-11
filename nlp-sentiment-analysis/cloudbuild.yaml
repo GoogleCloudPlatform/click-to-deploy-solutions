@@ -1,0 +1,202 @@
+# Copyright 2023 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+
+steps:
+- id: 'zip code'
+  name: 'ubuntu'
+  entrypoint: 'sh'
+  args: 
+    - '-c'
+    - |
+        apt-get update && apt-get install zip -y
+        zip /workspace/function-source.zip main.py requirements.txt
+  dir: /workspace/code
+
+- id: 'list workspace'
+  name: 'ubuntu'
+  entrypoint: 'sh'
+  args: 
+    - '-c'
+    - |
+        echo "Listing contents of /workspace:"
+        ls -la /workspace
+  dir: /workspace
+
+- id: 'create bucket'
+  name: 'google/cloud-sdk'
+  entrypoint: 'sh'
+  args: 
+    - '-c'
+    - |
+        gsutil mb -p $PROJECT_ID gs://$PROJECT_ID-tf-state || echo "Bucket already exists"
+  dir: /workspace
+
+- id: 'assign eventarc roles'
+  name: 'google/cloud-sdk'
+  entrypoint: 'sh'
+  args: 
+    - '-c'
+    - |
+        PROJECT_NUMBER=$(gcloud projects describe $PROJECT_ID --format="value(projectNumber)")
+        SERVICE_ACCOUNT="service-${PROJECT_NUMBER}@gcp-sa-eventarc.iam.gserviceaccount.com"
+        gcloud projects add-iam-policy-binding $PROJECT_ID \
+            --member="serviceAccount:${SERVICE_ACCOUNT}" \
+            --role="roles/eventarc.serviceAgent"
+  dir: /workspace
+
+- id: 'tf init'
+  name: 'hashicorp/terraform:1.0.0'
+  entrypoint: 'sh'
+  args: 
+    - '-c'
+    - |
+        terraform init \
+        -backend-config="bucket=$PROJECT_ID-tf-state" \
+        -backend-config="prefix=document-ai"
+  dir: /workspace/infra
+
+- id: 'tf apply'
+  name: 'hashicorp/terraform:1.0.0'
+  args: 
+    - apply
+    - -auto-approve
+  dir: /workspace/infra
+
+options:
+  env:
+    - TF_VAR_project_id=$PROJECT_ID
+tags:
+  - terraform
+  - document-ai
+  - apply
+timeout: 3600s
+
+
+
+
+
+# steps:
+# - id: 'zip code'
+#   name: 'ubuntu'
+#   entrypoint: 'sh'
+#   args: 
+#     - '-c'
+#     - |
+#         apt-get update && apt-get install zip -y
+#         zip /workspace/function-source.zip /workspace/code/main.py /workspace/code/requirements.txt
+#   dir: /workspace/code
+
+# - id: 'list workspace'
+#   name: 'ubuntu'
+#   entrypoint: 'sh'
+#   args: 
+#     - '-c'
+#     - |
+#         echo "Listing contents of /workspace:"
+#         ls -la /workspace
+#   dir: /workspace
+
+# - id: 'create bucket'
+#   name: 'google/cloud-sdk'
+#   entrypoint: 'sh'
+#   args: 
+#     - '-c'
+#     - |
+#         gsutil mb -p $PROJECT_ID gs://$PROJECT_ID-tf-state || echo "Bucket already exists"
+#   dir: /workspace
+
+# - id: 'assign eventarc roles'
+#   name: 'google/cloud-sdk'
+#   entrypoint: 'sh'
+#   args: 
+#     - '-c'
+#     - |
+#         PROJECT_NUMBER=$(gcloud projects describe $PROJECT_ID --format="value(projectNumber)")
+#         SERVICE_ACCOUNT="service-${PROJECT_NUMBER}@gcp-sa-eventarc.iam.gserviceaccount.com"
+#         gcloud projects add-iam-policy-binding $PROJECT_ID \
+#             --member="serviceAccount:${SERVICE_ACCOUNT}" \
+#             --role="roles/eventarc.serviceAgent"
+#   dir: /workspace
+
+# - id: 'tf init'
+#   name: 'hashicorp/terraform:1.0.0'
+#   entrypoint: 'sh'
+#   args: 
+#     - '-c'
+#     - |
+#         terraform init \
+#         -backend-config="bucket=$PROJECT_ID-tf-state" \
+#         -backend-config="prefix=document-ai"
+#   dir: /workspace/infra
+
+# - id: 'tf apply'
+#   name: 'hashicorp/terraform:1.0.0'
+#   args: 
+#     - apply
+#     - -auto-approve
+#   dir: /workspace/infra
+
+# options:
+#   env:
+#     - TF_VAR_project_id=$PROJECT_ID
+# tags:
+#   - terraform
+#   - document-ai
+#   - apply
+# timeout: 3600s
+
+
+
+
+# steps:
+# - id: 'zip code'
+#   name: 'ubuntu'
+#   entrypoint: 'sh'
+#   args: 
+#   - '-c'
+#   - |
+#       pwd  # Print the current working directory inside the container
+#       ls -la /workspace  # List all files and directories in the workspace
+      
+#   - | 
+#     apt-get update; apt-get install zip -y
+#     zip /workspace/function-source.zip /workspace/main.py /workspace/requirements.txt  # Updated path
+#   dir: code
+# - id: 'tf init'
+#   name: 'hashicorp/terraform:1.0.0'
+#   entrypoint: 'sh'
+#   args: 
+#   - '-c'
+#   - |
+#     ls -la
+#     pwd 
+#     terraform init \
+#     -backend-config="bucket=$PROJECT_ID-tf-state" \
+#     -backend-config="prefix=document-ai"
+#   dir: /workspace/infra   
+# - id: 'tf apply'
+#   name: 'hashicorp/terraform:1.0.0'
+#   args: 
+#   - apply
+#   - -auto-approve
+#   dir: /workspace/infra
+# options:
+#   env:
+#     - TF_VAR_project_id=$PROJECT_ID
+# tags:
+#   - terraform
+#   - document-ai
+#   - apply
+# timeout: 3600s

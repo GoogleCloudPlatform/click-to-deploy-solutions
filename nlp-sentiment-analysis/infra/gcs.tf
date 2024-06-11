@@ -20,8 +20,17 @@ resource "google_storage_bucket" "doc_input" {
   labels                      = local.resource_labels
 }
 
+# resource "google_storage_bucket" "doc_output" {
+#   name                        = "${var.project_id}-sentiment-analysis"
+#   location                    = var.region
+#   uniform_bucket_level_access = true
+#   force_destroy               = true
+#   labels                      = local.resource_labels
+# }
+
+
 resource "google_storage_bucket" "doc_output" {
-  name                        = "${var.project_id}-sentiment-analysis"
+  name                        = "${var.project_id}-sentiment-analysis-output"
   location                    = var.region
   uniform_bucket_level_access = true
   force_destroy               = true
