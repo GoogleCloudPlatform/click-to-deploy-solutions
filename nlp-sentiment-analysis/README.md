@@ -57,9 +57,24 @@ gcloud builds submit . --config build/cloudbuild.yaml
 ```
 
 ## Testing the architecture
-Execute the command below on Cloud Shell to delete the resources.
+Once you deployed the solution successfully, upload the form.pdf to the input bucket using either Cloud Console or gsutil.
+
+```bash
+gsutil cp assets/form.pdf gs://<YOUR PROJECT NAME>-sentiment-analysis_input
 ```
-gcloud builds submit . --config cloudbuild_destroy.yaml
+
+Then, check the parsed results in the output bucket in json (Key=value) format.
+
+Finally, check the json results on BigQuery
+
+## Cleaning up your environment
+
+Execute the command below on Cloud Shell to destroy the resources.
+
+``` {shell}
+gcloud builds submit . --config build/cloudbuild_destroy.yaml
 ```
+
+The above command will delete the associated resources so there will be no billable charges made afterwards.
 
 This is not an official Google product.
