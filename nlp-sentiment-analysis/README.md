@@ -53,7 +53,7 @@ sh prereq.sh
 
 3. Run the Cloud Build Job
 ```
-gcloud builds submit . --config build/cloudbuild.yaml
+gcloud builds submit . --config cloudbuild.yaml
 ```
 
 ## Testing the architecture
