@@ -1,6 +1,6 @@
 #!/bin/bash
 
-CLOUD_RUN_URL="https://cloudrun-srv-6thgagxxya-uc.a.run.app"
+CLOUD_RUN_URL="[YOUR CLOUD RUN PUBLIC ENDPOINT]"
 
 texts=("The sun is shining, and life is good!"
        "Feeling grateful for simple joys."

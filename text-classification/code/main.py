@@ -14,7 +14,7 @@ LOCATION = os.environ.get('LOCATION')  # Update with your region
 
 
 vertexai.init(project=PROJECT_ID, location=LOCATION)
-model = GenerativeModel("gemini-1.0-pro")
+model = GenerativeModel("gemini-1.5-pro")
 chat = model.start_chat()
 
 def get_chat_response(chat: ChatSession, prompt: str):
