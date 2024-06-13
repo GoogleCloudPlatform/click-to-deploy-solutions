@@ -57,6 +57,25 @@ gcloud builds submit . --config cloudbuild.yaml
 ```
 
 ## Testing the architecture
+
+Once you have deployed the solution successfully, upload the text file from the asset folder to the input bucket using either Cloud Console or gsutil.
+
+Execute the command below to copy the file to the input bucket
+```
+PROJECT_NAME=$(gcloud config get-value project)
+gsutil cp assets/test.txt gs://$PROJECT_NAME-sentiment-analysis
+```
+
+Then, check the parsed results in the output bucket in json (Key=value) format.
+
+Navigate to the Output Bucket, in this case it would be 
+<YOUR_PROJECT_ID>-Sentiment-analysis-Output to check the json results.
+
+<p align="center"><img src="assets/architecture.png"></p>
+
+
+
+
 Execute the command below on Cloud Shell to delete the resources.
 ```
 gcloud builds submit . --config cloudbuild_destroy.yaml
