@@ -1,4 +1,6 @@
-# Extract data from your documents using Generative AI on Google Cloud
+# Classify texts using Google GenAI
+
+This package will get you up to speed with an infrastructure to classify texts using GenAI, store the texts in BigQuery and then visualise those into a Looker Studio dashboard
 
 ## Let's get started
 
