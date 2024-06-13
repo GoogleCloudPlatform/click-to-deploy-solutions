@@ -93,7 +93,7 @@ Then for testing you can update the strings in the populate.sh file:
 
 Hint: You can generate those using Gemini :)
 
-![Image updating the populate.sh file]([https://services.google.com/fh/files/misc/copy_cloudrun_url.gif](https://services.google.com/fh/files/misc/update_url_populate_file.gif))
+![Image updating the populate.sh file](https://services.google.com/fh/files/misc/update_url_populate_file.gif)
 
 
 
