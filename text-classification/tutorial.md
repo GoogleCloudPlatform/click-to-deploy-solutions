@@ -57,7 +57,9 @@ Next we are going to test the architecture and finally clean up your environment
 * Select the service called text-classification	
 * The service endpoint will be available right next to the package name
 
-<img src="blob:chrome-untrusted://media-app/10b2451d-2b17-4742-87d3-250c26fa3ea3" alt="Screen recording 2024-06-13 11.15.26 AM.gif"/>![image](https://github.com/GoogleCloudPlatform/click-to-deploy-solutions/assets/14345186/a966ffba-2aa5-4964-bb36-acfa832bdce7)
+![Image copying the Cloud Run URL](https://services.google.com/fh/files/misc/copy_cloudrun_url.gif)
+
+
 
 
 ## Testing your architecture
@@ -91,7 +93,8 @@ Then for testing you can update the strings in the populate.sh file:
 
 Hint: You can generate those using Gemini :)
 
-<img src="blob:chrome-untrusted://media-app/5599b7f4-5e93-4382-9029-3c96a41f494f" alt="Screen recording 2024-06-13 11.18.42 AM.gif"/>![image](https://github.com/GoogleCloudPlatform/click-to-deploy-solutions/assets/14345186/28d39033-33ef-42c8-a217-5337debd25b9)
+![Image updating the populate.sh file]([https://services.google.com/fh/files/misc/copy_cloudrun_url.gif](https://services.google.com/fh/files/misc/update_url_populate_file.gif))
+
 
 
 ## Cleaning up your environment
