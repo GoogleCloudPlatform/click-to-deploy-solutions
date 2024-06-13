@@ -55,7 +55,10 @@ Next we are going to test the architecture and finally clean up your environment
 ## Getting the endpoint
 * Visit Cloud Run list of services (https://console.cloud.google.com/run) 
 * Select the service called text-classification	
-* The service endpoint will be available right next to the package name 
+* The service endpoint will be available right next to the package name
+
+<img src="blob:chrome-untrusted://media-app/10b2451d-2b17-4742-87d3-250c26fa3ea3" alt="Screen recording 2024-06-13 11.15.26 AM.gif"/>![image](https://github.com/GoogleCloudPlatform/click-to-deploy-solutions/assets/14345186/a966ffba-2aa5-4964-bb36-acfa832bdce7)
+
 
 ## Testing your architecture
 Once you deployed the solution successfully, update the populate.sh with the endpoint you got from the previous step
@@ -80,12 +83,16 @@ Feel free to play around and take this example to new usecases, in code/main.py 
 prompt = f"""You are a lawyer assistant and need to classify a given email of a law case by its content, the process email text is "{text}". Give me a result such as Criminal, Civil, Family, Probate and Corporate. Refrain from explaining your answer"""
 ```
 
-Then for testing you can update the strings in the populate.sh file, 
+Then for testing you can update the strings in the populate.sh file:
+
 "I hope this email finds you well. My name is John Doe, and I am seeking legal assistance regarding an employment dispute with my former employer, ABC Corporation. I was terminated last month under circumstances that I believe were unlawful. Could we schedule a consultation to discuss the details of my case? I have attached relevant documents, including my employment contract and termination letter, for your review."
 
 "My name is Michael Johnson, and I am in urgent need of legal representation. I have been charged with assault following an incident that occurred on June 10, 2024. I maintain that I acted in self-defense and believe that the charges against me are unjust. I am currently out on bail and need to appear in court for my first hearing on July 1, 2024. I would like to schedule a meeting with you as soon as possible to discuss my case and prepare my defense. I have attached the police report and bail documents for your review. Please let me know your earliest availability for a consultation. I am very anxious about this situation and am looking for strong legal guidance."
 
 Hint: You can generate those using Gemini :)
+
+<img src="blob:chrome-untrusted://media-app/5599b7f4-5e93-4382-9029-3c96a41f494f" alt="Screen recording 2024-06-13 11.18.42 AM.gif"/>![image](https://github.com/GoogleCloudPlatform/click-to-deploy-solutions/assets/14345186/28d39033-33ef-42c8-a217-5337debd25b9)
+
 
 ## Cleaning up your environment
 
