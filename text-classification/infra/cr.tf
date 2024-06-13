@@ -1,5 +1,5 @@
 resource "google_cloud_run_v2_service" "default" {
-  name     = "cloudrun-srv"
+  name     = "text-classification"
   location = "us-central1"
   project  = var.project_id
   ingress  = "INGRESS_TRAFFIC_ALL"

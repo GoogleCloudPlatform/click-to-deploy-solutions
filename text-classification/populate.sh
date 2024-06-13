@@ -1,6 +1,6 @@
 #!/bin/bash
 
-CLOUD_RUN_URL="[YOUR CLOUD RUN PUBLIC ENDPOINT]"
+CLOUD_RUN_URL="[YOUR CLOUD RUN PUBLIC]"
 
 texts=("The sun is shining, and life is good!"
        "Feeling grateful for simple joys."
