@@ -48,7 +48,7 @@ The region is the region where the cloudbuild will run as well as the region whe
 
 ## Result
 
-At this point you should have successfully deployed the foundations for a Three Tier Web Application!.
+At this point you have successfully deployed the application and necessary underlining infrastructure to run it! Yay!
 
 This process may take a while to deploy, please do not close the window when deploying.
 
@@ -66,6 +66,8 @@ Next we are going to test the architecture and finally clean up your environment
 
 ## Testing your architecture
 Once you deployed the solution successfully, update the populate.sh with the endpoint you got from the previous step
+
+![Image updating the populate.sh file](https://services.google.com/fh/files/misc/update_url_populate_file.gif)
 
 ```bash
 sh populate.sh
@@ -94,8 +96,6 @@ Then for testing you can update the strings in the populate.sh file:
 "My name is Michael Johnson, and I am in urgent need of legal representation. I have been charged with assault following an incident that occurred on June 10, 2024. I maintain that I acted in self-defense and believe that the charges against me are unjust. I am currently out on bail and need to appear in court for my first hearing on July 1, 2024. I would like to schedule a meeting with you as soon as possible to discuss my case and prepare my defense. I have attached the police report and bail documents for your review. Please let me know your earliest availability for a consultation. I am very anxious about this situation and am looking for strong legal guidance."
 
 Hint: You can generate those using Gemini :)
-
-![Image updating the populate.sh file](https://services.google.com/fh/files/misc/update_url_populate_file.gif)
 
 
 
