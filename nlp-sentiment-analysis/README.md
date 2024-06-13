@@ -71,9 +71,15 @@ Then, check the parsed results in the output bucket in json (Key=value) format.
 Navigate to the Output Bucket, in this case it would be 
 <YOUR_PROJECT_ID>-Sentiment-analysis-Output to check the json results.
 
-<p align="center"><img src="assets/architecture.png"></p>
+<p align="center"><img src="assets/Bucket_Output.png"></p>
 
 
+Navigate to BigQuery to view the Output of the sentiment analysis job.
+
+<p align="center"><img src="assets/BigQuery_Output.png"></p>
+
+
+## Destroying the architecture
 
 
 Execute the command below on Cloud Shell to delete the resources.
