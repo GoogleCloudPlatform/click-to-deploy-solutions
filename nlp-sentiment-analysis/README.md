@@ -53,28 +53,39 @@ sh prereq.sh
 
 3. Run the Cloud Build Job
 ```
-gcloud builds submit . --config build/cloudbuild.yaml
+gcloud builds submit . --config cloudbuild.yaml
 ```
 
 ## Testing the architecture
-Once you deployed the solution successfully, upload the form.pdf to the input bucket using either Cloud Console or gsutil.
 
-```bash
-gsutil cp assets/form.pdf gs://<YOUR PROJECT NAME>-sentiment-analysis_input
+Once you have deployed the solution successfully, upload the text file from the asset folder to the input bucket using either Cloud Console or gsutil.
+
+Execute the command below to copy the file to the input bucket
+```
+PROJECT_NAME=$(gcloud config get-value project)
+gsutil cp assets/test.txt gs://$PROJECT_NAME-sentiment-analysis
 ```
 
 Then, check the parsed results in the output bucket in json (Key=value) format.
 
-Finally, check the json results on BigQuery
+Navigate to the Output Bucket, in this case it would be 
+<YOUR_PROJECT_ID>-Sentiment-analysis-Output to check the json results.
 
-## Cleaning up your environment
+<p align="center"><img src="assets/Bucket_Output.png"></p>
 
-Execute the command below on Cloud Shell to destroy the resources.
 
-``` {shell}
-gcloud builds submit . --config build/cloudbuild_destroy.yaml
+Navigate to BigQuery to view the Output of the sentiment analysis job.
+
+<p align="center"><img src="assets/BigQuery_Output.png"></p>
+
+
+## Destroying the architecture
+
+
+Execute the command below on Cloud Shell to delete the resources.
+```
+gcloud builds submit . --config cloudbuild_destroy.yaml
 ```
 
-The above command will delete the associated resources so there will be no billable charges made afterwards.
-
 This is not an official Google product.
+
