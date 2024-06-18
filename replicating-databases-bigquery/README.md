@@ -34,7 +34,7 @@ The main components that we would be setting up are (to learn more about these p
 * [Cloud SQL for MySQL ](https://cloud.google.com/sql): Fully managed relational database service for MySQL, PostgreSQL, and SQL Server with rich extension collections, configuration flags, and developer ecosystems.
 
 ## Costs
-Pricing Estimates - We have created a sample estimate based on some usage we see from new startups looking to scale. This estimate would give you an idea of how much this deployment would essentially cost per month at this scale and you extend it to the scale you further prefer. Here's the [link](https://cloud.google.com/products/calculator#id=d4863606-7782-48a5-a326-b7b1253da3e3).
+Pricing Estimates - We have created a sample estimate based on some usage we see from new startups looking to scale. This estimate would give you an idea of how much this deployment would essentially cost per month at this scale and you extend it to the scale you further prefer. Here's the [link](https://cloud.google.com/products/calculator/estimate-preview/d0e5421f-a262-4679-be79-5b064092725b?hl=en).
 
 ## Deploy the architecture
 
