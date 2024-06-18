@@ -32,7 +32,7 @@ The main components that are deployed in this architecture are the following (yo
 
 ## Costs
 
-Pricing Estimates - We have created a sample estimate based on some usage we see from new startups looking to scale. This estimate would give you an idea of how much this deployment would essentially cost per month at this scale and you extend it to the scale you further prefer. Here's the [link](https://cloud.google.com/products/calculator#id=8a7471c9-98df-4b71-97de-6222d22484c8).
+Pricing Estimates - We have created a sample estimate based on some usage we see from new startups looking to scale. This estimate would give you an idea of how much this deployment would essentially cost per month at this scale and you extend it to the scale you further prefer. Here's the [link](https://cloud.google.com/products/calculator/estimate-preview/2396d643-06db-48f2-bcaa-cf71a9564714).
 
 
 ## Deploy the architecture
