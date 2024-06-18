@@ -1,0 +1,8 @@
+venv
+*.pyc
+__pycache__/
+*.py[cod]
+*$py.class
+*.tfstate
+*terraform.lock.*
+
