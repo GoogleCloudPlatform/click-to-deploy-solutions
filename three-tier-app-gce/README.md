@@ -39,7 +39,7 @@ The main components that we would be setting up are (to learn more about these p
 
 ## Costs
 
-Pricing Estimates - We have created a sample estimate based on some usage we see from new startups looking to scale. This estimate would give you an idea of how much this deployment would essentially cost per month at this scale and you extend it to the scale you further prefer. Here's the [link](https://cloud.google.com/products/calculator/#id=bfa6c5e2-8801-4a2a-8075-2d6588d06f13).
+Pricing Estimates - We have created a sample estimate based on some usage we see from new startups looking to scale. This estimate would give you an idea of how much this deployment would essentially cost per month at this scale and you extend it to the scale you further prefer. Here's the [link](https://cloud.google.com/products/calculator/estimate-preview/436f8188-94b2-487a-ba30-8fe73d90f9b1?hl=en).
 
 ## Deploy the architecture
 
