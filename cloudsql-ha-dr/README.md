@@ -44,7 +44,7 @@ If you're migrating from another Cloud Provider, refer to [this](https://cloud.g
 
 ## Costs
 
-Pricing Estimates - We have created a sample estimate based on some usage we see from new startups looking to scale. This estimate would give you an idea of how much this deployment would essentially cost per month at this scale and you extend it to the scale you further prefer. Here's the [link](https://cloud.google.com/products/calculator/#id=35b50e4b-8292-43b7-b909-d29213b80fea).
+Pricing Estimates - We have created a sample estimate based on some usage we see from new startups looking to scale. This estimate would give you an idea of how much this deployment would essentially cost per month at this scale and you extend it to the scale you further prefer. Here's the [link](https://cloud.google.com/products/calculator/estimate-preview/41fd94c4-7650-4e32-a3e0-5ead9a7ac76c?hl=en).
 
 ## Deploy the architecture
 
