@@ -294,7 +294,7 @@ billable charges made afterwards.
 [8]: https://cloud.google.com/composer
 [9]: https://github.com/googlestaging/deploystack-gcs-to-bq-with-least-privileges
 [10]: https://cloud.google.com/free/docs/aws-azure-gcp-service-comparison
-[11]: https://cloud.google.com/products/calculator#id=44710202-c9d4-49d5-a378-99d7dd34f5e2
+[11]: https://cloud.google.com/products/calculator/estimate-preview/6b8d1736-2544-4877-8f8d-22f1f287472a?hl=en
 [12]: https://cloud.google.com/resource-manager/docs/creating-managing-organization
 [13]: https://cloud.google.com/billing/docs/how-to/manage-billing-account
 [14]: https://cloud.google.com/resource-manager/docs/creating-managing-projects
