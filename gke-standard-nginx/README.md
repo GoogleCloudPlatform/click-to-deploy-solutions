@@ -171,7 +171,7 @@ gcloud builds submit . --config build/cloudbuild_destroy.yaml
 [4]: https://cloud.google.com/load-balancing
 [5]: https://cloud.google.com/stackdriver/docs/managed-prometheus
 [6]: https://cloud.google.com/kubernetes-engine/docs/archive/jenkins-on-kubernetes-engine
-[7]: https://cloud.google.com/products/calculator/estimate-preview/ec923f89-3fd0-4c52-831d-d1f6c7205015
+[7]: https://cloud.google.com/products/calculator/estimate-preview/6b5c59c3-acc6-4e27-95bb-495999848c8f?hl=en
 [8]: https://github.com/GoogleCloudPlatform/click-to-deploy-solutions/tree/main/gke-standard-nginx
 [9]: https://cloud.google.com/resource-manager/docs/creating-managing-organization
 [10]: https://cloud.google.com/billing/docs/how-to/manage-billing-account
