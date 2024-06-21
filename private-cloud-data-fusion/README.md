@@ -41,7 +41,7 @@ The main components that we would be setting up are (to learn more about these p
 * [Cloud Data Fusion](https://cloud.google.com/data-fusion) : Fully managed, cloud-native data integration at any scale.
 
 ## Costs
-Pricing Estimates - We have created a sample estimate based on some usage we see from new startups looking to scale. This estimate would give you an idea of how much this deployment would essentially cost per month at this scale and you extend it to the scale you further prefer. Here's the [link](https://cloud.google.com/products/calculator#id=78109407-bdd1-4934-bfff-bf45c21756f3).
+Pricing Estimates - We have created a sample estimate based on some usage we see from new startups looking to scale. This estimate would give you an idea of how much this deployment would essentially cost per month at this scale and you extend it to the scale you further prefer. Here's the [link](https://cloud.google.com/products/calculator/estimate-preview/6b5c59c3-acc6-4e27-95bb-495999848c8f?hl=en).
 
 ## Deploy the architecture
 
