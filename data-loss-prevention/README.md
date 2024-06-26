@@ -3,11 +3,27 @@
 
 ## Introduction
 
+
 ## Use cases
 
+* __Automated Sensitive Data Masking in Application Logs__ :This pipeline automatically masks sensitive information in application logs to prevent data breaches. Applications generate logs that are collected by Cloud Logging. The Log Router sends these logs to Pub/Sub, where Dataflow processes them using the DLP API to identify and mask sensitive data. The masked logs are then securely stored back in Cloud Logging, ensuring compliance with data protection regulations.
+
+* __Real-Time Compliance Monitoring and Reporting__ :Financial institutions can use this pipeline to comply with regulatory requirements by monitoring sensitive financial data in real-time. Application logs collected by Cloud Logging are forwarded to Pub/Sub. Dataflow processes these logs, utilizing the DLP API to mask sensitive information. The de-identified logs are stored back in Cloud Logging, while a separate Dataflow job or BigQuery can generate compliance reports automatically.
+
+* __Incident Response and Alerting for Data Breaches__ :Organizations can enhance their incident response capabilities with this pipeline by detecting and responding to data breaches involving sensitive information. Application logs collected by Cloud Logging are sent to Pub/Sub. Dataflow processes these logs with the DLP API to detect and mask sensitive data. Alerts are published to a separate Pub/Sub topic if sensitive data is detected, triggering incident response workflows via Cloud Functions or other services to notify security teams and initiate remediation processes.
+
 ## Architecture
+<p align="center"><img src="assets/DLP-architecture.png"></p>
+The main components that we would be setting up are (to learn more about these products, click on the hyperlinks)
+
+1. [Cloud Logging](https://cloud.google.com/logging) : fully managed service for storing, searching, analyzing, monitoring, and alerting on log data and events.
+2. [Pub/Sub](https://cloud.google.com/pubsub) : asynchronous messaging service that allows for communication between services. It is used for streaming analytics, data integration, and event distribution.
+3. [DataFlow](https://cloud.google.com/dataflow): a unified service for building and running batch and streaming data processing pipelines.
+4. [Cloud Data Loss Prevention](https://cloud.google.com/security/products/dlp) : a service offered by Google Cloud to help organizations discover, classify, and protect their most sensitive data.
 
 ## Costs
+
+Pricing Estimates - We have created a sample estimate based on some usage we see from new startups looking to scale. This estimate would give you an idea of how much this deployment would essentially cost per month at this scale and you extend it to the scale you further prefer. Here's the [link](https://cloud.google.com/products/calculator/estimate-preview/05e26e0a-9e1d-4b9e-9f0b-b3f7189515ec?hl=en). You can also get the idea for Data Loss Prevention pricing for [here](https://cloud.google.com/sensitive-data-protection/pricing#sensitive-data-protection-pricing)
 
 ## Deploy the architecture
 
