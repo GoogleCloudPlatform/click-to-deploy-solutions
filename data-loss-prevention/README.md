@@ -1,8 +1,14 @@
 [![banner](../banner.png)](https://cloud.google.com/?utm_source=github&utm_medium=referral&utm_campaign=GCP&utm_content=packages_repository_banner)
-# Protect you data using Data Loss Prevation
+# Protect you data using Data Loss Prevention
 
 ## Introduction
+This architecture uses a serverless pipeline to securely process and store logs, ensuring sensitive information remains masked while retaining valuable insights for troubleshooting. By leveraging the Data Loss Prevention (DLP) API's powerful redaction capabilities, it enables organizations to confidently analyze log data without compromising data privacy.
 
+In this architecture, log entries are routed from their source to Pub/Sub, a scalable messaging service. A Dataflow pipeline then ingests these log entries, aggregates them into batches to optimize DLP API calls, and invokes the DLP service for content inspection and transformation.
+
+The DLP service, utilizing pre-defined or custom infoType detectors, identifies sensitive information within the log entries. It then applies configurable masking techniques, such as tokenization or redaction, to obfuscate sensitive data. The transformed logs, now free of sensitive information, are then stored in a designated log bucket (e.g., Cloud Storage), ready for further analysis.
+
+This architecture allows for seamless integration between log routing, batch processing, and the DLP API, enabling organizations to protect sensitive information while maintaining the utility of their log data for troubleshooting and analysis. It ensures compliance with data privacy regulations and best practices, safeguarding both customer data and internal confidential information.
 
 ## Use cases
 
@@ -23,7 +29,7 @@ The main components that we would be setting up are (to learn more about these p
 
 ## Costs
 
-Pricing Estimates - We have created a sample estimate based on some usage we see from new startups looking to scale. This estimate would give you an idea of how much this deployment would essentially cost per month at this scale and you extend it to the scale you further prefer. Here's the [link](https://cloud.google.com/products/calculator/estimate-preview/05e26e0a-9e1d-4b9e-9f0b-b3f7189515ec?hl=en). You can also get the idea for Data Loss Prevention pricing for [here](https://cloud.google.com/sensitive-data-protection/pricing#sensitive-data-protection-pricing)
+Pricing Estimates - We have created a sample estimate based on some usage we see from new startups looking to scale. This estimate would give you an idea of how much this deployment would essentially cost per month at this scale and you extend it to the scale you further prefer. Here's the [link](https://cloud.google.com/products/calculator/estimate-preview/168cc770-1b97-413b-9dbc-21a8adfee64f?hl=en). You can also get the idea for Data Loss Prevention pricing for [here](https://cloud.google.com/sensitive-data-protection/pricing#sensitive-data-protection-pricing)
 
 ## Deploy the architecture
 
