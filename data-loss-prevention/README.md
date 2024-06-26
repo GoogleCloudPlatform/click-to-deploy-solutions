@@ -19,12 +19,12 @@ This architecture allows for seamless integration between log routing, batch pro
 * __Incident Response and Alerting for Data Breaches__ :Organizations can enhance their incident response capabilities with this pipeline by detecting and responding to data breaches involving sensitive information. Application logs collected by Cloud Logging are sent to Pub/Sub. Dataflow processes these logs with the DLP API to detect and mask sensitive data. Alerts are published to a separate Pub/Sub topic if sensitive data is detected, triggering incident response workflows via Cloud Functions or other services to notify security teams and initiate remediation processes.
 
 ## Architecture
-<p align="center"><img src="assets/DLP-architecture.png"></p>
+<p align="center"><img src="assets/architecture.png"></p>
 The main components that we would be setting up are (to learn more about these products, click on the hyperlinks)
 
 1. [Cloud Logging](https://cloud.google.com/logging) : fully managed service for storing, searching, analyzing, monitoring, and alerting on log data and events.
 2. [Pub/Sub](https://cloud.google.com/pubsub) : asynchronous messaging service that allows for communication between services. It is used for streaming analytics, data integration, and event distribution.
-3. [DataFlow](https://cloud.google.com/dataflow): a unified service for building and running batch and streaming data processing pipelines.
+3. [CloudRun](https://cloud.google.com/dataflow): 
 4. [Cloud Data Loss Prevention](https://cloud.google.com/security/products/dlp) : a service offered by Google Cloud to help organizations discover, classify, and protect their most sensitive data.
 
 ## Costs
@@ -35,9 +35,9 @@ Pricing Estimates - We have created a sample estimate based on some usage we see
 
 Before we deploy the architecture, you will need the following information:
 
-* The **project ID**
+1. * The **project ID**
 
-Once the repository is cloned please run the following command to install the prerequisistes:
+2. Once the repository is cloned please run the following command to install the prerequisistes:
 
 ```sh
 sh prereq.sh
@@ -45,7 +45,7 @@ sh prereq.sh
 
 You will then be prompted to provide the project-id for the destination project.
 
-After this is complete, you can kick off the Cloud Run application Generate Service with the following command:
+3. After this is complete, you can kick off the Cloud Run application Generate Service with the following command:
 
 ```sh
 gcloud run deploy generate-service --source code/generator/ --region us-central1 --update-env-vars PROJECT_ID=<PROJECT ID>
@@ -53,7 +53,7 @@ gcloud run deploy generate-service --source code/generator/ --region us-central1
 
 > **_NOTE:_**  When you run this command will need to answer if you want to create a new repository and if you allow unauthenticated invocations. Set `Y` to create the repository and `N` to unauthenticated invocations.
 
-And now the applicaion Redact Service
+4. And now the applicaion Redact Service
 
 ```sh
 gcloud run deploy redact-service --source code/redact/ --region us-central1 --update-env-vars PROJECT_ID=<PROJECT ID>
@@ -63,7 +63,7 @@ gcloud run deploy redact-service --source code/redact/ --region us-central1 --up
 
 If you encounter errors when running these commands, please attempt to run them again in a clean project.
 
-Now you need to create a log router that will intercept de generate-service's logs and send them to the Pub/Sub. The Pub/Sub will send every message to redact-service that will be responsible to mask the logs.
+5. Now you need to create a log router that will intercept de generate-service's logs and send them to the Pub/Sub. The Pub/Sub will send every message to redact-service that will be responsible to mask the logs.
 
 You need the redact-service's url, run this command to get it:
 
@@ -71,7 +71,7 @@ You need the redact-service's url, run this command to get it:
 gcloud run services describe redact-service --region us-central1 --format 'value(status.url)'
 ```
 
-And now you can run the following:
+6. And now you can run the following:
 
 ```sh
 terraform apply -var project_id=<PROJECT ID>
@@ -85,7 +85,7 @@ At this point you should have successfully deployed the DLP project! This proces
 
 ## Testing your architecture
 
-Once you deployed the solution successfully, let's test.
+1. Once you deployed the solution successfully, let's test.
 
 ```sh
 gcloud beta run services logs read redact-service --limit=20 --project <PROJECT ID> --region us-central1
@@ -108,13 +108,13 @@ Example:
 
 ## Cleaning up your environment
 
-Execute the command below on Cloud Shell to destroy the resources.
+1. Execute the command below on Cloud Shell to destroy the resources.
 
 ```sh
 terraform destroy -var project_id=<PROJECT ID>
 ```
 
-To delete Cloud Run, execute this command:
+2. To delete Cloud Run, execute this command:
 
 ```sh
 gcloud run services delete redact-service --region us-central1
@@ -124,7 +124,7 @@ gcloud run services delete redact-service --region us-central1
 gcloud run services delete generate-service --region us-central1
 ```
 
-Delete the images that were generated:
+3. Delete the images that were generated:
 
 ```sh
 gcloud artifacts docker images delete us-central1-docker.pkg.dev/<PROJECT ID>/cloud-run-source-deploy/generate-service
@@ -136,6 +136,4 @@ gcloud artifacts docker images delete us-central1-docker.pkg.dev/<PROJECT ID>/cl
 
 The above commands will delete the associated resources so there will be no billable charges made afterwards.
 
-## Known issues
 
-## Useful links
