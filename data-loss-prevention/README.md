@@ -40,7 +40,7 @@ Estimated deployment time: 15 min
 Follow the steps below to deploy the architecture:
 
 1. Click on Open in Google Cloud Shell button below.
-<a href="" target="_new">
+<a href="https://ssh.cloud.google.com/cloudshell/editor?cloudshell_git_repo=https://github.com/GoogleCloudPlatform/click-to-deploy-solutions&cloudshell_workspace=data-loss-prevention&cloudshell_tutorial=tutorial.md" target="_new">
     <img alt="Open in Cloud Shell" src="https://gstatic.com/cloudssh/images/open-btn.svg">
 </a>
 
@@ -93,7 +93,7 @@ Congratulations! The DLP project deployment should now be underway. Please be pa
 
 ## Testing the architecture
 
-1. Once you have deployed the solution successfully, let's test. Run the below command to check the log:
+Once you have deployed the solution successfully, let's test. Run the below command to check the log:
 
 ```sh
 gcloud beta run services logs read redact-service --limit=20 --project <PROJECT ID> --region us-central1
@@ -123,7 +123,7 @@ Example:
 terraform destroy -var project_id=<PROJECT ID>
 ```
 
-3. To delete Cloud Run, execute the below commands :
+2. To delete Cloud Run, execute the below commands :
 
 ```sh
 gcloud run services delete redact-service --region us-central1
@@ -133,7 +133,7 @@ gcloud run services delete redact-service --region us-central1
 gcloud run services delete generate-service --region us-central1
 ```
 
-4. We also need to delete the images that were generated. Run the below command to delete the images:
+3. We also need to delete the images that were generated. Run the below command to delete the images:
 
 ```sh
 gcloud artifacts docker images delete us-central1-docker.pkg.dev/<PROJECT ID>/cloud-run-source-deploy/generate-service
