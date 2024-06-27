@@ -44,7 +44,7 @@ Follow the steps below to deploy the architecture:
     <img alt="Open in Cloud Shell" src="https://gstatic.com/cloudssh/images/open-btn.svg">
 </a>
 
-1. Run the prerequisites script to enable APIs permissions.
+2. Run the prerequisites script to enable APIs permissions.
 
 ```sh
 sh prereq.sh
