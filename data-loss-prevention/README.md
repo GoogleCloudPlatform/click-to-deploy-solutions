@@ -1,5 +1,5 @@
 [![banner](../banner.png)](https://cloud.google.com/?utm_source=github&utm_medium=referral&utm_campaign=GCP&utm_content=packages_repository_banner)
-# Protect you data using Data Loss Prevention
+# Protect your data using Data Loss Prevention
 
 ## Introduction
 This architecture uses a serverless pipeline to securely process and store logs, ensuring sensitive information remains masked while retaining valuable insights for troubleshooting. By leveraging the Data Loss Prevention (DLP) API's powerful redaction capabilities, it enables organizations to confidently analyze log data without compromising data privacy.
@@ -29,7 +29,7 @@ The main components that we would be setting up are (to learn more about these p
 
 ## Costs
 
-Pricing Estimates - We have created a sample estimate based on some usage we see from new startups looking to scale. This estimate would give you an idea of how much this deployment would essentially cost per month at this scale and you extend it to the scale you further prefer. Here's the [link](https://cloud.google.com/products/calculator/estimate-preview/168cc770-1b97-413b-9dbc-21a8adfee64f?hl=en). You can also get the idea for Data Loss Prevention pricing for [here](https://cloud.google.com/sensitive-data-protection/pricing#sensitive-data-protection-pricing)
+Pricing Estimates - We have created a sample estimate based on some usage we see from new startups looking to scale. This estimate would give you an idea of how much this deployment would essentially cost per month at this scale and you extend it to the scale you further prefer. Here's the [link](https://cloud.google.com/products/calculator/estimate-preview/8484501a-7936-4e22-9387-57b787bbe878?_gl=1*ivolfw*_up*MQ..&gclid=CjwKCAjwm_SzBhAsEiwAXE2Cv5uQapFkLBu4oYucpZqH_eJkvshWrFri3skFdH8c_MhxP0kBIfyW4xoCGuMQAvD_BwE&gclsrc=aw.ds&hl=en). You can also get the idea for Data Loss Prevention pricing for [here](https://cloud.google.com/sensitive-data-protection/pricing#sensitive-data-protection-pricing)
 
 ## Deploy the architecture
 Before we deploy the architecture, you will need the following information:
