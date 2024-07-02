@@ -12,20 +12,21 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Python image to use.
-FROM python:3.12-alpine
+terraform {
+  backend "gcs" {
+  }
+  required_providers {
+    google = {
+      source  = "hashicorp/google"
+      version = "5.35.0"
+    }
+  }
+  provider_meta "google" {
+    module_name = "cloud-solutions/data-loss-prevention-v0.1"
+  }
+}
 
-# Set the working directory to /app
-WORKDIR /app
-
-# copy the requirements file used for dependencies
-COPY requirements.txt .
-
-# Install any needed packages specified in requirements.txt
-RUN pip install --trusted-host pypi.python.org -r requirements.txt
-
-# Copy the rest of the working directory contents into the container at /app
-COPY . .
-
-# Run app.py when the container launches
-ENTRYPOINT ["python", "app.py"]
+provider "google" {
+  project = var.project_id
+  region  = var.region
+}
