@@ -59,15 +59,12 @@ echo "Granting Cloud Build's and Compute Service Accounts IAM roles to deploy th
 PROJECT_NUMBER=$(gcloud projects describe $PROJECT_ID --format='value(projectNumber)')
 MEMBER=serviceAccount:$PROJECT_NUMBER@cloudbuild.gserviceaccount.com
 COMPUTEMEMBER=serviceAccount:$PROJECT_NUMBER-compute@developer.gserviceaccount.com
-# BUILDSERVICEAGENT=serviceAccount:service-$PROJECT_NUMBER@gcp-sa-cloudbuild.iam.gserviceaccount.com
 
 add_iam_member $MEMBER roles/editor
 add_iam_member $MEMBER roles/iam.securityAdmin
 add_iam_member $MEMBER roles/eventarc.admin
 add_iam_member $MEMBER roles/artifactregistry.admin 
 add_iam_member $MEMBER roles/storage.admin 
-add_iam_member $COMPUTEMEMBER roles/storage.admin 
-add_iam_member $COMPUTEMEMBER roles/run.admin
 
 
 # Service usage admin
@@ -78,6 +75,8 @@ add_iam_member $COMPUTEMEMBER roles/aiplatform.user
 add_iam_member $COMPUTEMEMBER roles/bigquery.dataEditor
 add_iam_member $COMPUTEMEMBER roles/iam.serviceAccountUser
 add_iam_member $COMPUTEMEMBER roles/cloudbuild.builds.builder
+add_iam_member $COMPUTEMEMBER roles/storage.admin 
+add_iam_member $COMPUTEMEMBER roles/run.admin
 # BIGQUERY USER VERTEX AI USER
 
 # roles/artifactregistry.createOnPushWriter
