@@ -1,32 +1,6 @@
 # Classify texts using Google GenAI
 
-## Introduction
-In today's data-driven world, the ability to quickly and accurately classify texts is crucial for various applications across industries. This guide provides a step-by-step approach to setting up and using Google's Generative AI (GenAI) to classify texts. Leveraging the power of GenAI, we will classify texts and store the results in BigQuery. The classified data can then be visualized in Looker Studio, offering powerful insights and easy access to meaningful patterns within the texts.
-
-This guide is designed for users who already have a Google Cloud project and want to explore how to integrate GenAI into their workflows. Whether you're looking to categorize customer feedback, filter emails, or classify documents, this solution provides a scalable and efficient method to process and analyze large volumes of text.
-
-This package will get you up to speed with an infrastructure to classify texts using GenAI, store the texts in BigQuery and then visualise those into a Looker Studio dashboard.
-
-## Use cases
-The versatility of GenAI text classifications extends across numerous industries, offering seamless integration with your business operations. Here are some applicable use cases of GenAI text classifications:
-
-* __Organizing Medical and Legal Documents__: Efficiently classify and manage large volumes of documents such as patient records, legal filings, and research articles. This enhances the retrieval and organization of information, helping healthcare professionals quickly access patient histories and legal researchers find relevant case laws and statutes.
-* __Automating Product Tagging and Categorization__: Streamline e-commerce operations by automatically tagging and categorizing products based on their descriptions and customer reviews. This automation improves product management, ensures accurate tagging, and enhances the shopping experience by making products easier to find for customers.
-* __Prioritizing and Routing Support Tickets__: Improve customer service efficiency by categorizing support tickets into specific categories like "Technical Issues," "Billing Inquiries," and "Payment Problems." This helps in prioritizing and routing tickets to the appropriate support teams, ensuring timely and accurate responses to customer queries.
-* __Medical Diagnosis Support__: Accelerate the diagnostic process by classifying medical reports and patient notes. This supports healthcare professionals in quickly identifying relevant information, aiding in faster diagnosis and treatment, and improving patient care by leveraging detailed and structured medical data.
-* __Detecting and Preventing Plagiarism__: Enhance academic integrity by identifying instances of plagiarism in student assignments and research papers. This use case helps educational institutions maintain high standards by ensuring that all submitted work is original and complies with academic policies, fostering a culture of honesty and creativity.
-
-## Architecture
-<p align="center"><img src="Architecture.png"></p>
-
-
-These are the main components that we would be setting up (to learn more about these products, click on the hyperlinks):
-* [Cloud Run](https://cloud.google.com/run): serverless PaaS offering to host containers for web-oriented applications, while offering security, scalability and easy versioning.
-* [Vertex AI PaLM API](https://cloud.google.com/vertex-ai/generative-ai/docs/language-model-overview#palm-api):Use advanced language models for natural language processing tasks. Ideal for building chatbots, text analysis tools, and translation services.
-* [BigQuery](https://cloud.google.com/bigquery): A Serverless and cost-effective enterprise data warehouse that works across clouds and scales with your data. 
-* [Looker Studio](https://support.google.com/looker-studio/answer/6283323?hl=en): Looker Studio is a free tool that turns your data into informative, easy to read, easy to share, and fully customizable dashboards and reports.
-
-
+This package will get you up to speed with an infrastructure to classify texts using GenAI, store the texts in BigQuery and then visualise those into a Looker Studio dashboard
 
 ## Let's get started
 
@@ -106,6 +80,24 @@ Finally, check the json results on BigQuery or even better, use the bellow link 
 ```
 https://lookerstudio.google.com/c/u/0/reporting/create?c.mode=edit&ds.connector=BIG_QUERY&ds.type=TABLE&ds.projectId=[YOUR PROJECT ID]&ds.datasetId=classified_messages&ds.tableId=classified_messages
 ```
+
+## Taking it further to other usecases
+
+Feel free to play around and take this example to new usecases, in code/main.py you have the prompt that is being used to create the emotions, you could alternativelly update that to e.g classify emails for a law firm into court cases: 
+
+```
+prompt = f"""You are a lawyer assistant and need to classify a given email of a law case by its content, the process email text is "{text}". Give me a result such as Criminal, Civil, Family, Probate and Corporate. Refrain from explaining your answer"""
+```
+
+Then for testing you can update the strings in the populate.sh file:
+
+"I hope this email finds you well. My name is John Doe, and I am seeking legal assistance regarding an employment dispute with my former employer, ABC Corporation. I was terminated last month under circumstances that I believe were unlawful. Could we schedule a consultation to discuss the details of my case? I have attached relevant documents, including my employment contract and termination letter, for your review."
+
+"My name is Michael Johnson, and I am in urgent need of legal representation. I have been charged with assault following an incident that occurred on June 10, 2024. I maintain that I acted in self-defense and believe that the charges against me are unjust. I am currently out on bail and need to appear in court for my first hearing on July 1, 2024. I would like to schedule a meeting with you as soon as possible to discuss my case and prepare my defense. I have attached the police report and bail documents for your review. Please let me know your earliest availability for a consultation. I am very anxious about this situation and am looking for strong legal guidance."
+
+Hint: You can generate those using Gemini :)
+
+
 
 ## Cleaning up your environment
 
