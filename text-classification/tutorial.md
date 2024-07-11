@@ -1,4 +1,4 @@
-# Classify texts using Google GenAI
+# Identify and classify keywords from text data using AI
 
 This package will get you up to speed with an infrastructure to classify texts using GenAI, store the texts in BigQuery and then visualise those into a Looker Studio dashboard
 
