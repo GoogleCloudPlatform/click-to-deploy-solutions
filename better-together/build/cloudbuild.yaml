@@ -29,7 +29,10 @@ steps:
   - apply
   - -auto-approve
   dir: infra
-options:
+- id: 'configure Apigee'
+  name: 'gcr.io/cloud-builders/gcloud'
+  entrypoint: 'bash'
+  args: ['./build/config_apigee.sh']
   env:
     - TF_VAR_project_id=$PROJECT_ID
 tags:
