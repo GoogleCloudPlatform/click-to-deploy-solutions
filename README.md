@@ -32,6 +32,7 @@ In the catalog below you will find all solutions ready to deploy, click on it an
 - [Integrate Cloud Data Fusion and Private Cloud SQL for a Robust Data Pipeline](./private-cloud-data-fusion/)
 - [Replicate your Databases into a Data Warehouse solution for data analysis in Google Cloud](./replicating-databases-bigquery/)
 - [Stream events in real-time for data analytics on Google Cloud](./streaming-data-to-analytics/)
+- [Protect your data using Data Loss Prevention](./data-loss-prevention)
 
 ### Security, Logging & Monitoring
 - [Protect applications with Cloud Armor](./cloud-armor-demo/)
