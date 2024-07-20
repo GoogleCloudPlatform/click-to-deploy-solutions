@@ -12,13 +12,16 @@ gcloud iam service-accounts create addressvalidationsa \
     --description="Address Validation SA" \
     --display-name="Address Validation SA"
 
-export PROJECT="apigee-hero"
+export PROJECT="apigee-bettertogether"
 export REGION="europe-west1"
 export APIGEE_ENVIRONMENT=test1
 
+export PRODUCT_NAME="AddressValidation-API-v1"
+export DEVELOPER_EMAIL="example-developer@cymbalgroup.com"
+export APP_NAME=addressvalidation-app-1
+export APIGEE_URL=test.api.example.com
+
 gcloud config set project $PROJECT
-gcloud services enable geocoding-backend.googleapis.com 
-gcloud services enable addressvalidation.googleapis.com 
 
 apigeecli kvms create -e $APIGEE_ENVIRONMENT -n address-gmap-keys -o $PROJECT -t $(gcloud auth print-access-token)
 apigeecli kvms entries create -m address-gmap-keys -k gmaps_key -l $GMAPS_KEY -e $APIGEE_ENVIRONMENT -o $PROJECT -t $(gcloud auth print-access-token)
@@ -30,13 +33,10 @@ apigeecli apis import -o $PROJECT -f . -t $(gcloud auth print-access-token)
 
 apigeecli apis deploy -n AddressValidation-Service -o $PROJECT -e $APIGEE_ENVIRONMENT -t $(gcloud auth print-access-token) -s addressvalidationsa@$PROJECT.iam.gserviceaccount.com --ovr
 
-export PRODUCT_NAME="AddressValidation-API-v1"
 apigeecli products create -n "$PRODUCT_NAME" \
   -m "$PRODUCT_NAME" \
   -o "$PROJECT" -e "$APIGEE_ENVIRONMENT" \
   -f auto -p "AddressValidation-Service" -t $(gcloud auth print-access-token) 
-
-export DEVELOPER_EMAIL="example-developer@cymbalgroup.com"
 
 apigeecli developers create -n "$DEVELOPER_EMAIL" \
   -f "Example" -s "Developer" \
@@ -44,16 +44,12 @@ apigeecli developers create -n "$DEVELOPER_EMAIL" \
 
 #Now let’s create an app subscription using the test developer account.
 
-export APP_NAME=addressvalidation-app-1
-
 DEVELOPER_APP=$(apigeecli apps create --name "$APP_NAME" \
   --email "$DEVELOPER_EMAIL" \
   --prods "$PRODUCT_NAME" \
   --org "$PROJECT" --token $(gcloud auth print-access-token))
 
 API_KEY=$(echo $DEVELOPER_APP | jq -r '.credentials[0].consumerKey')
-
-export APIGEE_URL=test.api.example.com
 
 curl --location '$APIGEE_URL/v1/addressvalidation?apikey=$API_KEY' \
 --header 'Content-Type: application/json' \

@@ -45,7 +45,11 @@ gcloud services enable cloudbuild.googleapis.com \
     compute.googleapis.com \
     servicenetworking.googleapis.com \
     cloudresourcemanager.googleapis.com \
-    apigee.googleapis.com
+    cloudkms.googleapis.com \
+    apigee.googleapis.com \
+    apikeys.googleapis.com \
+    geocoding-backend.googleapis.com \
+    addressvalidation.googleapis.com 
 
 echo "Granting Cloud Build's Service Account IAM roles to deploy the resources..."
 PROJECT_NUMBER=$(gcloud projects describe $PROJECT_ID --format='value(projectNumber)')
@@ -53,5 +57,7 @@ MEMBER=serviceAccount:$PROJECT_NUMBER@cloudbuild.gserviceaccount.com
 add_iam_member $MEMBER roles/editor
 add_iam_member $MEMBER roles/iam.securityAdmin
 add_iam_member $MEMBER roles/compute.networkAdmin
+add_iam_member $MEMBER roles/cloudkms.admin
+add_iam_member $MEMBER roles/cloudkms.cryptoKeyEncrypterDecrypter
 
 echo Script completed successfully!
