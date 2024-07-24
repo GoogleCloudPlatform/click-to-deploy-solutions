@@ -13,30 +13,30 @@
 # limitations under the License.
 
 steps:
-#- id: 'tf init'
-#  name: 'hashicorp/terraform:1.9.0'
-#  entrypoint: 'sh'
-#  args: 
-#  - '-c'
-#  - | 
-#    terraform init \
-#    -backend-config="bucket=$PROJECT_ID-tf-state" \
-#    -backend-config="prefix=better-together"
-#  dir: infra
-#- id: 'tf apply'
-#  name: 'hashicorp/terraform:1.9.0'
-#  args: 
-#  - apply
-#  - -auto-approve
-#  dir: infra
+- id: 'tf init'
+  name: 'hashicorp/terraform:1.9.0'
+  entrypoint: 'sh'
+  args: 
+  - '-c'
+  - | 
+    terraform init \
+    -backend-config="bucket=$PROJECT_ID-tf-state" \
+    -backend-config="prefix=better-together"
+  dir: infra
+- id: 'tf apply'
+  name: 'hashicorp/terraform:1.9.0'
+  args: 
+  - apply
+  - -auto-approve
+  dir: infra
 - id: 'configure Apigee'
   name: 'gcr.io/cloud-builders/gcloud'
   entrypoint: 'bash'
   args: ['./build/config_apigee.sh']
   env:
     - TF_VAR_project_id=$PROJECT_ID
-#tags:
-#  - terraform
-#  - better-together
-#  - apply
-#timeout: 3600s
+tags:
+  - terraform
+  - better-together
+  - apply
+timeout: 3600s

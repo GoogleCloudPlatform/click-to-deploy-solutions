@@ -44,12 +44,6 @@ apigee_environments = {
   }
 }
 
-apigee_envgroups = {
-  test = {
-    hostnames = ["test.api.example.com"]
-  }
-}
-
 network = "apigee-network"
 
 exposure_subnets = [
