@@ -13,10 +13,12 @@
 # limitations under the License.
 
 steps:
-#- id: 'delete Apigee'
-#  name: 'gcr.io/cloud-builders/gcloud'
-#  entrypoint: 'bash'
-#  args: ['./build/delete_apigee.sh']
+- id: 'delete Apigee'
+  name: 'gcr.io/cloud-builders/gcloud'
+  entrypoint: 'bash'
+  args: ['./build/delete_apigee.sh']
+  env:
+  - 'PROJECT_ID=$PROJECT_ID'
 - id: 'tf init'
   name: 'hashicorp/terraform:1.9.0'
   entrypoint: 'sh'
