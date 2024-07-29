@@ -35,6 +35,7 @@ steps:
   args: ['./build/config_apigee.sh']
   env:
     - TF_VAR_project_id=$PROJECT_ID
+    - 'PROJECT_ID=$PROJECT_ID'
 tags:
   - terraform
   - better-together
