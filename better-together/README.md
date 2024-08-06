@@ -29,7 +29,9 @@ The main components that we would be setting up are (to learn more about these p
 * [Cloud Scheduler](https://cloud.google.com/scheduler) : Cloud Scheduler is a fully managed cron job service that allows you to schedule virtually any job, including batch, big data jobs, cloud infrastructure operations, and more.
 
 ## Costs
-Pricing Estimates - We have created a sample estimate based on some usage we see from new startups looking to scale. This estimate would give you an idea of how much this deployment would essentially cost per month at this scale and you extend it to the scale you further prefer. Here's the [link]().
+Pricing Estimates - We have created a sample estimate based on some usage we see from new startups looking to scale. This estimate would give you an idea of how much this deployment would essentially cost per month at this scale and you extend it to the scale you further prefer. Here are the links below:
+* [Address Validation API](https://developers.google.com/maps/documentation/address-validation/usage-and-billing#address-validation). - 17 USD/1000 request
+* [BigQuery + Apigee](https://cloud.google.com/products/calculator?hl=en&e=48754805&dl=CiRiNjc3YmZmMy1hZjhiLTQyNTctYmYyYy0wZTA5YzVmZGU3ZDYQCxokMjgxMjYxOTctOTU1RS00NTkxLUE1NDMtQzkwOUU4NDU4OUZD).
 
 ## Deploy the architecture
 
