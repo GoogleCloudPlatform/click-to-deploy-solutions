@@ -31,7 +31,7 @@ The main components that we would be setting up are (to learn more about these p
 ## Costs
 Pricing Estimates - We have created a sample estimate based on some usage we see from new startups looking to scale. This estimate would give you an idea of how much this deployment would essentially cost per month at this scale and you extend it to the scale you further prefer. Here are the links below:
 * [Address Validation API](https://developers.google.com/maps/documentation/address-validation/usage-and-billing#address-validation). - 17 USD/1000 request
-* [BigQuery + Apigee](https://cloud.google.com/products/calculator?hl=en&e=48754805&dl=CiRiNjc3YmZmMy1hZjhiLTQyNTctYmYyYy0wZTA5YzVmZGU3ZDYQCxokMjgxMjYxOTctOTU1RS00NTkxLUE1NDMtQzkwOUU4NDU4OUZD).
+* [BigQuery + Apigee](https://cloud.google.com/products/calculator?hl=en&e=48754805&dl=CiQ0ZDBiNzIxOC0zYzA4LTRlNmQtODBhOS0wYmVlY2ZjMmJmNDUQCxokMjgxMjYxOTctOTU1RS00NTkxLUE1NDMtQzkwOUU4NDU4OUZD).
 
 ## Deploy the architecture
 
