@@ -12,7 +12,7 @@ gcloud iam service-accounts create addressvalidationsa \
     --description="Address Validation SA" \
     --display-name="Address Validation SA"
 
-export PROJECT="apigee-bettertogether"
+export PROJECT=$PROJECT_ID
 export REGION="europe-west1"
 export APIGEE_ENVIRONMENT=test1
 
@@ -47,18 +47,19 @@ apigeecli developers create -n "$DEVELOPER_EMAIL" \
 DEVELOPER_APP=$(apigeecli apps create --name "$APP_NAME" \
   --email "$DEVELOPER_EMAIL" \
   --prods "$PRODUCT_NAME" \
-  --org "$PROJECT" --token $(gcloud auth print-access-token))
+  --org "$PROJECT" --token $(gcloud auth print-access-token))#
 
 API_KEY=$(echo $DEVELOPER_APP | jq -r '.credentials[0].consumerKey')
 
-curl --location '$APIGEE_URL/v1/addressvalidation?apikey=$API_KEY' \
---header 'Content-Type: application/json' \
---data '{
-    "address": {
-        "regionCode": "US",
-        "locality": "Mountain View",
-        "addressLines": [
-            "1600 Amphitheatre Pkwy"
-        ]
-    }
-}'
+
+#curl --location '$APIGEE_URL/v1/addressvalidation?apikey=$API_KEY' \
+#--header 'Content-Type: application/json' \
+#--data '{
+#    "address": {
+#        "regionCode": "US",
+#        "locality": "Mountain View",
+#        "addressLines": [
+#            "1600 Amphitheatre Pkwy"
+#        ]
+#    }
+#}'
