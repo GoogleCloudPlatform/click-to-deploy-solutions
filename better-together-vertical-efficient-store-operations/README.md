@@ -38,16 +38,17 @@ Pricing Estimates - We have created a sample estimate based on some usage we see
 :clock1: Estimated deployment time:  min
 
 1. Click on Open in Google Cloud Shell button below.
+   
 <a href="" target="_new">
     <img alt="Open in Cloud Shell" src="https://gstatic.com/cloudssh/images/open-btn.svg">
 </a>
 
-1. Run the prerequisites script to enable APIs and set Cloud Build permissions.
+2. Run the prerequisites script to enable APIs and set Cloud Build permissions.
 ```
 sh prereq.sh
 ```
 
-1. Run the Cloud Build Job
+3. Run the Cloud Build Job
 ```
 gcloud builds submit . --config build/cloudbuild.yaml
 ```
@@ -55,11 +56,40 @@ gcloud builds submit . --config build/cloudbuild.yaml
 Once it is finished, you can go to [Cloud Composer](https://console.cloud.google.com/composer/environments) to see the dags' results and explore the Cloud Composers's functionalities.
 
 ## Testing the architecture
-After you deployed the solution, you can check the resources created and see how they work together.
 
+Once deployed, you'll need to retrieve two crucial pieces of information to interact with your API: the endpoint URL and your unique app key to start testing the solution.
+
+#### 1. Obtaining the Endpoint URL
+The endpoint URL can be found within the DNS hostname of the certificate associated with your load balancer. For instance, it might look something like 34.49.65.0.nip.io
+
+#### 2. Retrieving Your App Key
+To access your app key, navigate to the app details section within your application's management interface. There, you'll find the key value readily available.
+
+#### 3. Making API Calls
+With the endpoint URL and app key in hand, you can start making requests to the API. Update the placeholders **($APIGEE_URL and $API_KEY)** in the provided curl example with your actual values.
+
+```bash
+curl -k --location '$APIGEE_URL/v1/addressvalidation?apikey=$API_KEY' \
+--header 'Content-Type: application/json' \
+--data '{
+    "address": {
+        "regionCode": "US",
+       "locality": "Mountain View",
+        "addressLines": [
+            "1600 Amphitheatre Pkwy"
+        ]
+    }
+}'
+```
+
+### Expected Response
+Once you have completed the steps above you will get a response like this:
+
+![architecture](assets/result.png)
 
 ## Cleaning up your environment
 1. Click on Open in Google Cloud Shell button below.
+
 <a href="" target="_new">
     <img alt="Open in Cloud Shell" src="https://gstatic.com/cloudssh/images/open-btn.svg">
 </a>
