@@ -51,8 +51,10 @@ DEVELOPER_APP=$(apigeecli apps create --name "$APP_NAME" \
 
 API_KEY=$(echo $DEVELOPER_APP | jq -r '.credentials[0].consumerKey')
 
+echo $APIGEE_URL
+echo $API_KEY
 
-#curl --location '$APIGEE_URL/v1/addressvalidation?apikey=$API_KEY' \
+#curl -k --location '$APIGEE_URL/v1/addressvalidation?apikey=$API_KEY' \
 #--header 'Content-Type: application/json' \
 #--data '{
 #    "address": {
