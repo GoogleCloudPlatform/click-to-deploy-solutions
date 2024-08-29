@@ -17,6 +17,7 @@
 variable "project_id" {
   description = "Project id (also used for the Apigee Organization)."
   type        = string
+  default     = "famrs-apigee-validate"
 }
 
 variable "ax_region" {

@@ -13,22 +13,22 @@
 # limitations under the License.
 
 steps:
-- id: 'tf init'
-  name: 'hashicorp/terraform:1.9.0'
-  entrypoint: 'sh'
-  args: 
-  - '-c'
-  - | 
-    terraform init \
-    -backend-config="bucket=$PROJECT_ID-tf-state" \
-    -backend-config="prefix=better-together"
-  dir: infra
-- id: 'tf apply'
-  name: 'hashicorp/terraform:1.9.0'
-  args: 
-  - apply
-  - -auto-approve
-  dir: infra
+#- id: 'tf init'
+#  name: 'hashicorp/terraform:1.9.0'
+#  entrypoint: 'sh'
+#  args: 
+#  - '-c'
+#  - | 
+#    terraform init \
+#    -backend-config="bucket=$PROJECT_ID-tf-state" \
+#    -backend-config="prefix=better-together"
+#  dir: infra
+#- id: 'tf apply'
+#  name: 'hashicorp/terraform:1.9.0'
+#  args: 
+#  - apply
+#  - -auto-approve
+#  dir: infra
 - id: 'configure Apigee'
   name: 'gcr.io/cloud-builders/gcloud'
   entrypoint: 'bash'
