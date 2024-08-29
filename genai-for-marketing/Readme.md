@@ -21,7 +21,7 @@ This architecture showcases the transformative potential of generative AI in mar
 * __Content Generation__: Reduce time for content generation with Vertex Foundation Models. Generate compelling and captivating email copy, website articles, social media posts, and assets for PMax. All aimed at achieving specific goals such as boosting sales, generating leads, or enhancing brand awareness. This encompasses both textual and visual elements using Vertex language & vision models.
 
 ## Architecture
-<p align="center"><img src="assets/architecture.png"></p>
+<p align="center"><img src="app/images/architecture.png"></p>
 The main components that we would be setting up are (to learn more about these products, click on the hyperlinks)
 
 1. [Looker](https://cloud.google.com/looker) :  Empowering data exploration and informed decision-making through a user-friendly interface and powerful visualization capabilities
