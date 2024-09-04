@@ -64,5 +64,5 @@ Congratulations! The GenAI for marketing project deployment should now be underw
 The above commands will delete the associated resources so there will be no billable charges made afterwards.
 
 ```sh
-terraform apply -auto-approve
+terraform destroy -auto-approve
 ```
