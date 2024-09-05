@@ -59,14 +59,10 @@ Next, you'll be asked to enter the project ID of the destination project. Please
 
 Congratulations! The GenAI for marketing project deployment should now be underway. Please be patient as this process might take some time. Kindly keep this window open during the deployment. Once completed, we'll proceed to test the architecture and then guide you through cleaning up your environment.
 
-## Testing the architecture
-
-Once you have deployed the solution successfully, let's test. Run the below command to check the log:
-
-
 ## Cleaning up your environment
-
 
 The above commands will delete the associated resources so there will be no billable charges made afterwards.
 
-
+```sh
+terraform destroy -auto-approve
+```
