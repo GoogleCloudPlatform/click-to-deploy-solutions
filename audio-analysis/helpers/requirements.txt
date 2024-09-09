@@ -1,0 +1,7 @@
+### Install Vertex AI SDK for Python
+google-cloud-aiplatform
+google-cloud-speech
+librosa 
+gcsfs
+numpy==2.0.0
+google-cloud-translate
