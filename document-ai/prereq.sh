@@ -65,6 +65,11 @@ add_iam_member $MEMBER roles/iam.securityAdmin
 add_iam_member $MEMBER roles/documentai.admin
 add_iam_member $MEMBER roles/eventarc.admin
 
+MEMBER_COMPUTE=serviceAccount:$PROJECT_NUMBER-compute@developer.gserviceaccount.com
+add_iam_member $MEMBER_COMPUTE roles/editor
+add_iam_member $MEMBER_COMPUTE roles/storage.objectAdmin
+add_iam_member $MEMBER_COMPUTE roles/iam.securityAdmin
+
 echo "Granting Cloud Storage's Service Account permissions required by EventArc..."
 GCS_SERVICE_ACCOUNT="$(gsutil kms serviceaccount -p $PROJECT_ID)"
 MEMBER=serviceAccount:$GCS_SERVICE_ACCOUNT
