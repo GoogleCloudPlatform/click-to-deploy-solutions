@@ -39,7 +39,7 @@ In the catalog below you will find all solutions ready to deploy, click on it an
 - [Protect applications with Cloud Armor](./cloud-armor-demo/)
 
 ### Industry Package
-- [Serverless Address Validation using Apigee and Google Maps](./better-together-vertical-efficient-store-operations/)
+- [Serverless Address Validation using Apigee and Google Maps](./address-validation-maps-apigee/)
 
 ## Contribute
 
