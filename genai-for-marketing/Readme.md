@@ -44,7 +44,7 @@ Estimated deployment time: 15 min
 Follow the steps below to deploy the architecture:
 
 1. Click on Open in Google Cloud Shell button below.
-<a href="" target="_new">
+<a href="https://ssh.cloud.google.com/cloudshell/editor?cloudshell_git_repo=https://github.com/GoogleCloudPlatform/click-to-deploy-solutions&cloudshell_workspace=genai-for-marketing&cloudshell_open_in_editor=infra/variables.tf&&cloudshell_tutorial=tutorial.md" target="_new">
     <img alt="Open in Cloud Shell" src="https://gstatic.com/cloudssh/images/open-btn.svg">
 </a>
 
