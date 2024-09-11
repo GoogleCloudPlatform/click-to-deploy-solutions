@@ -1,5 +1,5 @@
 [![banner](../banner.png)](https://cloud.google.com/?utm_source=github&utm_medium=referral&utm_campaign=GCP&utm_content=packages_repository_banner)
-# Better Togetter with Apigee
+# Serverless Address Validation using Apigee and Google Maps
 
 ## Introduction
 This architecture uses a serverless pipeline to securely process and validate addresses, ensuring data quality while leveraging Google Cloud services for scalability and efficiency. By integrating Apigee with the Address Validation API, it enables organizations to confidently cleanse and store address data without compromising accuracy.
@@ -90,7 +90,7 @@ Once you have completed the steps above you will get a response like this:
 ## Cleaning up your environment
 1. Click on Open in Google Cloud Shell button below.
 
-<a href="" target="_new">
+<a href="https://ssh.cloud.google.com/cloudshell/editor?cloudshell_git_repo=https://github.com/GoogleCloudPlatform/click-to-deploy-solutions&cloudshell_workspace=better-together-vertical-efficient-store-operations&cloudshell_open_in_editor=infra/terraform.auto.tfvars&&cloudshell_tutorial=tutorial.md" target="_new">
     <img alt="Open in Cloud Shell" src="https://gstatic.com/cloudssh/images/open-btn.svg">
 </a>
 
