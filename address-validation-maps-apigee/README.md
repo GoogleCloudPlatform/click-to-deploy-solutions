@@ -35,7 +35,7 @@ Pricing Estimates - We have created a sample estimate based on some usage we see
 
 ## Deploy the architecture
 
-:clock1: Estimated deployment time:  min
+:clock1: Estimated deployment time: 15 min
 
 1. Click on Open in Google Cloud Shell button below.
    

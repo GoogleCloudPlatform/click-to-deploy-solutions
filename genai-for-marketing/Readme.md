@@ -61,7 +61,7 @@ Congratulations! The GenAI for marketing project deployment should now be underw
 
 ## Cleaning up your environment
 
-The above commands will delete the associated resources so there will be no billable charges made afterwards.
+The below command will delete the associated resources so there will be no billable charges made afterwards.
 
 ```sh
 terraform destroy -auto-approve
