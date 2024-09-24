@@ -11,7 +11,7 @@ This architecture illustrates a streamlined workflow for editing images using Go
 
 
 ## Architecture
-<p align="center"><img src="assets/architecture.png"></p>
+<p align="center"><img src="assets/Architecture.png"></p>
 The main components that we would be setting up are (to learn more about these products, click on the hyperlinks)
 
 1. [Imagen](https://cloud.google.com/use-cases/text-to-image-ai) : Imagen is a powerful AI model from Google that generates and edits images from text descriptions.
