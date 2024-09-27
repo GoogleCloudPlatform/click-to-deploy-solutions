@@ -11,7 +11,7 @@ location = "us"
 
 client = documentai.DocumentProcessorServiceClient()
 name = f"projects/427625783791/locations/us/processors/1875d368769573dc"
-os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = 'path/to/json file'
+os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = '/Users/diyasini/Desktop/Hero-Project/click-to-deploy-solutions/document-ai/frontend/key/docai-428805-fc8a50a1c2bd.json'
 os.environ['GOOGLE_CLOUD_PROJECT'] = 'docai-428805'
 
 st.title("Invoice Parsing using DocAI")

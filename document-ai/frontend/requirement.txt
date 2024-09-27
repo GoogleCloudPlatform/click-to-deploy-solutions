@@ -15,5 +15,6 @@ streamlit
 numpy
 os
 opencv-python 
-
+streamlit_pdf_viewer
+google-cloud-documentai>=2.12
 
