@@ -24,11 +24,11 @@ resource "random_id" "db_name_suffix" {
 resource "google_sql_database_instance" "instance" {
   name                = local.db_instance_name
   region              = var.region
-  database_version    = "POSTGRES_14"
+  database_version    = "POSTGRES_16"
   deletion_protection = false # not recommended for PROD
 
   settings {
-    tier        = "db-custom-1-3840"
+    tier        = "db-f1-micro"
     user_labels = local.resource_labels
 
     ip_configuration {
