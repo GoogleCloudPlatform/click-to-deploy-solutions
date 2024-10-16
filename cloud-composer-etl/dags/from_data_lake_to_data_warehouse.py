@@ -20,16 +20,16 @@ from datetime import datetime
 from airflow import models
 from airflow.operators.trigger_dagrun import TriggerDagRunOperator
 from airflow.providers.google.cloud.transfers.gcs_to_bigquery import GCSToBigQueryOperator
-from airflow.providers.google.cloud.operators.bigquery import BigQueryCreateEmptyDatasetOperator
-
+from airflow.providers.google.cloud.operators.bigquery import BigQueryCreateEmptyDatasetOperator,BigQueryInsertJobOperator
 
 CONN_ID = "pgCitibike"
 DATASET_NAME = "citibike"
 GCS_DATA_LAKE_BUCKET = os.environ.get("GCS_DATA_LAKE_BUCKET")
-
+PROJECT_ID = os.environ.get("GCP_PROJECT")
 
 with models.DAG(
-    dag_id='datalake_to_dw',
+    dag_id='from_data_lake_to_data_warehouse',
+    description='Import data from the data lake to the data warehouse in BigQuery',
     schedule_interval="@once",
     start_date=datetime(2022, 1, 1),
     catchup=False,
@@ -72,6 +72,46 @@ with models.DAG(
         write_disposition='WRITE_TRUNCATE',
     )
 
+    create_bike_trips_table = BigQueryInsertJobOperator(
+        task_id="create_bike_trips_table",
+        configuration={
+            "query": {
+                "query": '''SELECT
+                            bikeid,
+                            COUNT(*) AS trip_count,
+                            MAX(starttime) AS last_start,
+                            MAX(stoptime) AS last_stop,
+                            ARRAY_AGG( STRUCT( 
+                                ss.name AS start_station_name,
+                                t.starttime AS start_time,
+                                es.name AS end_station_name,
+                                t.stoptime AS end_time,
+                                tripduration AS trip_duration) ) AS trips
+                            FROM
+                            `{0}.citibike.trips` t
+                            JOIN
+                            `{0}.citibike.stations` AS ss ON (t.start_station_id = ss.station_id)
+                            JOIN
+                            `{0}.citibike.stations` AS es ON (t.end_station_id = es.station_id)
+                            GROUP BY
+                            bikeid
+                        '''.format(PROJECT_ID),
+                "useLegacySql": False,
+                "destinationTable": {
+                    "projectId": PROJECT_ID,
+                    "datasetId": "citibike",
+                    "tableId": "bike_trips",
+                },
+                "createDisposition": "CREATE_IF_NEEDED",
+                "writeDisposition": "WRITE_TRUNCATE",
+            }
+        },
+    )
+
+# task dependency
 trigger_datalake_dag >> create_dataset
 create_dataset >> load_stations
 create_dataset >> load_trips
+
+load_stations >> create_bike_trips_table
+load_trips >> create_bike_trips_table
