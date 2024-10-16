@@ -54,7 +54,7 @@ resource "google_service_networking_connection" "private_service_connection" {
 }
 
 resource "google_compute_router" "nat_router" {
-  name    = "${google_compute_network.vpc_network.id}-nat-router"
+  name    = "${google_compute_network.vpc_network.name}-nat-router"
   network = google_compute_network.vpc_network.id
   region  = var.region
 
@@ -64,7 +64,7 @@ resource "google_compute_router" "nat_router" {
 }
 
 resource "google_compute_router_nat" "nat_gateway" {
-  name                               = "${google_compute_network.vpc_network.id}-nat-gw"
+  name                               = "${google_compute_network.vpc_network.name}-nat-gw"
   router                             = google_compute_router.nat_router.name
   region                             = google_compute_router.nat_router.region
   nat_ip_allocate_option             = "AUTO_ONLY"
