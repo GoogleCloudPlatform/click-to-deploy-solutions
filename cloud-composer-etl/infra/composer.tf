@@ -23,8 +23,8 @@ module "composer" {
   environment_size         = "ENVIRONMENT_SIZE_SMALL"
   labels                   = local.resource_labels
 
-  network                          = google_compute_network.vpc_network.id
-  subnetwork                       = google_compute_subnetwork.composer_subnetwork.id
+  network                          = google_compute_network.vpc_network.name
+  subnetwork                       = google_compute_subnetwork.composer_subnetwork.name
   master_ipv4_cidr                 = var.composer_ip_ranges.master
   service_ip_allocation_range_name = "services"
   pod_ip_allocation_range_name     = "pods"
