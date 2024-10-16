@@ -12,35 +12,31 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-module "vpc" {
-  source       = "terraform-google-modules/network/google"
-  version      = "~> 9.0"
-  project_id   = var.project_id
-  network_name = var.network_name
+
+resource "google_compute_network" "vpc_network" {
+  name = var.network_name
+  description = "VPC for Data Platform"
   routing_mode = "GLOBAL"
+  auto_create_subnetworks = false
+}
 
-  subnets = [
-    {
-      subnet_name           = var.composer_env_name
-      subnet_ip             = var.composer_ip_ranges.nodes
-      subnet_region         = var.region
-      subnet_private_access = true
-    },
-  ]
+resource "google_compute_subnetwork" "composer_subnetwork" {
+  name          = var.composer_env_name
+  ip_cidr_range = var.composer_ip_ranges.nodes
+  region        = var.region
+  network       = google_compute_network.vpc_network.id
+  private_ip_google_access = true
 
-  secondary_ranges = {
-    "${var.composer_env_name}" = [
-      {
-        range_name    = "pods"
-        ip_cidr_range = var.composer_ip_ranges.pods
-      },
-      {
-        range_name    = "services"
-        ip_cidr_range = var.composer_ip_ranges.services
-      },
-    ]
+  secondary_ip_range {
+    range_name    = "pods"
+    ip_cidr_range = var.composer_ip_ranges.pods
+  }
+  secondary_ip_range {
+    range_name    = "services"
+    ip_cidr_range = var.composer_ip_ranges.services
   }
 }
+
 
 resource "google_compute_global_address" "service_range" {
   name          = "service-networking-address"
@@ -48,19 +44,18 @@ resource "google_compute_global_address" "service_range" {
   address_type  = "INTERNAL"
   address       = "10.200.0.0"
   prefix_length = 16
-  network       = module.vpc.network_name
+  network       = google_compute_network.vpc_network.id
 }
 
 resource "google_service_networking_connection" "private_service_connection" {
-  provider                = google-beta
-  network                 = module.vpc.network_id
+  network                 = google_compute_network.vpc_network.id
   service                 = "servicenetworking.googleapis.com"
   reserved_peering_ranges = [google_compute_global_address.service_range.name]
 }
 
 resource "google_compute_router" "nat_router" {
-  name    = "${module.vpc.network_name}-nat-router"
-  network = module.vpc.network_self_link
+  name    = "${google_compute_network.vpc_network.name}-nat-router"
+  network = google_compute_network.vpc_network.id
   region  = var.region
 
   bgp {
@@ -69,7 +64,7 @@ resource "google_compute_router" "nat_router" {
 }
 
 resource "google_compute_router_nat" "nat_gateway" {
-  name                               = "${module.vpc.network_name}-nat-gw"
+  name                               = "${google_compute_network.vpc_network.name}-nat-gw"
   router                             = google_compute_router.nat_router.name
   region                             = google_compute_router.nat_router.region
   nat_ip_allocate_option             = "AUTO_ONLY"
