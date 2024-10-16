@@ -37,8 +37,8 @@ with models.DAG(
 ) as dag:
 
     trigger_datalake_dag = TriggerDagRunOperator(
-        task_id="trigger_datalake_dag",
-        trigger_dag_id="postgres_to_datalake",
+        task_id="trigger_data_lake_dag",
+        trigger_dag_id="from_database_to_data_lake",
         wait_for_completion=True,
         poke_interval=10,  # seconds
         execution_date="{{ execution_date }}"
