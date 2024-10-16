@@ -46,7 +46,6 @@ module "composer" {
   }
 
   depends_on = [
-    module.vpc,
     google_project_iam_member.composer_v2_extension
   ]
 }

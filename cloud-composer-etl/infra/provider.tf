@@ -20,10 +20,6 @@ terraform {
       source  = "hashicorp/google"
       version = "~> 5.44"
     }
-    google-beta = {
-      source  = "hashicorp/google-beta"
-      version = "~> 5.44"
-    }
   }
   provider_meta "google" {
     module_name = "cloud-solutions/cloud-composer-etl-v0.1"
@@ -31,11 +27,6 @@ terraform {
 }
 
 provider "google" {
-  project = var.project_id
-  region  = var.region
-}
-
-provider "google-beta" {
   project = var.project_id
   region  = var.region
 }
