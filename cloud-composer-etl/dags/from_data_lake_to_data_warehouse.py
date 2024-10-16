@@ -110,8 +110,5 @@ with models.DAG(
 
 # task dependency
 trigger_datalake_dag >> create_dataset
-create_dataset >> load_stations
-create_dataset >> load_trips
-
-load_stations >> create_bike_trips_table
-load_trips >> create_bike_trips_table
+create_dataset >> [load_stations, load_trips]
+[load_stations, load_trips] >> create_bike_trips_table

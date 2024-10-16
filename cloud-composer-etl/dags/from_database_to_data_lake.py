@@ -21,7 +21,6 @@ import string
 
 from airflow import models
 from airflow.providers.google.cloud.transfers.postgres_to_gcs import PostgresToGCSOperator
-from airflow.operators.dummy import DummyOperator
 
 
 CONN_ID = "pgCitibike"

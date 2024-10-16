@@ -16,23 +16,32 @@ from datetime import datetime, timedelta
 from airflow import models
 from airflow.operators.bash_operator import BashOperator
 
+# for reference https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/tasks.html#slas
+
+def my_sla_miss_callback(dag, task_list, blocking_task_list, slas, blocking_tis):
+    print(f"Dag {dag.dag_id} tasks {task_list} missed SLA")
+
+
 with models.DAG(
     dag_id='dag_with_sla',
     description='This dag shows how to set up SLA for each task',
-    schedule_interval="*/5 * * * *",
+    schedule_interval="*/2 * * * *",
     start_date=datetime(2022, 1, 1),
     catchup=False,
-    tags=["example", "has_sla"],
+    sla_miss_callback=my_sla_miss_callback,
+    tags=["example", "has_sla"]
 ) as dag:
 
-    task1 = BashOperator(
-        task_id='task1',
+    task_1 = BashOperator(
+        task_id='task_1',
         bash_command='sleep 15',
         dag=dag,
-        sla=timedelta(seconds=10))
+        sla=timedelta(seconds=10)) # from dag start time
 
-    task2 = BashOperator(
-        task_id='task2',
+    task_2 = BashOperator(
+        task_id='task_2',
         bash_command='sleep 5',
         dag=dag,
-        sla=timedelta(seconds=10))
+        sla=timedelta(seconds=30)) # from dag start time
+
+task_1 >> task_2
