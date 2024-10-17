@@ -20,6 +20,7 @@ module "composer" {
   region                   = var.region
   composer_env_name        = var.composer_env_name
   composer_service_account = google_service_account.service_account.email
+  image_version            = var.image_version
   environment_size         = "ENVIRONMENT_SIZE_SMALL"
   labels                   = local.resource_labels
 

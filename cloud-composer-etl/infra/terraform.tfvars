@@ -14,6 +14,7 @@
 
 network_name      = "cloud-composer-etl-vpc"
 composer_env_name = "composer-af2"
+image_version     = "composer-2.9.7-airflow-2.9.3"
 
 resource_labels = {
   env = "sandbox"

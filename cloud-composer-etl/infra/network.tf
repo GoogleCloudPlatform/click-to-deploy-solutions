@@ -14,17 +14,17 @@
 
 
 resource "google_compute_network" "vpc_network" {
-  name = var.network_name
-  description = "VPC for Data Platform"
-  routing_mode = "GLOBAL"
+  name                    = var.network_name
+  description             = "VPC for Data Platform"
+  routing_mode            = "GLOBAL"
   auto_create_subnetworks = false
 }
 
 resource "google_compute_subnetwork" "composer_subnetwork" {
-  name          = var.composer_env_name
-  ip_cidr_range = var.composer_ip_ranges.nodes
-  region        = var.region
-  network       = google_compute_network.vpc_network.id
+  name                     = var.composer_env_name
+  ip_cidr_range            = var.composer_ip_ranges.nodes
+  region                   = var.region
+  network                  = google_compute_network.vpc_network.id
   private_ip_google_access = true
 
   secondary_ip_range {
