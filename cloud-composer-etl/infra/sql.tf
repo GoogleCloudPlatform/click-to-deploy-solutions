@@ -13,7 +13,7 @@
 # limitations under the License.
 
 locals {
-  db_instance_name       = "postgres-${random_id.db_name_suffix.hex}"
+  db_instance_name       = "${var.composer_env_name}-${random_id.db_name_suffix.hex}"
   airflow_conn_sample_db = "gcpcloudsql://airflow:${random_password.db_password.result}@${google_sql_database_instance.instance.private_ip_address}:5432/citibike"
 }
 

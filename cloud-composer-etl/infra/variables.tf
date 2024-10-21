@@ -40,6 +40,11 @@ variable "composer_env_name" {
   description = "Cloud Composer environment name"
 }
 
+variable "image_version" {
+  type        = string
+  description = "Cloud Composer image version"
+}
+
 variable "composer_ip_ranges" {
   type        = map(string)
   description = "Composer 2 runs on GKE, so inform here the IP ranges you want to use"

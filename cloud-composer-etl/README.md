@@ -113,10 +113,12 @@ gcloud builds submit . --config build/cloudbuild_destroy.yaml
 ```
 
 ## Known issues
-If you face problems to delete the Service Networking peering:
+If you face problems to delete the Service Networking peering, that is expected. Please check this [link for reference](https://cloud.google.com/vpc/docs/configure-private-services-access#removing-connection).
+
 ```
  Error: Unable to remove Service Networking Connection, err: Error waiting for Delete Service Networking Connection: Error code 9, message: Failed to delete connection; Producer services (e.g. CloudSQL, Cloud Memstore, etc.) are still using this connection
  ```
-Go to the [Console](https://console.cloud.google.com/networking/peering/list) and manually delete the peering.
+
+Workaround: Go to the [Console](https://console.cloud.google.com/networking/peering/list) and manually delete the peering.
 
 Then, run the Cloud Build Destroy job again.

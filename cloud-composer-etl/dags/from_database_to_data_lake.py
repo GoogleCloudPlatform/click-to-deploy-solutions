@@ -21,7 +21,6 @@ import string
 
 from airflow import models
 from airflow.providers.google.cloud.transfers.postgres_to_gcs import PostgresToGCSOperator
-from airflow.operators.dummy import DummyOperator
 
 
 CONN_ID = "pgCitibike"
@@ -29,11 +28,12 @@ GCS_DATA_LAKE_BUCKET = os.environ.get("GCS_DATA_LAKE_BUCKET")
 
 
 with models.DAG(
-    dag_id='postgres_to_datalake',
+    dag_id='from_database_to_data_lake',
+    description='Export data from the relational database to data lake in Google Cloud Storage',
     start_date=datetime(2022, 1, 1),
     schedule_interval="0 1 * * *",
     catchup=False,
-    tags=['cloudsql', 'postgres', 'gcs'],
+    tags=['cloudsql', 'postgres', 'gcs', 'data_lake'],
 ) as dag:
 
     task_stations = PostgresToGCSOperator(
