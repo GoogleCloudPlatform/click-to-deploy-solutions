@@ -1,1 +1,0 @@
-module_name = "cloud-solutions/gen-ai-mkt-v0.1"
