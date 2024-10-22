@@ -35,6 +35,6 @@ terraform {
 
 
   provider_meta "google" {
-    module_name = "cloud-solutions/genai-for-marketing-v2.0"
+    module_name = "cloud-solutions/gen-ai-mkt-v0.1"
   }
 }
