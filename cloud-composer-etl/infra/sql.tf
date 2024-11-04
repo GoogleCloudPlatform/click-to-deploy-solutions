@@ -13,7 +13,7 @@
 # limitations under the License.
 
 locals {
-  db_instance_name       = "postgres-${random_id.db_name_suffix.hex}"
+  db_instance_name       = "${var.composer_env_name}-${random_id.db_name_suffix.hex}"
   airflow_conn_sample_db = "gcpcloudsql://airflow:${random_password.db_password.result}@${google_sql_database_instance.instance.private_ip_address}:5432/citibike"
 }
 
@@ -24,16 +24,16 @@ resource "random_id" "db_name_suffix" {
 resource "google_sql_database_instance" "instance" {
   name                = local.db_instance_name
   region              = var.region
-  database_version    = "POSTGRES_14"
+  database_version    = "POSTGRES_16"
   deletion_protection = false # not recommended for PROD
 
   settings {
-    tier        = "db-custom-1-3840"
+    tier        = "db-f1-micro"
     user_labels = local.resource_labels
 
     ip_configuration {
       ipv4_enabled    = true
-      private_network = module.vpc.network_self_link
+      private_network = google_compute_network.vpc_network.id
     }
   }
 

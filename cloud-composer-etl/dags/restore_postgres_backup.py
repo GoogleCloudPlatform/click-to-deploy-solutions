@@ -27,11 +27,12 @@ INSTANCE_NAME=os.environ.get("SQL_INSTANCE_NAME")
 
 
 with models.DAG(
-    dag_id='postgres_restore',
+    dag_id='restore_postgres_backup',
+    description='Restore a PostgresSQL database backup',
     start_date=datetime(2022, 1, 1),
     schedule_interval="@once",
     catchup=False,
-    tags=['example'],
+    tags=['example', 'infrastructure'],
 ) as dag:
 
     import_body = {"importContext": {"fileType": "sql", "uri": FILE_NAME, "database":"citibike"}}
