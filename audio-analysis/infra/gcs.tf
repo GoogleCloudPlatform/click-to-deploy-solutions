@@ -12,10 +12,18 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-resource "google_storage_bucket" "audio-analysis" {
-  name                        = "${var.project_id}-audio-analysis"
+resource "google_storage_bucket" "audio_analysis_input" {
+  name                        = "${var.project_id}-audio_analysis_input"
   location                    = var.region
   uniform_bucket_level_access = true
-  force_destroy               = true
+  force_destroy               = false
+  labels                      = local.resource_labels
+}
+
+resource "google_storage_bucket" "audio_analysis_output" {
+  name                        = "${var.project_id}-audio_analysis_output"
+  location                    = var.region
+  uniform_bucket_level_access = true
+  force_destroy               = false
   labels                      = local.resource_labels
 }

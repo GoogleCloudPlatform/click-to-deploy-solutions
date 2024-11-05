@@ -19,6 +19,9 @@ locals {
     solution    = "audio-analysis"
     terraform   = "true"
   })
+
+  function_name = "audio-analysis"
+
 }
 
 variable "project_id" {
@@ -28,20 +31,11 @@ variable "project_id" {
 variable "region" {
   type        = string
   description = "GCP region"
-  default     = "us-east1"
-}
-
-variable "network_name" {
-  description = "VPC name"
+  default     = "us-central1"
 }
 
 variable "resource_labels" {
   type        = map(string)
   description = "Resource labels"
   default     = {}
-}
-
-variable "function_location" {
-  description = "The location of this cloud function"
-  type        = string
 }

@@ -12,7 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-project_id = "click-to-deploy-demo"
+location = "us"
+region   = "us-central1"
 
 resource_labels = {
   env = "sandbox"

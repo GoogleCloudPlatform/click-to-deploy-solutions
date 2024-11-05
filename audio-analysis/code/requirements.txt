@@ -1,0 +1,12 @@
+Flask
+google-cloud-speech
+google-cloud-dlp
+google-cloud-aiplatform
+google-cloud-speech
+librosa 
+gcsfs
+numpy==2.0.0
+google-cloud-translate
+IPython
+functions-framework==3.5.0
+cloudevents==1.11.0

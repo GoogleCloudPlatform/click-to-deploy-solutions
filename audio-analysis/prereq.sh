@@ -58,6 +58,9 @@ apis=(
    pubsub.googleapis.com 
    speech.googleapis.com 
    translate.googleapis.com
+   dlp.googleapis.com
+   eventarc.googleapis.com
+   iam.googleapis.com
 )
 
 for api in "${apis[@]}"
@@ -72,25 +75,16 @@ add_iam_member $MEMBER roles/editor
 add_iam_member $MEMBER roles/iam.securityAdmin
 add_iam_member $MEMBER roles/compute.networkAdmin
 add_iam_member $MEMBER roles/secretmanager.admin
-add_iam_member $MEMBER roles/storage.admin
-add_iam_member $MEMBER roles/cloudfunctions.admin
-add_iam_member $MEMBER roles/run.admin
-add_iam_member $MEMBER roles/pubsub.admin
-add_iam_member $MEMBER roles/cloudbuild.builds.editor
-add_iam_member $MEMBER roles/artifactregistry.admin
-add_iam_member $MEMBER roles/secretmanager.admin
-add_iam_member $MEMBER roles/cloudbuild.builds.builder
-add_iam_member $MEMBER roles/logging.logWriter
+add_iam_member $MEMBER roles/eventarc.admin
 
 echo "Granting Cloud Speech to text's Service Account IAM roles to perform transcription..."
 PROJECT_NUMBER=$(gcloud projects describe $PROJECT_ID --format='value(projectNumber)')
 MEMBER=serviceAccount:service-$PROJECT_NUMBER@gcp-sa-speech.iam.gserviceaccount.com
 add_iam_member $MEMBER roles/storage.objectUser
 
-echo "Granting default Compute engine service account account IAM roles to deploy the resources..."
-#SA change as per https://cloud.google.com/build/docs/cloud-build-service-account-updates
-#TODO: Change it to generic SA
-MEMBER="serviceAccount:1059281389037-compute@developer.gserviceaccount.com"
+# echo "Granting default Compute engine service account account IAM roles to deploy the resources..."
+# #SA change as per https://cloud.google.com/build/docs/cloud-build-service-account-updates
+MEMBER="serviceAccount:$PROJECT_NUMBER-compute@developer.gserviceaccount.com"
 add_iam_member $MEMBER roles/storage.admin
 add_iam_member $MEMBER roles/cloudfunctions.admin
 add_iam_member $MEMBER roles/run.admin
@@ -100,5 +94,22 @@ add_iam_member $MEMBER roles/artifactregistry.admin
 add_iam_member $MEMBER roles/logging.logWriter
 add_iam_member $MEMBER roles/secretmanager.admin
 
+
+echo "Granting Cloud Storage's Service Account permissions required by EventArc..."
+GCS_SERVICE_ACCOUNT="$(gsutil kms serviceaccount -p $PROJECT_ID)"
+MEMBER=serviceAccount:$GCS_SERVICE_ACCOUNT
+add_iam_member $MEMBER roles/pubsub.publisher
+
+# #CF Service account
+MEMBER=$PROJECT_NUMBER-compute@developer.gserviceaccount.com
+add_iam_member $MEMBER roles/eventarc.eventReceiver
+add_iam_member $MEMBER roles/storage.objectViewer
+
+# CF SA permissions at bucket level
+#gsutil iam ch serviceAccount:$PROJECT_NUMBER-compute@developer.gserviceaccount.com:roles/storage.objectViewer gs://[AUDIO BUCKET INPUT] -- VVIP
+
+# #GCS SA
+MEMBER=service-$PROJECT_NUMBER@gs-project-accounts.iam.gserviceaccount.com
+add_iam_member $MEMBER roles/pubsub.publisher
 
 echo Script completed successfully!
