@@ -18,46 +18,46 @@ resource "random_password" "cloudsql_password" {
   length = 8
 }
 
-# create a VPC for CloudSQL
-module "vpc" {
-  source     = "github.com/GoogleCloudPlatform/cloud-foundation-fabric//modules/net-vpc?ref=v23.0.0"
-  project_id = module.project.project_id
-  name       = "sql-vpc"
-  subnets = [
-    {
-      ip_cidr_range = var.ip_ranges.sql_vpc
-      name          = "subnet"
-      region        = var.region
-    }
-  ]
-  psa_config = {
-    ranges = {
-      cloud-sql = var.ip_ranges.psa
-    }
-  }
-}
-
 # create a VPC connector for the ClouSQL VPC
-resource "google_vpc_access_connector" "connector" {
-  count         = var.create_connector ? 1 : 0
-  project       = module.project.project_id
-  name          = "wp-connector"
-  region        = var.region
-  ip_cidr_range = var.ip_ranges.connector
-  network       = module.vpc.self_link
+#resource "google_vpc_access_connector" "connector" {
+#  count         = var.create_connector ? 1 : 0
+#  project       = var.project_id
+#  name          = "wp-connector"
+#  region        = var.region
+#  ip_cidr_range = var.ip_ranges.connector
+#  network       = module.vpc.network_self_link
+#}
+
+resource "google_sql_database_instance" "cloud_sql" {
+  name             = "mysql-db"
+  database_version = "MYSQL_5_7"
+  region           = var.region
+  project          = var.project_id
+  settings {
+    tier                  = "db-g1-small"
+    user_labels           = local.resource_labels
+    disk_autoresize       = true
+    disk_autoresize_limit = 0
+    disk_size             = 10
+    disk_type             = "PD_SSD"
+
+    ip_configuration {
+      authorized_networks {
+        name  = "default_network"
+        value = "0.0.0.0/0"
+      }
+    }
+
+#    ip_configuration {
+#      ipv4_enabled    = false
+#      private_network = module.vpc.network_self_link
+#    }
+  }
+  deletion_protection = false
 }
 
-# Set up CloudSQL
-module "cloudsql" {
-  source           = "github.com/GoogleCloudPlatform/cloud-foundation-fabric//modules/cloudsql-instance?ref=v23.0.0"
-  project_id       = module.project.project_id
-  network          = module.vpc.self_link
-  name             = "mysql"
-  region           = var.region
-  database_version = local.cloudsql_conf.database_version
-  tier             = local.cloudsql_conf.tier
-  databases        = [local.cloudsql_conf.db]
-  users = {
-    "${local.cloudsql_conf.user}" = var.cloudsql_password
-  }
+resource "google_sql_user" "users" {
+  name     = "wp-user"
+  instance = google_sql_database_instance.cloud_sql.name
+  password = random_password.cloudsql_password.result
 }

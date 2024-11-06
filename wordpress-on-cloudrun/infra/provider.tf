@@ -1,4 +1,4 @@
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,19 +15,18 @@
 terraform {
   backend "gcs" {
   }
-  required_version = ">= 1.4.4"
-  required_providers {
-    google = {
-      source  = "hashicorp/google"
-      version = ">= 4.69.1" # tftest
-    }
-    google-beta = {
-      source  = "hashicorp/google-beta"
-      version = ">= 4.69.1" # tftest
-    }
-  }
 
   provider_meta "google" {
     module_name = "cloud-solutions/wordpress-on-cloudrun-v1.0"
   }
+}
+
+provider "google" {
+  project = var.project_id
+  region  = var.region
+}
+
+provider "google-beta" {
+  project = var.project_id
+  region  = var.region
 }

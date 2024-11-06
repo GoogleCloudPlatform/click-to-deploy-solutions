@@ -1,5 +1,5 @@
 /**
- * Copyright 2022 Google LLC
+ * Copyright 2024 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,13 +14,19 @@
  * limitations under the License.
  */
 
-#output "cloud_run_service" {
-#  description = "CloudRun service URL"
-#  value       = module.cloud_run.service.status[0].url
-#}
+module "vpc" {
+  source       = "terraform-google-modules/network/google"
+  version      = "~> 9.3.0"
+  project_id   = var.project_id
+  network_name = "sql-vpc"
+  routing_mode = "GLOBAL"
 
-#output "cloudsql_password" {
-#  description = "CloudSQL password"
-#  value       = var.cloudsql_password == null ? module.cloudsql.user_passwords[local.cloudsql_conf.user] : var.cloudsql_password
-#  sensitive   = true
-#}
+  subnets = [
+    {
+      subnet_name           = "subnet-${var.region}"
+      subnet_ip             = "10.0.6.0/24"
+      subnet_region         = var.region
+      subnet_private_access = true
+    }
+  ]
+}
