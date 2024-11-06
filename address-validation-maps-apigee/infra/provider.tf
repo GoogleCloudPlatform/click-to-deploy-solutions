@@ -26,4 +26,7 @@ terraform {
       version = ">= 4.20.0"
     }
   }
+  provider_meta "google" {
+    module_name = "cloud-solutions/better-together-retail-v0.1"
+  }
 }
