@@ -23,3 +23,13 @@ output "project_id" {
   value       = var.project_id
   description = "The project ID"
 }
+
+output "gcs_input_bucket" {
+  value       = google_storage_bucket.audio_analysis_input
+  description = "The GCS input bucket details" 
+}
+
+output "gcs_output_bucket" {
+  value       = google_storage_bucket.audio_analysis_input
+  description = "The GCS output bucket details"
+}

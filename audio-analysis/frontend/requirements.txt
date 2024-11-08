@@ -1,4 +1,4 @@
-# Copyright 2023 Google LLC
+# Copyright 2024 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,31 +12,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-#TODO: Fix and test with latest code
-steps:
-- id: 'tf init'
-  name: 'hashicorp/terraform:1.6'
-  entrypoint: 'sh'
-  args: 
-  - '-c'
-  - | 
-    terraform init \
-    -backend-config="bucket=$PROJECT_ID-tf-state" \
-    -backend-config="prefix=audio-analysis"
-  dir: infra
-- id: 'tf apply'
-  name: 'hashicorp/terraform:1.6'
-  args: 
-  - apply
-  - -auto-approve
-  dir: infra
-options:
-  env:
-    - TF_VAR_project_id=$PROJECT_ID
-    - REGION=us-central1
-tags:
-  - terraform
-  - audio-analysis
-  - apply
-
-timeout: 3600s
+streamlit
+requests
+google-cloud-storage
+Flask
+google-cloud-speech
+google-cloud-dlp
+google-cloud-aiplatform
+librosa 
+gcsfs
+google-cloud-translate
