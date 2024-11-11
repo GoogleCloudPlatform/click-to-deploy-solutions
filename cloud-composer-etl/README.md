@@ -50,7 +50,7 @@ Check more operators available in [Airflow Google Operators doc](https://airflow
 
 ## Costs
 
-Pricing Estimates - We have created a sample estimate based on some usage we see from new startups looking to scale. This estimate would give you an idea of how much this deployment would essentially cost per month at this scale and you extend it to the scale you further prefer. Here's the [link](https://cloud.google.com/products/calculator/#id=f7caffab-fca3-490e-8654-f406df790929).
+Pricing Estimates - We have created a sample estimate based on some usage we see from new startups looking to scale. This estimate would give you an idea of how much this deployment would essentially cost per month at this scale and you extend it to the scale you further prefer. Here's the [link](https://cloud.google.com/products/calculator/estimate-preview/CiRhNjQ0YjQxOS1hMWZhLTQ3YjAtYjdmMi03NDc4NGIzNTQ0MWQQAQ==?e=48754805&hl=en).
 
 ## Deploying the architecture
 
