@@ -1,2 +1,3 @@
 venv/*
 Notes
+__pycache__
