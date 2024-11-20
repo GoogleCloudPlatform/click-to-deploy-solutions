@@ -56,6 +56,11 @@ resource "google_sql_database_instance" "cloud_sql" {
   deletion_protection = false
 }
 
+resource "google_sql_database" "database" {
+  name     = "wp-mysql"
+  instance = google_sql_database_instance.cloud_sql.name
+}
+
 resource "google_sql_user" "users" {
   name     = "wp-user"
   instance = google_sql_database_instance.cloud_sql.name
