@@ -1,3 +1,19 @@
+## Architecture
+
+<p align="center"><img src="assets/Architecture.png"></p>
+
+The main components that we would be setting up are (to learn more about these products, click on the hyperlinks)
+
+* [Cloud Storage (GCS) bucket](https://cloud.google.com/storage/) : for storing uploaded Audio File data for processing.
+* [Cloud Run](https://cloud.google.com/run/docs/overview/what-is-cloud-run) : For the main applicaiton logic as well as the streamlit UI for user interaction.
+
+
+## Costs
+
+Pricing Estimates - We have created a sample estimate based on some usage we see from new startups looking to scale. This estimate would give you an idea of how much this deployment would essentially cost per month at this scale and you extend it to the scale you further prefer. Here's the [link]
+(https://cloud.google.com/products/calculator/estimate-preview/CiQzMWY0MzBiNS1hNTgwLTQzMDMtOTc4MS0zMjg3MzU2MmQxZGYQAQ==?hl=en).
+
+
 ## Deploy the architecture
 Before we deploy the architecture, you will need the following information:
  * The **project ID**
