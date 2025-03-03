@@ -47,3 +47,7 @@ Would you like to contribute to the project? Please check out [contribution](doc
 
 
 This is not an official Google product.
+
+### Getting Help
+
+If you have any questions or if you found any problems with this repository, please report through GitHub issues.
