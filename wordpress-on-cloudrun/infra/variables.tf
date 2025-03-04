@@ -14,6 +14,22 @@
  * limitations under the License.
  */
 
+locals {
+  resource_labels = merge(var.resource_labels, {
+    deployed_by = "cloudbuild"
+    env         = "sandbox"
+    repo        = "click-to-deploy-solutions"
+    solution    = "three-tier-gke"
+    terraform   = "true"
+  })
+}
+
+variable "resource_labels" {
+  type        = map(string)
+  description = "Resource labels"
+  default     = {}
+}
+
 # Documentation: https://cloud.google.com/run/docs/securing/managing-access#making_a_service_public
 variable "cloud_run_invoker" {
   type        = string

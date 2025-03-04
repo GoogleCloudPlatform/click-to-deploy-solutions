@@ -48,7 +48,9 @@ Pricing Estimates - We have created a sample estimate based on some usage we see
 sh prereq.sh
 ```
 
-Please note - New organizations have the 'Enforce Domain Restricted Sharing' policy enforced by default. You may have to edit the policy to allow public access to your Cloud Run instance. Please refer to this [page](https://cloud.google.com/resource-manager/docs/organization-policy/restricting-domains#setting_the_organization_policy) for more information.
+⚠️ Please note - New organizations have the 'Enforce Domain Restricted Sharing' policy enforced by default. You may have to edit the policy to allow public access to your Cloud Run instance. Please refer to this [page](https://cloud.google.com/resource-manager/docs/organization-policy/restricting-domains#setting_the_organization_policy) for more information.
+
+⚠️ Please note - New organizations have the 'Restrict Authorized Networks on Cloud SQL instances' policy enforced by default. You may have to edit the policy to allow cloud run to access Cloud SQL instance. Please refer to this [page](https://cloud.google.com/sql/docs/mysql/org-policy/org-policy#connection-constraints) for more information.
 
 3. Run the Cloud Build Job
 ```
