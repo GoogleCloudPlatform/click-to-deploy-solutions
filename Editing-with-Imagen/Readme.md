@@ -21,27 +21,6 @@ The main components that we would be setting up are (to learn more about these p
 Pricing Estimates - We have created a sample estimate based on some usage we see from new startups looking to scale. This estimate would give you an idea of how much this deployment would essentially cost per month at this scale and you extend it to the scale you further prefer. Here's the [link](https://cloud.google.com/products/calculator/estimate-preview/15e38d2d-f023-4d94-958f-3688d89f0cdf?e=48754805&hl=en).
 
 
-## Deploy the architecture
-
-Before we deploy the architecture, you will need the following information:
- * The **project ID**
-
-Estimated deployment time: 15 min
-
-Follow the steps below to deploy the architecture:
-
-1. Click on Open in Google Cloud Shell button below.
-<a href="https://ssh.cloud.google.com/cloudshell/editor?cloudshell_git_repo=https://github.com/GoogleCloudPlatform/click-to-deploy-solutions&cloudshell_workspace=genai-for-marketing&cloudshell_open_in_editor=infra/variables.tf&&cloudshell_tutorial=tutorial.md" target="_new">
-    <img alt="Open in Cloud Shell" src="https://gstatic.com/cloudssh/images/open-btn.svg">
-</a>
-
-1. Run the prerequisites script to enable APIs permissions.
-
-```sh
-sh prereq.sh
-```
-Next, you'll be asked to enter the project ID of the destination project. Please provide the project ID when prompted.  
-
 ## Result
 
 Congratulations! The GenAI for marketing project deployment should now be underway. Please be patient as this process might take some time. Kindly keep this window open during the deployment. Once completed, we'll proceed to test the architecture and then guide you through cleaning up your environment.
