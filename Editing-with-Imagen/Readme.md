@@ -25,11 +25,3 @@ Pricing Estimates - We have created a sample estimate based on some usage we see
 
 Congratulations! The GenAI for marketing project deployment should now be underway. Please be patient as this process might take some time. Kindly keep this window open during the deployment. Once completed, we'll proceed to test the architecture and then guide you through cleaning up your environment.
 
-## Cleaning up your environment
-
-The below command will delete the associated resources so there will be no billable charges made afterwards.
-
-```sh
-terraform destroy -auto-approve
-```
-
