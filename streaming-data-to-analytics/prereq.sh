@@ -62,6 +62,19 @@ add_iam_member $MEMBER roles/iam.securityAdmin
 add_iam_member $MEMBER roles/compute.networkAdmin
 add_iam_member $MEMBER roles/secretmanager.admin
 
+echo "Granting Compute's Service Account IAM roles to deploy the resources..."
+PROJECT_NUMBER=$(gcloud projects describe $PROJECT_ID --format='value(projectNumber)')
+MEMBER=serviceAccount:$PROJECT_NUMBER-compute@developer.gserviceaccount.com
+add_iam_member $MEMBER roles/editor
+add_iam_member $MEMBER roles/iam.securityAdmin
+add_iam_member $MEMBER roles/compute.networkAdmin
+add_iam_member $MEMBER roles/secretmanager.admin
+add_iam_member $MEMBER roles/storage.admin
+add_iam_member $MEMBER roles/pubsub.admin
+add_iam_member $MEMBER roles/bigquery.admin
+add_iam_member $MEMBER roles/run.admin
+add_iam_member $MEMBER roles/logging.admin
+
 echo Create Docker repository
 if gcloud artifacts repositories describe docker-repo --location=$REPO_LOCATION; then
     echo Docker repository already exists!
