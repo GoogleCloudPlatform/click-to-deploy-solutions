@@ -37,7 +37,7 @@ You will then be prompted to provide the project-id for the destination project.
 After this is complete, you can kick off the Cloud Build pipeline with the following command:
 
 ```bash
-gcloud builds submit . --config cloudbuild.yaml
+gcloud builds submit . --config build/cloudbuild.yaml
 ```
 
 If you encounter errors when running these commands, please attempt to run them again in a clean project.

@@ -86,6 +86,11 @@ resource "google_discovery_engine_data_store" "storage_datastore" {
   industry_vertical = "GENERIC"
   content_config    = "CONTENT_REQUIRED"
   solution_types    = ["SOLUTION_TYPE_CHAT"]
+  lifecycle {
+    ignore_changes = [
+      document_processing_config 
+    ]
+  }
 }
 
 resource "google_discovery_engine_chat_engine" "chat_app" {
@@ -93,7 +98,7 @@ resource "google_discovery_engine_chat_engine" "chat_app" {
   engine_id         = local.chat_engine_id
   collection_id     = "default_collection"
   location          = var.genai_location
-  display_name      = "Chat engine"
+  display_name      = local.chat_engine_id
   industry_vertical = "GENERIC"
   data_store_ids = [
     google_discovery_engine_data_store.website_datastore.data_store_id,
