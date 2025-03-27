@@ -51,4 +51,10 @@ MEMBER=serviceAccount:$PROJECT_NUMBER@cloudbuild.gserviceaccount.com
 add_iam_member $MEMBER roles/editor
 add_iam_member $MEMBER roles/iam.securityAdmin
 
+COMPUTEMEMBER=serviceAccount:$PROJECT_NUMBER-compute@developer.gserviceaccount.com
+add_iam_member $COMPUTEMEMBER roles/editor
+add_iam_member $COMPUTEMEMBER roles/iam.securityAdmin
+add_iam_member $COMPUTEMEMBER roles/logging.logWriter 
+add_iam_member $COMPUTEMEMBER roles/storage.admin 
+
 echo Script completed successfully!
