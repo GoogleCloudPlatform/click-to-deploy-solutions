@@ -30,7 +30,7 @@ variable "cloudsql_password" {
 variable "connector" {
   type        = string
   description = "Existing VPC serverless connector to use if not creating a new one"
-  default     = null
+  default     = false
 }
 
 variable "create_connector" {
@@ -83,7 +83,7 @@ variable "project_id" {
 variable "region" {
   type        = string
   description = "The region where resources will be deployed."
-  default     = "europe-west1"
+  default     = "us-central1"
 }
 
 variable "wordpress_image" {

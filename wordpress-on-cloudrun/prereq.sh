@@ -53,6 +53,8 @@ gcloud services enable cloudbuild.googleapis.com \
     servicenetworking.googleapis.com \
     storage.googleapis.com \
     serviceusage.googleapis.com \
+    sqladmin.googleapis.com \
+    vpcaccess.googleapis.com \
     --project $PROJECT_ID
 
 echo "Granting Cloud Build's Service Account IAM roles to deploy the resources..."
@@ -62,5 +64,10 @@ add_iam_member $MEMBER roles/editor
 add_iam_member $MEMBER roles/iam.securityAdmin
 add_iam_member $MEMBER roles/compute.networkAdmin
 add_iam_member $MEMBER roles/secretmanager.admin
+
+MEMBER_COMPUTE=serviceAccount:$PROJECT_NUMBER-compute@developer.gserviceaccount.com
+add_iam_member $MEMBER_COMPUTE roles/editor
+add_iam_member $MEMBER_COMPUTE roles/storage.objectAdmin
+add_iam_member $MEMBER_COMPUTE roles/compute.networkAdmin
 
 echo Script completed successfully!
