@@ -21,7 +21,7 @@ resource "google_compute_instance" "cloudsql_proxy" {
 
   boot_disk {
     initialize_params {
-      image = "cos-cloud/cos-101-lts"
+      image = "cos-cloud/cos-121-lts"
       labels = {
         vm_name = "cloudsql-proxy"
       }

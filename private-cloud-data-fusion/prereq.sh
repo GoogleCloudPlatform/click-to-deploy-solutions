@@ -52,6 +52,7 @@ else
         container.googleapis.com \
         datafusion.googleapis.com \
         dataproc.googleapis.com \
+        datastream.googleapis.com \
         secretmanager.googleapis.com \
         servicenetworking.googleapis.com \
         sqladmin.googleapis.com \
@@ -62,7 +63,7 @@ else
 
     echo "Granting Cloud Build's Service Account IAM roles to deploy the resources..."
     PROJECT_NUMBER=$(gcloud projects describe $PROJECT_ID --format='value(projectNumber)')
-    MEMBER=serviceAccount:$PROJECT_NUMBER@cloudbuild.gserviceaccount.com
+    MEMBER=serviceAccount:$PROJECT_NUMBER-compute@developer.gserviceaccount.com
     add_iam_member $MEMBER roles/editor
     add_iam_member $MEMBER roles/iam.securityAdmin
     add_iam_member $MEMBER roles/compute.networkAdmin
