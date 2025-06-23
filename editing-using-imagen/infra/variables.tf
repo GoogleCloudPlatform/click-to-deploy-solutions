@@ -19,6 +19,14 @@ locals {
     solution    = "editing-using-imagen"
     terraform   = "true"
   })
+
+  editing_api_container = "us-central1-docker.pkg.dev/${var.project_id}/docker-repo/editing-using-imagen:${var.editing-using-imagen_tag}"
+  function_name        = "editing-api"
+}
+
+variable "editing-using-imagen_tag" {
+  description = "Editing API container tag"
+  default     = "latest"
 }
 
 variable "project_id" {

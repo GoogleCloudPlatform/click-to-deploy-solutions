@@ -1,11 +1,11 @@
 resource "google_cloud_run_service" "run_service" {
-  name = "app"
+  name = local.function_name
   location = "us-central1"
 
   template {
     spec {
       containers {
-        image = "us-central1-docker.pkg.dev/someproject-123/docker-repo/fast-api:1.0"
+        image = local.editing_api_container
       }
     }
   }

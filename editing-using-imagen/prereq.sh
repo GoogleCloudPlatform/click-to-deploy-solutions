@@ -30,6 +30,8 @@ else
    export PROJECT_ID=$GOOGLE_CLOUD_PROJECT
 fi
 
+REPO_LOCATION="us-central1"
+
 echo Running prerequisites on project $PROJECT_ID
 BUCKET_NAME=gs://$PROJECT_ID-tf-state
 if gsutil ls $BUCKET_NAME; then
@@ -41,8 +43,8 @@ fi
 
 echo Enabling required APIs...
 gcloud services enable cloudbuild.googleapis.com \
-    aiplatform.googleapis.com \
     artifactregistry.googleapis.com \
+    containerscanning.googleapis.com \
     iam.googleapis.com \
     run.googleapis.com \
 
@@ -52,12 +54,21 @@ MEMBER=serviceAccount:$PROJECT_NUMBER@cloudbuild.gserviceaccount.com
 add_iam_member $MEMBER roles/editor
 add_iam_member $MEMBER roles/viewer
 
-# Terraform Setup
-cd infra
-echo "Initializing Terraform..."
-terraform init -reconfigure -backend-config="bucket=$PROJECT_ID-tf-state"
+echo "Granting Compute's Service Account IAM roles to deploy the resources..."
+PROJECT_NUMBER=$(gcloud projects describe $PROJECT_ID --format='value(projectNumber)')
+MEMBER=serviceAccount:$PROJECT_NUMBER-compute@developer.gserviceaccount.com
+add_iam_member $MEMBER roles/editor
+add_iam_member $MEMBER roles/storage.admin
 
-echo "Applying Terraform configuration..."
-terraform apply -auto-approve
+echo Create Docker repository
+if gcloud artifacts repositories describe docker-repo --location=$REPO_LOCATION; then
+    echo Docker repository already exists!
+else
+    gcloud artifacts repositories create docker-repo \
+    --repository-format=docker \
+    --location=$REPO_LOCATION \
+    --description="Private docker images" \
+    --project $PROJECT_ID
+fi
 
 echo Script completed successfully!
