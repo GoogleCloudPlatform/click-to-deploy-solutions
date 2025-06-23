@@ -43,6 +43,7 @@ fi
 
 echo Enabling required APIs...
 gcloud services enable cloudbuild.googleapis.com \
+    aiplatform.googleapis.com \
     artifactregistry.googleapis.com \
     containerscanning.googleapis.com \
     iam.googleapis.com \
@@ -53,12 +54,14 @@ PROJECT_NUMBER=$(gcloud projects describe $PROJECT_ID --format='value(projectNum
 MEMBER=serviceAccount:$PROJECT_NUMBER@cloudbuild.gserviceaccount.com
 add_iam_member $MEMBER roles/editor
 add_iam_member $MEMBER roles/viewer
+add_iam_member $MEMBER roles/aiplatform.user 
 
 echo "Granting Compute's Service Account IAM roles to deploy the resources..."
 PROJECT_NUMBER=$(gcloud projects describe $PROJECT_ID --format='value(projectNumber)')
 MEMBER=serviceAccount:$PROJECT_NUMBER-compute@developer.gserviceaccount.com
 add_iam_member $MEMBER roles/editor
 add_iam_member $MEMBER roles/storage.admin
+add_iam_member $MEMBER roles/aiplatform.user 
 
 echo Create Docker repository
 if gcloud artifacts repositories describe docker-repo --location=$REPO_LOCATION; then

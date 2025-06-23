@@ -71,5 +71,5 @@ def app():
                             st.error(f"An error occurred during image generation: {e}")
 
 if __name__ == "__main__":
-        auth_token.authentication();
+        #auth_token.authentication();
         app();
