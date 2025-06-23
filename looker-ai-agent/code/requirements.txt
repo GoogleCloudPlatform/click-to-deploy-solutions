@@ -1,0 +1,7 @@
+fastapi
+fastapi[standard]
+uvicorn[standard]
+google-auth
+aiohttp
+pydantic
+requests
