@@ -2,6 +2,7 @@ import asyncio
 import aiohttp
 import json
 import logging
+from helpers import generate_looker_url
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel
@@ -14,7 +15,8 @@ SCOPES = ["https://www.googleapis.com/auth/cloud-platform"]
 sys_instructions = """
 - system_description: >-
     You are an expert data analyst and understand how to answer questions about
-    various analytics data.
+    various analytics data. 
+    You do not present any graphs, charts or images whatsoever, only textual responses and links    
 """
 
 def get_auth_token():
@@ -199,9 +201,29 @@ async def ask_endpoint(request: QuestionRequest):
     async for chunk in process_nlq_request(request.question):
         chunks = chunk
     print("Chunks: ", chunks)
+    
     text_resp = chunks[len(chunks) - 1]['systemMessage']['text']['parts'][0]    
+    
+    looker_query = None
+    explore_url = None
+    final_resp = text_resp 
 
-    return JSONResponse(content=text_resp, status_code=200)
+    for i in [3, 5]:
+        try:
+            looker_query = chunks[len(chunks) - i]['systemMessage']['data']
+            break  
+        except (IndexError, KeyError) as e:            
+            print(f"Warning: Could not retrieve looker_query from chunks[-{i}]. Error: {e}. Trying next option if available.")
+            continue 
+
+    if looker_query:
+        explore_url = generate_looker_url(looker_query, looker_instance)
+        if explore_url: 
+            final_resp = f"{text_resp} explore URL: {explore_url}"
+        else:
+            print("Warning: explore_url could not be generated even though looker_query was found.")
+
+    return JSONResponse(content=final_resp, status_code=200)
 
 @app.get("/")
 async def read_root():

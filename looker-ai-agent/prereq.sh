@@ -87,7 +87,6 @@ echo "Secret '$LOOKER_AGENT_CONFIG' found. Proceeding with the script..."
 
 echo "Granting Cloud Build's and Compute Service Accounts IAM roles to deploy the resources..."
 PROJECT_NUMBER=$(gcloud projects describe $PROJECT_ID --format='value(projectNumber)')
-MEMBER=serviceAccount:$PROJECT_NUMBER@cloudbuild.gserviceaccount.com
 COMPUTEMEMBER=serviceAccount:$PROJECT_NUMBER-compute@developer.gserviceaccount.com
 
 # --- Create a dedicated service account if it doesn't exist ---
@@ -104,14 +103,6 @@ else
     --project="$PROJECT_ID"
 fi
 
-add_iam_member $MEMBER roles/editor
-add_iam_member $MEMBER roles/iam.securityAdmin
-add_iam_member $MEMBER roles/resourcemanager.projectIamAdmin
-add_iam_member $MEMBER roles/eventarc.admin
-add_iam_member $MEMBER roles/artifactregistry.admin 
-add_iam_member $MEMBER roles/storage.admin 
-# Allows the cloud build service account to check secrets but not see their values
-add_iam_member $MEMBER roles/secretmanager.secretVersionManager
 
 # Service usage admin
 add_iam_member $CUSTOMSAMEMBER roles/artifactregistry.admin
@@ -134,7 +125,7 @@ add_iam_member $COMPUTEMEMBER roles/aiplatform.user
 add_iam_member $COMPUTEMEMBER roles/secretmanager.secretVersionManager
 add_iam_member $COMPUTEMEMBER roles/cloudaicompanion.user
 
-# --- GRANT SECRET ACCESSOR ROLE TO COMPUTE MEMBER ---
+# --- GRANT SECRET ACCESSOR ROLE TO COMPUTE MEMBER ON SPECIFIC SECRET ---
 add_secret_accessor "$LOOKER_AGENT_CONFIG" "$COMPUTEMEMBER"
 add_secret_accessor "$LOOKER_AGENT_CONFIG" "$CUSTOMSAMEMBER"
 # ---------------------------------------------------
