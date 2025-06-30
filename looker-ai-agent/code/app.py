@@ -119,9 +119,7 @@ async def process_nlq_request(question: str):
         }
         url = f"https://dataqna.googleapis.com/v1alpha1/projects/{PROJECT}:askQuestion"
 
-        data = []
-        print("##############")
-        print(payload)
+        data = []        
         async with aiohttp.ClientSession() as session:
             async with session.post(url, json=payload, headers=headers) as resp:
                 if resp.status == 200:
