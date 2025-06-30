@@ -14,11 +14,20 @@
 
 steps:
 
-- name: 'gcr.io/cloud-builders/gcloud'
+- id: 'build'
+  name: 'gcr.io/cloud-builders/gcloud'
   entrypoint: 'gcloud'
-  args: ['builds', 'submit', 'code/', '--tag=${LOCATION}-docker.pkg.dev/${PROJECT_ID}/cloud-run-source-deploy/looker-agent']
+  args: ['beta', 
+        'builds', 
+        'submit', 
+        'code/', 
+        '--service-account=projects/${PROJECT_ID}/serviceAccounts/looker-agent-runner@${PROJECT_ID}.iam.gserviceaccount.com', 
+        '--default-buckets-behavior=regional-user-owned-bucket',
+        '--tag=${LOCATION}-docker.pkg.dev/${PROJECT_ID}/cloud-run-source-deploy/looker-agent']
 
 - id: 'terraform init'
+  waitFor: 
+    - 'build'
   name: 'hashicorp/terraform:1.0.0'
   entrypoint: 'sh'
   args: 
@@ -35,12 +44,15 @@ steps:
   - apply
   - -auto-approve
   dir: infra
+
 options:  
   env:
     - TF_VAR_project_id=$PROJECT_ID
+    - TF_VAR_project_number=$PROJECT_NUMBER
+  defaultLogsBucketBehavior: REGIONAL_USER_OWNED_BUCKET
 tags:
   - terraform
   - looker-agent
   - apply
 timeout: 3600s
-
+serviceAccount: 'projects/${PROJECT_ID}/serviceAccounts/looker-agent-runner@${PROJECT_ID}.iam.gserviceaccount.com'

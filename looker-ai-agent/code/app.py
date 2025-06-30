@@ -3,25 +3,14 @@ import aiohttp
 import json
 import logging
 from fastapi import FastAPI, HTTPException
-from fastapi.responses import JSONResponse # Use JSONResponse for non-streaming JSON output
+from fastapi.responses import JSONResponse
 from pydantic import BaseModel
-from typing import Optional
-import os # Import os to potentially use environment variables
+import os
 from google.auth import default
 from google.auth.transport.requests import Request as gRequest
-import requests
-
-# --- PLACEHOLDERS ---
-# You need to replace these with your actual implementations or values
-# WARNING: Hardcoding credentials like this is NOT secure for production.
-# Use environment variables or a secrets manager (like Google Secret Manager)
-# in a real-world application.
-
 
 # --- Cortado Setup ---
 SCOPES = ["https://www.googleapis.com/auth/cloud-platform"]
-
-# CA API System Instructions
 sys_instructions = """
 - system_description: >-
     You are an expert data analyst and understand how to answer questions about
@@ -29,20 +18,13 @@ sys_instructions = """
 """
 
 def get_auth_token():
-    """Shows basic usage of the Google Auth library in a Colab environment.
-    Returns:
-      str: The API token.
-    """
     credentials, _ = default(scopes=SCOPES)
     auth_req = gRequest()
-    credentials.refresh(auth_req)  # refresh token
+    credentials.refresh(auth_req)
     if credentials.valid:
         return credentials.token
 
-# Consider fetching system instructions from environment variables or a config file
 CORTADO_SYS_INSTRUCTIONS = sys_instructions
-
-# --- END PLACEHOLDERS ---
 
 # Configure basic logging
 logging.basicConfig(level=logging.INFO)
@@ -51,11 +33,37 @@ logger = logging.getLogger(__name__)
 # Define the request body model
 class QuestionRequest(BaseModel):
     question: str
-    # data_part: Optional[str]
 
 app = FastAPI()
 
-# Your original NLQ function adapted to wait for the full response
+# Initialize variables with default None values
+looker_client_id = None
+looker_client_secret = None
+looker_instance = None
+lookml_model = None
+lookml_explore = None
+
+try:
+    # 1. Read the JSON configuration string from the environment variable
+    config_json_str = os.environ["LOOKER_AGENT_CONFIG"]
+
+    # 2. Parse the JSON string into a Python dictionary
+    config = json.loads(config_json_str)
+
+    # 3. Store each value from the dictionary into its own variable
+    # Using .get() is safer as it returns None if a key is missing
+    looker_client_id = config.get("LOOKER_CLIENT_ID")
+    looker_client_secret = config.get("LOOKER_CLIENT_SECRET")
+    looker_instance = config.get("LOOKER_INSTANCE")
+    lookml_model = config.get("LOOKML_MODEL")
+    lookml_explore = config.get("LOOKML_EXPLORE")
+
+except KeyError:
+    logging.error("FATAL: Environment variable 'LOOKER_AGENT_CONFIG' not found.")
+except json.JSONDecodeError as e:
+    logging.error(f"FATAL: Could not decode JSON. Error: {e}")
+
+
 async def process_nlq_request(question: str):
     """
     Processes the natural language question, waits for the full response
@@ -66,8 +74,8 @@ async def process_nlq_request(question: str):
 
         # SECURITY RISK: Hardcoded credentials. Move these to environment variables
         # or a secrets manager in production.
-        client_id = os.environ.get("LOOKER_CLIENT_ID", "")
-        client_secret = os.environ.get("LOOKER_CLIENT_SECRET", "")
+        # client_id = os.environ.get("LOOKER_CLIENT_ID", "")
+        # client_secret = os.environ.get("LOOKER_CLIENT_SECRET", "")
         PROJECT = os.environ.get("PROJECT", "")
 
         payload = {
@@ -85,16 +93,16 @@ async def process_nlq_request(question: str):
                     "looker": {
                         "exploreReferences": [
                             {
-                                "lookerInstanceUri": os.environ.get("LOOKER_INSTANCE",""),
-                                "lookmlModel": os.environ.get("LOOKML_MODEL",""),
-                                "explore": os.environ.get("LOOKML_EXPLORE",""),
+                                "lookerInstanceUri": looker_instance,
+                                "lookmlModel": lookml_model,
+                                "explore": lookml_explore,
                             }
                         ],
                         "credentials": {
                             "oauth": {
                                 "secret": {
-                                    "client_id": client_id,
-                                    "client_secret": client_secret
+                                    "client_id": looker_client_id,
+                                    "client_secret": looker_client_secret
                                 }
                             }
                         }
@@ -110,7 +118,8 @@ async def process_nlq_request(question: str):
         url = f"https://dataqna.googleapis.com/v1alpha1/projects/{PROJECT}:askQuestion"
 
         data = []
-
+        print("##############")
+        print(payload)
         async with aiohttp.ClientSession() as session:
             async with session.post(url, json=payload, headers=headers) as resp:
                 if resp.status == 200:
@@ -178,7 +187,6 @@ async def process_nlq_request(question: str):
     except:
         logging.error("some Errror")
 
-
 @app.post("/ask")
 async def ask_endpoint(request: QuestionRequest):
     """
@@ -191,12 +199,10 @@ async def ask_endpoint(request: QuestionRequest):
     async for chunk in process_nlq_request(request.question):
         chunks = chunk
     print("Chunks: ", chunks)
-    text_resp = chunks[len(chunks) - 1]['systemMessage']['text']['parts'][0]
+    text_resp = chunks[len(chunks) - 1]['systemMessage']['text']['parts'][0]    
 
     return JSONResponse(content=text_resp, status_code=200)
 
-
-# Optional: Add a root endpoint for health checks
 @app.get("/")
 async def read_root():
     return {"status": "ok"}
