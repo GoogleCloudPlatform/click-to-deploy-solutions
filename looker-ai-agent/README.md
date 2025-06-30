@@ -20,32 +20,34 @@ Before you can configure the secret, generate API credentials from your Looker i
 3.  Under the **API Credentials** section, click **Edit Keys**.
 4.  Click **New API Key**. The UI will display a **Client ID** and a **Client Secret**.
 
-For more detailed instructions, refer to the official Looker documentation on [API Credentials](https://cloud.google.com/looker/docs/api-credentials).
+For more detailed instructions, refer to the official Looker documentation on [API Credentials](https://cloud.google.com/looker/docs/api-auth#authentication_with_an_sdk).
 
 ---
 
 ## Step 2: Create the Secret in Google Cloud
 
 The application requires a secret named `LOOKER_AGENT_CONFIG` stored in Google Cloud Secret Manager.
+The expected structure of the secret is a JSON with:
 
-1.  **Create the Secret:**
-    ```bash
-    gcloud secrets create LOOKER_AGENT_CONFIG \
-        --replication-policy="automatic" \
-    ```
-2.  **Add the Secret Version:** Replace `YOUR_LOOKER_CLIENT_ID` and `YOUR_LOOKER_CLIENT_SECRET` with the credentials obtained in Step 1.
-    ```bash
-    echo -n "client_id: YOUR_LOOKER_CLIENT_ID\nclient_secret: YOUR_LOOKER_CLIENT_SECRET" | gcloud secrets versions add LOOKER_AGENT_CONFIG --data-file=-
-    ```
-    For more information on managing secrets, see [Creating and Accessing Secrets](https://cloud.google.com/secret-manager/docs/creating-and-accessing-secrets).
+    {
+      "LOOKER_CLIENT_ID": "YOUR_LOOKER_CLIENT_ID",
+      "LOOKER_CLIENT_SECRET": "YOUR_LOOKER_CLIENT_SECRET",
+      "LOOKER_INSTANCE": "YOUR_LOOKER_INSTANCE_URL",
+      "LOOKML_MODEL": "your_lookml_model_name",
+      "LOOKML_EXPLORE": "your_explore_name"
+    }
+
+![Screen Recording 2025-06-30 at 18 12 28](https://github.com/user-attachments/assets/8b160d07-90d6-49e6-bcb8-4f121d50ad1f)
+
+
+
+For more information on managing secrets, see [Creating and Accessing Secrets](https://cloud.google.com/secret-manager/docs/creating-and-accessing-secrets).
 
 ---
 
 ## Step 3: Run the Prerequisite Script
 
 From the root directory of your project, execute the `prereq.sh` script. This script automates several setup tasks, including enabling necessary Google Cloud APIs, creating a Cloud Storage bucket for Terraform state, and configuring IAM permissions.
-
-**Important Security Note:** This script creates a dedicated service account (`looker-agent-runner`) that will be granted high-privileged IAM roles for deployment. After successful deployment, we **strongly recommend** reviewing and restricting the permissions of this service account to the minimum necessary for the deployed Cloud Run service to operate. For guidance, refer to [Understanding Service Accounts](https://cloud.google.com/iam/docs/understanding-service-accounts) and [Granting, Changing, and Revoking Access](https://cloud.google.com/iam/docs/grant-revoke-roles).
 
 To run the script:
 
@@ -70,7 +72,7 @@ Once the prerequisite script has completed successfully, deploy the Looker Data 
 From the root directory of your project, execute the following command:
 
 ```bash
-gcloud builds submit --config ./build/cloudbuild.yaml --region us-central1 
+    gcloud builds submit --config ./build/cloudbuild.yaml --region us-central1 
 ```
 
 For more details on Cloud Build, including configuration and deployment to Cloud Run, refer to the [Cloud Build Documentation](https://cloud.google.com/cloud-build/docs/deploying-builds/deploy-cloud-run).
