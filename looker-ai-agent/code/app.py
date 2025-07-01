@@ -71,25 +71,19 @@ async def process_nlq_request(question: str):
     Processes the natural language question, waits for the full response
     from the external API, and returns the complete JSON result.
     """
+    token = get_auth_token() # Get your auth token
     try:
-        token = get_auth_token() # Get your auth token
-
-        # SECURITY RISK: Hardcoded credentials. Move these to environment variables
-        # or a secrets manager in production.
-        # client_id = os.environ.get("LOOKER_CLIENT_ID", "")
-        # client_secret = os.environ.get("LOOKER_CLIENT_SECRET", "")
-        PROJECT = os.environ.get("PROJECT", "")
-
+        PROJECT = os.environ.get("PROJECT", "espresso-machiato")
         payload = {
-            "project": PROJECT,
             "messages": [
                 {
                     "userMessage": {
                         "text": question
                     }
                 }
-            ],
-            "context": {
+            ],            
+            "parent": f"projects/{PROJECT}/locations/global",            
+            "inline_context": {
                 "systemInstruction": f"""{CORTADO_SYS_INSTRUCTIONS}""",
                 "datasourceReferences": {
                     "looker": {
@@ -117,11 +111,10 @@ async def process_nlq_request(question: str):
             "Content-Type": "application/json",
             "Accept": "text/event-stream" # Still request event-stream from upstream
         }
-        url = f"https://dataqna.googleapis.com/v1alpha1/projects/{PROJECT}:askQuestion"
-
+        url = f"https://geminidataanalytics.googleapis.com/v1alpha/projects/{PROJECT}/locations/global:chat"
         data = []        
         async with aiohttp.ClientSession() as session:
-            async with session.post(url, json=payload, headers=headers) as resp:
+            async with session.post(url, json=payload, headers=headers) as resp:                
                 if resp.status == 200:
                     buffer = ''
                     async for chunk in resp.content.iter_any():
@@ -176,7 +169,7 @@ async def process_nlq_request(question: str):
 
                     # Handle any remaining complete JSON in buffer
                     if buffer.strip() and buffer.strip() != "]":
-                       data.append(json.loads(buffer))
+                        data.append(json.loads(buffer))
                 else:
                     # format json object error message that can be parsed in the frontend
                     error_text = await resp.text()
@@ -185,7 +178,7 @@ async def process_nlq_request(question: str):
         
         yield data
     except:
-        logging.error("some Errror")
+        logging.error("Failed to fulfill request")
 
 @app.post("/ask")
 async def ask_endpoint(request: QuestionRequest):

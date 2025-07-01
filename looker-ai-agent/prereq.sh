@@ -63,12 +63,9 @@ gcloud services enable cloudbuild.googleapis.com \
     storage-component.googleapis.com \
     secretmanager.googleapis.com \
     dialogflow.googleapis.com \
-    dataqna.googleapis.com \
+    geminidataanalytics.googleapis.com \
     secretmanager.googleapis.com\
     cloudaicompanion.googleapis.com
-
-echo 60 seconds wait...
-sleep 60
 
 LOOKER_AGENT_CONFIG="LOOKER_AGENT_CONFIG"
 
@@ -82,6 +79,10 @@ if ! gcloud secrets describe "$LOOKER_AGENT_CONFIG" --project="$PROJECT_ID" &> /
   echo "--------------------------------------------------" >&2
   exit 1 # Exit the script with a non-zero status code to indicate failure.
 fi
+
+echo 60 seconds wait...
+sleep 60
+
 
 echo "Secret '$LOOKER_AGENT_CONFIG' found. Proceeding with the script..."
 
