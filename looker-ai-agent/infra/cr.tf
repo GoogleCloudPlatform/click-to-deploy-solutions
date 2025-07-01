@@ -33,16 +33,12 @@ resource "google_cloud_run_v2_service" "default" {
           }
         }
       }
+      env {
+        name  = "REVISION_TIME"
+        value = timestamp() # This will change on every 'terraform apply'
+      }
     }    
   }   
 }
 
-# data "google_project" "project" {}
-
-# # This resource grants the "Cloud Run Invoker" role to the Dialogflow service account
-# resource "google_project_iam_member" "dialogflow_run_invoker" {
-#   project = data.google_project.project.project_id
-#   role    = "roles/run.invoker"
-#   member  = "serviceAccount:service-${data.google_project.project.number}@gcp-sa-dialogflow.iam.gserviceaccount.com"
-# }
 

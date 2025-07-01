@@ -125,6 +125,7 @@ add_iam_member $COMPUTEMEMBER roles/storage.objectUser
 add_iam_member $COMPUTEMEMBER roles/aiplatform.user 
 add_iam_member $COMPUTEMEMBER roles/secretmanager.secretVersionManager
 add_iam_member $COMPUTEMEMBER roles/cloudaicompanion.user
+add_iam_member $COMPUTEMEMBER roles/geminidataanalytics.dataAgentUser
 
 # --- GRANT SECRET ACCESSOR ROLE TO COMPUTE MEMBER ON SPECIFIC SECRET ---
 add_secret_accessor "$LOOKER_AGENT_CONFIG" "$COMPUTEMEMBER"
