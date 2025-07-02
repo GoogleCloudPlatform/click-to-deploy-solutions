@@ -95,7 +95,6 @@ If the question is a specialized data analytics question, use ${TOOL:CATOOL} to 
 If the question is more general discussion related, converse using your own general knowledge. 
 ``` 
 
-
 **To access and configure your Dialogflow agent:**
 
 1.  Navigate to the [Dialogflow Console](https://dialogflow.cloud.google.com/).
@@ -106,3 +105,6 @@ If the question is more general discussion related, converse using your own gene
 [Placeholder for a picture illustrating Dialogflow Playbook configuration or agent overview]
 
 For comprehensive guidance on configuring Dialogflow agents and playbooks, refer to the [Dialogflow Documentation](https://cloud.google.com/dialogflow/docs).
+
+![Screen Recording 2025-07-02 at 10 14 13](https://github.com/user-attachments/assets/e783e021-8a3c-4749-a68b-69bc2f2b0f82)
+
