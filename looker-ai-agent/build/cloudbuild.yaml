@@ -52,7 +52,7 @@ options:
   defaultLogsBucketBehavior: REGIONAL_USER_OWNED_BUCKET
 tags:
   - terraform
-  - looker-agent
+  - looker-ai-agent
   - apply
 timeout: 3600s
 serviceAccount: 'projects/${PROJECT_ID}/serviceAccounts/looker-agent-runner@${PROJECT_ID}.iam.gserviceaccount.com'
