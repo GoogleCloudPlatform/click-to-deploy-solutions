@@ -110,7 +110,7 @@ datacatalog_client = datacatalog_v1.DataCatalogClient()
 # Text models
 llm_latest = bison_latest.from_pretrained(model_name="text-bison")
 llm_ga = bison_ga.from_pretrained(model_name="text-bison@002")
-gemini_llm = GenerativeModel("gemini-1.0-pro-001")
+gemini_llm = GenerativeModel("gemini-2.0-flash")
 
 TEXT_MODEL_NAME = config["models"]["text_model_name"]
 
@@ -121,7 +121,7 @@ translate_client = translate.Client()
 texttospeech_client = texttospeech.TextToSpeechLongAudioSynthesizeClient()
 
 # Image models
-imagen = ImageGenerationModel.from_pretrained("imagegeneration@002")
+imagen = ImageGenerationModel.from_pretrained("imagen-3.0-generate-002")
 
 # Workspace integration
 # Fetch Secret Configuration
@@ -175,7 +175,7 @@ app.add_middleware(
 @router.post("/users/{user_id}/campaigns")
 def create_campaign(user_id: str,data: CampaignCreateRequest
                     ) -> CampaignCreateResponse:
-    """Campaing Creation and content generation with PaLM API
+    """Campaing Creation and content generation with Gemini API
         Parameters:
             user_id: str
             campaign_name: str
@@ -340,7 +340,7 @@ async def update_status(user_id: str,campaign_id:str,data:CampaignStatusUpdate):
 @router.post(path="/generate-text")
 def post_text_bison_generate(data: TextGenerateRequest,
                              ) -> TextGenerateResponse:
-    """Text generation with PaLM API
+    """Text generation with Gemini API
     Parameters:
         model: str = "latest"
             [Options] "latest" | "ga"

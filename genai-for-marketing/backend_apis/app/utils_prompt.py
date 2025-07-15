@@ -14,7 +14,7 @@
 
 
 """
-A utility module for performing prompt engineering with the Vertex PaLM API.
+A utility module for performing prompt engineering with the Vertex Gemini API.
 """
 
 
@@ -35,11 +35,13 @@ from vertexai.preview.language_models import TextGenerationModel
 from vertexai.preview.vision_models import ImageGenerationModel
 
 from vertexai.generative_models import GenerativeModel , GenerationConfig
+from google.genai.types import GenerateVideosConfig, Image
+
 
 
 async def async_predict_text_gemini(
         prompt: str,
-        model_name: str="gemini-1.0-pro",
+        model_name: str="gemini-2.0-flash",
         max_output_tokens: int=2048,
         temperature: float=0.4,
         top_k: int=40,

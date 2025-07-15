@@ -7,7 +7,7 @@ You are empowered to extend these APIs, intertwining them with your specific pol
 ## List of APIs developed in this repository
 
 **Campaign Creation and Generating the brief assets (POST)** (path="/campaigns")
- - Create Campaing and Generate text with PaLM API (text-bison) latest or 001.
+ - Create Campaing and Generate text with Gemini API latest .
 
 **List all Campaigns created by user (GET)** (path="/campaigns")
  - List of Campaigns and there details.
@@ -18,8 +18,8 @@ You are empowered to extend these APIs, intertwining them with your specific pol
 **Delete Campaign (DELETE)** (path="/campaigns/{campaign_id}")
  - List of Campaigns and there details.
 
-**Text generation with Vertex AI PaLM API (text-bison)** (path="/generate-text")
- - Generate text with PaLM API (text-bison) latest or 001.
+**Text generation with Vertex AI Gemini API ** (path="/generate-text")
+ - Generate text with Gemini API latest.
 
 **Image generation with Vertex Imagen API** (path="/generate-image")
  - Generate images with the Vertex Imagen API.
