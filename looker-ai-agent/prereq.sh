@@ -135,6 +135,13 @@ add_secret_accessor "$LOOKER_AGENT_CONFIG" "$CUSTOMSAMEMBER"
 
 
 echo "Creating artifact registry repository"
-gcloud artifacts repositories create cloud-run-source-deploy --repository-format=docker --location=us-central1 --async
+if gcloud artifacts repositories describe cloud-run-source-deploy --location=us-central1 --project="$PROJECT_ID" &> /dev/null; then
+    echo "Repository 'cloud-run-source-deploy' already exists."
+else
+    echo "Creating Artifact Registry repository 'cloud-run-source-deploy'..."
+    gcloud artifacts repositories create cloud-run-source-deploy --repository-format=docker --location=us-central1 --async
+fi
+
+gcloud builds submit --config ./build/cloudbuild.yaml --region us-central1
 
 echo Script completed successfully!
