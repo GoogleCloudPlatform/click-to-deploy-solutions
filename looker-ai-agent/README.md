@@ -58,28 +58,7 @@ To run the script:
 
 ---
 
-## Step 4: Deploy the Looker Data Agent Application
-
-Once the prerequisite script has completed successfully, deploy the Looker Data Agent application using Google Cloud Build. This command initiates a build process that will:
-
-1.  **Build the Docker image** for the Looker Data Agent application.
-2.  **Push the Docker image to Artifact Registry** in the specified region.
-3.  **Deploy the image as a Cloud Run service**, making the application accessible.
-4.  **Automatically create a Dialogflow agent (`looker-ca-agent`) and a Dialogflow tool (`CATOOL`)**, preparing them for conversational analytics.
-
-**Note:** The `--region` flag is crucial. It specifies where the Cloud Run service will be deployed and where the Docker image will be stored in Artifact Registry. This region cannot be global. We recommend `us-central1`.
-
-From the root directory of your project, execute the following command:
-
-```bash
-    gcloud builds submit --config ./build/cloudbuild.yaml --region us-central1 
-```
-
-For more details on Cloud Build, including configuration and deployment to Cloud Run, refer to the [Cloud Build Documentation](https://cloud.google.com/cloud-build/docs/deploying-builds/deploy-cloud-run).
-
----
-
-## Step 5: Configure the Dialogflow Playbook
+## Step 4: Configure the Dialogflow Playbook
 
 After the Cloud Build deployment, a Dialogflow agent named **looker-ca-agent** and an associated tool named **CATOOL** will be automatically created. Your next step is to define the conversational logic (playbook) for this agent.
 
