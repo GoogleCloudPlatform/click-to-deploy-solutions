@@ -18,9 +18,13 @@ steps:
   name: 'gcr.io/cloud-builders/docker'
   args: ['build', '-t', 'gcr.io/${PROJECT_ID}/genmedia', './code']
 
+- id: 'push'
+  name: 'gcr.io/cloud-builders/docker'
+  args: ['push', 'gcr.io/${PROJECT_ID}/genmedia']
+
 - id: 'terraform init'
   waitFor: 
-    - 'build'
+    - 'push'
   name: 'hashicorp/terraform:1.0.0'
   entrypoint: 'sh'
   args: 
