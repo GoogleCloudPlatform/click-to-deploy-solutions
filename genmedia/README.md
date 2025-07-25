@@ -17,10 +17,6 @@ Please note - New organizations have the 'Enforce Domain Restricted Sharing' pol
 ```
 gcloud builds submit . --config build/cloudbuild.yaml
 ```
-<center>
-<h4>🎉 Congratulations! 🎉  <br />
-
-You have successfully deployed the foundation for running Wordpress using CloudRun on Google Cloud.</h4></center>
 
 ## Check your deployment
 Once deployed, you can find the app URL under services [Cloud Run]([url](https://console.cloud.google.com/run).
