@@ -17,7 +17,7 @@ resource "google_data_fusion_instance" "cdf_private" {
   description                   = "Cloud Data Fusion private instance"
   region                        = var.region
   type                          = "DEVELOPER"
-  version                       = "6.7.2"
+  version                       = "6.10.1"
   enable_stackdriver_logging    = true
   enable_stackdriver_monitoring = true
   labels                        = local.resource_labels

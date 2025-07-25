@@ -23,6 +23,7 @@ resource "google_compute_subnetwork" "group1" {
   network                  = google_compute_network.default.self_link
   region                   = var.group1_region
   private_ip_google_access = true
+  depends_on               = [google_compute_network.default]
 }
 
 # Router and Cloud NAT are required for installing packages from repos (apache, php etc)
@@ -30,6 +31,7 @@ resource "google_compute_router" "group1" {
   name    = "${var.network_name}-gw-group1"
   network = google_compute_network.default.self_link
   region  = var.group1_region
+  depends_on               = [google_compute_network.default]
 }
 
 module "cloud-nat-group1" {
@@ -39,6 +41,7 @@ module "cloud-nat-group1" {
   project_id = var.project_id
   region     = var.group1_region
   name       = "${var.network_name}-cloud-nat-group1"
+  depends_on               = [google_compute_network.default]
 }
 
 resource "google_compute_global_address" "service_range" {
@@ -48,10 +51,13 @@ resource "google_compute_global_address" "service_range" {
   address       = "10.200.0.0"
   prefix_length = 16
   network       = google_compute_network.default.self_link
+  depends_on               = [google_compute_network.default]
 }
 
 resource "google_service_networking_connection" "private_service_connection" {
   network                 = google_compute_network.default.id
   service                 = "servicenetworking.googleapis.com"
   reserved_peering_ranges = [google_compute_global_address.service_range.name]
+  depends_on               = [google_compute_network.default]
+
 }
