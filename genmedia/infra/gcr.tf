@@ -52,3 +52,8 @@ resource "google_cloud_run_v2_service_iam_member" "public_access" {
   role     = "roles/run.invoker"
   member   = "allUsers"
 }
+
+output "cloud_run_service_url" {
+  description = "The URL of the deployed Cloud Run service."
+  value       = google_cloud_run_v2_service.default.uri
+}
