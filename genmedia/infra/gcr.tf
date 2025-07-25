@@ -4,7 +4,7 @@ resource "google_storage_bucket" "video_bucket" {
  name          = "${var.project_id}-genmedia-bucket"
  location      =  var.location
  storage_class = "STANDARD"
-
+ force_destroy = true
  uniform_bucket_level_access = true
 }
 
