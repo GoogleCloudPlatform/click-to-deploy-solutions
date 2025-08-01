@@ -50,7 +50,7 @@ resource "google_cloud_run_v2_service_iam_member" "public_access" {
   location = google_cloud_run_v2_service.default.location
   name     = google_cloud_run_v2_service.default.name
   role     = "roles/run.invoker"
-  member   = "allUsers"
+  member   = var.cloud_run_invoker
 }
 
 output "cloud_run_service_url" {
