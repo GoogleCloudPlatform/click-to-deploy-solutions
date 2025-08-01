@@ -23,19 +23,6 @@ gcloud builds submit . --config build/cloudbuild.yaml
 ## Check your deployment
 Once deployment is completed, terraform will output the app URL as: **cloud_run_service_url = "https://genmedia-app-xxxxxxxx.a.run.app"**.
 
-<br>
-
-You can retrieve the url at any time with:
-``` bash
-terraform output
-```
-
-or for the concrete variable:
-
-``` bash
-terraform output cloud_run_service_url
-```
-
 Alternatively, you can find the app URL under services [Cloud Run](https://console.cloud.google.com/run).
 
 
