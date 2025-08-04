@@ -4,7 +4,7 @@ resource "google_storage_bucket" "video_bucket" {
  name          = "${var.project_id}-genmedia-bucket"
  location      =  var.location
  storage_class = "STANDARD"
-
+ force_destroy = true
  uniform_bucket_level_access = true
 }
 
@@ -50,5 +50,10 @@ resource "google_cloud_run_v2_service_iam_member" "public_access" {
   location = google_cloud_run_v2_service.default.location
   name     = google_cloud_run_v2_service.default.name
   role     = "roles/run.invoker"
-  member   = "allUsers"
+  member   = var.cloud_run_invoker
+}
+
+output "cloud_run_service_url" {
+  description = "The URL of the deployed Cloud Run service."
+  value       = google_cloud_run_v2_service.default.uri
 }
