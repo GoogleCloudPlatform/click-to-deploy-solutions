@@ -28,5 +28,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy the content of the local src directory to the working directory
 COPY . .
 
+EXPOSE 8501
+
 # Streamlit-specific commands for running the app
-CMD streamlit run app.py --server.enableXsrfProtection false --server.port $PORT
+ENTRYPOINT ["streamlit", "run", "app.py", "--server.port=8501", "--server.address=0.0.0.0", "--server.enableCORS=false", "--server.enableXsrfProtection=false"]
