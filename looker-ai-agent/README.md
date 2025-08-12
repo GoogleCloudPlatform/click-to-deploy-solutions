@@ -19,7 +19,7 @@ The versatility of GenAI text classifications extends across numerous industries
 * __Detecting and Preventing Plagiarism__: Enhance academic integrity by identifying instances of plagiarism in student assignments and research papers. This use case helps educational institutions maintain high standards by ensuring that all submitted work is original and complies with academic policies, fostering a culture of honesty and creativity.
 
 ## Architecture
-<p align="center"><img src="Architecture.png"></p>
+![Design Architecture](assets/Architecture.png)
 
 
 These are the main components that we would be setting up (to learn more about these products, click on the hyperlinks):
