@@ -1,89 +1,114 @@
+[![banner](../banner.png)](https://cloud.google.com/?utm_source=github&utm_medium=referral&utm_campaign=GCP&utm_content=packages_repository_banner)
+
 # Looker Data Agent Deployment
 
-This guide provides the steps to deploy the Looker Data Agent application using Google Cloud Build. This solution offers a robust backend for creating conversational agents that can interact with Looker, enabling insights through platforms like Microsoft Teams, Slack, and other conversational interfaces.
+## Introduction
+In today's data-driven world, the ability to quickly and accurately classify texts is crucial for various applications across industries. This guide provides a step-by-step approach to setting up and using Google's Generative AI (GenAI) to classify texts. Leveraging the power of GenAI, we will classify texts and store the results in BigQuery. The classified data can then be visualized in Looker Studio, offering powerful insights and easy access to meaningful patterns within the texts.
 
----
+This guide is designed for users who already have a Google Cloud project and want to explore how to integrate GenAI into their workflows. Whether you're looking to categorize customer feedback, filter emails, or classify documents, this solution provides a scalable and efficient method to process and analyze large volumes of text.
 
-## Prerequisites
+This package will get you up to speed with an infrastructure to classify texts using GenAI, store the texts in BigQuery and then visualise those into a Looker Studio dashboard.
 
-1.  A Google Cloud project. If you don't have one, follow the [Creating and Managing Projects](https://cloud.google.com/resource-manager/docs/creating-managing-projects) guide.
-2.  The `gcloud` command-line tool installed and authenticated. See [Installing the gcloud CLI](https://cloud.google.com/sdk/docs/install) for details.
+## Use cases
+The versatility of GenAI text classifications extends across numerous industries, offering seamless integration with your business operations. Here are some applicable use cases of GenAI text classifications:
 
----
+* __Organizing Medical and Legal Documents__: Efficiently classify and manage large volumes of documents such as patient records, legal filings, and research articles. This enhances the retrieval and organization of information, helping healthcare professionals quickly access patient histories and legal researchers find relevant case laws and statutes.
+* __Automating Product Tagging and Categorization__: Streamline e-commerce operations by automatically tagging and categorizing products based on their descriptions and customer reviews. This automation improves product management, ensures accurate tagging, and enhances the shopping experience by making products easier to find for customers.
+* __Prioritizing and Routing Support Tickets__: Improve customer service efficiency by categorizing support tickets into specific categories like "Technical Issues," "Billing Inquiries," and "Payment Problems." This helps in prioritizing and routing tickets to the appropriate support teams, ensuring timely and accurate responses to customer queries.
+* __Medical Diagnosis Support__: Accelerate the diagnostic process by classifying medical reports and patient notes. This supports healthcare professionals in quickly identifying relevant information, aiding in faster diagnosis and treatment, and improving patient care by leveraging detailed and structured medical data.
+* __Detecting and Preventing Plagiarism__: Enhance academic integrity by identifying instances of plagiarism in student assignments and research papers. This use case helps educational institutions maintain high standards by ensuring that all submitted work is original and complies with academic policies, fostering a culture of honesty and creativity.
 
-## Step 1: Generate Looker API Credentials
+## Architecture
+<p align="center"><img src="Architecture.png"></p>
 
-Before you can configure the secret, generate API credentials from your Looker instance:
 
-1.  In your Looker instance, navigate to **Admin > Users**.
-2.  Select the user you want to generate credentials for and click **Edit**.
-3.  Under the **API Credentials** section, click **Edit Keys**.
-4.  Click **New API Key**. The UI will display a **Client ID** and a **Client Secret**.
-
-For more detailed instructions, refer to the official Looker documentation on [API Credentials](https://cloud.google.com/looker/docs/api-auth#authentication_with_an_sdk).
-
----
-
-## Step 2: Create the Secret in Google Cloud
-
-The application requires a secret named `LOOKER_AGENT_CONFIG` stored in Google Cloud Secret Manager.
-The expected structure of the secret is a JSON with:
-
-    {
-      "LOOKER_CLIENT_ID": "YOUR_LOOKER_CLIENT_ID",
-      "LOOKER_CLIENT_SECRET": "YOUR_LOOKER_CLIENT_SECRET",
-      "LOOKER_INSTANCE": "YOUR_LOOKER_INSTANCE_URL",
-      "LOOKML_MODEL": "your_lookml_model_name",
-      "LOOKML_EXPLORE": "your_explore_name"
-    }
-
-![Screen Recording 2025-06-30 at 18 12 28](https://github.com/user-attachments/assets/8b160d07-90d6-49e6-bcb8-4f121d50ad1f)
+These are the main components that we would be setting up (to learn more about these products, click on the hyperlinks):
+* [Cloud Run](https://cloud.google.com/run): Serverless PaaS offering to host containers for web-oriented applications, while offering security, scalability and easy versioning.
+* [Vertex AI PaLM API](https://cloud.google.com/vertex-ai/generative-ai/docs/language-model-overview#palm-api): Use advanced language models for natural language processing tasks. Ideal for building chatbots, text analysis tools, and translation services.
+* [BigQuery](https://cloud.google.com/bigquery): A Serverless and cost-effective enterprise data warehouse that works across clouds and scales with your data. 
+* [Looker Studio](https://support.google.com/looker-studio/answer/6283323?hl=en): Looker Studio is a free tool that turns your data into informative, easy to read, easy to share, and fully customizable dashboards and reports.
 
 
 
-For more information on managing secrets, see [Creating and Accessing Secrets](https://cloud.google.com/secret-manager/docs/creating-and-accessing-secrets).
+## Cost
 
----
+Pricing Estimates - We have created a sample estimate based on some usage we see from new startups looking to scale. This estimate would give you an idea of how much this deployment would essentially cost per month at this scale and you extend it to the scale you further prefer. Here's the [link](https://cloud.google.com/products/calculator-legacy/#id=e6f716ca-7d69-45b3-ac98-b85d3c609fe9).
 
-## Step 3: Run the Prerequisite Script
+This solution assumes you already have a project created and set up where you wish to host these resources.
 
-From the root directory of your project, execute the `prereq.sh` script. This script automates several setup tasks, including enabling necessary Google Cloud APIs, creating a Cloud Storage bucket for Terraform state, and configuring IAM permissions.
+**Time to complete**: About 5 minutes
 
-To run the script:
+Click the **Start** button to move to the next step.
+
+
+
+## Deploy the architecture
+
+**Time to complete**: About 5 minutes
+
+1. Click on Open in Google Cloud Shell button below.
+
+<a href="https://ssh.cloud.google.com/cloudshell/editor?shellonly=true&cloudshell_git_repo=https://github.com/GoogleCloudPlatform/click-to-deploy-solutions&cloudshell_workspace=text-classification&cloudshell_open_in_editor=infra/terraform.tfvars" target="_new">
+    <img alt="Open in Cloud Shell" src="https://gstatic.com/cloudssh/images/open-btn.svg">
+</a>
+
+2. Run the prerequisites script to enable APIs and set Cloud Build permissions.
+```
+sh prereq.sh
+```
+
+3. Run the Cloud Build Job
+```
+gcloud builds submit . --config cloudbuild.yaml
+```
+
+
+
+## Result
+
+At this point you have successfully deployed the application and necessary underlining infrastructure to run it! Yay!
+
+This process may take a while to deploy, please do not close the window when deploying.
+
+Next we are going to test the architecture and finally clean up your environment.
+
+## Getting the endpoint
+* Visit Cloud Run list of services (https://console.cloud.google.com/run) 
+* Select the service called text-classification	
+* The service endpoint will be available right next to the package name
+
+![Image copying the Cloud Run URL](https://services.google.com/fh/files/misc/copy_cloudrun_url.gif)
+
+
+
+
+## Testing your architecture
+Once you deployed the solution successfully, update the populate.sh with the endpoint you got from the previous step
+
+![Image updating the populate.sh file](https://services.google.com/fh/files/misc/update_url_populate_file.gif)
 
 ```bash
-./prereq.sh
-``` 
-**During execution, the script will confirm your active Google Cloud Project ID.** If it\'s not already set in your `gcloud` configuration, the script will prompt you to enter it.
+sh populate.sh
+```
 
----
+Then, check the parsed results in the output bucket in text (OCR) and json (Key=value) formats
 
-## Step 4: Configure the Dialogflow Playbook
+Finally, check the json results on BigQuery or even better, use the bellow link to check it in a Looker Studio dashboard.
 
-After the Cloud Build deployment, a Dialogflow agent named **looker-ca-agent** and an associated tool named **CATOOL** will be automatically created. Your next step is to define the conversational logic (playbook) for this agent.
+```
+https://lookerstudio.google.com/c/u/0/reporting/create?c.mode=edit&ds.connector=BIG_QUERY&ds.type=TABLE&ds.projectId=[YOUR PROJECT ID]&ds.datasetId=classified_messages&ds.tableId=classified_messages
+```
 
-The **CATOOL** is designed to interact with your Looker instance for specialized data analytics questions. You will need to write custom instructions within the Dialogflow agent to guide its behavior and integrate with **CATOOL**. This allows you to combine Looker conversational analytics with other tools or even multiple Looker Explores as needed.
+## Cleaning up your environment
 
-Here's an example prompt you can use to start configuring your Dialogflow agent:
+Execute the command below on Cloud Shell to destroy the resources.
 
-```bash
-Determine if the user is asking specialized data analytics question to an Ecommerce dataset OR if they are looking for more of a general discussion.
+``` {shell}
+gcloud builds submit . --config build/cloudbuild_destroy.yaml
+```
 
-If the question is a specialized data analytics question, use ${TOOL:CATOOL} to interpret the natural language question and fetch the results from the database. Provide a contextual summary back to the user with as much detail as you can gather.
+The above command will delete the associated resources so there will be no billable charges made afterwards.
 
-If the question is more general discussion related, converse using your own general knowledge. 
-``` 
+## Congratulations
 
-**To access and configure your Dialogflow agent:**
-
-1.  Navigate to the [Dialogflow Console](https://dialogflow.cloud.google.com/).
-2.  Select your Google Cloud project.
-3.  Locate the agent named **looker-ca-agent**.
-4.  Within the agent settings, you can define your custom instructions and further refine its behavior.
-
-[Placeholder for a picture illustrating Dialogflow Playbook configuration or agent overview]
-
-For comprehensive guidance on configuring Dialogflow agents and playbooks, refer to the [Dialogflow Documentation](https://cloud.google.com/dialogflow/docs).
-
-![Screen Recording 2025-07-02 at 10 14 13](https://github.com/user-attachments/assets/e783e021-8a3c-4749-a68b-69bc2f2b0f82)
-
+<walkthrough-conclusion-trophy></walkthrough-conclusion-trophy>
