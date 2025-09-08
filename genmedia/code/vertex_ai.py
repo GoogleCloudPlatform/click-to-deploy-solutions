@@ -67,7 +67,7 @@ def refine_veo_prompt_with_gemini(user_prompt: str, image_bytes: bytes = None, m
         return ""
 
 
-def generate_image_with_imagen(prompt: str ,  model_name: str) -> bytes:
+def generate_image_with_imagen(prompt: str ,  model_name: str = "Imagen 3") -> bytes:
     """Generates an image using Imagen on Vertex AI and returns its bytes."""
     try:
         # model = ImageGenerationModel.from_pretrained("imagen-3.0-generate-002")
