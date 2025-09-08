@@ -32,7 +32,7 @@ These are the main components that we would be setting up (to learn more about t
 
 ## Cost
 
-Pricing Estimates - We have created a sample estimate based on some usage we see from new startups looking to scale. This estimate would give you an idea of how much this deployment would essentially cost per month at this scale and you extend it to the scale you further prefer. Here's the [link](https://cloud.google.com/products/calculator-legacy/#id=e6f716ca-7d69-45b3-ac98-b85d3c609fe9).
+Pricing Estimates - We have created a sample estimate based on some usage we see from new startups looking to scale. This estimate would give you an idea of how much this deployment would essentially cost per month at this scale and you extend it to the scale you further prefer. Here's the [link](https://cloud.google.com/products/calculator/estimate-preview/3de21092-1d49-43bd-8101-d06aa2a54e64?isLegacy=true&e=48754805&hl=en).
 
 This solution assumes you already have a project created and set up where you wish to host these resources.
 
