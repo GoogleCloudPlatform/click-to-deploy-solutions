@@ -29,6 +29,11 @@ resource "google_cloud_run_v2_service" "default" {
   template {
     containers {
       image = "gcr.io/${var.project_id}/genmedia:latest"
+      
+      ports {
+        container_port = 8501
+      }
+
       env {
         name  = "PROJECT_ID"
         value = var.project_id
