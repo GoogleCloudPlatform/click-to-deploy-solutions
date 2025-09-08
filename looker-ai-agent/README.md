@@ -23,10 +23,10 @@ The versatility of GenAI text classifications extends across numerous industries
 
 
 These are the main components that we would be setting up (to learn more about these products, click on the hyperlinks):
+* [Looker](https://cloud.google.com/looker) :  Empowering data exploration and informed decision-making through a user-friendly interface and powerful visualization capabilities
 * [Cloud Run](https://cloud.google.com/run): Serverless PaaS offering to host containers for web-oriented applications, while offering security, scalability and easy versioning.
-* [Vertex AI PaLM API](https://cloud.google.com/vertex-ai/generative-ai/docs/language-model-overview#palm-api): Use advanced language models for natural language processing tasks. Ideal for building chatbots, text analysis tools, and translation services.
-* [BigQuery](https://cloud.google.com/bigquery): A Serverless and cost-effective enterprise data warehouse that works across clouds and scales with your data. 
-* [Looker Studio](https://support.google.com/looker-studio/answer/6283323?hl=en): Looker Studio is a free tool that turns your data into informative, easy to read, easy to share, and fully customizable dashboards and reports.
+* [Conversational Agents](https://cloud.google.com/conversational-agents): Provide proactive, personalized self service and natural, human-like voices for highly engaging customer experiences.
+
 
 
 
