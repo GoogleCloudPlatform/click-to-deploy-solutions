@@ -8,6 +8,8 @@ from vertex_ai import (
 
 )
 from video_processing import save_temp_video, stitch_videos
+# from models import IMAGEN_MODELS, VEO_MODELS
+
 
 def image_to_video_tab():
     st.header("Step 1: Craft and Refine Your **Image** Prompt")
@@ -64,7 +66,7 @@ def image_to_video_tab():
     if st.button("🎨 Generate Image with Imagen", use_container_width=True, disabled=not prompt_to_use_for_imagen, key="generate_image_button"):
         if prompt_to_use_for_imagen:
             with st.spinner(f"Imagen ({st.session_state.imagen_model_choice}) is generating your image... This may take a moment."):
-                st.session_state.image_bytes = generate_image_with_imagen(prompt_to_use_for_imagen)
+                st.session_state.image_bytes = generate_image_with_imagen(prompt_to_use_for_imagen, st.session_state.imagen_model_choice)
                 st.session_state.video_bytes = None
                 st.session_state.raw_veo_user_prompt = "" 
                 st.session_state.veo_refined_prompt = ""

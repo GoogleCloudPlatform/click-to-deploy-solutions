@@ -1,10 +1,12 @@
 import streamlit as st
 from vertexai.vision_models import ImageGenerationModel
 from vertexai.generative_models import GenerativeModel, Part
-from google.genai.types import GenerateVideosConfig, Image
+from google.genai.types import GenerateVideosConfig, Image as GenaiImage
 from google.genai import types
 import time
 import uuid
+from model import GEMINI_MODEL_NAME, IMAGEN_MODEL3, IMAGEN_MODEL4 , VEO_MODEL2 , VEO_MODEL3
+
 
 from config import client, gcs_bucket_name, storage_client
 from gcs import upload_bytes_to_gcs
@@ -12,7 +14,7 @@ from gcs import upload_bytes_to_gcs
 
 def refine_prompt_with_gemini(user_prompt: str, for_video: bool = False) -> str:
     """Uses Gemini on Vertex AI to refine a user's prompt for image or video generation."""
-    model = GenerativeModel("gemini-2.0-flash")
+    model = GenerativeModel(GEMINI_MODEL_NAME)
     
     if for_video:
         refinement_prompt = f"""
@@ -43,7 +45,7 @@ def refine_prompt_with_gemini(user_prompt: str, for_video: bool = False) -> str:
     
 def refine_veo_prompt_with_gemini(user_prompt: str, image_bytes: bytes = None, mime_type: str = "image/png") -> str:
     """Uses Gemini on Vertex AI to refine a user's prompt for image or video generation, optionally with an image."""
-    model = GenerativeModel("gemini-2.0-flash")
+    model = GenerativeModel(GEMINI_MODEL_NAME)
     
     refinement_prompt_text = f"""
     You are an expert prompt engineer for text-to-video models.
@@ -67,14 +69,14 @@ def refine_veo_prompt_with_gemini(user_prompt: str, image_bytes: bytes = None, m
         return ""
 
 
-def generate_image_with_imagen(prompt: str ,  model_name: str = "Imagen 3") -> bytes:
+def generate_image_with_imagen(prompt: str ,  model_name: str) -> bytes:
     """Generates an image using Imagen on Vertex AI and returns its bytes."""
     try:
         # model = ImageGenerationModel.from_pretrained("imagen-3.0-generate-002")
         if model_name == "Imagen 3":
-            model = ImageGenerationModel.from_pretrained("imagen-3.0-generate-002")
+            model = ImageGenerationModel.from_pretrained(IMAGEN_MODEL3)
         elif model_name == "Imagen 4":
-            model = ImageGenerationModel.from_pretrained("imagen-4.0-generate-preview-06-06")
+            model = ImageGenerationModel.from_pretrained(IMAGEN_MODEL4)
         else:
             st.error("Invalid Imagen model selected.")
             return None
@@ -122,7 +124,7 @@ def generate_video_with_veo(input_type: str, input_content: bytes | str, video_p
     try:
         if input_type == "image":
             operation = client.models.generate_videos(
-                model="veo-2.0-generate-001",
+                model=VEO_MODEL2,
                 prompt=video_prompt,
                 image=genai_image,
                 config=GenerateVideosConfig(
@@ -134,7 +136,7 @@ def generate_video_with_veo(input_type: str, input_content: bytes | str, video_p
             ) 
         else: # Text to Video
             operation = client.models.generate_videos(
-                model="veo-2.0-generate-001",
+                model=VEO_MODEL2,
                 prompt=video_prompt,
                 config=GenerateVideosConfig(
                     aspect_ratio="16:9",
@@ -216,7 +218,7 @@ def generate_video_with_veo3(input_type: str, input_content: bytes | str, video_
     try:
         if input_type == "image":
             operation = client.models.generate_videos(
-                model="veo-3.0-generate-preview", # Changed to Veo3 model
+                model=VEO_MODEL3, # Changed to Veo3 model
                 prompt=video_prompt,
                 image=genai_image,
                 config=GenerateVideosConfig(
