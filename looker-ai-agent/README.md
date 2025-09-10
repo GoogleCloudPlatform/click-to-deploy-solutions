@@ -10,7 +10,7 @@ This guide is designed for users who already have a Google Cloud project and wan
 This package will get you up to speed with an infrastructure to classify texts using GenAI, store the texts in BigQuery and then visualise those into a Looker Studio dashboard.
 
 ## Use cases
-The versatility of GenAI text classifications extends across numerous industries, offering seamless integration with your business operations. Here are some applicable use cases of GenAI text classifications:
+The Looker Agent unlocks a wide range of use cases that drive productivity, streamline workflows, and empower everyone to make data-driven decisions. Here are some applicable use cases:
 
 * __Self-Service Analytics__: Eliminates bottlenecks and reduces the burden on data analysts by enabling self-service analytics, empowering every user to make data-driven decisions without needing to be an expert in SQL or a specific dashboard.
 * __Cross-Functional Team Collaboration__: Acts as a universal data interface within collaborative platforms like Google Chat or Slack, breaking down silos between departments. It allows teams to share and discuss a single source of truth without leaving their conversation. This ensures all teams are aligned and working with consistent information, leading to better, faster decisions.
