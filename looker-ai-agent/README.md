@@ -10,7 +10,7 @@ The architecture uses a Google Cloud Run service to connect Looker's API with co
 This guide is designed for users who already have a Google Cloud project and want to query trusted data using natural language in a chat channel and get an immediate, data-backed answer directly from Looker. 
 
 ## Use cases
-The Looker Agent unlocks a wide range of use cases that drive productivity, streamline workflows, and empower everyone to make data-driven decisions. Here are some applicable use cases:
+The Looker Agent unlocks a wide range of use cases that drive productivity, streamline workflows, and empowers everyone to make data-driven decisions. Here are some applicable use cases:
 
 * __Self-Service Analytics__: Eliminates bottlenecks and reduces the burden on data analysts by enabling self-service analytics, empowering every user to make data-driven decisions without needing to be an expert in SQL or a specific dashboard.
 * __Cross-Functional Team Collaboration__: Acts as a universal data interface within collaborative platforms like Google Chat or Slack, breaking down silos between departments. It allows teams to share and discuss a single source of truth without leaving their conversation. This ensures all teams are aligned and working with consistent information, leading to better, faster decisions.
