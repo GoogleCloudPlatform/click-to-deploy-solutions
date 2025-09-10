@@ -3,11 +3,11 @@
 # Looker Data Agent Deployment
 
 ## Introduction
-In today's data-driven world, the ability to quickly and accurately classify texts is crucial for various applications across industries. This guide provides a step-by-step approach to setting up and using Google's Generative AI (GenAI) to classify texts. Leveraging the power of GenAI, we will classify texts and store the results in BigQuery. The classified data can then be visualized in Looker Studio, offering powerful insights and easy access to meaningful patterns within the texts.
+The Looker Data Agent seamlessly integrates trusted, real-time data into your teams' daily workflows in tools like Google Chat and Slack. This guide provides a step-by-step approach to building a conversational analytics interface through connecting Looker data with conversational agents in your team's collaboration platforms. Whether you're looking to integrate with Slack, Google Chat, or Teams, this solution provides an efficient method to put real-time data insights directly into the flow of your team's work.
 
-This guide is designed for users who already have a Google Cloud project and want to explore how to integrate GenAI into their workflows. Whether you're looking to categorize customer feedback, filter emails, or classify documents, this solution provides a scalable and efficient method to process and analyze large volumes of text.
+The architecture uses a Google Cloud Run service to connect Looker's API with conversational agents in platforms like Slack or Teams.
 
-This package will get you up to speed with an infrastructure to classify texts using GenAI, store the texts in BigQuery and then visualise those into a Looker Studio dashboard.
+This guide is designed for users who already have a Google Cloud project and want to query trusted data using natural language in a chat channel and get an immediate, data-backed answer directly from Looker. 
 
 ## Use cases
 The Looker Agent unlocks a wide range of use cases that drive productivity, streamline workflows, and empower everyone to make data-driven decisions. Here are some applicable use cases:
