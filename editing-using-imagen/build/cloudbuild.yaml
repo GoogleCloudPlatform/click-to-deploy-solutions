@@ -1,0 +1,59 @@
+# Copyright 2023 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+steps:
+# Container steps
+- name: 'gcr.io/cloud-builders/docker'
+  args:
+    - 'build'
+    - '-t'
+    - '${_IMAGE_NAME}'
+    - '.'
+  dir: code
+- name: 'gcr.io/cloud-builders/docker'
+  args: 
+  - 'push'
+  - '${_IMAGE_NAME}'
+  dir: code
+# Terraform steps
+- id: 'tf init'
+  name: 'hashicorp/terraform'
+  entrypoint: 'sh'
+  args: 
+  - '-c'
+  - | 
+    terraform init \
+    -backend-config="bucket=$PROJECT_ID-tf-state" \
+    -backend-config="prefix=editing-using-imagen"
+  dir: infra
+- id: 'tf apply'
+  name: 'hashicorp/terraform'
+  args: 
+  - apply
+  - -auto-approve
+  dir: infra
+substitutions:
+  _IMAGE_NAME: us-central1-docker.pkg.dev/${PROJECT_ID}/docker-repo/editing-using-imagen:${BUILD_ID}
+options:
+  dynamic_substitutions: true
+  env:
+    - TF_VAR_project_id=$PROJECT_ID
+    - TF_VAR_editing-using-imagen_tag=$BUILD_ID
+tags:
+  - terraform
+  - editing-using-imagen
+  - apply
+images:
+  - ${_IMAGE_NAME}
+timeout: 3600s
