@@ -45,7 +45,7 @@ For more information on managing secrets, see [Creating and Accessing Secrets](h
 
 ---
 
-## Step 3: Run the Prerequisite Script
+## Step 3: Deploy the architecture
 
 From the root directory of your project, execute the `prereq.sh` script. This script automates several setup tasks, including enabling necessary Google Cloud APIs, creating a Cloud Storage bucket for Terraform state, and configuring IAM permissions.
 
@@ -56,7 +56,13 @@ To run the script:
 ``` 
 **During execution, the script will confirm your active Google Cloud Project ID.** If it\'s not already set in your `gcloud` configuration, the script will prompt you to enter it.
 
----
+After this is complete, you can kick off the Cloud Build pipeline with the following command:
+
+```bash
+gcloud builds submit . --config cloudbuild.yaml
+```
+
+If you encounter errors when running these commands, please attempt to run them again in a clean project.
 
 ## Step 4: Configure the Dialogflow Playbook
 
@@ -87,4 +93,20 @@ For comprehensive guidance on configuring Dialogflow agents and playbooks, refer
 
 ![Screen Recording 2025-07-02 at 10 14 13](https://github.com/user-attachments/assets/e783e021-8a3c-4749-a68b-69bc2f2b0f82)
 
+## Cleaning up your environment
+
+Execute the command below on Cloud Shell to destroy the resources.
+
+``` {shell}
+gcloud builds submit . --config cloudbuild_destroy.yaml
+```
+
+The above command will delete the associated resources so there will be no billable charges made afterwards.
+
+
+## Congratulations
+
+<walkthrough-conclusion-trophy></walkthrough-conclusion-trophy>
+
+You’re all set!
 
