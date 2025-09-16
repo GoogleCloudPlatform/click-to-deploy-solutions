@@ -33,25 +33,3 @@ These are the main components that we would be setting up (to learn more about t
 ## Cost
 
 Pricing Estimates - We have created a sample estimate based on some usage we see from new startups looking to scale. This estimate would give you an idea of how much this deployment would essentially cost per month at this scale and you extend it to the scale you further prefer. Here's the [link](https://cloud.google.com/products/calculator/estimate-preview/3de21092-1d49-43bd-8101-d06aa2a54e64?isLegacy=true&e=48754805&hl=en).
-
-
-
-## Deploy the architecture
-
-**Time to complete**: About 5 minutes
-
-1. Click on Open in Google Cloud Shell button below.
-
-<a href="https://ssh.cloud.google.com/cloudshell/editor?shellonly=true&cloudshell_git_repo=https://github.com/GoogleCloudPlatform/click-to-deploy-solutions&cloudshell_workspace=text-classification&cloudshell_open_in_editor=infra/terraform.tfvars" target="_new">
-    <img alt="Open in Cloud Shell" src="https://gstatic.com/cloudssh/images/open-btn.svg">
-</a>
-
-2. Run the prerequisites script to enable APIs and set Cloud Build permissions.
-```
-sh prereq.sh
-```
-
-3. Run the Cloud Build Job
-```
-gcloud builds submit . --config cloudbuild.yaml
-```
