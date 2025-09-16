@@ -1,6 +1,6 @@
 [![banner](../banner.png)](https://cloud.google.com/?utm_source=github&utm_medium=referral&utm_campaign=GCP&utm_content=packages_repository_banner)
 
-# Looker Data Agent Deployment
+# Building a Conversational Analytics Interface with a Looker Agent
 
 ## Introduction
 The Looker Data Agent seamlessly integrates trusted, real-time data into your teams' daily communcation workflows. This guide provides a step-by-step approach to building a conversational analytics interface through connecting Looker with conversational agents in your team's collaboration platforms. Whether you're looking to integrate with Slack, Google Chat, or Microsoft Teams, this solution provides an efficient method to put real-time data insights directly into the flow of your team's work.
