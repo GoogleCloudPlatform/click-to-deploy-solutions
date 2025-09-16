@@ -49,6 +49,12 @@ For more information on managing secrets, see [Creating and Accessing Secrets](h
 
 From the root directory of your project, execute the `prereq.sh` script. This script automates several setup tasks, including enabling necessary Google Cloud APIs, creating a Cloud Storage bucket for Terraform state, and configuring IAM permissions.
 
+To set the Project ID:
+
+```bash
+gcloud config set project PROJECT_ID
+```
+
 To run the script:
 
 ```bash
