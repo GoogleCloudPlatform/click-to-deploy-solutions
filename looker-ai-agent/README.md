@@ -23,7 +23,7 @@ The Looker Agent unlocks a wide range of use cases that drive productivity, stre
 
 
 These are the main components that we would be setting up (to learn more about these products, click on the hyperlinks):
-* [Looker](https://cloud.google.com/looker) :  Empowers data exploration and informed decision-making through a user-friendly interface and powerful visualization capabilities
+* [Looker](https://cloud.google.com/looker):  Empowers data exploration and informed decision-making through a user-friendly interface and powerful visualization capabilities
 * [Cloud Run](https://cloud.google.com/run): Serverless PaaS offering to host containers for web-oriented applications, while offering security, scalability and easy versioning.
 * [Conversational Agents](https://cloud.google.com/conversational-agents): Provides proactive, personalized self service and natural, human-like voices for highly engaging customer experiences.
 
