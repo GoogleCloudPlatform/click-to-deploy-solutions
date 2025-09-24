@@ -93,11 +93,9 @@ If the question is more general discussion related, converse using your own gene
 3.  Locate the agent named **looker-ca-agent**.
 4.  Within the agent settings, you can define your custom instructions and further refine its behavior.
 
-[Placeholder for a picture illustrating Dialogflow Playbook configuration or agent overview]
+![Screen Recording 2025-07-02 at 10 14 13](https://github.com/user-attachments/assets/e783e021-8a3c-4749-a68b-69bc2f2b0f82)
 
 For comprehensive guidance on configuring Dialogflow agents and playbooks, refer to the [Dialogflow Documentation](https://cloud.google.com/dialogflow/docs).
-
-![Screen Recording 2025-07-02 at 10 14 13](https://github.com/user-attachments/assets/e783e021-8a3c-4749-a68b-69bc2f2b0f82)
 
 ## Cleaning up your environment
 
