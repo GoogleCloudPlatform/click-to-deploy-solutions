@@ -8,6 +8,7 @@ This guide provides the steps to deploy the Looker Data Agent application using 
 
 1.  A Google Cloud project. If you don't have one, follow the [Creating and Managing Projects](https://cloud.google.com/resource-manager/docs/creating-managing-projects) guide.
 2.  The `gcloud` command-line tool installed and authenticated. See [Installing the gcloud CLI](https://cloud.google.com/sdk/docs/install) for details.
+3.  A Looker instance. See [this link](https://cloud.google.com/looker) for more information.
 
 ---
 
