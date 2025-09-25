@@ -32,4 +32,4 @@ These are the main components that we would be setting up (to learn more about t
 
 ## Cost
 
-Pricing Estimates - We have created a sample estimate based on some usage we see from new startups looking to scale. This estimate would give you an idea of how much this deployment would essentially cost per month at this scale and you extend it to the scale you further prefer. Here's the [link](https://cloud.google.com/products/calculator/estimate-preview/3de21092-1d49-43bd-8101-d06aa2a54e64?isLegacy=true&e=48754805&hl=en).
+Pricing Estimates - We have created a sample estimate. This estimate would give you an idea of how much this deployment would essentially cost per month at this scale and you extend it to the scale you further prefer. It's important to note that this does not include the costs to a Looker license. Here's the [link](https://cloud.google.com/products/calculator/estimate-preview/CiQzNTI2MjVhMi0wMWNlLTQ2MWQtYjQ3Ny1kNzM3OTRkYjA2MGIQAQ==?e=48754805&hl=en).
