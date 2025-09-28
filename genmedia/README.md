@@ -12,7 +12,7 @@ The Google genMedia package is a powerful, unified suite of generative AI tools 
 
 
 ## Architecture
-<p align="center"><img src="app/images/architecture.png"></p>
+
 The main components that we would be setting up are (to learn more about these products, click on the hyperlinks)
 
 1. [Gemini](https://cloud.google.com/looker) :  Gemini acts as the multimodal foundation model that orchestrates the entire genMedia workflow, providing complex reasoning, prompt understanding, and consistency control across the image (Imagen) and video (Veo) generation processes.
