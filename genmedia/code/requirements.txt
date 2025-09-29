@@ -1,0 +1,8 @@
+# /full/path/to/your-generative-app/requirements.txt
+streamlit
+google-generativeai
+google-cloud-aiplatform
+pillow
+google-genai
+mediapy
+moviepy
