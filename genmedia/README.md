@@ -1,5 +1,5 @@
 [![banner](../banner.png)](https://cloud.google.com/?utm_source=github&utm_medium=referral&utm_campaign=GCP&utm_content=packages_repository_banner)
-# GenMedia
+# Deploy your AI Media Studio
 
 ## Introduction
 The Google genMedia package is a powerful, unified suite of generative AI tools that represents the next evolution of media production, combining Google's most advanced models to create high-quality, multimodal assets from simple prompts. At its core, this package relies on the synergy of three industry-leading technologies: Veo handles state-of-the-art video generation, producing high-fidelity, cinematic clips with native audio from text or existing images; Imagen provides best-in-class image generation, creating detailed, photorealistic static assets and powering precise editing capabilities; and the Gemini foundation model acts as the intelligent orchestrator, applying its multimodal reasoning to manage complex, multi-step creative workflows and ensure consistency across both images and videos. This integration allows creators and developers to move beyond single-asset generation and rapidly produce complete, cohesive campaigns—from product shots to dynamic social media content—all within a single, streamlined process.
