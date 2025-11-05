@@ -32,13 +32,13 @@ Estimated deployment time: 8 mins
 
 1. Click on Open in Google Cloud Shell button below.
 
-<a href="https://ssh.cloud.google.com/cloudshell/editor?cloudshell_git_repo=https://github.com/bigdavros/hero-dev-repo&cloudshell_workspace=/&cloudshell_open_in_editor=README.md" target="_new">
+<a href="https://ssh.cloud.google.com/cloudshell/editor?cloudshell_git_repo=https://github.com/GoogleCloudPlatform/click-to-deploy-solutions/&cloudshell_workspace=/&cloudshell_open_in_editor=README.md" target="_new">
     <img alt="Open in Cloud Shell" src="https://gstatic.com/cloudssh/images/open-btn.svg">
 </a>
 
 2. Run the script to deploy the demo. You will be prompted for variables by the script.
 ```
-sh deploy.sh
+cd recaptcha-demo/ && sh deploy.sh
 ```
 ## Accessing the demo
 
