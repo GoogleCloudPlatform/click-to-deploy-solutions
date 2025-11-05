@@ -191,6 +191,19 @@ echo "Creating service account $SERVICE_ACCOUNT"
 gcloud iam service-accounts create recaptcha-heroes-compute-$SHORTCOMMIT \
   --display-name "reCAPTCHA Heroes Compute Service Account"
 
+echo "Waiting for $SERVICE_ACCOUNT to propagate across IAM global infrastructure"
+
+# The dots provide feedback so the user sees progress. On S/A creation it can take 60
+# seconds for eventual consistency in Google Cloud's Identity and Access Management 
+# (IAM) system. The service account identity must fully propagate across the global 
+# infrastructure before it can be referenced correctly as a member in a project's IAM 
+# policy.
+for i in $(seq 1 60);
+do
+    echo -n "."
+    sleep 1
+done
+
 echo "Granting permissions to $SERVICE_ACCOUNT"
 
 # These are the roles needed to run the build and deploy to cloud run
@@ -199,33 +212,26 @@ declare -a roles=(
    "roles/artifactregistry.writer"
    "roles/cloudbuild.builds.builder"
    "roles/cloudbuild.integrations.owner"
+   "roles/cloudbuild.builds.editor"
    "roles/iam.serviceAccountUser"
    "roles/logging.logWriter"
    "roles/run.developer"
    "roles/storage.objectUser"
 )
 
-# The dots provide feedback so the user sees progress. On S/A creation it can take a
-# little while for the S/A to be ready for permissions assignments after creation, so
-# we wait 10 seconds
-echo -n "."
-sleep 5
-echo -n "."
-sleep 5
-
 # Add the roles
 for role in "${roles[@]}"
 do
-    echo -n "."
+    echo -n "Adding $role"
     # If the adding succeeds then move to the next one. If it fails, retry once then
     # cleanup and quit.
     if gcloud projects add-iam-policy-binding $PROJECT_ID --member=serviceAccount:$SERVICE_ACCOUNT --role="$role" --no-user-output-enabled ; then
-        echo -n "."
+        echo " done"
     else
-        echo "\nRetrying\n"
+        echo "\nFAILED. Retrying...\n"
         sleep 5
         if gcloud projects add-iam-policy-binding $PROJECT_ID --member=serviceAccount:$SERVICE_ACCOUNT --role="$role" --no-user-output-enabled ; then
-            echo -n "."
+            echo " done"
         else
             echo -e "\e[0;31m\nFailed to add required permission to $SERVICE_ACCOUNT: $role\n\e[0m"
             echo "cleaning up"
