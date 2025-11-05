@@ -43,8 +43,8 @@ RUN chown -R tomcat webapps/ work/ temp/ logs/
 RUN rm -rf /opt/tomcat/webapps/ROOT
 
 WORKDIR /
-RUN git clone https://github.com/GoogleCloudPlatform/click-to-deploy-solutions/recaptcha-demo
-RUN cd /click-to-deploy-solutions/recpatcha-demo
+RUN git clone https://github.com/GoogleCloudPlatform/click-to-deploy-solutions
+RUN cd /click-to-deploy-solutions/recaptcha-demo
 RUN mvn package
 RUN mv target/demo-container.war /opt/tomcat/webapps/ROOT.war
 
