@@ -40,19 +40,15 @@ RUN tar xzvf apache-tomcat-9*tar.gz -C /opt/tomcat --strip-components=1
 WORKDIR /opt/tomcat
 RUN chgrp -R tomcat /opt/tomcat
 RUN chown -R tomcat webapps/ work/ temp/ logs/
-
-WORKDIR /
 RUN rm -rf /opt/tomcat/webapps/ROOT
 
+WORKDIR /
+RUN git clone https://github.com/GoogleCloudPlatform/click-to-deploy-solutions/recaptcha-demo
+RUN cd /click-to-deploy-solutions/recpatcha-demo
+RUN mvn package
+RUN mv target/demo-container.war /opt/tomcat/webapps/ROOT.war
+
 ADD target/demo-container.war /demo-container.war
-
-RUN if [ "$dev" = "true" ] ; then \
-    mv demo-container.war /opt/tomcat/webapps/ROOT.war  ; \
-fi 
-
-RUN if [ "$dev" = "false" ] ; then \
-    git clone https://github.com/GoogleCloudPlatform/click-to-deploy-solutions/recaptcha-demo; cd /recpatcha-demo; mvn package; mv target/demo-container.war /opt/tomcat/webapps/ROOT.war; \
-fi
 
 RUN echo "#!/usr/bin/env bash" > /newcatalina.sh
 RUN echo ${projectId} | awk '{print "export PROJECTID="$0}'>> /newcatalina.sh

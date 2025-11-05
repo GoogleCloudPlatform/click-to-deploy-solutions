@@ -208,7 +208,7 @@ do
     sleep 1
 done
 
-echo "Granting permissions to $SERVICE_ACCOUNT"
+echo "\nGranting permissions to $SERVICE_ACCOUNT"
 
 # These are the roles needed to run the build and deploy to cloud run
 # Least privilege applies here. You may alter these permissions as required.
@@ -244,8 +244,6 @@ do
             exit 1
         fi
     fi
-    
-    echo -n "."
     sleep 1
 done
 echo ""
