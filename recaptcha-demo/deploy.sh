@@ -207,8 +207,9 @@ do
     echo -n "."
     sleep 1
 done
+echo "."
 
-echo "\nGranting permissions to $SERVICE_ACCOUNT"
+echo "Granting permissions to $SERVICE_ACCOUNT"
 
 # These are the roles needed to run the build and deploy to cloud run
 # Least privilege applies here. You may alter these permissions as required.
@@ -259,6 +260,7 @@ do
     echo -n "."
     sleep 1
 done
+echo "."
 
 # Create the API key needed by the demo. It should be restricted to the reCAPTCHA service.
 # Fetch the key name for the cleanup script

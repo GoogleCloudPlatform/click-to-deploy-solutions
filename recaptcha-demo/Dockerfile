@@ -48,8 +48,6 @@ WORKDIR /click-to-deploy-solutions/recaptcha-demo
 RUN mvn package
 RUN mv target/demo-container.war /opt/tomcat/webapps/ROOT.war
 
-ADD target/demo-container.war /demo-container.war
-
 RUN echo "#!/usr/bin/env bash" > /newcatalina.sh
 RUN echo ${projectId} | awk '{print "export PROJECTID="$0}'>> /newcatalina.sh
 RUN echo ${comitid} | awk '{print "export COMMITID="$0}'>> /newcatalina.sh
