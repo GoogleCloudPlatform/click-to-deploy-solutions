@@ -224,17 +224,6 @@ declare -a roles=(
    "roles/storage.objectViewer"
 )
 
-# The dots provide feedback so the user sees progress. On S/A creation it can take 60
-# seconds for eventual consistency in Google Cloud's Identity and Access Management 
-# (IAM) system. The service account identity must fully propagate across the global 
-# infrastructure before it can be referenced correctly as a member in a project's IAM 
-# policy.
-for i in $(seq 1 60);
-do
-    echo -n "."
-    sleep 1
-done
-
 # Add the roles
 for role in "${roles[@]}"
 do
@@ -260,6 +249,16 @@ do
 done
 
 echo "Waiting for $SERVICE_ACCOUNT permissions to propagate across IAM global infrastructure"
+# The dots provide feedback so the user sees progress. On S/A creation it can take 60
+# seconds for eventual consistency in Google Cloud's Identity and Access Management 
+# (IAM) system. The service account identity must fully propagate across the global 
+# infrastructure before it can be referenced correctly as a member in a project's IAM 
+# policy.
+for i in $(seq 1 60);
+do
+    echo -n "."
+    sleep 1
+done
 
 # Create the API key needed by the demo. It should be restricted to the reCAPTCHA service.
 # Fetch the key name for the cleanup script
