@@ -221,6 +221,7 @@ declare -a roles=(
    "roles/logging.logWriter"
    "roles/run.developer"
    "roles/storage.objectUser"
+   "roles/storage.objectViewer"
 )
 
 # Add the roles
