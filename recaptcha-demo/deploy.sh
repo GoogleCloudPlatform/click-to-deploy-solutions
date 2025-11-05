@@ -11,7 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
+gcloud services enable compute.googleapis.com 
 # This variable is used to rename files that may otherwise be overwritten 
 START=$(date +%s)
 
