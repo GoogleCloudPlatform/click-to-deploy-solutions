@@ -124,6 +124,10 @@ echo -n "Checking region: "
 if [ -z "$REGION" ] 
 then
     echo "Region not set"
+    CURRENT_EMAIL=$(gcloud config get-value account)
+    gcloud projects add-iam-policy-binding secops-demo-env \
+    --member="$CURRENT_EMAIL" \
+    --role="roles/compute.viewer"
     select_region
 fi
 
