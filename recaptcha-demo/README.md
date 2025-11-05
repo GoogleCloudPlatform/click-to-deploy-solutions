@@ -38,7 +38,7 @@ Estimated deployment time: 8 mins
 
 2. Run the script to deploy the demo. You will be prompted for variables by the script.
 ```
-sh click-to-deploy-solutions/recaptcha-demo/deploy.sh
+cd recaptcha-demo/ && sh deploy.sh
 ```
 ## Accessing the demo
 
