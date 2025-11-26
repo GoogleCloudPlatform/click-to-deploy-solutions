@@ -1,6 +1,6 @@
 Flask==2.3.3
 flask_apscheduler
-requests==2.32.2
+requests==2.32.4
 faker
 google-cloud-logging
 debugpy # Required for debugging.
