@@ -38,6 +38,7 @@ In the catalog below you will find all solutions ready to deploy, click on it an
 
 ### Security, Logging & Monitoring
 - [Protect applications with Cloud Armor](./cloud-armor-demo/)
+- [Protect applications with reCAPTCHA](./recaptcha-demo/)
 
 ### Industry Package
 - [Serverless Address Validation using Apigee and Google Maps](./address-validation-maps-apigee/)
