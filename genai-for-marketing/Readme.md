@@ -1,5 +1,5 @@
 [![banner](../banner.png)](https://cloud.google.com/?utm_source=github&utm_medium=referral&utm_campaign=GCP&utm_content=packages_repository_banner)
-# GenAI for Marketing
+# Marketing Campaign Generation using Google Cloud
 
 ## Introduction
 This architecture harnesses generative AI to empower marketing initiatives, leveraging a diverse set of Google Cloud components to fuel content creation, data analysis, and campaign optimization.  It illustrates how large language models (LLMs) like Gemini can be used to generate various types of marketing content, including ad copy, social media posts, and product descriptions.

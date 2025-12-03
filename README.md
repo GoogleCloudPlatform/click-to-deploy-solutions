@@ -13,8 +13,8 @@ In the catalog below you will find all solutions ready to deploy, click on it an
 - [Identify Objects from Images using AI](./object-localization/)
 - [Perform Sentiment Analysis on your Text Data using Google Cloud](./nlp-sentiment-analysis/)
 - [Identify and classify keywords from text data using AI](./text-classification)
-- [GenAI for marketing](./genai-for-marke[ting/)
-- [GenMedia](./genmedia)  
+- [Marketing Campaign Generation using Google Cloud](./genai-for-marketing/)
+- [Deploy Your AI Media Studio](./genmedia/)
 
 ### Application Modernization
 - [Host a Serverless Wordpress Site with Cloud Run](./wordpress-on-cloudrun/)
