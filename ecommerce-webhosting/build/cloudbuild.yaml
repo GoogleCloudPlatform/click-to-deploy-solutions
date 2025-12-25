@@ -43,7 +43,7 @@ steps:
   args: 
   - '-c'
   - | 
-    gsutil rsync -r images gs://ecommerce-$PROJECT_ID/assets/images
+    gcloud storage rsync --recursive images gs://ecommerce-$PROJECT_ID/assets/images
 
 options:
   env:
