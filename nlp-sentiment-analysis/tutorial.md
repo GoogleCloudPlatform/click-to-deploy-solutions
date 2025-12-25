@@ -67,7 +67,7 @@ Next we are going to test the architecture and finally clean up your environment
 Once you deployed the solution successfully, upload the form.pdf to the input bucket using either Cloud Console or gsutil.
 
 ```bash
-gsutil cp assets/form.pdf gs://<YOUR PROJECT NAME>-sentiment-analysis_input
+gcloud storage cp assets/form.pdf gs://<YOUR PROJECT NAME>-sentiment-analysis_input
 ```
 
 Then, check the parsed results in the output bucket in json (Key=value) format.

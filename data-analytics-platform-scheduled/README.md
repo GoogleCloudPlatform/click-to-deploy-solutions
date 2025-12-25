@@ -66,9 +66,9 @@ Once it is finished, you can go to [Cloud Composer](https://console.cloud.google
 
 
 ## Testing the architecture
-After you deployed the solution, you can test it by loading the sample file from this repository to the Data Lake bucket by running the `gsutil` command below, or using the console.
+After you deployed the solution, you can test it by loading the sample file from this repository to the Data Lake bucket by running the `gcloud storage` command below, or using the console.
 ```
-gsutil cp sample_data/order_events_001.csv gs://your-upload-bucket/order-events/
+gcloud storage cp sample_data/order_events_001.csv gs://your-upload-bucket/order-events/
 ```
 
 Then, check the uploaded data on BigQuery > ecommerce dataset > order_events table.

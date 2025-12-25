@@ -69,7 +69,7 @@ Once you deployed the solution successfully, upload an image to the image bucket
 For example, you can download this <a href="https://cloud.google.com/static/vision/docs/images/bicycle.jpg"> image </a>, and upload it to GCS using the command below. Note you must to replace the bucket name.
 
 ```bash
-gsutil cp bicycle.jpg gs://<YOUR PROJECT NAME>-images
+gcloud storage cp bicycle.jpg gs://<YOUR PROJECT NAME>-images
 ```
 
 Then, you can check the object localization results into a JSON file in the output bucket:

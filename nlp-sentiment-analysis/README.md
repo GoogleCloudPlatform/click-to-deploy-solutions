@@ -63,7 +63,7 @@ Once you have deployed the solution successfully, upload the text file from the 
 Execute the command below to copy the file to the input bucket
 ```
 PROJECT_NAME=$(gcloud config get-value project)
-gsutil cp assets/test.txt gs://$PROJECT_NAME-sentiment-analysis
+gcloud storage cp assets/test.txt gs://$PROJECT_NAME-sentiment-analysis
 ```
 
 Then, check the parsed results in the output bucket in json (Key=value) format.
@@ -88,4 +88,3 @@ gcloud builds submit . --config cloudbuild_destroy.yaml
 ```
 
 This is not an official Google product.
-

@@ -54,7 +54,7 @@ You can copy the example files from .`/app/demo-data` into the GCS bucket by
 running:
 
 ```bash
-gsutil cp -r ./app/demo-data/* gs://$PROJECT_ID-data/
+gcloud storage cp --recursive ./app/demo-data/* gs://$PROJECT_ID-data/
 ```
 
 After completion, the three essential files required to execute the Dataflow Job
