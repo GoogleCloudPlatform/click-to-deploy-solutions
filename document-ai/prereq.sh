@@ -32,11 +32,11 @@ fi
 
 echo Running prerequisites on project $PROJECT_ID
 BUCKET_NAME=gs://$PROJECT_ID-tf-state
-if gsutil ls $BUCKET_NAME; then
+if gcloud storage ls $BUCKET_NAME; then
     echo Terraform bucket already created!
 else
     echo Creating Terraform state bucket...
-    gsutil mb $BUCKET_NAME
+    gcloud storage buckets create $BUCKET_NAME
 fi
 
 echo Enabling required APIs...
@@ -71,7 +71,7 @@ add_iam_member $MEMBER_COMPUTE roles/storage.objectAdmin
 add_iam_member $MEMBER_COMPUTE roles/iam.securityAdmin
 
 echo "Granting Cloud Storage's Service Account permissions required by EventArc..."
-GCS_SERVICE_ACCOUNT="$(gsutil kms serviceaccount -p $PROJECT_ID)"
+GCS_SERVICE_ACCOUNT="$(gcloud storage service-agent --project $PROJECT_ID)"
 MEMBER=serviceAccount:$GCS_SERVICE_ACCOUNT
 add_iam_member $MEMBER roles/pubsub.publisher
 
