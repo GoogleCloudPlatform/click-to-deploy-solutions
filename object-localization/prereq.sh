@@ -31,11 +31,11 @@ else
 fi
 
 BUCKET_NAME=gs://$PROJECT_ID-tf-state
-if gsutil ls $BUCKET_NAME; then
+if gcloud storage ls $BUCKET_NAME; then
     echo Terraform bucket already created!
 else
     echo Creating Terraform state bucket...
-    gsutil mb $BUCKET_NAME
+    gcloud storage buckets create $BUCKET_NAME
 fi
 
 echo Enabling required APIs...

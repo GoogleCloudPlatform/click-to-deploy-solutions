@@ -36,10 +36,10 @@ steps:
   - '-c'
   - | 
     gunzip citibike.sql.gz
-    gsutil cp citibike.sql gs://$PROJECT_ID-sql-backup
+    gcloud storage cp citibike.sql gs://$PROJECT_ID-sql-backup
     export DATABASE_INSTANCE=$(gcloud sql instances list --format='value(name)' --filter='labels.solution:cloud-composer-etl')
     export SERVICE_ACCOUNT=$(gcloud sql instances describe $$DATABASE_INSTANCE --format='value(serviceAccountEmailAddress)')
-    gsutil iam ch serviceAccount:$$SERVICE_ACCOUNT:objectAdmin gs://$PROJECT_ID-sql-backup
+    gcloud storage buckets add-iam-policy-binding gs://$PROJECT_ID-sql-backup --member=serviceAccount:$$SERVICE_ACCOUNT --role=objectAdmin
   dir: sql
 - id: 'upload dags'
   name: 'gcr.io/cloud-builders/gcloud-slim'
@@ -48,7 +48,7 @@ steps:
   - '-c'
   - | 
     export COMPOSER_BUCKET=$(gcloud composer environments describe composer-af2 --location $$REGION --format='value(config.dagGcsPrefix)')
-    gsutil cp * $$COMPOSER_BUCKET
+    gcloud storage cp * $$COMPOSER_BUCKET
   dir: dags
 options:
   env:
