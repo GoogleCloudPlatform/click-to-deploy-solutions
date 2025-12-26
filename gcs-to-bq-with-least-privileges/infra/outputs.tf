@@ -42,6 +42,7 @@ output "service_accounts" {
 
 output "command_01_gcs" {
   description = "gcloud command to copy data into the created bucket impersonating the service account."
+  # The gsutil top-level flag '-i' is not supported by the migration guide. The command has been left untranslated.
   value       = "gsutil -i ${module.service-account-landing.email} cp data-demo/* ${module.gcs-data.url}"
 }
 

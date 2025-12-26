@@ -68,11 +68,11 @@ If you face a problem with the EventArc API during the deployment, please check 
 
 ## Testing the architecture 
 
-Once you deployed the solution successfully, upload an image to the image bucket using either Cloud Console or `gsutil`.
+Once you deployed the solution successfully, upload an image to the image bucket using either Cloud Console or `gcloud storage`.
 
 For example, you can download [this image](https://cloud.google.com/static/vision/docs/images/bicycle.jpg), and upload it to GCS using the command below. Note you must to replace the bucket name.
 ```
-gsutil cp bicycle.jpg gs://<YOUR PROJECT NAME>-images
+gcloud storage cp bicycle.jpg gs://<YOUR PROJECT NAME>-images
 ```
 
 Then, you can check the object localization results into a JSON file in the output bucket:
@@ -106,4 +106,3 @@ It happens because the Eventarc permissions take some time to propagate. First, 
 ## Useful links
 - [Form Parsing with Object Detection](https://codelabs.developers.google.com/codelabs/docai-form-parser-v1-python#0)
 - [Use a Object Detection para processar seus formulários escritos à mão de maneira inteligente (Python)](https://codelabs.developers.google.com/codelabs/docai-form-parser-v3-python?hl=pt-br#0) (Portuguese)
-

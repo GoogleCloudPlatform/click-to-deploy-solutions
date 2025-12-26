@@ -67,7 +67,7 @@ If you face a problem with the EventArc API during the deployment, please check 
 
 Once you deployed the solution successfully, upload the `form.pdf` to the input bucket using either Cloud Console or `gsutil`.
 ```
-gsutil cp assets/form.pdf gs://<YOUR PROJECT NAME>-doc-ai-form-input
+gcloud storage cp assets/form.pdf gs://<YOUR PROJECT NAME>-doc-ai-form-input
 ```
 
 Then, check the parsed results in the output bucket in text (OCR) and json (Key=value) formats
@@ -100,4 +100,3 @@ It happens because the Eventarc permissions take some time to propagate. First, 
 ## Useful links
 - [Form Parsing with Document AI](https://codelabs.developers.google.com/codelabs/docai-form-parser-v1-python#0)
 - [Use a Document AI para processar seus formulários escritos à mão de maneira inteligente (Python)](https://codelabs.developers.google.com/codelabs/docai-form-parser-v3-python?hl=pt-br#0) (Portuguese)
-
