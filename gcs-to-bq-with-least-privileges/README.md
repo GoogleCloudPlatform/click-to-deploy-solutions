@@ -175,7 +175,7 @@ An example of those files can be found in the folder `./app/demo-data` inside th
 You can copy the example files into the GCS bucket by running:
 
 ```bash
-gsutil cp -r ./app/demo-data/* gs://$PROJECT_ID-data/
+gcloud storage cp --recursive ./app/demo-data/* gs://$PROJECT_ID-data/
 ```
 
 After completion, the three essential files required to execute the Dataflow Job
