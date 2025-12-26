@@ -40,6 +40,14 @@ else
    export PROJECT_ID=$GOOGLE_CLOUD_PROJECT
 fi
 
+# Determine region dynamically from gcloud config (must be set by user)
+REGION=$(gcloud config get-value compute/region 2>/dev/null)
+if [ -z "$REGION" ]; then
+  echo "No default compute/region set. Please set one with:"
+  echo "  gcloud config set compute/region REGION"
+  exit 1
+fi
+
 echo Running prerequisites on project $PROJECT_ID
 BUCKET_NAME=gs://$PROJECT_ID-tf-state
 if gcloud storage ls $BUCKET_NAME; then
@@ -133,15 +141,14 @@ add_secret_accessor "$LOOKER_AGENT_CONFIG" "$COMPUTEMEMBER"
 add_secret_accessor "$LOOKER_AGENT_CONFIG" "$CUSTOMSAMEMBER"
 # ---------------------------------------------------
 
-
 echo "Creating artifact registry repository"
-if gcloud artifacts repositories describe cloud-run-source-deploy --location=us-central1 --project="$PROJECT_ID" &> /dev/null; then
+if gcloud artifacts repositories describe cloud-run-source-deploy --location="$REGION" --project="$PROJECT_ID" &> /dev/null; then
     echo "Repository 'cloud-run-source-deploy' already exists."
 else
     echo "Creating Artifact Registry repository 'cloud-run-source-deploy'..."
-    gcloud artifacts repositories create cloud-run-source-deploy --repository-format=docker --location=us-central1 --async
+    gcloud artifacts repositories create cloud-run-source-deploy --repository-format=docker --location="$REGION" --async
 fi
 
-gcloud builds submit --config ./build/cloudbuild.yaml --region us-central1
+gcloud builds submit --config ./build/cloudbuild.yaml --region "$REGION"
 
 echo Script completed successfully!
