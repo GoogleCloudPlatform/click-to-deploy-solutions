@@ -17,7 +17,168 @@
 Utility module for Codey releated demo.
 """
 
+import re
 from google.cloud import bigquery
+
+_DEFAULT_ALLOWED_TABLES = frozenset({"customers", "events", "transactions"})
+
+_FORBIDDEN_SQL_KEYWORDS = frozenset({
+    "ALTER",
+    "ASSERT",
+    "BEGIN",
+    "CALL",
+    "CLONE",
+    "COMMIT",
+    "COPY",
+    "CREATE",
+    "DECLARE",
+    "DELETE",
+    "DROP",
+    "EXCEPT",
+    "EXEC",
+    "EXECUTE",
+    "EXPORT",
+    "EXTERNAL_QUERY",
+    "GRANT",
+    "IMMEDIATE",
+    "IMPORT",
+    "INFORMATION_SCHEMA",
+    "INSERT",
+    "INTERSECT",
+    "INTO",
+    "LOAD",
+    "MERGE",
+    "OVERWRITE",
+    "PROCEDURE",
+    "RAISE",
+    "RENAME",
+    "REPLACE",
+    "REVOKE",
+    "ROLLBACK",
+    "SCRIPT",
+    "SESSION_USER",
+    "SET",
+    "SHOW",
+    "SYSTEM_USER",
+    "TRANSACTION",
+    "TRUNCATE",
+    "UNDROP",
+    "UNION",
+    "UPDATE",
+    "VALUES",
+})
+
+_PROMPT_INJECTION_PATTERNS = re.compile(
+    r"(?:"
+    r"ignore\s+(?:all\s+)?(?:previous|prior|above)\s+instructions"
+    r"|disregard\s+(?:all\s+)?(?:previous|prior|above)\s+instructions"
+    r"|generate\s+the\s+exact\s+sql"
+    r"|\[Q\]\s*:|\[SQL\]\s*:"
+    r")",
+    re.IGNORECASE,
+)
+
+
+def validate_question(question: str) -> str:
+    """Validates a natural-language question against prompt and SQL injection."""
+    if not isinstance(question, str) or not question.strip():
+        raise ValueError("Question must be a non-empty string.")
+    cleaned = question.strip()
+    if len(cleaned) > 500:
+        raise ValueError("Question exceeds maximum allowed length.")
+    if _PROMPT_INJECTION_PATTERNS.search(cleaned):
+        raise ValueError("Invalid question: potential prompt injection detected.")
+    if ";" in cleaned or "--" in cleaned or "/*" in cleaned or "*/" in cleaned:
+        raise ValueError("Invalid question: SQL metacharacters are not allowed.")
+    return cleaned
+
+
+def validate_sql_query(
+        sql: str,
+        project_id: str = "",
+        dataset_id: str = "",
+        allowed_tables: set[str] | frozenset[str] | None = None,
+) -> str:
+    """Validates that an LLM-generated SQL string is a safe, single SELECT query."""
+    if not isinstance(sql, str) or not sql.strip():
+        raise ValueError("Generated SQL query is empty.")
+
+    cleaned = sql.replace("```sql", "").replace("```", "").strip()
+    if "--" in cleaned or "/*" in cleaned or "*/" in cleaned:
+        raise ValueError("SQL comments are not allowed in generated queries.")
+
+    cleaned = re.sub(
+        r"^(?:sql\b|\[SQL\]\s*:)\s*", "", cleaned, flags=re.IGNORECASE
+    ).strip()
+
+    if not re.match(r"^SELECT\b", cleaned, flags=re.IGNORECASE):
+        raise ValueError("Only SELECT queries are allowed.")
+
+    if cleaned.endswith(";"):
+        cleaned = cleaned[:-1].strip()
+    if ";" in cleaned:
+        raise ValueError("Multiple SQL statements are not allowed.")
+
+    masked = re.sub(r"'[^']*'|\"[^\"]*\"", "''", cleaned)
+    if "#" in masked or ";" in masked:
+        raise ValueError("Disallowed SQL comment or statement separator detected.")
+
+    for token in re.findall(r"\b[A-Za-z_][A-Za-z0-9_]*\b", masked):
+        if token.upper() in _FORBIDDEN_SQL_KEYWORDS:
+            raise ValueError(f"Disallowed SQL keyword detected: {token}")
+
+    sql_no_extract = re.sub(
+        r"\bEXTRACT\s*\([^)]*\)", "", masked, flags=re.IGNORECASE
+    )
+    if re.search(
+        r"\bFROM\s+(?:`[^`]+`|[A-Za-z0-9_.-]+)(?:\s+(?:AS\s+)?[A-Za-z0-9_]+)?\s*,",
+        sql_no_extract,
+        flags=re.IGNORECASE,
+    ):
+        raise ValueError("Comma joins are not allowed; use explicit JOIN clauses.")
+
+    table_refs = re.findall(
+        r"\b(?:FROM|JOIN)\s+(`[^`]+`|[A-Za-z0-9_.-]+)",
+        sql_no_extract,
+        flags=re.IGNORECASE,
+    )
+    if not table_refs:
+        raise ValueError("SQL query must reference at least one allowed table.")
+
+    valid_tables = {
+        t.lower() for t in (allowed_tables or _DEFAULT_ALLOWED_TABLES)
+    }
+    for raw_ref in table_refs:
+        ref = raw_ref.strip("`").strip()
+        parts = [p.strip("`").strip() for p in ref.split(".")]
+        if len(parts) == 3:
+            proj, dset, tbl = parts
+            if project_id and proj != project_id:
+                raise ValueError(
+                    f"Unauthorized project in table reference: {raw_ref}"
+                )
+            if dataset_id and dset != dataset_id:
+                raise ValueError(
+                    f"Unauthorized dataset in table reference: {raw_ref}"
+                )
+            if tbl.lower() not in valid_tables:
+                raise ValueError(f"Unauthorized table in query: {raw_ref}")
+        elif len(parts) == 2:
+            dset, tbl = parts
+            if dataset_id and dset != dataset_id:
+                raise ValueError(
+                    f"Unauthorized dataset in table reference: {raw_ref}"
+                )
+            if tbl.lower() not in valid_tables:
+                raise ValueError(f"Unauthorized table in query: {raw_ref}")
+        elif len(parts) == 1:
+            tbl = parts[0]
+            if tbl.lower() not in valid_tables:
+                raise ValueError(f"Unauthorized table in query: {raw_ref}")
+        else:
+            raise ValueError(f"Invalid table reference in query: {raw_ref}")
+
+    return cleaned
 
 
 def get_tags_from_table(
@@ -157,13 +318,14 @@ def generate_prompt(
     Returns:
         The prompt.
     """
+    cleaned_question = validate_question(question)
     PROMPT_PROJECT_ID = [project_id]*7
     context = ''
     for i in metadata:
         context += i
 
     return (f"{prompt.format(context,*PROMPT_PROJECT_ID)} \n"
-             f"[Q]: {question} \n"
+             f"[Q]: {cleaned_question} \n"
              "[SQL]:")
 
 
@@ -198,6 +360,7 @@ def generate_sql_and_query(
         NotFoundError: If the dataset or table is not found.
         BadRequestError: If the query is invalid.
     """
+    cleaned_question = validate_question(question)
 
     metadata = get_metadata_from_dataset(
         bqclient=bqclient,
@@ -208,17 +371,21 @@ def generate_sql_and_query(
         tag_template_name=tag_template_name)
 
     prompt = generate_prompt(
-        question, 
+        cleaned_question, 
         metadata,
         prompt_template,
         project_id)
 
-    gen_code = llm.predict(
+    raw_output = llm.predict(
         prompt = prompt,
         max_output_tokens = 1024,
         temperature=0.3
-    ).text.replace("```","")
-    gen_code = gen_code[gen_code.find("SELECT"):]
+    ).text
+    gen_code = validate_sql_query(
+        raw_output,
+        project_id=project_id,
+        dataset_id=dataset_id,
+    )
     result = []
     result_job = bqclient.query(gen_code)
     for row in result_job:
