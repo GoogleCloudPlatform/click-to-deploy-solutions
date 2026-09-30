@@ -18,5 +18,5 @@ opencv-python
 segment-anything 
 streamlit-drawable-canvas 
 vertexai 
-python-dotenv==1.0.1
+python-dotenv==1.2.2
 PyJWT==2.8.0
