@@ -44,16 +44,27 @@ def to_serializable(val):
 
 def verify_auth_token(id_token):
     # Verify Firebase auth.
+    audience = os.environ.get("GOOGLE_CLOUD_PROJECT") or config["global"]["project_id"]
     claims = google.oauth2.id_token.verify_firebase_token(
-        id_token, HTTP_REQUEST, audience=os.environ.get("GOOGLE_CLOUD_PROJECT")
+        id_token, HTTP_REQUEST, audience=audience
     )
-    if not claims:
-        return "000"
-    
+    if not claims or not claims.get("sub"):
+        raise ValueError("Invalid or missing authentication token")
+
     user_id = claims['sub']
     friendly_id = claims.get("name", claims.get("email", "Unknown"))
     print(friendly_id)
     return user_id
+
+def user_owns_folder(user_id: str, folder_id: str) -> bool:
+    """Return True if folder_id belongs to one of the user's campaigns."""
+    campaign_col = db.collection("users").document(user_id).collection("campaigns").stream()
+    for campaign in campaign_col:
+        camp_dict = campaign.to_dict() or {}
+        workspace_assets = camp_dict.get("workspace_assets") or {}
+        if workspace_assets.get("new_folder_id") == folder_id:
+            return True
+    return False
 
 def create_campaign(user_id,campaign:Campaign):
     user_ref = db.collection("users").document(user_id)
@@ -107,4 +118,3 @@ def delete_campaign(user_id,campaign_id):
         camp_ref.delete()
         return f"{campaign_id} Campaign is deleted."
     return f"{campaign_id} Campaign does not exists."
-
