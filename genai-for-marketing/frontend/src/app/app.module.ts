@@ -15,7 +15,8 @@ import { UserJourneyComponent } from './user-journey/user-journey.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { ToggelButtonsComponent } from './toggel-buttons/toggel-buttons.component';
 import { ArchitectureDiagramComponent } from './architecture-diagram/architecture-diagram.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { AuthInterceptor } from './services/auth.interceptor';
 import { CampaignListComponent } from './campaign-list/campaign-list.component';
 import { MaterialModule } from './material/material.module';
 import { NgxDocViewerModule } from 'ngx-doc-viewer';
@@ -156,6 +157,11 @@ const fireBaseConfig = environment.firebaseConfig
       provideFirestore(() => getFirestore()),
       provideAuth(() => getAuth()),
       ]),
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    },
     CustomerService,
     DatePipe
   ],
