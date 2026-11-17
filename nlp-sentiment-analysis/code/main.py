@@ -10,15 +10,12 @@ def process_document(bucket_name, object_name):
     print("Document processing started.")
     language_client = language_v2.LanguageServiceClient()
     storage_client = storage.Client()
-    
-    file_path = f"/tmp/{object_name}"
 
-    print(f"Downloading document to: {file_path}")
+    # Download file directly into memory to avoid local path traversal
+    print(f"Downloading document: gs://{bucket_name}/{object_name}")
     bucket = storage_client.get_bucket(bucket_name)
     blob = bucket.blob(object_name)
-    blob.download_to_filename(file_path)
-    with open(file_path, "r") as text_file:
-        document_content = text_file.read()
+    document_content = blob.download_as_text()
 
     print("Performing sentiment analysis...")
     document = language_v2.Document(content=document_content, type_=language_v2.Document.Type.PLAIN_TEXT)
