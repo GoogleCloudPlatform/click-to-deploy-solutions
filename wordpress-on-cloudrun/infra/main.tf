@@ -40,12 +40,46 @@ resource "random_password" "wp_password" {
   length = 8
 }
 
+resource "google_service_account" "cloud_run" {
+  project      = var.project_id
+  account_id   = "cr-wordpress"
+  display_name = "Cloud Run WordPress Service Account"
+}
+
+resource "google_project_iam_member" "cloudsql_client" {
+  project = var.project_id
+  role    = "roles/cloudsql.client"
+  member  = "serviceAccount:${google_service_account.cloud_run.email}"
+}
+
+resource "google_secret_manager_secret" "wordpress_db_password" {
+  project   = var.project_id
+  secret_id = "wordpress-db-password"
+
+  replication {
+    auto {}
+  }
+}
+
+resource "google_secret_manager_secret_version" "wordpress_db_password" {
+  secret      = google_secret_manager_secret.wordpress_db_password.id
+  secret_data = var.cloudsql_password == null ? module.cloudsql.user_passwords[local.cloudsql_conf.user] : var.cloudsql_password
+}
+
+resource "google_secret_manager_secret_iam_member" "wordpress_db_password_accessor" {
+  project   = var.project_id
+  secret_id = google_secret_manager_secret.wordpress_db_password.secret_id
+  role      = "roles/secretmanager.secretAccessor"
+  member    = "serviceAccount:${google_service_account.cloud_run.email}"
+}
+
 # create the Cloud Run service
 module "cloud_run" {
-  source     = "github.com/GoogleCloudPlatform/cloud-foundation-fabric//modules/cloud-run?ref=v40.1.0"
-  project_id = var.project_id
-  name       = "cr-wordpress"
-  region     = var.region
+  source          = "github.com/GoogleCloudPlatform/cloud-foundation-fabric//modules/cloud-run?ref=v40.1.0"
+  project_id      = var.project_id
+  name            = "cr-wordpress"
+  region          = var.region
+  service_account = google_service_account.cloud_run.email
 
   containers = {
     wordpress = {
@@ -62,7 +96,12 @@ module "cloud_run" {
         "WORDPRESS_DB_HOST" : module.cloudsql.ip
         "WORDPRESS_DB_NAME" : local.cloudsql_conf.db
         "WORDPRESS_DB_USER" : local.cloudsql_conf.user
-        "WORDPRESS_DB_PASSWORD" : var.cloudsql_password == null ? module.cloudsql.user_passwords[local.cloudsql_conf.user] : var.cloudsql_password
+      }
+      env_from_key = {
+        "WORDPRESS_DB_PASSWORD" = {
+          name = google_secret_manager_secret.wordpress_db_password.secret_id
+          key  = "latest"
+        }
       }
     }
   }
@@ -84,4 +123,10 @@ module "cloud_run" {
     #vpcaccess_connector = local.connector
   }
   ingress_settings = "all"
+
+  depends_on = [
+    google_secret_manager_secret_version.wordpress_db_password,
+    google_secret_manager_secret_iam_member.wordpress_db_password_accessor,
+    google_project_iam_member.cloudsql_client,
+  ]
 }
