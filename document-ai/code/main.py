@@ -9,17 +9,12 @@ def process_document(bucket_name, object_name):
     print("Document processing started.")
     client = documentai_v1beta3.DocumentProcessorServiceClient()
 
-    # Download file
-    file_path = "/tmp/{}".format(object_name)
-    print("download document to..."+file_path)
+    # Download file directly into memory to avoid local path traversal
+    print(f"Downloading document gs://{bucket_name}/{object_name}...")
     storage_client = storage.Client()
     bucket = storage_client.get_bucket(bucket_name)
     blob = bucket.blob(object_name)
-    blob.download_to_filename(file_path)
-
-    # Read the file into memory
-    with open(file_path, "rb") as image:
-        image_content = image.read()
+    image_content = blob.download_as_bytes()
     # Set the document content in the request
     document = {"content": image_content, "mime_type": blob.content_type}
 
