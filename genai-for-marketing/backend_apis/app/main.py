@@ -57,7 +57,6 @@ from .body_schema import (
     ImageEditRequest,
     ImageGenerateResponse,
     TrendTopReponse,
-    NewsSummaryRequest,
     NewsSummaryResponse,
     AudiencesRequest,
     AudiencesResponse,
@@ -480,14 +479,20 @@ def get_top_search_term(trends_date: str
         top_search_terms: list[dict[int, str]]
     """
     try:
+        parsed_date = datetime.strptime(trends_date, "%Y-%m-%d").date()
         query = (
             "SELECT term, rank "
             "FROM `bigquery-public-data.google_trends.top_terms` "
-            f"WHERE refresh_date = '{trends_date}' "
+            "WHERE refresh_date = @trends_date "
             "GROUP BY 1,2 "
             "ORDER by rank ASC"
         )
-        query_job = bq_client.query(query, location="US")
+        job_config = bigquery.QueryJobConfig(
+            query_parameters=[
+                bigquery.ScalarQueryParameter("trends_date", "DATE", parsed_date)
+            ]
+        )
+        query_job = bq_client.query(query, job_config=job_config, location="US")
         trends = [
             {"rank": i[1], "term":i[0]}
                 for i in query_job.result()
