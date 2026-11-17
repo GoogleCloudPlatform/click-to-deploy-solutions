@@ -24,7 +24,8 @@ from . import utils_trendspotting as trendspotting
 from . import utils_prompt
 from . import bulk_email_util
 from datetime import datetime, timedelta
-from fastapi import FastAPI, HTTPException, UploadFile, Request, APIRouter
+from fastapi import FastAPI, HTTPException, UploadFile, Request, APIRouter, Depends, status
+from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse, FileResponse
 from fastapi.staticfiles import StaticFiles
@@ -158,7 +159,41 @@ HEADLINE_PROMPT_TEMPLATE = config["prompts"]["headline_prompt_template"]
 LONG_HEADLINE_PROMPT_TEMPLATE = config["prompts"]["load_headline_prompt_template"]
 DESCRIPTION_PROMPT_TEMPLATE = config["prompts"]["description_prompt_template"]
 
-router = APIRouter(prefix="/marketing-api")
+security = HTTPBearer(auto_error=False)
+
+
+def get_current_user(
+    credentials: HTTPAuthorizationCredentials | None = Depends(security),
+) -> str:
+    """Verify the Firebase ID token from the Authorization header."""
+    if credentials is None or credentials.scheme.lower() != "bearer":
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Missing or invalid Authorization header",
+        )
+    try:
+        return utils_firebase.verify_auth_token(credentials.credentials)
+    except Exception:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Invalid or expired authentication token",
+        )
+
+
+def verify_user_access(
+    user_id: str,
+    current_user_id: str = Depends(get_current_user),
+) -> str:
+    """Ensure the authenticated user matches the requested user_id."""
+    if user_id != current_user_id:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Forbidden: cannot access another user's resources",
+        )
+    return current_user_id
+
+
+router = APIRouter(prefix="/marketing-api", dependencies=[Depends(get_current_user)])
 app = FastAPI(docs_url="/marketing-api/docs")
 
 app.add_middleware(
@@ -172,8 +207,11 @@ app.add_middleware(
 
 # create-campaign
 @router.post("/users/{user_id}/campaigns")
-def create_campaign(user_id: str,data: CampaignCreateRequest
-                    ) -> CampaignCreateResponse:
+def create_campaign(
+    user_id: str,
+    data: CampaignCreateRequest,
+    _: str = Depends(verify_user_access),
+) -> CampaignCreateResponse:
     """Campaing Creation and content generation with PaLM API
         Parameters:
             user_id: str
@@ -263,7 +301,10 @@ def create_campaign(user_id: str,data: CampaignCreateRequest
 
 # List-campaigns
 @router.get("/users/{user_id}/campaigns")
-async def list_campaigns(user_id: str) -> CampaignListResponse:
+async def list_campaigns(
+    user_id: str,
+    _: str = Depends(verify_user_access),
+) -> CampaignListResponse:
     """
     List Existing Campaign for logged in user
     """
@@ -273,7 +314,11 @@ async def list_campaigns(user_id: str) -> CampaignListResponse:
 
 # get-campaign
 @router.get("/users/{user_id}/campaigns/{campaign_id}")
-async def get_campaign(user_id: str,campaign_id:str) -> Campaign:
+async def get_campaign(
+    user_id: str,
+    campaign_id: str,
+    _: str = Depends(verify_user_access),
+) -> Campaign:
     """
     List Existing Campaign for logged in user
     """
@@ -287,7 +332,12 @@ async def get_campaign(user_id: str,campaign_id:str) -> Campaign:
 
 # Update-campaign
 @router.put("/users/{user_id}/campaigns/{campaign_id}")
-async def update_campaign(user_id: str,campaign_id:str,data:Campaign):
+async def update_campaign(
+    user_id: str,
+    campaign_id: str,
+    data: Campaign,
+    _: str = Depends(verify_user_access),
+):
     """
     Update Campiagn detail in backend storage
     """
@@ -304,7 +354,11 @@ async def update_campaign(user_id: str,campaign_id:str,data:Campaign):
 
 # Delete-campaign
 @router.delete("/users/{user_id}/campaigns/{campaign_id}")
-async def delete_campaign(user_id: str,campaign_id:str):
+async def delete_campaign(
+    user_id: str,
+    campaign_id: str,
+    _: str = Depends(verify_user_access),
+):
     """
     Delete Campiagn from backend storage
     """
@@ -320,7 +374,12 @@ async def delete_campaign(user_id: str,campaign_id:str):
 
 # Update-Status
 @router.put("/users/{user_id}/campaigns/{campaign_id}/status/")
-async def update_status(user_id: str,campaign_id:str,data:CampaignStatusUpdate):
+async def update_status(
+    user_id: str,
+    campaign_id: str,
+    data: CampaignStatusUpdate,
+    _: str = Depends(verify_user_access),
+):
     """
     Update Campiagn Creative Component Status in backend storage
     """
@@ -981,7 +1040,10 @@ def post_bulk_email_generate(data: BulkEmailGenRequest) -> BulkEmailGenResponse:
     )
 
 @router.post(path="/export-google-doc")
-def post_export_google_doc(data:ExportGoogleDocRequest) -> ExportGoogleDocResponse:
+def post_export_google_doc(
+    data: ExportGoogleDocRequest,
+    current_user_id: str = Depends(get_current_user),
+) -> ExportGoogleDocResponse:
     """
     data:
         folder_id: str
@@ -992,25 +1054,44 @@ def post_export_google_doc(data:ExportGoogleDocRequest) -> ExportGoogleDocRespon
     Returns:
         doc_id: str
     """
-    
+    if not data.folder_id or "/" in data.folder_id or ".." in data.folder_id:
+        raise HTTPException(status_code=400, detail="Invalid folder_id")
+
+    if not utils_firebase.user_owns_folder(current_user_id, data.folder_id):
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Forbidden: folder does not belong to user",
+        )
+
+    expected_prefix = f"{bucket_name}/{data.folder_id}/"
+    validated_blobs = []
+    for img in data.images:
+        if (
+            not isinstance(img, str)
+            or not img.startswith(expected_prefix)
+            or ".." in img.split("/")
+        ):
+            raise HTTPException(status_code=400, detail="Invalid image path")
+        validated_blobs.append(img[len(bucket_name) + 1:])
+
     try:
         file_id = utils_workspace.create_doc(credentials = CREDENTIALS,
                                              folder_id=data.folder_id,
                                              doc_name=data.doc_name,
                                              text=data.text)
-        i=0
-        for img in data.images:
+        for i, source_blob_name in enumerate(validated_blobs):
             file = utils_gcs.download_from_gcs(project_id=project_id,
                                                bucket_name=bucket_name,
-                                               source_blob_name='/'.join(img.split('/')[1:]))
+                                               source_blob_name=source_blob_name)
             utils_workspace.upload_to_folder(credentials= CREDENTIALS,
                                              f=file,
                                              folder_id=data.folder_id,
                                              upload_name=str(data.image_prefix)+"_"+str(i),
                                              mime_type='application/octet-stream'
                                              )
-            i=i+1
         
+    except HTTPException:
+        raise
     except Exception as e:
             raise HTTPException(
             status_code=400, 
